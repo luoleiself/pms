@@ -1,0 +1,157 @@
+# 删除数据库
+DROP DATABASE IF EXISTS `pms`; 
+CREATE DATABASE IF NOT EXISTS `pms` CHARACTER SET utf8;
+
+USE `pms`;
+
+/*##################### 商品信息表  #####################*/
+DROP TABLE IF EXISTS `goodsinfo`;
+CREATE TABLE IF NOT EXISTS `goodsinfo` (
+  `id` int(10) unsigned NOT NULL  AUTO_INCREMENT COMMENT '商品id',
+  `name` varchar(20) NOT NULL COMMENT '商品名称',
+  `desc` varchar(100) COMMENT '商品描述',
+  `amount` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '库存数量',
+  `produce_time` int(10) unsigned COMMENT '生产日期',
+  `create_time` int(10) unsigned COMMENT '创建时间',
+  `update_time` int(10) unsigned COMMENT '更新时间',
+  `category_id` int(5) unsigned COMMENT '商品分类',
+  `brand_id` int(5) unsigned COMMENT '所属品牌', 
+	`manufactor_id` int(5) unsigned COMMENT '供应商id', 
+	primary key(`id`)
+);
+
+/*##################### 供应商信息表  #####################*/
+DROP TABLE IF EXISTS `manufactors`;
+CREATE TABLE IF NOT EXISTS `manufactors`(
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '供应商id', 
+	`name` varchar(20) NOT NULL COMMENT '供应商名称', 
+	`address` varchar(100) COMMENT '供应商地址', 
+	`contact` varchar(20) COMMENT '联系人', 
+	`telephone` varchar(15) COMMENT '联系方式', 
+	`fax` varchar(15) COMMENT '传真号码', 
+	`email` varchar(20) COMMENT '邮箱地址', 
+	`create_time` int(10) unsigned COMMENT '创建时间', 
+	`update_time` int(10) unsigned COMMENT '更新时间',
+	primary key (`id`)
+);
+
+/*##################### 分类信息表  #####################*/
+DROP TABLE IF EXISTS `categories`;
+CREATE TABLE IF NOT EXISTS `categories`(
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '分类id', 
+	`pid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '父级分类id', 
+	`name` varchar(20) NOT NULL COMMENT '分类名称', 
+	`desc` varchar(100) COMMENT '分类描述', 
+	`create_time` int(10) unsigned COMMENT '创建时间', 
+	`update_time` int(10) unsigned COMMENT '更新时间', 
+	`status` tinyint(1) unsigned DEFAULT '1' COMMENT '启用状态: 1启用，0禁用', 
+	primary key(`id`)
+);
+
+/*##################### 品牌信息表  #####################*/
+DROP TABLE IF EXISTS `brands`;
+CREATE TABLE IF NOT EXISTS `brands`(
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '品牌id', 
+	`pid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '父级品牌id', 
+	`name` varchar(20) NOT NULL COMMENT '品牌名称', 
+	`logo` varchar(100) COMMENT '品牌logo', 
+	`desc` varchar(100) COMMENT '品牌描述', 
+	`create_time` int(10) unsigned COMMENT '创建时间', 
+	`update_time` int(10) unsigned COMMENT '更新时间', 
+	`status` tinyint(1) unsigned DEFAULT '1' COMMENT '启用状态: 1启用，0禁用',
+	primary key(`id`)
+);
+
+/*##################### 销售信息表  #####################*/
+DROP TABLE IF EXISTS `goodsxs`;
+CREATE TABLE IF NOT EXISTS `goodsxs`(
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '销售记录id', 
+	`price` decimal(10,2) unsigned DEFAULT '0.0' COMMENT '销售单价', 
+	`amount` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '销售数量', 
+  `discount` decimal(4,2) unsigned NOT NULL DEFAULT '0.0' COMMENT '折扣率',
+	`create_time` int(10) unsigned COMMENT '创建时间', 
+	`update_time` int(10) unsigned COMMENT '更新时间', 
+	`sale_person` int(5) unsigned COMMENT '销售人员id', 
+	`goods_id` int(5) unsigned COMMENT '商品id', 
+	primary key(`id`)
+);
+
+/*##################### 商品入库信息表  #####################*/
+DROP TABLE IF EXISTS `goodsrk`;
+CREATE TABLE IF NOT EXISTS `goodsrk`(
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '商品入库记录id', 
+	`amount` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '入库数量', 
+	`price` decimal(10,2) unsigned DEFAULT '0.0' COMMENT '入库单价', 
+	`create_time` int(10) unsigned COMMENT '创建时间', 
+	`update_time` int(10) unsigned COMMENT '更新时间', 
+	`goods_id` int(5) unsigned COMMENT '商品id', 
+	`operator` varchar(20) COMMENT '操作人', 
+	primary key(`id`)
+);
+
+/*##################### 商品出库信息表  #####################*/
+DROP TABLE IF EXISTS `goodsck`;
+CREATE TABLE IF NOT EXISTS `goodsck`(
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '商品出库记录id', 
+	`amount` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '出库数量', 
+	`price` decimal(10,2) unsigned DEFAULT '0.0' COMMENT '出库单价', 
+	`create_time` int(10) unsigned COMMENT '创建时间', 
+	`update_time` int(10) unsigned COMMENT '更新时间', 
+	`goods_id` int(5) unsigned COMMENT '商品id',
+	`brand_id` int(5) unsigned COMMENT '品牌id', 
+	`operator` varchar(20) COMMENT '操作人', 
+	primary key(`id`)
+);
+
+/*##################### 用户信息表  #####################*/
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users`(
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户id', 
+  `name` varchar(20) NOT NULL COMMENT '用户名称', 
+  `sex` tinyint(1) unsigned DEFAULT '1' COMMENT '性别: 1男，0女', 
+  `department` varchar(15) COMMENT '所属部门',
+  `password` varchar(200) COMMENT '用户密码', 
+  `telephone` varchar(15) COMMENT '联系电话', 
+  `address` varchar(100) COMMENT '地址', 
+  `status` smallint(1) unsigned NOT NULL DEFAULT '1' COMMENT '启用状态: 1启用，0禁用',
+  primary key(`id`)
+);
+
+/*##################### 角色信息表  #####################*/
+DROP TABLE IF EXISTS `roles`;
+CREATE TABLE IF NOT EXISTS `roles`(
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '角色id',
+  `name` varchar(20) NOT NULL COMMENT '角色名称',
+  `desc` varchar(100) COMMENT '角色描述',
+  primary key(`id`)
+);
+
+/*##################### 权限信息表  #####################*/
+DROP TABLE IF EXISTS `roles`;
+CREATE TABLE IF NOT EXISTS `roles`(
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '权限id',
+  `name` varchar(20) NOT NULL COMMENT '权限菜单名称',
+  `path` varchar(20) NOT NULL COMMENT '权限菜单跳转路径',
+  `pid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '父级权限id',
+  `desc` varchar(100) COMMENT '权限菜单描述',
+  primary key(`id`)
+);
+
+/*##################### 用户角色信息表  #####################*/
+DROP TABLE IF EXISTS `user_role`;
+CREATE TABLE IF NOT EXISTS `user_role`(
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户角色id',
+  `user_id` int(10) unsigned COMMENT '用户id',
+  `role_id` int(10) unsigned COMMENT '角色id',
+  primary key(`id`)
+);
+
+/*##################### 角色权限信息表  #####################*/
+DROP TABLE IF EXISTS `role_menu`;
+CREATE TABLE IF NOT EXISTS `role_menu`( 
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '角色权限id',
+  `menu_id` int(10) unsigned COMMENT '权限id',
+  `role_id` int(10) unsigned COMMENT '角色id',
+  `permission` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '权限状态: 1可用，0不可用',
+  primary key(`id`)
+);
