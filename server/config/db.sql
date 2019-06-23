@@ -5,17 +5,17 @@ CREATE DATABASE IF NOT EXISTS `pms` CHARACTER SET utf8;
 USE `pms`;
 
 /*##################### 商品信息表  #####################*/
-DROP TABLE IF EXISTS `goodsinfo`;
-CREATE TABLE IF NOT EXISTS `goodsinfo` (
+DROP TABLE IF EXISTS `goods`;
+CREATE TABLE IF NOT EXISTS `goods` (
   `id` int(10) unsigned NOT NULL  AUTO_INCREMENT COMMENT '商品id',
   `name` varchar(20) NOT NULL COMMENT '商品名称',
+	`keys` varchar(100) COMMENT '检索关键字',
   `desc` varchar(100) COMMENT '商品描述',
   `amount` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '库存数量',
-  `produce_time` int(10) unsigned COMMENT '生产日期',
   `create_time` int(10) unsigned COMMENT '创建时间',
   `update_time` int(10) unsigned COMMENT '更新时间',
-  `category_id` int(5) unsigned COMMENT '商品分类',
-  `brand_id` int(5) unsigned COMMENT '所属品牌', 
+  `category_id` int(5) unsigned COMMENT '商品分类id',
+  `brand_id` int(5) unsigned COMMENT '所属品牌id', 
 	`manufactor_id` int(5) unsigned COMMENT '供应商id', 
 	primary key(`id`)
 );
@@ -25,6 +25,7 @@ DROP TABLE IF EXISTS `manufactors`;
 CREATE TABLE IF NOT EXISTS `manufactors`(
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '供应商id', 
 	`name` varchar(20) NOT NULL COMMENT '供应商名称', 
+	`desc` varchar(100) COMMENT '供应商描述',
 	`address` varchar(100) COMMENT '供应商地址', 
 	`contact` varchar(20) COMMENT '联系人', 
 	`telephone` varchar(15) COMMENT '联系方式', 
@@ -54,7 +55,6 @@ CREATE TABLE IF NOT EXISTS `brands`(
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '品牌id', 
 	`pid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '父级品牌id', 
 	`name` varchar(20) NOT NULL COMMENT '品牌名称', 
-	`logo` varchar(100) COMMENT '品牌logo', 
 	`desc` varchar(100) COMMENT '品牌描述', 
 	`create_time` int(10) unsigned COMMENT '创建时间', 
 	`update_time` int(10) unsigned COMMENT '更新时间', 
@@ -62,44 +62,43 @@ CREATE TABLE IF NOT EXISTS `brands`(
 	primary key(`id`)
 );
 
+/*##################### 商品单位信息表  #####################*/
+DROP TABLE IF EXISTS `units`;
+CREATE TABLE IF NOT EXISTS `units`(
+	`id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '单位id', 
+	`name` varchar(20) NOT NULL COMMENT '单位名称', 
+	`desc` varchar(100) COMMENT '单位描述', 
+	`create_time` int(10) unsigned COMMENT '创建时间', 
+	`update_time` int(10) unsigned COMMENT '更新时间', 
+	`status` tinyint(1) unsigned DEFAULT '1' COMMENT '启用状态: 1启用，0禁用',
+	primary key(`id`)
+);
+
 /*##################### 销售信息表  #####################*/
-DROP TABLE IF EXISTS `goodsxs`;
-CREATE TABLE IF NOT EXISTS `goodsxs`(
+DROP TABLE IF EXISTS `sales`;
+CREATE TABLE IF NOT EXISTS `sales`(
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '销售记录id', 
 	`price` decimal(10,2) unsigned DEFAULT '0.0' COMMENT '销售单价', 
 	`amount` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '销售数量', 
-  `discount` decimal(4,2) unsigned NOT NULL DEFAULT '0.0' COMMENT '折扣率',
+	`unit` int(5) unsigned NOT NULL COMMENT '商品单位id',
 	`create_time` int(10) unsigned COMMENT '创建时间', 
 	`update_time` int(10) unsigned COMMENT '更新时间', 
-	`sale_person` int(5) unsigned COMMENT '销售人员id', 
+	`operator` int(5) unsigned COMMENT '操作人员id', 
 	`goods_id` int(5) unsigned COMMENT '商品id', 
 	primary key(`id`)
 );
 
-/*##################### 商品入库信息表  #####################*/
-DROP TABLE IF EXISTS `goodsrk`;
-CREATE TABLE IF NOT EXISTS `goodsrk`(
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '商品入库记录id', 
-	`amount` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '入库数量', 
-	`price` decimal(10,2) unsigned DEFAULT '0.0' COMMENT '入库单价', 
-	`create_time` int(10) unsigned COMMENT '创建时间', 
-	`update_time` int(10) unsigned COMMENT '更新时间', 
-	`goods_id` int(5) unsigned COMMENT '商品id', 
-	`operator` varchar(20) COMMENT '操作人', 
-	primary key(`id`)
-);
-
-/*##################### 商品出库信息表  #####################*/
-DROP TABLE IF EXISTS `goodsck`;
-CREATE TABLE IF NOT EXISTS `goodsck`(
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '商品出库记录id', 
-	`amount` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '出库数量', 
-	`price` decimal(10,2) unsigned DEFAULT '0.0' COMMENT '出库单价', 
-	`create_time` int(10) unsigned COMMENT '创建时间', 
-	`update_time` int(10) unsigned COMMENT '更新时间', 
+/*##################### 采购信息表  #####################*/
+DROP TABLE IF EXISTS `purchase`;
+CREATE TABLE IF NOT EXISTS `purchase`(
+	`id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '采购信息id',
+	`price` decimal(10,2) unsigned default '0.0' COMMENT '采购单价',
+	`amount` smallint(5) unsigned default '0' COMMENT '采购数量',
+	`unit` int(5) unsigned NOT NULL COMMENT '商品单位id',
+	`create_time` int(10) unsigned COMMENT '创建时间',
+	`update_time` int(10) unsigned COMMENT '更新时间',
+	`operator` int(5) unsigned COMMENT '操作人员id',
 	`goods_id` int(5) unsigned COMMENT '商品id',
-	`brand_id` int(5) unsigned COMMENT '品牌id', 
-	`operator` varchar(20) COMMENT '操作人', 
 	primary key(`id`)
 );
 
@@ -113,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `users`(
   `password` varchar(200) COMMENT '用户密码', 
   `telephone` varchar(15) COMMENT '联系电话', 
   `address` varchar(100) COMMENT '地址', 
-  `status` smallint(1) unsigned NOT NULL DEFAULT '1' COMMENT '启用状态: 1启用，0禁用',
+  `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '启用状态: 1启用，0禁用',
   primary key(`id`)
 );
 
@@ -123,6 +122,7 @@ CREATE TABLE IF NOT EXISTS `roles`(
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '角色id',
   `name` varchar(20) NOT NULL COMMENT '角色名称',
   `desc` varchar(100) COMMENT '角色描述',
+	`status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '启用状态: 1启用，0禁用',
   primary key(`id`)
 );
 
