@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS `goods` (
   `category_id` int(5) unsigned COMMENT '商品分类id',
   `brand_id` int(5) unsigned COMMENT '所属品牌id', 
 	`manufactor_id` int(5) unsigned COMMENT '供应商id', 
+	`operator` int(5) unsigned COMMENT '操作人员id', 
 	primary key(`id`)
 );
 
@@ -33,6 +34,7 @@ CREATE TABLE IF NOT EXISTS `manufactors`(
 	`email` varchar(20) COMMENT '邮箱地址', 
 	`create_time` int(10) unsigned COMMENT '创建时间', 
 	`update_time` int(10) unsigned COMMENT '更新时间',
+	`operator` int(5) unsigned COMMENT '操作人员id', 
 	primary key (`id`)
 );
 
@@ -44,7 +46,8 @@ CREATE TABLE IF NOT EXISTS `categories`(
 	`name` varchar(20) NOT NULL COMMENT '分类名称', 
 	`desc` varchar(100) COMMENT '分类描述', 
 	`create_time` int(10) unsigned COMMENT '创建时间', 
-	`update_time` int(10) unsigned COMMENT '更新时间', 
+	`update_time` int(10) unsigned COMMENT '更新时间',
+	`operator` int(5) unsigned COMMENT '操作人员id',  
 	`status` tinyint(1) unsigned DEFAULT '1' COMMENT '启用状态: 1启用，0禁用', 
 	primary key(`id`)
 );
@@ -58,18 +61,7 @@ CREATE TABLE IF NOT EXISTS `brands`(
 	`desc` varchar(100) COMMENT '品牌描述', 
 	`create_time` int(10) unsigned COMMENT '创建时间', 
 	`update_time` int(10) unsigned COMMENT '更新时间', 
-	`status` tinyint(1) unsigned DEFAULT '1' COMMENT '启用状态: 1启用，0禁用',
-	primary key(`id`)
-);
-
-/*##################### 商品单位信息表  #####################*/
-DROP TABLE IF EXISTS `units`;
-CREATE TABLE IF NOT EXISTS `units`(
-	`id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '单位id', 
-	`name` varchar(20) NOT NULL COMMENT '单位名称', 
-	`desc` varchar(100) COMMENT '单位描述', 
-	`create_time` int(10) unsigned COMMENT '创建时间', 
-	`update_time` int(10) unsigned COMMENT '更新时间', 
+	`operator` int(5) unsigned COMMENT '操作人员id', 
 	`status` tinyint(1) unsigned DEFAULT '1' COMMENT '启用状态: 1启用，0禁用',
 	primary key(`id`)
 );
@@ -80,7 +72,6 @@ CREATE TABLE IF NOT EXISTS `sales`(
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '销售记录id', 
 	`price` decimal(10,2) unsigned DEFAULT '0.0' COMMENT '销售单价', 
 	`amount` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '销售数量', 
-	`unit` int(5) unsigned NOT NULL COMMENT '商品单位id',
 	`create_time` int(10) unsigned COMMENT '创建时间', 
 	`update_time` int(10) unsigned COMMENT '更新时间', 
 	`operator` int(5) unsigned COMMENT '操作人员id', 
@@ -94,7 +85,6 @@ CREATE TABLE IF NOT EXISTS `purchase`(
 	`id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '采购信息id',
 	`price` decimal(10,2) unsigned default '0.0' COMMENT '采购单价',
 	`amount` smallint(5) unsigned default '0' COMMENT '采购数量',
-	`unit` int(5) unsigned NOT NULL COMMENT '商品单位id',
 	`create_time` int(10) unsigned COMMENT '创建时间',
 	`update_time` int(10) unsigned COMMENT '更新时间',
 	`operator` int(5) unsigned COMMENT '操作人员id',
@@ -112,6 +102,7 @@ CREATE TABLE IF NOT EXISTS `users`(
   `password` varchar(200) COMMENT '用户密码', 
   `telephone` varchar(15) COMMENT '联系电话', 
   `address` varchar(100) COMMENT '地址', 
+	`operator` int(5) unsigned COMMENT '操作人员id', 
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '启用状态: 1启用，0禁用',
   primary key(`id`)
 );
