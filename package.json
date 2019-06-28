@@ -20,7 +20,9 @@
   "homepage": "https://github.com/luoleiself/pms#readme",
   "dependencies": {
     "koa": "^2.7.0",
+    "koa-log4": "^2.3.2",
     "koa-router": "^7.4.0",
+    "log4js": "^4.4.0",
     "mysql2": "^1.6.5",
     "sequelize": "^5.8.12"
   },
