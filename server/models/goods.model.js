@@ -2,24 +2,65 @@ exports = module.exports = function(sequelize, DataTypes) {
   return sequelize.define(
     "Goods",
     {
-      name: DataTypes.STRING, 
-      userName: DataTypes.STRING,
-      password: DataTypes.STRING,
-      email: DataTypes.STRING,
-      phoneNum: DataTypes.STRING,
-      salt: DataTypes.STRING,
-      comments: DataTypes.STRING,
-      photo: { type: DataTypes.STRING, default: "" },
-      auth: { type: DataTypes.BOOLEAN, default: "" }
+      id: {
+        type: DataTypes.INTEGER(10).UNSIGNED,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false,
+        comment: "商品id"
+      },
+      name: {
+        type: DataTypes.STRING(20),
+        allowNull: false,
+        comment: "商品名称"
+      },
+      keys: {
+        type: DataTypes.STRING(100),
+        comment: "检索关键字"
+      },
+      desc: { type: DataTypes.STRING(100), comment: "商品描述" },
+      amount: {
+        type: DataTypes.INTEGER(5).UNSIGNED,
+        allowNull: false,
+        defaultValue: "0",
+        comment: "库存数据量"
+      },
+      create_time: {
+        type: DataTypes.INTEGER(10).UNSIGNED,
+        comment: "创建时间"
+      },
+      update_time: {
+        type: DataTypes.INTEGER(10).UNSIGNED,
+        comment: "更新时间"
+      },
+      category_id: {
+        type: DataTypes.INTEGER(5).UNSIGNED,
+        comment: "商品分类id"
+      },
+      brand_id: {
+        type: DataTypes.INTEGER(5).UNSIGNED,
+        comment: "所属品牌id"
+      },
+      manufacturer_id: {
+        type: DataTypes.INTEGER(5).UNSIGNED,
+        comment: "供应商id"
+      },
+      operator: {
+        type: DataTypes.INTEGER(5).UNSIGNED,
+        comment: "操作人员id"
+      }
+    },
+    {
+      sequelize,
+      timestamps: false,
+      modelName: "goods"
+      //   classMethods: {
+      //     associate: function(models) {
+      //       // Using additional options like CASCADE etc for demonstration
+      //       // Can also simply do Task.belongsTo(models.User);
+      //       AdminUser.belongsTo(models.AdminGroup);
+      //     }
+      //   }
     }
-    // {
-    //   classMethods: {
-    //     associate: function(models) {
-    //       // Using additional options like CASCADE etc for demonstration
-    //       // Can also simply do Task.belongsTo(models.User);
-    //       AdminUser.belongsTo(models.AdminGroup);
-    //     }
-    //   }
-    // }
   );
 };

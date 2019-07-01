@@ -1,0 +1,41 @@
+{
+  "appenders": {
+    "access": {
+      "type": "dateFile",
+      "pattern": "yyyy-MM-dd.log",
+      "alwaysIncludePattern": true,
+      "encoding": "utf-8",
+      "filename": "logs/access"
+    },
+    "error": {
+      "type": "dateFile",
+      "pattern": "yyyy-MM-dd.log",
+      "alwaysIncludePattern": true,
+      "encoding": "utf-8",
+      "filename": "logs/error"
+    },
+    "out": {
+      "type": "console"
+    }
+  },
+  "categories": {
+    "default": {
+      "appenders": [
+        "out"
+      ],
+      "level": "info"
+    },
+    "access": {
+      "appenders": [
+        "access"
+      ],
+      "level": "info"
+    },
+    "error": {
+      "appenders": [
+        "error"
+      ],
+      "level": "error"
+    }
+  }
+}
