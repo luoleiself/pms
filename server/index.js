@@ -14,15 +14,14 @@ app.use(async (ctx, next) => {
 
 app.use(router.routes()).use(router.allowedMethods());
 
-app.listen(3000, () => {
-  console.log("pms service is running at http://localhost:3000");
-});
-
 /* 数据库同步 */
 models.sequelize
   .sync()
   .then(() => {
     console.log("database sync success...");
+    app.listen(3000, () => {
+      console.log("pms service is running at http://localhost:3000");
+    });
   })
   .catch(err => {
     console.log(err);

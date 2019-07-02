@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS `goods` (
   `category_id` int(5) unsigned COMMENT '商品分类id',
   `brand_id` int(5) unsigned COMMENT '所属品牌id', 
 	`manufactor_id` int(5) unsigned COMMENT '供应商id', 
+	`status` tinyint(1) unsigned DEFAULT '1' COMMENT '启用状态: 1启用，0禁用', 
 	`operator` int(5) unsigned COMMENT '操作人员id', 
 	primary key(`id`)
 );

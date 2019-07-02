@@ -14,7 +14,7 @@ router.get("/:id", async (ctx, next) => {
     }
   };
   let result = await goodsService.findAll();
-  console.log("result:", result);
+  // console.log("result:", result);
   logUtils.logAccess(ctx);
 });
 
@@ -29,4 +29,4 @@ router.all("/", async (ctx, next) => {
   logUtils.logAccess(ctx);
 });
 
-router.exports = module.exports = router;
+exports = module.exports = router;

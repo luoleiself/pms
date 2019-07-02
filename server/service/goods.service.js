@@ -1,11 +1,10 @@
-const models = require("../models");
-
-console.log("models", models.Goods);
-module.exports = {
-  async findAll() {
-    return await models.Goods.findAll();
-  },
-  findById() {
-    return models.goods.findOne();
-  }
+exports = module.exports = function({ goods }) {
+  return {
+    async findAll() {
+      return await goods.findAll();
+    },
+    async findOne() {
+      return goods.findOne();
+    }
+  };
 };
