@@ -2,6 +2,7 @@ const Koa = require("koa");
 const app = new Koa();
 // const log4js = require("koa-log4");
 const path = require("path");
+const md5 = require("md5");
 // const logger = require('../config/log.config');
 
 // logger
@@ -39,7 +40,7 @@ router.get("/about", async (ctx, next) => {
 });
 router.get("/", async (ctx, next) => {
   await next();
-  logger.logError(ctx, new Error('hello world'));
+  logger.logError(ctx, new Error("hello world"));
   try {
     let a = 1 / 0;
     console.log(a);
@@ -52,6 +53,12 @@ router.get("/", async (ctx, next) => {
 });
 
 app.use(router.routes()).use(router.allowedMethods());
+
 app.listen(3000, () => {
   console.log("service listening in http://localhost:3000...");
 });
+
+let msg = "hello world";
+let password = "123456";
+console.log(md5(msg));
+console.log(md5(password));

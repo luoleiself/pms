@@ -1,6 +1,15 @@
-const models = require("../models");
-const goodsService = require("./goods.service")(models);
+const fs = require("fs");
+const path = require("path");
+const service = {};
 
-exports = module.exports = {
-  goodsService
-};
+fs.readdirSync(__dirname)
+  .filter(fileName => {
+    return fileName.indexOf(".") !== 0 && fileName !== "index.js";
+  })
+  .forEach(fileName => {
+    let name = path.basename(fileName, ".js");
+    name = name.replace(/\.s/gim, "S");
+    service[name] = require(`./${fileName}`);
+  });
+
+exports = module.exports = service;

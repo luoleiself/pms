@@ -1,21 +1,30 @@
 exports = module.exports = function(sequelize, DataTypes) {
   return sequelize.define(
-    "roles",
+    "func",
     {
       id: {
         type: DataTypes.INTEGER(10).UNSIGNED,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
-        comment: "角色id"
+        comment: "功能id"
+      },
+      pid: {
+        type: DataTypes.INTEGER(10).UNSIGNED,
+        defaultValue: "0",
+        comment: "功能父id"
       },
       name: {
         type: DataTypes.STRING(20),
-        comment: "角色名称"
+        comment: "权限名称"
+      },
+      url: {
+        type: DataTypes.STRING(50),
+        comment: "功能url"
       },
       desc: {
         type: DataTypes.STRING(100),
-        comment: "角色描述"
+        comment: "功能描述"
       },
       status: {
         type: DataTypes.BOOLEAN,

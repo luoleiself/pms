@@ -39,7 +39,8 @@ exports = module.exports = function(sequelize, DataTypes) {
     },
     {
       sequelize,
-      timestamps: false
+      timestamps: false,
+      underscored: true
     }
   );
 };

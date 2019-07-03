@@ -40,11 +40,7 @@ exports = module.exports = function(sequelize, DataTypes) {
     {
       sequelize,
       timestamps: false,
-      // classLevelMethod: {
-      //   associate(models) {
-      //     categories.belongsTo(models.goods);
-      //   }
-      // }
+      underscored: true
     }
   );
   return categories;

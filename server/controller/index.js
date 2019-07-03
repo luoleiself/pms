@@ -1,16 +1,24 @@
+const fs = require("fs");
+const path = require("path");
 const Router = require("koa-router");
+
 const router = new Router();
 // router.prefix("/api");
-const goods = require("./goods.controller");
 
-router.use("/goods", goods.routes());
+fs.readdirSync(__dirname)
+  .filter(fileName => {
+    return fileName.indexOf(".") !== 0 && fileName !== "index.js";
+  })
+  .forEach(fileName => {
+    router.use(
+      `/${path.basename(fileName, ".controller.js")}`,
+      require(`./${fileName}`).routes()
+    );
+  });
 
 router.all("/", async (ctx, next) => {
-  // 添加日志工具
-  let { logUtils } = ctx;
   await next();
-  ctx.body = { code: 0, msg: "Not matched to any routing" };
-  logUtils.logAccess(ctx);
+  ctx.body = { code: 10001, msg: "Not matched to any routing" };
 });
 
 exports = module.exports = router;

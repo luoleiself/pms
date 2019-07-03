@@ -27,10 +27,6 @@ exports = module.exports = function(sequelize, DataTypes) {
         type: DataTypes.INTEGER(10).UNSIGNED,
         comment: "更新时间"
       },
-      goods_id: {
-        type: DataTypes.INTEGER(5).UNSIGNED,
-        comment: "商品id"
-      },
       operator: {
         type: DataTypes.INTEGER(5).UNSIGNED,
         comment: "操作人员id"
@@ -38,7 +34,8 @@ exports = module.exports = function(sequelize, DataTypes) {
     },
     {
       sequelize,
-      timestamps: false
+      timestamps: false,
+      underscored: true
     }
   );
 };

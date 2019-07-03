@@ -1,10 +1,8 @@
-exports = module.exports = function({ goods }) {
-  return {
-    async findAll() {
-      return await goods.findAll();
-    },
-    async findOne() {
-      return goods.findOne();
-    }
-  };
+exports = module.exports = {
+  async findAll({ goods }, ctx) {
+    return await goods.findAll();
+  },
+  async findOne({ goods }, ctx) {
+    return await goods.findOne();
+  }
 };

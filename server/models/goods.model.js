@@ -36,18 +36,18 @@ exports = module.exports = function(sequelize, DataTypes) {
         defaultValue: "1",
         comment: "启用状态: 1启用，0禁用"
       },
-      category_id: {
-        type: DataTypes.INTEGER(5).UNSIGNED,
-        comment: "商品分类id"
-      },
-      brand_id: {
-        type: DataTypes.INTEGER(5).UNSIGNED,
-        comment: "所属品牌id"
-      },
-      manufacturer_id: {
-        type: DataTypes.INTEGER(5).UNSIGNED,
-        comment: "供应商id"
-      },
+      // category_id: {
+      //   type: DataTypes.INTEGER(5).UNSIGNED,
+      //   comment: "商品分类id"
+      // },
+      // brand_id: {
+      //   type: DataTypes.INTEGER(5).UNSIGNED,
+      //   comment: "所属品牌id"
+      // },
+      // manufacturer_id: {
+      //   type: DataTypes.INTEGER(5).UNSIGNED,
+      //   comment: "供应商id"
+      // },
       operator: {
         type: DataTypes.INTEGER(5).UNSIGNED,
         comment: "操作人员id"
@@ -56,11 +56,7 @@ exports = module.exports = function(sequelize, DataTypes) {
     {
       sequelize,
       timestamps: false,
-      // classLevelMethod: {
-      //   associate(models) {
-      //     goods.hasMany(models.categories);
-      //   }
-      // }
+      underscored: true
     }
   );
   return goods;
