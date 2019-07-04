@@ -5,8 +5,15 @@ const { usersService } = require("../service");
 const router = new Router();
 
 router.get("/:id", async (ctx, next) => {
+  const { logUtils } = ctx;
   await next();
-  ctx.body = { code: 1000, msg: "请求成功", data: `${ctx.origin}${ctx.path}` };
+  try {
+    let result = await usersService.findOne(models, ctx);
+    ctx.body = { code: 200, msg: "请求成功", data: result ? result : [] };
+  } catch (error) {
+    logUtils.logError(ctx, error);
+    ctx.body = { code: 500, data: [], msg: "服务器内部错误" };
+  }
 });
 
 router.all("/", async (ctx, next) => {
@@ -14,10 +21,10 @@ router.all("/", async (ctx, next) => {
   await next();
   try {
     let result = await usersService.findAll(models, ctx);
-    ctx.body = { code: 10000, msg: "请求成功", data: JSON.stringify(result) };
+    ctx.body = { code: 200, msg: "请求成功", data: result };
   } catch (error) {
     logUtils.logError(ctx, error);
-    ctx.body = { code: 10001, data: [], msg: "服务器错误" };
+    ctx.body = { code: 500, data: [], msg: "服务器内部错误" };
   }
 });
 

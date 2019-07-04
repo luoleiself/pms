@@ -8,6 +8,6 @@ exports = module.exports = {
     }
   },
   async findOne({ users }, ctx) {
-    return await users.findOne();
+    return await users.findOne({ where: { id: ctx.params.id } });
   }
 };

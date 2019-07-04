@@ -13,10 +13,10 @@ router.all("/", async (ctx, next) => {
   await next();
   try {
     let result = await goodsService.findAll(models, ctx);
-    ctx.body = { code: 10000, msg: "请求成功", data: JSON.stringify(result) };
+    ctx.body = { code: 200, msg: "请求成功", data: result };
   } catch (error) {
     logUtils.logError(ctx, error);
-    ctx.body = { code: 10001, data: [], msg: "服务器错误" };
+    ctx.body = { code: 500, data: [], msg: "服务器错误" };
   }
 });
 

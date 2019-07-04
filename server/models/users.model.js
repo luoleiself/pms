@@ -14,7 +14,7 @@ exports = module.exports = function(sequelize, DataTypes) {
         comment: "用户名称"
       },
       sex: {
-        type: DataTypes.BOOLEAN,
+        type: DataTypes.TINYINT(1),
         defaultValue: "1",
         comment: "性别: 1男, 0女"
       },

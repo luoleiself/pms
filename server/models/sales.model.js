@@ -15,7 +15,7 @@ exports = module.exports = function(sequelize, DataTypes) {
         comment: "销售单价"
       },
       amount: {
-        type: DataTypes.INTEGER(5).UNSIGNED,
+        type: DataTypes.SMALLINT(5).UNSIGNED,
         defaultValue: "0",
         comment: "销售数量"
       },

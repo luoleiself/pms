@@ -24,7 +24,7 @@ app.use(router.routes()).use(router.allowedMethods());
 models.sequelize
   .sync()
   .then(async () => {
-    console.log("database sync success...");
+    console.log("|----- database sync success -----|");
 
     let user = null;
     try {

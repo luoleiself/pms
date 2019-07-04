@@ -3,7 +3,7 @@ const path = require("path");
 const Router = require("koa-router");
 
 const router = new Router();
-// router.prefix("/api");
+router.prefix("/api");
 
 fs.readdirSync(__dirname)
   .filter(fileName => {
@@ -18,7 +18,7 @@ fs.readdirSync(__dirname)
 
 router.all("/", async (ctx, next) => {
   await next();
-  ctx.body = { code: 10001, msg: "Not matched to any routing" };
+  ctx.body = { code: 404, msg: "Not matched to any routing" };
 });
 
 exports = module.exports = router;

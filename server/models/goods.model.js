@@ -19,7 +19,7 @@ exports = module.exports = function(sequelize, DataTypes) {
       },
       desc: { type: DataTypes.STRING(100), comment: "商品描述" },
       amount: {
-        type: DataTypes.INTEGER(5).UNSIGNED,
+        type: DataTypes.SMALLINT(5).UNSIGNED,
         defaultValue: "0",
         comment: "库存数据量"
       },
