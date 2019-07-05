@@ -23,13 +23,19 @@ try {
 }
 
 fs.readdirSync(__dirname)
-  .filter(function(file) {
-    return file.indexOf(".") !== 0 && file !== "index.js";
+  .filter(fileName => {
+    return fileName.indexOf(".") !== 0 && fileName !== "index.js";
   })
-  .forEach(function(file) {
-    let model = sequelize.import(path.join(__dirname, file));
+  .forEach(fileName => {
+    let model = sequelize.import(path.join(__dirname, fileName));
     db[model.name] = model;
   });
+
+// Object.keys(db).forEach(modelName => {
+//   if ("associate" in db[modelName]) {
+//     db[modelName].associate(db);
+//   }
+// });
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

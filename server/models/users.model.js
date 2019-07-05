@@ -1,5 +1,5 @@
 exports = module.exports = function(sequelize, DataTypes) {
-  return sequelize.define(
+  const users = sequelize.define(
     "users",
     {
       id: {
@@ -58,4 +58,11 @@ exports = module.exports = function(sequelize, DataTypes) {
       underscored: true
     }
   );
+
+  // users.associate = models => {
+  //   console.log(models.roles);
+  //   users.belongsToMany(models.roles, { through: models.user_role });
+  // };
+
+  return users;
 };

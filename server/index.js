@@ -8,12 +8,17 @@ const app = new Koa();
 
 app.use(async (ctx, next) => {
   ctx.logUtils = logUtils;
+  ctx.resData = {
+    code: 10200,
+    msg: "操作成功",
+    data: []
+  };
   let startTime = Date.now();
   await next();
   let endTime = Date.now();
   ctx.set({
-    "X-Response-Time": `${endTime - startTime}ms`,
-    "Cache-Control": "no-cache"
+    "Cache-Control": "no-cache",
+    "X-Response-Time": `${endTime - startTime}ms`
   });
   logUtils.logAccess(ctx);
 });

@@ -18,7 +18,7 @@ fs.readdirSync(__dirname)
 
 router.all("/", async (ctx, next) => {
   await next();
-  ctx.body = { code: 404, msg: "Not matched to any routing" };
+  ctx.body = { code: 10404, msg: "Not matched to any routing" };
 });
 
 exports = module.exports = router;
