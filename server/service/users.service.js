@@ -19,31 +19,53 @@ exports = module.exports = {
       logUtils.logError(ctx, error);
     }
   },
-  async add({ users }, ctx) {
+  async add(models, ctx) {
     let {
       logUtils,
       request: { body }
     } = ctx;
     try {
-      return await users.findOrCreate({
-        where: { name: ctx.request.body.name },
+      return await models.users.findOrCreate({
+        where: { username: body.username },
         defaults: {
+          name: body.name,
+          role_type: body.role_type,
           sex: body.sex,
           department: body.department,
           password: body.password,
           telephone: body.telephone,
           address: body.address,
-          create_time: Date.now() / 1000
+          create_time: Math.floor(Date.now() / 1000)
         }
       });
     } catch (error) {
       logUtils.logError(ctx, error);
     }
   },
-  async update({ users }, ctx) {
-    let { logUtils } = ctx;
+  async update(models, ctx) {
+    let {
+      logUtils,
+      request: { body }
+    } = ctx;
     try {
-      let result = await users.update({});
+      let user = await this.findById(models, ctx);
+      if (!user) {
+        return null;
+      }
+      user.name = body.name;
+      user.sex = body.sex;
+      user.name = body.name;
+      user.role_type = body.role_type;
+      user.sex = body.sex;
+      user.department = body.department;
+      user.password = body.password;
+      user.telephone = body.telephone;
+      user.address = body.address;
+      user.update_time = Math.floor(Date.now() / 1000);
+      user.status = body.status;
+      
+      await user.save();
+      return user;
     } catch (error) {
       logUtils.logError(ctx, error);
     }

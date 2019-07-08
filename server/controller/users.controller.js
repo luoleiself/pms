@@ -26,10 +26,34 @@ router.post("/", async (ctx, next) => {
   let { logUtils, resData } = ctx;
   await next();
   try {
-    let result = await usersService.add(models, ctx);
-    console.log(result);
+    let [result, created] = await usersService.add(models, ctx);
+    if (created) {
+      resData.data = result;
+    } else {
+      resData.code = "10404";
+      resData.msg = "该登陆用户名已存在!";
+    }
+    ctx.body = resData;
   } catch (error) {
     logUtils.logError(ctx, error);
+  }
+});
+
+router.put("/:id", async (ctx, next) => {
+  let { logUtils, resData } = ctx;
+  await next();
+  try {
+    let result = await usersService.update(models, ctx);
+    if (!result) {
+      resData.msg = "该用户不存在!";
+      resData.code = 10404;
+    } else {
+      resData.data = result;
+    }
+    ctx.body = resData;
+  } catch (error) {
+    logUtils.logError(ctx, error);
+    ctx.status = 500;
   }
 });
 

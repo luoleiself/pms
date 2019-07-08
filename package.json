@@ -2,11 +2,13 @@
   "name": "pms",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npm run dev:server",
-    "dev:server": " cd ./server && nodemon --ignore logs/ --watch ./ index.js"
+    "dev": "concurrently \"npm run dev:customer\" \"npm run dev:server\"",
+    "dev:server": " cd ./server && nodemon --ignore logs/ --watch ./ index.js",
+    "dev:customer": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
   },
   "repository": {
     "type": "git",
@@ -19,15 +21,30 @@
   },
   "homepage": "https://github.com/luoleiself/pms#readme",
   "dependencies": {
+    "@vue/cli-plugin-babel": "^3.9.0",
+    "@vue/cli-plugin-eslint": "^3.9.0",
+    "@vue/cli-service": "^3.9.0",
+    "@vue/eslint-config-airbnb": "^4.0.0",
+    "babel-eslint": "^10.0.1",
+    "concurrently": "^4.1.1",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.0.0",
     "koa": "^2.7.0",
     "koa-body": "^4.1.0",
     "koa-router": "^7.4.0",
     "log4js": "^4.4.0",
     "md5": "^2.2.1",
     "mysql2": "^1.6.5",
-    "sequelize": "^5.8.12"
+    "node-sass": "^4.9.0",
+    "sass-loader": "^7.1.0",
+    "sequelize": "^5.8.12",
+    "vue-template-compiler": "^2.6.10"
   },
   "devDependencies": {
-    "nodemon": "^1.19.1"
+    "nodemon": "^1.19.1",
+    "core-js": "^2.6.5",
+    "vue": "^2.6.10",
+    "vue-router": "^3.0.3",
+    "vuex": "^3.0.1"
   }
 }
