@@ -1,5 +1,5 @@
 exports = module.exports = function(sequelize, DataTypes) {
-  const goods = sequelize.define(
+  return sequelize.define(
     "goods",
     {
       id: {
@@ -56,8 +56,19 @@ exports = module.exports = function(sequelize, DataTypes) {
     {
       sequelize,
       timestamps: false,
-      underscored: true
+      underscored: true,
+      tableName: "goods",
+      freezeTableName: true,
+      classMethods: {
+        associate(models) {
+          models.goods.hasMany(models.purchase, {
+            foreignKey: "goods_id"
+          });
+          models.goods.hasMany(models.sales, {
+            foreignKey: "goods_id"
+          });
+        }
+      }
     }
   );
-  return goods;
 };

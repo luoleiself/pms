@@ -55,7 +55,19 @@ exports = module.exports = function(sequelize, DataTypes) {
     {
       sequelize,
       timestamps: false,
-      underscored: true
+      underscored: true,
+      tableName: "manufactors",
+      freezeTableName: true,
+      classMethods: {
+        associate(models) {
+          models.manufactors.hasMany(models.brands, {
+            foreignKey: "manufactor_id"
+          });
+          models.manufactors.hasMany(models.goods, {
+            foreignKey: "manufactor_id"
+          });
+        }
+      }
     }
   );
 };

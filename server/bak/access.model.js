@@ -1,30 +1,26 @@
 exports = module.exports = function(sequelize, DataTypes) {
   return sequelize.define(
-    "func",
+    "access",
     {
       id: {
         type: DataTypes.INTEGER(10).UNSIGNED,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
-        comment: "功能id"
+        comment: "菜单id"
       },
       pid: {
         type: DataTypes.INTEGER(10).UNSIGNED,
         defaultValue: "0",
-        comment: "功能父id"
+        comment: "菜单父id"
       },
       name: {
         type: DataTypes.STRING(20),
-        comment: "权限名称"
+        comment: "菜单名称"
       },
       url: {
-        type: DataTypes.STRING(50),
-        comment: "功能url"
-      },
-      desc: {
-        type: DataTypes.STRING(100),
-        comment: "功能描述"
+        type: DataTypes.STRING(20),
+        comment: "菜单连接"
       },
       status: {
         type: DataTypes.BOOLEAN,
@@ -47,7 +43,17 @@ exports = module.exports = function(sequelize, DataTypes) {
     {
       sequelize,
       timestamps: false,
-      underscored: true
+      underscored: true,
+      tableName: "access",
+      freezeTableName: true,
+      classMethods: {
+        associate(models) {
+          models.access.belongsToMany(models.roles, {
+            through: models.role_access,
+            foreignKey: "access_id"
+          });
+        }
+      }
     }
   );
 };

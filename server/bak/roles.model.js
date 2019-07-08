@@ -38,7 +38,21 @@ exports = module.exports = function(sequelize, DataTypes) {
     {
       sequelize,
       timestamps: false,
-      underscored: true
+      underscored: true,
+      tableName: "roles",
+      freezeTableName: true,
+      classMethods: {
+        associate(models) {
+          models.roles.belongsToMany(models.users, {
+            through: models.user_role,
+            foreignKey: "role_id"
+          });
+          models.roles.belongsToMany(models.access, {
+            through: models.role_access,
+            foreignKey: "role_id"
+          });
+        }
+      }
     }
   );
 };

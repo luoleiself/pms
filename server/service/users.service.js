@@ -1,12 +1,11 @@
 exports = module.exports = {
-  async findByPages({ users }, ctx) {
-    let { logUtils } = ctx;
-    let p = ctx.query.p || 1;
-    let p_size = ctx.query.p_size || 10;
+  async findByPages(models, ctx) {
+    let { logUtils, dbQuery } = ctx;
     try {
-      let limit = Number(p_size);
-      let offset = Number(p - 1) * p_size;
-      return await users.findAndCountAll({ offset, limit });
+      return await models.users.findAndCountAll({
+        offset: dbQuery.offset,
+        limit: dbQuery.limit
+      });
     } catch (error) {
       logUtils.logError(ctx, error);
     }
@@ -15,12 +14,44 @@ exports = module.exports = {
     let { logUtils } = ctx;
     try {
       let id = Number.parseInt(ctx.params.id);
-      if (id) {
-        console.log(id);
-        return await users.findOne({ where: { id: id } });
-      } else {
-        throw new Error(id);
-      }
+      return await users.findOne({ where: { id: id } });
+    } catch (error) {
+      logUtils.logError(ctx, error);
+    }
+  },
+  async add({ users }, ctx) {
+    let {
+      logUtils,
+      request: { body }
+    } = ctx;
+    try {
+      return await users.findOrCreate({
+        where: { name: ctx.request.body.name },
+        defaults: {
+          sex: body.sex,
+          department: body.department,
+          password: body.password,
+          telephone: body.telephone,
+          address: body.address,
+          create_time: Date.now() / 1000
+        }
+      });
+    } catch (error) {
+      logUtils.logError(ctx, error);
+    }
+  },
+  async update({ users }, ctx) {
+    let { logUtils } = ctx;
+    try {
+      let result = await users.update({});
+    } catch (error) {
+      logUtils.logError(ctx, error);
+    }
+  },
+  async delete({ users }, ctx) {
+    let { logUtils } = ctx;
+    try {
+      let result = await users.delete();
     } catch (error) {
       logUtils.logError(ctx, error);
     }

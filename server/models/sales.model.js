@@ -19,6 +19,10 @@ exports = module.exports = function(sequelize, DataTypes) {
         defaultValue: "0",
         comment: "销售数量"
       },
+      // goods_id: {
+      //   type: DataTypes.INTEGER(5).UNSIGNED,
+      //   comment: "商品id"
+      // },
       create_time: {
         type: DataTypes.INTEGER(10).UNSIGNED,
         comment: "创建时间"
@@ -27,10 +31,6 @@ exports = module.exports = function(sequelize, DataTypes) {
         type: DataTypes.INTEGER(10).UNSIGNED,
         comment: "更新时间"
       },
-      // goods_id: {
-      //   type: DataTypes.INTEGER(5).UNSIGNED,
-      //   comment: "商品id"
-      // },
       operator: {
         type: DataTypes.INTEGER(5).UNSIGNED,
         comment: "操作人员id"
@@ -39,7 +39,13 @@ exports = module.exports = function(sequelize, DataTypes) {
     {
       sequelize,
       timestamps: false,
-      underscored: true
+      underscored: true,
+      tableName: "sales",
+      freezeTableName: true
+      // classMethods: {
+      //   associate(models) {
+      //   }
+      // }
     }
   );
 };

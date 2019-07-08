@@ -19,6 +19,10 @@ exports = module.exports = function(sequelize, DataTypes) {
         defaultValue: "0",
         comment: "采购数量"
       },
+      // goods_id: {
+      //   type: DataTypes.INTEGER(5).UNSIGNED,
+      //   comment: "商品id"
+      // },
       create_time: {
         type: DataTypes.INTEGER(10).UNSIGNED,
         comment: "创建时间"
@@ -35,7 +39,13 @@ exports = module.exports = function(sequelize, DataTypes) {
     {
       sequelize,
       timestamps: false,
-      underscored: true
+      underscored: true,
+      tableName: "purchase",
+      freezeTableName: true
+      // classMethods: {
+      //   associate(models) {
+      //   }
+      // }
     }
   );
 };

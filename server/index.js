@@ -1,8 +1,11 @@
 const Koa = require("koa");
 const md5 = require("md5");
+const koaBody = require("koa-body");
 const models = require("./models");
 const router = require("./controller");
 const logUtils = require("./utils/logUtils");
+const pages = require("./middleware/pages");
+const headers = require("./middleware/headers");
 
 const app = new Koa();
 
@@ -13,15 +16,21 @@ app.use(async (ctx, next) => {
     msg: "操作成功",
     data: []
   };
-  let startTime = Date.now();
   await next();
-  let endTime = Date.now();
-  ctx.set({
-    "Cache-Control": "no-cache",
-    "X-Response-Time": `${endTime - startTime}ms`
-  });
+  let { resData } = ctx;
+  ctx.status = 200;
+  if (ctx.status == 500) {
+    resData.code = 10500;
+    resData.msg = "服务器内部错误";
+    ctx.body = resData;
+  }
   logUtils.logAccess(ctx);
 });
+
+app
+  .use(koaBody())
+  .use(pages)
+  .use(headers);
 
 app.use(router.routes()).use(router.allowedMethods());
 
@@ -31,29 +40,13 @@ models.sequelize
   .then(async () => {
     console.log("|----- database sync success -----|");
 
-    let user = null;
-    try {
-      user = await models.users.findOne({ where: { name: "admin" } });
-      if (!user) {
-        models.users
-          .build({
-            name: "admin",
-            password: md5(123456),
-            department: "系统部",
-            telephone: "010-12345678",
-            address: "北京市朝阳区朝阳路1号",
-            create_time: Date.now() / 1000
-          })
-          .save();
-      }
-    } catch (error) {
-      throw new Error(error);
-    }
-
     app.listen(3000, () => {
       console.log("pms service is running at http://localhost:3000");
     });
   })
   .catch(err => {
-    throw new Error(err);
+    if (err.name == "SequelizeConnectionError") {
+      console.error(`数据库连接错误，请检查数据库是否存在!`);
+      process.exit();
+    }
   });

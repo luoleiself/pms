@@ -19,7 +19,8 @@ try {
   );
   sequelize.authenticate();
 } catch (error) {
-  throw new Error(error);
+  console.error(`数据库连接出错，请检查models\\index.js`);
+  process.exit();
 }
 
 fs.readdirSync(__dirname)
@@ -31,39 +32,38 @@ fs.readdirSync(__dirname)
     db[model.name] = model;
   });
 
-// Object.keys(db).forEach(modelName => {
-//   if ("associate" in db[modelName]) {
-//     db[modelName].associate(db);
-//   }
-// });
+Object.keys(db).forEach(modelName => {
+  if (
+    db[modelName].options.hasOwnProperty("classMethods") &&
+    db[modelName].options.classMethods.hasOwnProperty("associate")
+  ) {
+    db[modelName].options.classMethods.associate(db);
+  }
+});
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-db.categories.hasMany(db.goods); // categories    1:N    goods
+// db.categories.hasMany(db.goods); // categories    1:N    goods
 
-db.brands.hasMany(db.goods); // brands    1:N    goods
+// db.brands.hasMany(db.goods); // brands    1:N    goods
 
-db.manufactors.hasMany(db.brands); // manufactors    1:N    brands
+// db.manufactors.hasMany(db.brands); // manufactors    1:N    brands
 
-db.manufactors.hasMany(db.goods); // manufactors    1:N   goods
+// db.manufactors.hasMany(db.goods); // manufactors    1:N   goods
 
-db.goods.hasMany(db.sales); // goods    1:N   sales
+// db.goods.hasMany(db.sales); // goods    1:N   sales
 
-db.goods.hasMany(db.purchase); // goods   1:N   purchase
+// db.goods.hasMany(db.purchase); // goods   1:N   purchase
 
-db.users.belongsToMany(db.roles, {
-  through: db.user_role
-}); // users    M:N   roles
-db.roles.belongsToMany(db.users, {
-  through: db.user_role
-}); // roles    M:N   users
+// db.users.belongsToMany(db.roles, {
+//   through: db.user_role,
+//   foreignKey: "user_id"
+// });
 
-db.roles.belongsToMany(db.func, {
-  through: db.role_func
-}); // roles    M:N   func
-db.func.belongsToMany(db.roles, {
-  through: db.role_func
-}); // func    M:N   roles
+// db.roles.belongsToMany(db.users, {
+//   through: db.user_role,
+//   foreignKey: "role_id"
+// });
 
 exports = module.exports = db;

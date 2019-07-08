@@ -1,5 +1,5 @@
 exports = module.exports = function(sequelize, DataTypes) {
-  const users = sequelize.define(
+  return sequelize.define(
     "users",
     {
       id: {
@@ -11,7 +11,15 @@ exports = module.exports = function(sequelize, DataTypes) {
       },
       name: {
         type: DataTypes.STRING(20),
-        comment: "用户名称"
+        comment: "用户姓名"
+      },
+      username: {
+        type: DataTypes.STRING(20),
+        comment: "登陆用户名"
+      },
+      password: {
+        type: DataTypes.STRING(200),
+        comment: "用户密码"
       },
       sex: {
         type: DataTypes.TINYINT(1),
@@ -22,10 +30,6 @@ exports = module.exports = function(sequelize, DataTypes) {
         type: DataTypes.STRING(15),
         comment: "所属部门"
       },
-      password: {
-        type: DataTypes.STRING(200),
-        comment: "用户密码"
-      },
       telephone: {
         type: DataTypes.STRING(15),
         comment: "联系电话"
@@ -33,6 +37,11 @@ exports = module.exports = function(sequelize, DataTypes) {
       address: {
         type: DataTypes.STRING(100),
         comment: "地址"
+      },
+      role_type: {
+        type: DataTypes.SMALLINT(1).UNSIGNED,
+        defaultValue: "0",
+        comment: "角色类型: 管理员：1, 销售：2, 采购：3"
       },
       status: {
         type: DataTypes.BOOLEAN,
@@ -55,14 +64,17 @@ exports = module.exports = function(sequelize, DataTypes) {
     {
       sequelize,
       timestamps: false,
-      underscored: true
+      underscored: true,
+      tableName: "users",
+      freezeTableName: true
+      // classMethods: {
+      //   associate(models) {
+      //     models.users.belongsToMany(models.roles, {
+      //       through: models.user_role,
+      //       foreignKey: "user_id"
+      //     });
+      //   }
+      // }
     }
   );
-
-  // users.associate = models => {
-  //   console.log(models.roles);
-  //   users.belongsToMany(models.roles, { through: models.user_role });
-  // };
-
-  return users;
 };
