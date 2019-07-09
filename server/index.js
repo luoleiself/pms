@@ -3,34 +3,17 @@ const md5 = require("md5");
 const koaBody = require("koa-body");
 const models = require("./models");
 const router = require("./controller");
-const logUtils = require("./utils/logUtils");
+const resData = require("./middleware/resData");
 const pages = require("./middleware/pages");
 const headers = require("./middleware/headers");
 
 const app = new Koa();
 
-app.use(async (ctx, next) => {
-  ctx.logUtils = logUtils;
-  ctx.resData = {
-    code: 10200,
-    msg: "操作成功",
-    data: []
-  };
-  await next();
-  let { resData } = ctx;
-  ctx.status = 200;
-  if (ctx.status == 500) {
-    resData.code = 10500;
-    resData.msg = "服务器内部错误";
-    ctx.body = resData;
-  }
-  logUtils.logAccess(ctx);
-});
-
 app
-  .use(koaBody())
   .use(pages)
-  .use(headers);
+  .use(headers)
+  .use(resData)
+  .use(koaBody());
 
 app.use(router.routes()).use(router.allowedMethods());
 
@@ -40,8 +23,8 @@ models.sequelize
   .then(async () => {
     console.log("|----- database sync success -----|");
 
-    app.listen(30000, () => {
-      console.log("pms service is running at http://localhost:30000");
+    app.listen(8888, () => {
+      console.log("pms service is running at http://localhost:8888");
     });
   })
   .catch(err => {

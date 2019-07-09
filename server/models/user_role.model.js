@@ -27,12 +27,7 @@ exports = module.exports = function(sequelize, DataTypes) {
       tableName: "user_role",
       freezeTableName: true
       // classMethods: {
-      //   associate(models) {
-      //     models.roles.hasMany(models.users, {
-      //       through: models.user_role,
-      //       foreignKey: "role_id"
-      //     });
-      //   }
+      //   associate(models) {}
       // }
     }
   );

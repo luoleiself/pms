@@ -49,6 +49,9 @@ exports = module.exports = function(sequelize, DataTypes) {
       freezeTableName: true,
       classMethods: {
         associate(models) {
+          models.brands.belongsTo(models.manufactors, {
+            foreignKey: "manufactor_id"
+          });
           models.brands.hasMany(models.goods, {
             foreignKey: "brand_id"
           });

@@ -38,11 +38,6 @@ exports = module.exports = function(sequelize, DataTypes) {
         type: DataTypes.STRING(100),
         comment: "地址"
       },
-      role_type: {
-        type: DataTypes.SMALLINT(1).UNSIGNED,
-        defaultValue: "0",
-        comment: "角色类型: 管理员：1, 销售：2, 采购：3"
-      },
       status: {
         type: DataTypes.BOOLEAN,
         defaultValue: "1",
@@ -66,15 +61,15 @@ exports = module.exports = function(sequelize, DataTypes) {
       timestamps: false,
       underscored: true,
       tableName: "users",
-      freezeTableName: true
-      // classMethods: {
-      //   associate(models) {
-      //     models.users.belongsToMany(models.roles, {
-      //       through: models.user_role,
-      //       foreignKey: "user_id"
-      //     });
-      //   }
-      // }
+      freezeTableName: true,
+      classMethods: {
+        associate(models) {
+          models.users.belongsToMany(models.roles, {
+            through: models.user_role,
+            foreignKey: "user_id"
+          });
+        }
+      }
     }
   );
 };

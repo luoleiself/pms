@@ -41,11 +41,14 @@ exports = module.exports = function(sequelize, DataTypes) {
       timestamps: false,
       underscored: true,
       tableName: "purchase",
-      freezeTableName: true
-      // classMethods: {
-      //   associate(models) {
-      //   }
-      // }
+      freezeTableName: true,
+      classMethods: {
+        associate(models) {
+          models.purchase.belongsTo(models.goods, {
+            foreignKey: "goods_id"
+          });
+        }
+      }
     }
   );
 };

@@ -7,16 +7,11 @@ let db = {};
 let sequelize = null;
 
 try {
-  sequelize = new Sequelize(
-    config.dev.database,
-    config.dev.username,
-    config.dev.password,
-    {
-      host: config.dev.host,
-      dialect: config.dev.dialect,
-      pool: config.dev.pool
-    }
-  );
+  sequelize = new Sequelize(config.dev.database, config.dev.username, config.dev.password, {
+    host: config.dev.host,
+    dialect: config.dev.dialect,
+    pool: config.dev.pool
+  });
   sequelize.authenticate();
 } catch (error) {
   console.error(`数据库连接出错，请检查models\\index.js`);
@@ -43,27 +38,5 @@ Object.keys(db).forEach(modelName => {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
-
-// db.categories.hasMany(db.goods); // categories    1:N    goods
-
-// db.brands.hasMany(db.goods); // brands    1:N    goods
-
-// db.manufactors.hasMany(db.brands); // manufactors    1:N    brands
-
-// db.manufactors.hasMany(db.goods); // manufactors    1:N   goods
-
-// db.goods.hasMany(db.sales); // goods    1:N   sales
-
-// db.goods.hasMany(db.purchase); // goods   1:N   purchase
-
-// db.users.belongsToMany(db.roles, {
-//   through: db.user_role,
-//   foreignKey: "user_id"
-// });
-
-// db.roles.belongsToMany(db.users, {
-//   through: db.user_role,
-//   foreignKey: "role_id"
-// });
 
 exports = module.exports = db;

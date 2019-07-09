@@ -18,11 +18,11 @@ exports = module.exports = function(sequelize, DataTypes) {
         comment: "检索关键字"
       },
       desc: { type: DataTypes.STRING(100), comment: "商品描述" },
-      amount: {
-        type: DataTypes.SMALLINT(5).UNSIGNED,
-        defaultValue: "0",
-        comment: "库存数据量"
-      },
+      // amount: {
+      //   type: DataTypes.SMALLINT(5).UNSIGNED,
+      //   defaultValue: "0",
+      //   comment: "库存数据量"
+      // },
       create_time: {
         type: DataTypes.INTEGER(10).UNSIGNED,
         comment: "创建时间"
@@ -61,6 +61,15 @@ exports = module.exports = function(sequelize, DataTypes) {
       freezeTableName: true,
       classMethods: {
         associate(models) {
+          models.goods.belongsTo(models.brands, {
+            foreignKey: "brand_id"
+          });
+          models.goods.belongsTo(models.categories, {
+            foreignKey: "category_id"
+          });
+          models.goods.belongsTo(models.manufactors, {
+            foreignKey: "manufactor_id"
+          });
           models.goods.hasMany(models.purchase, {
             foreignKey: "goods_id"
           });

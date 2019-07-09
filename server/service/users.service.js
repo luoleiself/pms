@@ -1,8 +1,21 @@
 exports = module.exports = {
-  async findByPages(models, ctx) {
+  attributes: [
+    "id",
+    "name",
+    "username",
+    "sex",
+    "department",
+    "address",
+    "telephone",
+    "status",
+    "create_time",
+    "update_time"
+  ],
+  async findByPages(ctx, models) {
     let { logUtils, dbQuery } = ctx;
     try {
       return await models.users.findAndCountAll({
+        attributes: this.attributes,
         offset: dbQuery.offset,
         limit: dbQuery.limit
       });
@@ -10,16 +23,19 @@ exports = module.exports = {
       logUtils.logError(ctx, error);
     }
   },
-  async findById({ users }, ctx) {
+  async findById(ctx, models) {
     let { logUtils } = ctx;
     try {
-      let id = Number.parseInt(ctx.params.id);
-      return await users.findOne({ where: { id: id } });
+      let id = Number(ctx.params.id);
+      return await models.users.findOne({
+        where: { id: id },
+        attributes: this.attributes
+      });
     } catch (error) {
       logUtils.logError(ctx, error);
     }
   },
-  async add(models, ctx) {
+  async add(ctx, models) {
     let {
       logUtils,
       request: { body }
@@ -29,10 +45,10 @@ exports = module.exports = {
         where: { username: body.username },
         defaults: {
           name: body.name,
-          role_type: body.role_type,
+          username: body.username,
+          password: body.password,
           sex: body.sex,
           department: body.department,
-          password: body.password,
           telephone: body.telephone,
           address: body.address,
           create_time: Math.floor(Date.now() / 1000)
@@ -42,38 +58,39 @@ exports = module.exports = {
       logUtils.logError(ctx, error);
     }
   },
-  async update(models, ctx) {
+  async update(ctx, models) {
     let {
       logUtils,
       request: { body }
     } = ctx;
     try {
-      let user = await this.findById(models, ctx);
+      let user = await this.findById(ctx, models);
       if (!user) {
         return null;
       }
       user.name = body.name;
-      user.sex = body.sex;
-      user.name = body.name;
-      user.role_type = body.role_type;
+      // user.password = body.password;
       user.sex = body.sex;
       user.department = body.department;
-      user.password = body.password;
       user.telephone = body.telephone;
       user.address = body.address;
       user.update_time = Math.floor(Date.now() / 1000);
-      user.status = body.status;
-      
+
       await user.save();
       return user;
     } catch (error) {
       logUtils.logError(ctx, error);
     }
   },
-  async delete({ users }, ctx) {
+  async delete(ctx, models) {
     let { logUtils } = ctx;
     try {
-      let result = await users.delete();
+      let user = await this.findById(ctx, models);
+      if (!user) {
+        return null;
+      }
+      await user.destroy();
+      return user;
     } catch (error) {
       logUtils.logError(ctx, error);
     }
