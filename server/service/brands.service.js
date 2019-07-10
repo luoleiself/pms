@@ -3,8 +3,10 @@ exports = module.exports = {
   attributes: ["id", "pid", "name", "desc", "create_time", "update_time", "status"],
   async findByPages(ctx, models) {
     let { logUtils, dbQuery } = ctx;
+    const Op = models.Sequelize.Op;
     try {
       return await models.brands.findAndCountAll({
+        where: { status: { [Op.in]: dbQuery.status } },
         offset: dbQuery.offset,
         limit: dbQuery.limit,
         attributes: this.attributes,
