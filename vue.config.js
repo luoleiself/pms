@@ -1,7 +1,10 @@
+const SERVER_PORT = process.env.SERVER_PORT || 80;
+const CLIENT_PORT = process.env.CLIENT_PORT || 80;
+
 module.exports = {
   lintOnSave: false,
   devServer: {
-    port: 8080,
+    port: CLIENT_PORT,
     host: "localhost"
   },
   // 链式调用配置
@@ -10,8 +13,8 @@ module.exports = {
     config.plugin("define").tap(args => {
       args[0]["process.env"].REQUEST_URL =
         process.env.NODE_ENV === "production"
-          ? JSON.stringify("http://localhost:8888/api")
-          : JSON.stringify("http://localhost:8888/api");
+          ? JSON.stringify(`http://localhost:${SERVER_PORT}/api`)
+          : JSON.stringify(`http://localhost:${SERVER_PORT}/api`);
       return args;
     });
   }

@@ -4,10 +4,11 @@ exports = module.exports = {
   async findByPages(ctx, models) {
     let { logUtils, dbQuery } = ctx;
     try {
-      return await models.categories.findAndCountAll({
+      return await models.brands.findAndCountAll({
         offset: dbQuery.offset,
         limit: dbQuery.limit,
-        attributes: this.attributes
+        attributes: this.attributes,
+        include: [models.manufactors]
       });
     } catch (error) {
       logUtils.logError(ctx, error);
@@ -17,9 +18,10 @@ exports = module.exports = {
     let { logUtils } = ctx;
     try {
       let id = Number(ctx.params.id);
-      return await models.categories.findOne({
+      return await models.brands.findOne({
         where: { id: id },
-        attributes: this.attributes
+        attributes: this.attributes,
+        include: [models.manufactors]
       });
     } catch (error) {
       logUtils.logError(ctx, error);
@@ -31,12 +33,13 @@ exports = module.exports = {
       request: { body }
     } = ctx;
     try {
-      return await models.categories.findOrCreate({
+      return await models.brands.findOrCreate({
         where: { name: body.name },
         defaults: {
           pid: body.pid,
           desc: body.desc,
           status: body.status,
+          manufactor_id: body.manufactor_id,
           create_time: Math.floor(Date.now() / 1000)
         }
       });
@@ -52,26 +55,25 @@ exports = module.exports = {
     const Op = models.Sequelize.Op;
     try {
       let id = Number(ctx.params.id);
-      let categories = await this.findById(ctx, models);
-      if (!categories) {
-        return { code: 0, msg: "该分类不存在!" };
+      let brands = await this.findById(ctx, models);
+      if (!brands) {
+        return { code: 0, msg: "该品牌不存在!" };
       }
-
-      let categoriesStore = await models.categories.findOne({
+      let brandsStore = await models.brands.findOne({
         where: { name: body.name, id: { [Op.not]: id } }
       });
-      if (categoriesStore) {
-        return { code: 0, msg: "分类名称已存在" };
+      if (brandsStore) {
+        return { code: 0, msg: "品牌名称已存在" };
       }
 
-      categories.name = body.name;
-      categories.pid = body.pid;
-      categories.desc = body.desc;
-      categories.status = body.status;
-      categories.update_time = Math.floor(Date.now() / 1000);
+      brands.name = body.name;
+      brands.pid = body.pid;
+      brands.desc = body.desc;
+      brands.status = body.status;
+      brands.update_time = Math.floor(Date.now() / 1000);
 
-      await categories.save();
-      return categories;
+      await brands.save();
+      return brands;
     } catch (error) {
       logUtils.logError(ctx, error);
     }
@@ -79,13 +81,15 @@ exports = module.exports = {
   async delete(ctx, models) {
     let { logUtils } = ctx;
     try {
-      let categories = await this.findById(ctx, models);
-      if (!categories) {
+      let id = Number(ctx.params.id);
+      let brands = await this.findById(ctx, models);
+      if (!brands) {
         return null;
       }
-      categories.status = false;
-      await categories.save();
-      return categories;
+
+      brands.status = false;
+      await brands.save();
+      return brands;
     } catch (error) {
       logUtils.logError(ctx, error);
     }
@@ -94,8 +98,8 @@ exports = module.exports = {
     let { logUtils } = ctx;
     try {
       let id = Number(ctx.params.id);
-      let categories = JSON.stringify(await this.findAll(ctx, models));
-      return tree(id, JSON.parse(categories));
+      let brands = JSON.stringify(await this.findAll(ctx, models));
+      return tree(id, JSON.parse(brands));
     } catch (error) {
       logUtils.logError(ctx, error);
     }
@@ -103,7 +107,7 @@ exports = module.exports = {
   async findAll(ctx, models) {
     let { logUtils } = ctx;
     try {
-      return await models.categories.findAll({
+      return await models.brands.findAll({
         attributes: this.attributes
       });
     } catch (error) {

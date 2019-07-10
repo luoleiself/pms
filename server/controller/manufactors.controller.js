@@ -1,14 +1,14 @@
 const Router = require("koa-router");
 const models = require("../models");
-const { categoriesService } = require("../service");
+const { manufactorsService } = require("../service");
 
 const router = new Router();
-// 查询所有分类列表分页
+// 查询所有供应商列表分页
 router.get("/", async (ctx, next) => {
   await next();
   let { logUtils, resData, dbQuery } = ctx;
   try {
-    let result = await categoriesService.findByPages(ctx, models);
+    let result = await manufactorsService.findByPages(ctx, models);
     resData.data = {
       total: result.count,
       p: dbQuery.p,
@@ -21,15 +21,15 @@ router.get("/", async (ctx, next) => {
     ctx.status = 500;
   }
 });
-// 获取指定分类
+// 获取指定供应商
 router.get("/:id", async (ctx, next) => {
   await next();
   let { logUtils, resData } = ctx;
   try {
-    let result = await categoriesService.findById(ctx, models);
+    let result = await manufactorsService.findById(ctx, models);
     if (!result) {
       resData.code = 10404;
-      resData.msg = "未查询到该分类信息";
+      resData.msg = "未查询到该供应商信息";
     } else {
       resData.data = result;
     }
@@ -39,17 +39,17 @@ router.get("/:id", async (ctx, next) => {
     ctx.status = 500;
   }
 });
-// 添加分类
+// 添加供应商
 router.post("/", async (ctx, next) => {
   await next();
   let { logUtils, resData } = ctx;
   try {
-    let [result, created] = await categoriesService.add(ctx, models);
+    let [result, created] = await manufactorsService.add(ctx, models);
     if (created) {
       resData.data = result;
     } else {
       resData.code = 10404;
-      resData.msg = "该分类名称已存在!";
+      resData.msg = "该供应商名称已存在!";
     }
     ctx.body = resData;
   } catch (error) {
@@ -57,12 +57,12 @@ router.post("/", async (ctx, next) => {
     ctx.status = 500;
   }
 });
-// 更新指定分类信息
+// 更新指定供应商信息
 router.put("/:id", async (ctx, next) => {
   await next();
   let { logUtils, resData } = ctx;
   try {
-    let result = await categoriesService.update(ctx, models);
+    let result = await manufactorsService.update(ctx, models);
     if (result.code == 0) {
       resData.msg = result.msg;
       resData.code = 10404;
@@ -75,33 +75,15 @@ router.put("/:id", async (ctx, next) => {
     ctx.status = 500;
   }
 });
-// 删除指定分类
+// 删除指定供应商
 router.delete("/:id", async (ctx, next) => {
   await next();
   let { logUtils, resData } = ctx;
   try {
-    let result = await categoriesService.delete(ctx, models);
+    let result = await manufactorsService.delete(ctx, models);
     if (!result) {
-      resData.msg = "该分类不存在!";
+      resData.msg = "该供应商不存在!";
       resData.code = 10404;
-    } else {
-      resData.data = result;
-    }
-    ctx.body = resData;
-  } catch (error) {
-    logUtils.logError(ctx, error);
-    ctx.status = 500;
-  }
-});
-// 获取指定分类的树形结构
-router.get("/:id/tree", async (ctx, next) => {
-  await next();
-  let { logUtils, resData } = ctx;
-  try {
-    let result = await categoriesService.getTree(ctx, models);
-    if (!result) {
-      resData.code = 10404;
-      resData.msg = "未查询到该分类信息";
     } else {
       resData.data = result;
     }

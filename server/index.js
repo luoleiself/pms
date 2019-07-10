@@ -7,6 +7,8 @@ const resData = require("./middleware/resData");
 const pages = require("./middleware/pages");
 const headers = require("./middleware/headers");
 
+const SERVER_PORT = process.env.SERVER_PORT || 80;
+
 const app = new Koa();
 
 app
@@ -23,8 +25,8 @@ models.sequelize
   .then(async () => {
     console.log("|----- database sync success -----|");
 
-    app.listen(8888, () => {
-      console.log("pms service is running at http://localhost:8888");
+    app.listen(SERVER_PORT, () => {
+      console.log(`pms service is running at http://localhost:${SERVER_PORT}`);
     });
   })
   .catch(err => {

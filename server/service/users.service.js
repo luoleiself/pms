@@ -89,7 +89,9 @@ exports = module.exports = {
       if (!user) {
         return null;
       }
-      await user.destroy();
+      
+      user.status = false;
+      await user.save();
       return user;
     } catch (error) {
       logUtils.logError(ctx, error);

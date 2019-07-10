@@ -101,7 +101,8 @@ exports = module.exports = {
       if (!goods) {
         return null;
       }
-      await goods.destroy();
+      goods.status = false;
+      await goods.save();
       return goods;
     } catch (error) {
       logUtils.logError(ctx, error);
