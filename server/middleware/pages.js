@@ -4,11 +4,11 @@ exports = module.exports = async (ctx, next) => {
   let limit = p_size;
   let offset = (p - 1) * p_size;
   if (ctx.query.status === "0") {
-    status = [false];
+    status = [0];
   } else if (ctx.query.status === "1") {
-    status = [true];
+    status = [1];
   } else {
-    status = [true, false];
+    status = [1, 0];
   }
   ctx.dbQuery = {
     p,

@@ -10,10 +10,7 @@ fs.readdirSync(__dirname)
     return fileName.indexOf(".") !== 0 && fileName !== "index.js";
   })
   .forEach(fileName => {
-    router.use(
-      `/${path.basename(fileName, ".controller.js")}`,
-      require(`./${fileName}`).routes()
-    );
+    router.use(`/${path.basename(fileName, ".controller.js")}`, require(`./${fileName}`).routes());
   });
 
 router.all("/", async (ctx, next) => {

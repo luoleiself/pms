@@ -18,11 +18,11 @@ exports = module.exports = function(sequelize, DataTypes) {
         comment: "检索关键字"
       },
       desc: { type: DataTypes.STRING(100), comment: "商品描述" },
-      // amount: {
-      //   type: DataTypes.SMALLINT(5).UNSIGNED,
-      //   defaultValue: "0",
-      //   comment: "库存数据量"
-      // },
+      amount: {
+        type: DataTypes.SMALLINT(5).UNSIGNED,
+        defaultValue: "0",
+        comment: "库存数据量"
+      },
       create_time: {
         type: DataTypes.INTEGER(10).UNSIGNED,
         comment: "创建时间"

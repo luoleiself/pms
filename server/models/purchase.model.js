@@ -11,7 +11,7 @@ exports = module.exports = function(sequelize, DataTypes) {
       },
       price: {
         type: DataTypes.DECIMAL(10, 2).UNSIGNED,
-        defaultValue: "0.0",
+        defaultValue: "0.00",
         comment: "采购单价"
       },
       amount: {
