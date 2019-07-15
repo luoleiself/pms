@@ -21,7 +21,6 @@ xhr.interceptors.request.use(
 // 添加响应拦截器
 xhr.interceptors.response.use(
   response => {
-    console.log(response);
     if (+response.status === 200) {
       return response.data;
     }
