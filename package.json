@@ -5,8 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
-    "dev:server": "set SERVER_PORT=9999 && cd ./server && nodemon --ignore logs/ --watch ./ index.js",
-    "dev:client": "set CLIENT_PORT=9998 && vue-cli-service serve",
+    "dev:server": "cd ./server && nodemon --ignore logs/ --watch ./ index.js",
+    "dev:client": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
@@ -31,6 +31,7 @@
     "element-ui": "^2.10.1",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
+    "jsonwebtoken": "^8.5.1",
     "koa": "^2.7.0",
     "koa-body": "^4.1.0",
     "koa-router": "^7.4.0",

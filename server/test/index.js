@@ -3,6 +3,9 @@ const app = new Koa();
 // const log4js = require("koa-log4");
 const path = require("path");
 const md5 = require("md5");
+
+const jwt = require('../middleware/jwt');
+console.log(jwt);
 // const logger = require('../config/log.config');
 
 // logger
@@ -54,9 +57,9 @@ router.get("/", async (ctx, next) => {
 
 app.use(router.routes()).use(router.allowedMethods());
 
-app.listen(3000, () => {
-  console.log("service listening in http://localhost:3000...");
-});
+// app.listen(3000, () => {
+//   console.log("service listening in http://localhost:3000...");
+// });
 
 let msg = "hello world";
 let password = "123456";

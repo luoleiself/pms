@@ -1,11 +1,11 @@
-const SERVER_PORT = process.env.SERVER_PORT || 80;
-const CLIENT_PORT = process.env.CLIENT_PORT || 80;
+const hostName = require("./server/config/host.json");
+const url = require("url");
 
 module.exports = {
   lintOnSave: false,
   devServer: {
-    port: CLIENT_PORT,
-    host: "localhost"
+    port: hostName.client.port,
+    host: hostName.client.hostName
   },
   // 链式调用配置
   chainWebpack: config => {
@@ -13,8 +13,8 @@ module.exports = {
     config.plugin("define").tap(args => {
       args[0]["process.env"].REQUEST_URL =
         process.env.NODE_ENV === "production"
-          ? JSON.stringify(`http://localhost:${SERVER_PORT}/api`)
-          : JSON.stringify(`http://localhost:${SERVER_PORT}/api`);
+          ? JSON.stringify(`${url.format(hostName.server)}`)
+          : JSON.stringify(`${url.format(hostName.server)}`);
       return args;
     });
   }

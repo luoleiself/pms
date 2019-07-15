@@ -1,4 +1,5 @@
 const Koa = require("koa");
+const url = require("url");
 const md5 = require("md5");
 const koaBody = require("koa-body");
 const models = require("./models");
@@ -6,8 +7,7 @@ const router = require("./controller");
 const resData = require("./middleware/resData");
 const pages = require("./middleware/pages");
 const headers = require("./middleware/headers");
-
-const SERVER_PORT = process.env.SERVER_PORT || 80;
+const hostName = require("./config/host.json");
 
 const app = new Koa();
 
@@ -25,8 +25,8 @@ models.sequelize
   .then(async () => {
     console.log("|----- database sync success -----|");
 
-    app.listen(SERVER_PORT, () => {
-      console.log(`pms service is running at http://localhost:${SERVER_PORT}`);
+    app.listen(hostName.server.port, () => {
+      console.log(`pms service is running at ${url.format(hostName.server)}`);
     });
   })
   .catch(err => {

@@ -12,6 +12,8 @@
   </el-form>
 </template>
 <script>
+import md5 from "md5";
+
 export default {
   data() {
     return {
@@ -31,7 +33,20 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          console.log(this.ruleForm);
+          this.ruleForm.password = md5(this.ruleForm.password);
+          this.$xhr
+            .post("/login", {
+              ...this.ruleForm
+            })
+            .then(res => {
+              if (res.code == 10200) {
+                console.log(res);
+                this.$router.push({ path: "/home" });
+              }
+            })
+            .catch(err => {
+              console.log(err);
+            });
         }
         return false;
       });
