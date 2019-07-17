@@ -3,24 +3,11 @@ const models = require("../models");
 const { usersService } = require("../service");
 
 const router = new Router();
-// 用户登陆
-router.get("/login", async (ctx, next) => {
-  await next();
-  let { logUtils, resData } = ctx;
-  try {
-    let result  = await usersService.login(ctx,models);
-    console.log(result);
-  } catch (error) {
-    logUtils.logError(ctx, error);
-    ctx.status = 500;
-  }
-});
-
 
 // 查询所有用户列表分页
 router.get("/", async (ctx, next) => {
-  await next();
   let { logUtils, resData, dbQuery } = ctx;
+  await next();
   try {
     let result = await usersService.findByPages(ctx, models);
     resData.data = {

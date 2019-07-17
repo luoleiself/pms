@@ -7,14 +7,21 @@ const router = require("./controller");
 const resData = require("./middleware/resData");
 const pages = require("./middleware/pages");
 const headers = require("./middleware/headers");
+const checkToken = require("./middleware/checkToken");
 const hostName = require("./config/host.json");
+const jwt = require("./utils/jwt");
 
 const app = new Koa();
 
 app
-  .use(pages)
+  .use(async (ctx, next) => {
+    ctx.jwt = jwt;
+    await next();
+  })
   .use(headers)
   .use(resData)
+  .use(pages)
+  .use(checkToken)
   .use(koaBody());
 
 app.use(router.routes()).use(router.allowedMethods());

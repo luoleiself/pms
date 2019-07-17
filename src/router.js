@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
+import store from "./store";
 
 Vue.use(Router);
 
@@ -18,26 +19,48 @@ const router = new Router({
     {
       path: "/home",
       name: "home",
-      component: () => import("@/views/Home.vue")
+      meta: {
+        requireAuth: true
+      },
+      component: () => import("@/views/Home.vue"),
+      redirect: "/home/goods",
+      children: [
+        {
+          path: "/home/users",
+          name: "users",
+          component: () => import("@/views/Users.vue")
+        },
+        {
+          path: "/home/goods",
+          name: "goods",
+          component: () => import("@/views/Goods.vue")
+        }
+      ]
     }
   ]
 });
 
-// router.beforeEach((to, from, next) => {
-//   if (to.matched.some(r => r.meta.requireAuth)) {
-//     if (store.state.user.status) {
-//       next();
-//     } else {
-//       // next({
-//       //   path: "/login",
-//       //   query: {
-//       //     redirect: to.fullPath
-//       //   }
-//       // });
-//     }
-//   } else {
-//     next();
-//   }
-// });
+// 页面刷新时，重新赋值token
+if (window.sessionStorage.getItem("user")) {
+  let user = JSON.parse(window.sessionStorage.getItem("user"));
+  store.dispatch("USER_LOGIN", user);
+}
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(r => r.meta.requireAuth)) {
+    if (window.sessionStorage.getItem("token")) {
+      next();
+    } else {
+      next({
+        path: "/login",
+        query: {
+          redirect: to.fullPath
+        }
+      });
+    }
+  } else {
+    next();
+  }
+});
 
 export default router;

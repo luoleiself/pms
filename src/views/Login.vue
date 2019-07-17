@@ -13,6 +13,8 @@
 </template>
 <script>
 import md5 from "md5";
+import { Debounce, Throttle } from "@/assets/js/utils";
+import { mapActions } from "vuex";
 
 export default {
   data() {
@@ -26,34 +28,94 @@ export default {
           { required: true, message: "用户名不能为空", trigger: "blur" }
         ],
         password: [{ required: true, message: "密码不能为空", trigger: "blur" }]
-      }
+      },
+      timer: null
     };
   },
+  mounted() {
+    let self = this;
+    window.addEventListener("keydown", function(evt) {
+      let keyCode = evt.keyCode;
+      if (keyCode == 13) {
+        self.login();
+      }
+    });
+  },
   methods: {
+    ...mapActions(["USER_LOGIN"]),
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.ruleForm.password = md5(this.ruleForm.password);
-          this.$xhr
-            .post("/login", {
-              ...this.ruleForm
-            })
-            .then(res => {
-              if (res.code == 10200) {
-                console.log(res);
-                this.$router.push({ path: "/home" });
-              }
-            })
-            .catch(err => {
-              console.log(err);
-            });
+          this.login();
         }
         return false;
       });
-    }
+    },
+    // login() {
+    //   if (this.timer) {
+    //     clearTimeout(this.timer);
+    //   }
+    //   this.timer = setTimeout(() => {
+    //     let { username, password } = this.ruleForm;
+    //     password = md5(password);
+    //     this.$xhr
+    //       .post("/login", {
+    //         username,
+    //         password
+    //       })
+    //       .then(res => {
+    //         window.sessionStorage.setItem(
+    //           "user",
+    //           JSON.stringify({
+    //             id: res.data.id,
+    //             username: res.data.username,
+    //             name: res.data.name
+    //           })
+    //         );
+    //         window.sessionStorage.setItem("token", res.token);
+    //         this.USER_LOGIN({
+    //           id: res.data.id,
+    //           username: res.data.username,
+    //           name: res.data.name
+    //         });
+    //         this.$router.push({ path: "/home" });
+    //       })
+    //       .catch(err => {
+    //         this.$message.error(err.msg);
+    //       });
+    //   }, 300);
+    // }
+    login: Debounce(function() {
+      let { username, password } = this.ruleForm;
+      password = md5(password);
+      this.$xhr
+        .post("/login", {
+          username,
+          password
+        })
+        .then(res => {
+          window.sessionStorage.setItem(
+            "user",
+            JSON.stringify({
+              id: res.data.id,
+              username: res.data.username,
+              name: res.data.name
+            })
+          );
+          window.sessionStorage.setItem("token", res.token);
+          this.USER_LOGIN({
+            id: res.data.id,
+            username: res.data.username,
+            name: res.data.name
+          });
+          this.$router.push({ path: "/home" });
+        })
+        .catch(err => {
+          this.$message.error(err.msg);
+        });
+    }, 300)
   }
 };
 </script>
-<style lang="sass" scoped>
-
+<style lang="scss" scoped>
 </style>
