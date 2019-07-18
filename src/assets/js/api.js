@@ -1,6 +1,5 @@
 import axios from "axios";
 import router from "../../router";
-import { Message } from "element-ui";
 
 const TIMEOUT = 30000,
   xhr = axios.create({
@@ -34,14 +33,13 @@ xhr.interceptors.response.use(
         return response.data;
       case 10401:
         window.sessionStorage.removeItem("token");
-        Message.error("登陆超时,请重新登陆!");
         setTimeout(() => {
           router.replace({
             path: "/login",
             query: { redirect: router.currentRoute.fullPath }
           });
-        }, 1000);
-        break;
+        }, 300);
+        return Promise.reject({ msg: "登陆超时,请重新登陆!" });
       default:
         return Promise.reject(response.data);
     }

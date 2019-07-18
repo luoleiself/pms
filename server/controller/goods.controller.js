@@ -8,7 +8,7 @@ router.get("/", async (ctx, next) => {
   await next();
   let { logUtils, resData, dbQuery } = ctx;
   try {
-    let result = await goodsService.findByPages(ctx, models);
+    let result = await goodsService.findAllByPages(ctx, models);
     resData.data = {
       total: result.count,
       p: dbQuery.p,

@@ -10,15 +10,17 @@ exports = module.exports = {
     "update_time",
     "brand_id",
     "category_id",
-    "manufactor_id"
+    "operator"
   ],
-  async findByPages(ctx, models) {
-    let { dbQuery } = ctx;
+  async findAllByPages(ctx, models) {
+    let { dbQuery, Op } = ctx;
     return await models.goods.findAndCountAll({
+      where: { status: { [Op.in]: dbQuery.status }, keys: { [Op.substring]: dbQuery.keys } },
+      order: [dbQuery.orderBy.split(",")],
       offset: dbQuery.offset,
       limit: dbQuery.limit,
       attributes: this.attributes,
-      include: [{ model: models.brands }, models.categories, models.manufactors]
+      include: [{ model: models.brands, include: { model: models.manufactors } }, models.categories]
     });
   },
   async findById(ctx, models) {
@@ -26,12 +28,13 @@ exports = module.exports = {
     return await models.goods.findOne({
       where: { id: id },
       attributes: this.attributes,
-      include: [{ model: models.brands }, models.categories, models.manufactors]
+      include: [{ model: models.brands, include: { model: models.manufactors } }, models.categories]
     });
   },
   async add(ctx, models) {
     let {
-      request: { body }
+      request: { body },
+      user
     } = ctx;
     return await models.goods.findOrCreate({
       where: { name: body.name },
@@ -41,16 +44,17 @@ exports = module.exports = {
         status: body.status,
         brand_id: body.brand_id,
         category_id: body.category_id,
-        manufactor_id: body.manufactor_id,
+        operator: user.payload.name,
         create_time: Math.floor(Date.now() / 1000)
       }
     });
   },
   async update(ctx, models) {
     let {
-      request: { body }
+      request: { body },
+      Op,
+      user
     } = ctx;
-    const Op = models.Sequelize.Op;
     let id = Number(ctx.params.id);
     let goodsStore = await models.goods.findOne({
       where: { name: body.name, id: { [Op.not]: id } }
@@ -69,7 +73,8 @@ exports = module.exports = {
     goods.status = body.status;
     goods.brand_id = body.brand_id;
     goods.category_id = body.category_id;
-    goods.manufactor_id = body.manufactor_id;
+    goods.operator = user.payload.name;
+    goods.status = body.status;
     goods.update_time = Math.floor(Date.now() / 1000);
 
     await goods.save();

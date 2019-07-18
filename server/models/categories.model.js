@@ -33,8 +33,8 @@ exports = module.exports = function(sequelize, DataTypes) {
         comment: "启用状态: 1启用，0禁用"
       },
       operator: {
-        type: DataTypes.INTEGER(5).UNSIGNED,
-        comment: "操作人员id"
+        type: DataTypes.STRING(20),
+        comment: "操作人员"
       }
     },
     {

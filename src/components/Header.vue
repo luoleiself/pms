@@ -12,7 +12,7 @@
         </ul>
       </el-col>
       <el-col :span="4">
-        <div class='menu_box'>
+        <div class='user_center_box'>
           <el-dropdown @command="handleCommand" trigger="hover">
             <span class="el-dropdown-link" :style="{'color':'#fff'}">
               <span>{{name}}</span>
@@ -57,7 +57,7 @@ export default {
             this.USER_LOGOUT({});
             setTimeout(() => {
               this.$router.push({ name: "login" });
-            }, 1000);
+            }, 300);
           })
           .catch(err => {
             this.$message.error(err.msg);
@@ -91,7 +91,7 @@ export default {
       }
     }
   }
-  .menu_box {
+  .user_center_box {
     height: 50px;
     padding: 0 15px 0 0;
     text-align: right;

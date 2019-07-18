@@ -1,15 +1,23 @@
 const tree = require("../utils/tree");
 exports = module.exports = {
   attributes: ["id", "pid", "name", "desc", "create_time", "update_time", "status"],
-  async findByPages(ctx, models) {
-    let { dbQuery } = ctx;
-    const Op = models.Sequelize.Op;
+  // 分页查询全部
+  async findAllByPages(ctx, models) {
+    let { dbQuery, Op } = ctx;
     return await models.brands.findAndCountAll({
       where: { status: { [Op.in]: dbQuery.status } },
       offset: dbQuery.offset,
       limit: dbQuery.limit,
       attributes: this.attributes,
       include: [models.manufactors]
+    });
+  },
+  // 按条件查询全部不分页
+  async findAllByParams(ctx, models) {
+    let { dbQuery, Op } = ctx;
+    return await models.brands.findAll({
+      where: { status: { [Op.in]: dbQuery.status }, name: { [Op.substring]: dbQuery.keys } },
+      attributes: this.attributes
     });
   },
   async findById(ctx, models) {
@@ -37,9 +45,9 @@ exports = module.exports = {
   },
   async update(ctx, models) {
     let {
-      request: { body }
+      request: { body },
+      Op
     } = ctx;
-    const Op = models.Sequelize.Op;
     let id = Number(ctx.params.id);
     let brands = await this.findById(ctx, models);
     if (!brands) {

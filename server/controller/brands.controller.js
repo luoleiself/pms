@@ -8,7 +8,7 @@ router.get("/", async (ctx, next) => {
   await next();
   let { logUtils, resData, dbQuery } = ctx;
   try {
-    let result = await brandsService.findByPages(ctx, models);
+    let result = await brandsService.findAllByPages(ctx, models); // 分页查询全部
     resData.data = {
       total: result.count,
       p: dbQuery.p,
@@ -20,6 +20,12 @@ router.get("/", async (ctx, next) => {
     logUtils.logError(ctx, error);
     ctx.status = 500;
   }
+});
+// 按关键字查询
+router.get("/?keys=:keys", async (ctx, next) => {
+  console.log(keys);
+  await next();
+  // result = await brandsService.findAllByParams(ctx, models); // 按条件查询全部
 });
 // 获取指定品牌
 router.get("/:id", async (ctx, next) => {

@@ -28,8 +28,7 @@ export default {
           { required: true, message: "用户名不能为空", trigger: "blur" }
         ],
         password: [{ required: true, message: "密码不能为空", trigger: "blur" }]
-      },
-      timer: null
+      }
     };
   },
   mounted() {
@@ -51,40 +50,6 @@ export default {
         return false;
       });
     },
-    // login() {
-    //   if (this.timer) {
-    //     clearTimeout(this.timer);
-    //   }
-    //   this.timer = setTimeout(() => {
-    //     let { username, password } = this.ruleForm;
-    //     password = md5(password);
-    //     this.$xhr
-    //       .post("/login", {
-    //         username,
-    //         password
-    //       })
-    //       .then(res => {
-    //         window.sessionStorage.setItem(
-    //           "user",
-    //           JSON.stringify({
-    //             id: res.data.id,
-    //             username: res.data.username,
-    //             name: res.data.name
-    //           })
-    //         );
-    //         window.sessionStorage.setItem("token", res.token);
-    //         this.USER_LOGIN({
-    //           id: res.data.id,
-    //           username: res.data.username,
-    //           name: res.data.name
-    //         });
-    //         this.$router.push({ path: "/home" });
-    //       })
-    //       .catch(err => {
-    //         this.$message.error(err.msg);
-    //       });
-    //   }, 300);
-    // }
     login: Debounce(function() {
       let { username, password } = this.ruleForm;
       password = md5(password);

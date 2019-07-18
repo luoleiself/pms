@@ -8,13 +8,22 @@ router.get("/", async (ctx, next) => {
   await next();
   let { logUtils, resData, dbQuery } = ctx;
   try {
-    let result = await categoriesService.findByPages(ctx, models);
-    resData.data = {
-      total: result.count,
-      p: dbQuery.p,
-      p_size: dbQuery.p_size,
-      rows: result.rows
-    };
+    let result = null;
+    if (dbQuery.keys) {
+      result = await categoriesService.findAllByParams(ctx, models); // 按条件查询全部
+    } else {
+      result = await categoriesService.findAllByPages(ctx, models); // 分页查询全部
+    }
+    if (Array.isArray(result)) {
+      resData.data = result;
+    } else {
+      resData.data = {
+        total: result.count,
+        p: dbQuery.p,
+        p_size: dbQuery.p_size,
+        rows: result.rows
+      };
+    }
     ctx.body = resData;
   } catch (error) {
     logUtils.logError(ctx, error);

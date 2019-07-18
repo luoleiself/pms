@@ -5,7 +5,6 @@ const { loginService } = require("../service");
 const router = new Router();
 // 用户登陆
 router.post("/", async (ctx, next) => {
-  console.log('checkToken 之后 有return 还经过这里...........................................................................');
   await next();
   let { logUtils, resData, jwt } = ctx;
   try {
@@ -18,7 +17,11 @@ router.post("/", async (ctx, next) => {
       resData.msg = "该用户名不存在!";
     } else {
       resData.data = result;
-      ctx.token = resData.token = jwt.sign({ id: result.id, username: result.username });
+      ctx.token = resData.token = jwt.sign({
+        id: result.id,
+        username: result.username,
+        name: result.name
+      });
     }
 
     ctx.body = resData;

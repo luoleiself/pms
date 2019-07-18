@@ -34,6 +34,31 @@ const router = new Router({
           path: "/home/goods",
           name: "goods",
           component: () => import("@/views/Goods.vue")
+        },
+        {
+          path: "/home/brands",
+          name: "brands",
+          component: () => import("@/views/Brands.vue")
+        },
+        {
+          path: "/home/categories",
+          name: "categories",
+          component: () => import("@/views/Categories.vue")
+        },
+        {
+          path: "/home/manufactors",
+          name: "manufactors",
+          component: () => import("@/views/Manufactors.vue")
+        },
+        {
+          path: "/home/sale",
+          name: "sale",
+          component: () => import("@/views/Sale.vue")
+        },
+        {
+          path: "/home/purchase",
+          name: "purchase",
+          component: () => import("@/views/Purchase.vue")
         }
       ]
     }

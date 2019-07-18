@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 
 const CERT = "hello pms";
 const OPTIONS = {
-  expiresIn: 10,
+  expiresIn: 86400,
   audience: "pms",
   issuer: "luoleiself",
   subject: "jwt"

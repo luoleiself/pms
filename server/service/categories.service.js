@@ -1,11 +1,21 @@
 const tree = require("../utils/tree");
 exports = module.exports = {
   attributes: ["id", "pid", "name", "desc", "create_time", "update_time", "status"],
-  async findByPages(ctx, models) {
-    let { dbQuery } = ctx;
+  // 查询全部分类分页
+  async findAllByPages(ctx, models) {
+    let { dbQuery, Op } = ctx;
     return await models.categories.findAndCountAll({
+      where: { status: { [Op.in]: dbQuery.status } },
       offset: dbQuery.offset,
       limit: dbQuery.limit,
+      attributes: this.attributes
+    });
+  },
+  // 按条件查询全部分类不分页
+  async findAllByParams(ctx, models) {
+    let { dbQuery, Op } = ctx;
+    return await models.categories.findAll({
+      where: { status: { [Op.in]: dbQuery.status }, name: { [Op.substring]: dbQuery.keys } },
       attributes: this.attributes
     });
   },
@@ -32,9 +42,9 @@ exports = module.exports = {
   },
   async update(ctx, models) {
     let {
-      request: { body }
+      request: { body },
+      Op
     } = ctx;
-    const Op = models.Sequelize.Op;
     let id = Number(ctx.params.id);
     let categories = await this.findById(ctx, models);
     if (!categories) {

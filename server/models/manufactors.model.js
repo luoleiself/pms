@@ -48,8 +48,8 @@ exports = module.exports = function(sequelize, DataTypes) {
         comment: "启用状态: 1启用，0禁用"
       },
       operator: {
-        type: DataTypes.INTEGER(5).UNSIGNED,
-        comment: "操作人员id"
+        type: DataTypes.STRING(20),
+        comment: "操作人员"
       }
     },
     {
@@ -61,9 +61,6 @@ exports = module.exports = function(sequelize, DataTypes) {
       classMethods: {
         associate(models) {
           models.manufactors.hasMany(models.brands, {
-            foreignKey: "manufactor_id"
-          });
-          models.manufactors.hasMany(models.goods, {
             foreignKey: "manufactor_id"
           });
         }

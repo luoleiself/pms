@@ -49,8 +49,8 @@ exports = module.exports = function(sequelize, DataTypes) {
       //   comment: "供应商id"
       // },
       operator: {
-        type: DataTypes.INTEGER(5).UNSIGNED,
-        comment: "操作人员id"
+        type: DataTypes.STRING(20),
+        comment: "操作人员"
       }
     },
     {
@@ -66,9 +66,6 @@ exports = module.exports = function(sequelize, DataTypes) {
           });
           models.goods.belongsTo(models.categories, {
             foreignKey: "category_id"
-          });
-          models.goods.belongsTo(models.manufactors, {
-            foreignKey: "manufactor_id"
           });
           models.goods.hasMany(models.purchase, {
             foreignKey: "goods_id"

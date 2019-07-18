@@ -37,8 +37,8 @@ exports = module.exports = function(sequelize, DataTypes) {
         comment: "更新时间"
       },
       operator: {
-        type: DataTypes.INTEGER(5).UNSIGNED,
-        comment: "操作人员id"
+        type: DataTypes.STRING(20),
+        comment: "操作人员"
       }
     },
     {

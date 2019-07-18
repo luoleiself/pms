@@ -1,7 +1,7 @@
 <template>
   <el-row class="left_nav tac">
     <el-col :span="24">
-      <el-menu default-active="2" class="el-menu-vertical-demo" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
+      <el-menu default-active="1" class="el-menu-vertical-demo" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
         <el-menu-item index="1">
           <i class="el-icon-menu"></i>
           <router-link tag="span" :to="{name: 'goods'}">
@@ -10,23 +10,33 @@
         </el-menu-item>
         <el-menu-item index="2">
           <i class="el-icon-menu"></i>
-          <span slot="title">分类管理</span>
+          <router-link tag="span" :to="{name: 'categories'}">
+            分类管理
+          </router-link>
         </el-menu-item>
         <el-menu-item index="3">
           <i class="el-icon-menu"></i>
-          <span slot="title">品牌管理</span>
+          <router-link tag="span" :to="{name: 'brands'}">
+            品牌管理
+          </router-link>
         </el-menu-item>
         <el-menu-item index="4">
           <i class="el-icon-menu"></i>
-          <span slot="title">供应商管理</span>
+          <router-link tag="span" :to="{name: 'manufactors'}">
+            供应商管理
+          </router-link>
         </el-menu-item>
         <el-menu-item index="5">
           <i class="el-icon-menu"></i>
-          <span slot="title">销售管理</span>
+          <router-link tag="span" :to="{name: 'sale'}">
+            销售管理
+          </router-link>
         </el-menu-item>
         <el-menu-item index="6">
           <i class="el-icon-menu"></i>
-          <span slot="title">采购管理</span>
+          <router-link tag="span" :to="{name: 'purchase'}">
+            采购管理
+          </router-link>
         </el-menu-item>
         <el-menu-item index="7">
           <i class="el-icon-menu"></i>

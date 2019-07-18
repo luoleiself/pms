@@ -16,6 +16,7 @@ const app = new Koa();
 app
   .use(async (ctx, next) => {
     ctx.jwt = jwt;
+    ctx.Op = models.Sequelize.Op;
     await next();
   })
   .use(headers)
