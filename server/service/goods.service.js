@@ -12,13 +12,27 @@ exports = module.exports = {
     "category_id",
     "operator"
   ],
+  // 分页查询全部
   async findAllByPages(ctx, models) {
     let { dbQuery, Op } = ctx;
-    return await models.goods.findAndCountAll({
-      where: { status: { [Op.in]: dbQuery.status }, keys: { [Op.substring]: dbQuery.keys } },
+    let query = {
+      where: { status: { [Op.in]: dbQuery.status } },
       order: [dbQuery.orderBy.split(",")],
       offset: dbQuery.offset,
       limit: dbQuery.limit,
+      attributes: this.attributes,
+      include: [{ model: models.brands, include: { model: models.manufactors } }, models.categories]
+    };
+    if (dbQuery.keys) {
+      query.where.keys = { [Op.substring]: dbQuery.keys };
+    }
+    return await models.goods.findAndCountAll(query);
+  },
+  // 按条件查询全部不分页
+  async findAllByParams(ctx, models) {
+    let { dbQuery, Op } = ctx;
+    return await models.goods.findAll({
+      where: { status: { [Op.in]: dbQuery.status }, keys: { [Op.substring]: dbQuery.keys } },
       attributes: this.attributes,
       include: [{ model: models.brands, include: { model: models.manufactors } }, models.categories]
     });
@@ -52,17 +66,9 @@ exports = module.exports = {
   async update(ctx, models) {
     let {
       request: { body },
-      Op,
       user
     } = ctx;
-    let id = Number(ctx.params.id);
-    let goodsStore = await models.goods.findOne({
-      where: { name: body.name, id: { [Op.not]: id } }
-    });
     let goods = await this.findById(ctx, models);
-    if (goodsStore) {
-      return { code: 0, msg: "商品名称已存在" };
-    }
     if (!goods) {
       return { code: 0, msg: "该商品不存在!" };
     }

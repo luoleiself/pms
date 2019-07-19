@@ -10,7 +10,7 @@
       <el-button @click="reset">重置</el-button>
     </div>
     <div class="menu_box">
-      <el-button type="primary" @click="add">新增商品</el-button>
+      <el-button type="primary" @click="add">添加商品</el-button>
     </div>
     <template>
       <el-table :data="tableOptions.tableData" :height="tableOptions.tableHeight" stripe border style="width: 100%" v-loading="tableOptions.loading" @selection-change="tblSelectionChange">
@@ -51,7 +51,7 @@
             <span>{{scope.row.update_time | dateFormat}}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="operator" label="操作人" align="center"></el-table-column>
+        <el-table-column prop="operator" label="操作人" align="center" width="100"></el-table-column>
         <el-table-column prop="" label="操作" align="center" width="120">
           <template slot-scope="scope">
             <el-button type="text" size="mini" @click="edit(scope.row)">编辑</el-button>
@@ -70,7 +70,7 @@
       <div>
         <el-form ref="form" :model="form" :rules="rules" label-width="120px">
           <el-form-item label="商品名称" prop="name">
-            <el-input v-model.trim="form.name" placeholder="商品名称"></el-input>
+            <el-input v-model.trim="form.name" placeholder="商品名称" :disabled="dialogOpt.formDisable"></el-input>
           </el-form-item>
           <el-form-item label="商品检索关键字" prop="keys">
             <el-input v-model.trim="form.keys" placeholder="商品检索关键字"></el-input>
@@ -100,7 +100,6 @@
   </div>
 </template>
 <script>
-import { selectDataConvert } from "@/assets/js/utils";
 import { dataMixin, methodsMixin } from "@/assets/js/mixin";
 
 export default {
@@ -118,6 +117,7 @@ export default {
       dialogOpt: {
         title: "添加商品",
         visible: false,
+        formDisable: false,
         oper: 0 // 1 -> 新增, 2 -> 编辑
       },
       form: {
@@ -163,12 +163,14 @@ export default {
       this.dialogOpt.visible = true;
       this.dialogOpt.oper = 1;
       this.dialogOpt.title = "添加商品";
+      this.dialogOpt.formDisable = false;
     },
     edit(row) {
       this.$xhr
         .get(`/goods/${row.id}`)
         .then(res => {
           this.dialogOpt.visible = true;
+          this.dialogOpt.formDisable = true;
           this.dialogOpt.oper = 2;
           this.dialogOpt.title = "编辑商品";
           this.dialogOpt.row = row;
@@ -196,7 +198,7 @@ export default {
     },
     enable(row) {
       this.$xhr
-        .put(`/goods/${row.id}`, { status: 1, name: row.name })
+        .put(`/goods/${row.id}`, { status: 1 })
         .then(res => {
           this.$message.success(res.msg);
           this.updateTable();
@@ -207,7 +209,7 @@ export default {
     },
     disable(row) {
       this.$xhr
-        .put(`/goods/${row.id}`, { status: 0, name: row.name })
+        .put(`/goods/${row.id}`, { status: 0 })
         .then(res => {
           this.$message.success(res.msg);
           this.updateTable();
@@ -277,7 +279,9 @@ export default {
           .get("/categories", { params: { status: "1", keys: query } })
           .then(res => {
             this.categoryOpt.loading = false;
-            this.categoryOpt.list = selectDataConvert(res.data);
+            this.categoryOpt.list = res.data.map(item => {
+              return { label: item.name, value: item.id };
+            });
           })
           .catch(err => {
             this.$message.error(err.msg);
@@ -292,7 +296,9 @@ export default {
           .get("/brands", { params: { status: "1", keys: query } })
           .then(res => {
             this.brandOpt.loading = false;
-            this.brandOpt.list = selectDataConvert(res.data);
+            this.brandOpt.list = res.data.map(item => {
+              return { label: item.name, value: item.id };
+            });
           })
           .catch(err => {
             this.$message.error(err.msg);

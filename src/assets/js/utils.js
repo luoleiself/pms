@@ -61,17 +61,3 @@ export const dateFormat = value => {
     min > 9 ? min : "0" + min
   }:${s > 9 ? s : "0" + s}`;
 };
-/**
- * @method 下拉列表数据转换
- * @param {Array} arr 需要转换的数组
- * @param {Object} opt 是否需要指定key
- * @returns {Array}
- */
-export const selectDataConvert = (arr, opt = { label: "label", value: "value" }) => {
-  if (!Array.isArray(arr)) {
-    return [];
-  }
-  return arr.map(item => {
-    return { [opt.label]: item.name, [opt.value]: item.id };
-  });
-};

@@ -11,13 +11,28 @@ exports = module.exports = {
     "email",
     "create_time",
     "update_time",
-    "status"
+    "status",
+    "operator"
   ],
-  async findByPages(ctx, models) {
-    let { dbQuery } = ctx;
-    return await models.manufactors.findAndCountAll({
+  async findAllByPages(ctx, models) {
+    let { dbQuery, Op } = ctx;
+    let query = {
+      where: { status: { [Op.in]: dbQuery.status } },
+      order: [dbQuery.orderBy.split(",")],
       offset: dbQuery.offset,
       limit: dbQuery.limit,
+      attributes: this.attributes
+    };
+    if (dbQuery.keys) {
+      query.where.name = { [Op.substring]: dbQuery.keys };
+    }
+    return await models.manufactors.findAndCountAll(query);
+  },
+  async findAllByParams(ctx, models) {
+    let { dbQuery, Op } = ctx;
+    return await models.manufactors.findAll({
+      where: { status: { [Op.in]: dbQuery.status }, name: { [Op.substring]: dbQuery.keys } },
+      order: [dbQuery.orderBy.split(",")],
       attributes: this.attributes
     });
   },
@@ -30,7 +45,8 @@ exports = module.exports = {
   },
   async add(ctx, models) {
     let {
-      request: { body }
+      request: { body },
+      user
     } = ctx;
     return await models.manufactors.findOrCreate({
       where: { name: body.name },
@@ -42,26 +58,19 @@ exports = module.exports = {
         fax: body.fax,
         email: body.email,
         status: body.status,
+        operator: user.payload.name,
         create_time: Math.floor(Date.now() / 1000)
       }
     });
   },
   async update(ctx, models) {
     let {
-      request: { body }
+      request: { body },
+      user
     } = ctx;
-    const Op = models.Sequelize.Op;
-    let id = Number(ctx.params.id);
     let manufactors = await this.findById(ctx, models);
     if (!manufactors) {
       return { code: 0, msg: "该供应商不存在!" };
-    }
-
-    let manufactorsStore = await models.manufactors.findOne({
-      where: { name: body.name, id: { [Op.not]: id } }
-    });
-    if (manufactorsStore) {
-      return { code: 0, msg: "供应商名称已存在" };
     }
 
     manufactors.name = body.name;
@@ -72,6 +81,7 @@ exports = module.exports = {
     manufactors.fax = body.fax;
     manufactors.email = body.email;
     manufactors.status = body.status;
+    manufactors.operator = user.payload.name;
     manufactors.update_time = Math.floor(Date.now() / 1000);
 
     await manufactors.save();
