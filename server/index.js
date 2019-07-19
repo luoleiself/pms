@@ -4,10 +4,10 @@ const md5 = require("md5");
 const koaBody = require("koa-body");
 const models = require("./models");
 const router = require("./controller");
-const resData = require("./middleware/resData");
-const pages = require("./middleware/pages");
-const headers = require("./middleware/headers");
-const checkToken = require("./middleware/checkToken");
+const resData = require("./middleware/resData"); // 响应数据模板
+const validateParams = require("./middleware/validateParams"); // 检查请求参数格式
+const headers = require("./middleware/headers"); // 设置响应头
+const validateToken = require("./middleware/validateToken"); // 验证token
 const hostName = require("./config/host.json");
 const jwt = require("./utils/jwt");
 
@@ -21,8 +21,8 @@ app
   })
   .use(headers)
   .use(resData)
-  .use(pages)
-  .use(checkToken)
+  .use(validateParams)
+  .use(validateToken)
   .use(koaBody());
 
 app.use(router.routes()).use(router.allowedMethods());

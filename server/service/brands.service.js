@@ -1,23 +1,50 @@
 const tree = require("../utils/tree");
 exports = module.exports = {
-  attributes: ["id", "pid", "name", "desc", "create_time", "update_time", "status"],
+  attributes: [
+    "id",
+    "pid",
+    "name",
+    "desc",
+    "create_time",
+    "update_time",
+    "status",
+    "operator",
+    "manufactor_id"
+  ],
   // 分页查询全部
   async findAllByPages(ctx, models) {
     let { dbQuery, Op } = ctx;
-    return await models.brands.findAndCountAll({
+    let query = {
       where: { status: { [Op.in]: dbQuery.status } },
+      order: [dbQuery.orderBy.split(",")],
       offset: dbQuery.offset,
       limit: dbQuery.limit,
       attributes: this.attributes,
       include: [models.manufactors]
-    });
+    };
+    if (dbQuery.keys) {
+      query.where.name = { [Op.substring]: dbQuery.keys };
+    }
+    let result = await models.brands.findAndCountAll(query);
+    result = JSON.parse(JSON.stringify(result));
+    for (let i = 0; i < result.rows.length; i++) {
+      if (result.rows[i].pid) {
+        let res = await models.brands.findByPk(result.rows[i].pid);
+        result.rows[i]["pname"] = res.name;
+      } else {
+        result.rows[i]["pname"] = "";
+      }
+    }
+    return result;
   },
   // 按条件查询全部不分页
   async findAllByParams(ctx, models) {
     let { dbQuery, Op } = ctx;
     return await models.brands.findAll({
       where: { status: { [Op.in]: dbQuery.status }, name: { [Op.substring]: dbQuery.keys } },
-      attributes: this.attributes
+      order: [dbQuery.orderBy.split(",")],
+      attributes: this.attributes,
+      include: [models.manufactors]
     });
   },
   async findById(ctx, models) {
@@ -30,7 +57,8 @@ exports = module.exports = {
   },
   async add(ctx, models) {
     let {
-      request: { body }
+      request: { body },
+      user
     } = ctx;
     return await models.brands.findOrCreate({
       where: { name: body.name },
@@ -38,6 +66,7 @@ exports = module.exports = {
         pid: body.pid,
         desc: body.desc,
         status: body.status,
+        operator: user.payload.name,
         manufactor_id: body.manufactor_id,
         create_time: Math.floor(Date.now() / 1000)
       }
@@ -46,24 +75,18 @@ exports = module.exports = {
   async update(ctx, models) {
     let {
       request: { body },
-      Op
+      user
     } = ctx;
-    let id = Number(ctx.params.id);
     let brands = await this.findById(ctx, models);
     if (!brands) {
       return { code: 0, msg: "该品牌不存在!" };
-    }
-    let brandsStore = await models.brands.findOne({
-      where: { name: body.name, id: { [Op.not]: id } }
-    });
-    if (brandsStore) {
-      return { code: 0, msg: "品牌名称已存在" };
     }
 
     brands.name = body.name;
     brands.pid = body.pid;
     brands.desc = body.desc;
     brands.status = body.status;
+    brands.operator = user.payload.name;
     brands.update_time = Math.floor(Date.now() / 1000);
 
     await brands.save();

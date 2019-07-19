@@ -9,11 +9,13 @@ router.get("/", async (ctx, next) => {
   let { logUtils, resData, dbQuery } = ctx;
   try {
     let result = null;
-    if (dbQuery.keys) {
-      result = await categoriesService.findAllByParams(ctx, models); // 按条件查询全部
-    } else {
+    if (dbQuery.p && dbQuery.p_size) {
       result = await categoriesService.findAllByPages(ctx, models); // 分页查询全部
+    } else {
+      dbQuery.keys = dbQuery.keys ? dbQuery.keys : "";
+      result = await categoriesService.findAllByParams(ctx, models); // 按条件查询全部
     }
+
     if (Array.isArray(result)) {
       resData.data = result;
     } else {
@@ -33,7 +35,15 @@ router.get("/", async (ctx, next) => {
 // 获取指定分类
 router.get("/:id", async (ctx, next) => {
   await next();
-  let { logUtils, resData } = ctx;
+  let {
+    logUtils,
+    resData,
+    params: { id }
+  } = ctx;
+  if (id.search(/^(\d)*$/) == -1) {
+    ctx.status = 400;
+    return;
+  }
   try {
     let result = await categoriesService.findById(ctx, models);
     if (!result) {
@@ -69,7 +79,15 @@ router.post("/", async (ctx, next) => {
 // 更新指定分类信息
 router.put("/:id", async (ctx, next) => {
   await next();
-  let { logUtils, resData } = ctx;
+  let {
+    logUtils,
+    resData,
+    params: { id }
+  } = ctx;
+  if (id.search(/^(\d)*$/) == -1) {
+    ctx.status = 400;
+    return;
+  }
   try {
     let result = await categoriesService.update(ctx, models);
     if (result.code == 0) {
@@ -87,7 +105,15 @@ router.put("/:id", async (ctx, next) => {
 // 删除指定分类
 router.delete("/:id", async (ctx, next) => {
   await next();
-  let { logUtils, resData } = ctx;
+  let {
+    logUtils,
+    resData,
+    params: { id }
+  } = ctx;
+  if (id.search(/^(\d)*$/) == -1) {
+    ctx.status = 400;
+    return;
+  }
   try {
     let result = await categoriesService.delete(ctx, models);
     if (!result) {
@@ -103,9 +129,17 @@ router.delete("/:id", async (ctx, next) => {
   }
 });
 // 获取指定分类的树形结构
-router.get("/:id/tree", async (ctx, next) => {
+router.get("/tree/:id", async (ctx, next) => {
   await next();
-  let { logUtils, resData } = ctx;
+  let {
+    logUtils,
+    resData,
+    params: { id }
+  } = ctx;
+  if (id.search(/^(\d)*$/) == -1) {
+    ctx.status = 400;
+    return;
+  }
   try {
     let result = await categoriesService.getTree(ctx, models);
     if (!result) {

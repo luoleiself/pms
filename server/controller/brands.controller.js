@@ -8,29 +8,43 @@ router.get("/", async (ctx, next) => {
   await next();
   let { logUtils, resData, dbQuery } = ctx;
   try {
-    let result = await brandsService.findAllByPages(ctx, models); // 分页查询全部
-    resData.data = {
-      total: result.count,
-      p: dbQuery.p,
-      p_size: dbQuery.p_size,
-      rows: result.rows
-    };
+    let result = null;
+    if (dbQuery.p && dbQuery.p_size) {
+      result = await brandsService.findAllByPages(ctx, models); // 分页查询全部
+    } else {
+      dbQuery.keys = dbQuery.keys ? dbQuery.keys : "";
+      result = await brandsService.findAllByParams(ctx, models); // 按条件查询全部
+    }
+
+    if (Array.isArray(result)) {
+      resData.data = result;
+    } else {
+      resData.data = {
+        total: result.count,
+        p: dbQuery.p,
+        p_size: dbQuery.p_size,
+        rows: result.rows
+      };
+    }
     ctx.body = resData;
   } catch (error) {
     logUtils.logError(ctx, error);
     ctx.status = 500;
   }
 });
-// 按关键字查询
-router.get("/?keys=:keys", async (ctx, next) => {
-  console.log(keys);
-  await next();
-  // result = await brandsService.findAllByParams(ctx, models); // 按条件查询全部
-});
+
 // 获取指定品牌
 router.get("/:id", async (ctx, next) => {
   await next();
-  let { logUtils, resData } = ctx;
+  let {
+    logUtils,
+    resData,
+    params: { id }
+  } = ctx;
+  if (id.search(/^(\d)*$/) == -1) {
+    ctx.status = 400;
+    return;
+  }
   try {
     let result = await brandsService.findById(ctx, models);
     if (!result) {
@@ -66,7 +80,15 @@ router.post("/", async (ctx, next) => {
 // 更新指定品牌信息
 router.put("/:id", async (ctx, next) => {
   await next();
-  let { logUtils, resData } = ctx;
+  let {
+    logUtils,
+    resData,
+    params: { id }
+  } = ctx;
+  if (id.search(/^(\d)*$/) == -1) {
+    ctx.status = 400;
+    return;
+  }
   try {
     let result = await brandsService.update(ctx, models);
     if (result.code == 0) {
@@ -84,7 +106,15 @@ router.put("/:id", async (ctx, next) => {
 // 删除指定品牌
 router.delete("/:id", async (ctx, next) => {
   await next();
-  let { logUtils, resData } = ctx;
+  let {
+    logUtils,
+    resData,
+    params: { id }
+  } = ctx;
+  if (id.search(/^(\d)*$/) == -1) {
+    ctx.status = 400;
+    return;
+  }
   try {
     let result = await brandsService.delete(ctx, models);
     if (!result) {
@@ -102,7 +132,15 @@ router.delete("/:id", async (ctx, next) => {
 // 获取指定品牌的树形结构
 router.get("/tree/:id", async (ctx, next) => {
   await next();
-  let { logUtils, resData } = ctx;
+  let {
+    logUtils,
+    resData,
+    params: { id }
+  } = ctx;
+  if (id.search(/^(\d)*$/) == -1) {
+    ctx.status = 400;
+    return;
+  }
   try {
     let result = await brandsService.getTree(ctx, models);
     if (!result) {
@@ -118,10 +156,11 @@ router.get("/tree/:id", async (ctx, next) => {
   }
 });
 
-// router.all("/[^1-9]*", async (ctx, next) => {
+// router.all("/", async (ctx, next) => {
 //   await next();
 //   let { resData } = ctx;
 //   resData.code = 10404;
+//   resData.data = ctx.path;
 //   resData.msg = "未匹配到正确资源操作路由!";
 //   ctx.body = resData;
 // });
