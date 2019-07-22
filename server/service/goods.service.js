@@ -21,10 +21,19 @@ exports = module.exports = {
       offset: dbQuery.offset,
       limit: dbQuery.limit,
       attributes: this.attributes,
-      include: [{ model: models.brands, include: { model: models.manufactors } }, models.categories]
+      include: [
+        { model: models.categories },
+        { model: models.brands, include: [{ model: models.manufactors }] }
+      ]
     };
     if (dbQuery.keys) {
       query.where.keys = { [Op.substring]: dbQuery.keys };
+    }
+    if (dbQuery.category_id) {
+      query.where.category_id = dbQuery.category_id;
+    }
+    if (dbQuery.brand_id) {
+      query.where.brand_id = dbQuery.brand_id;
     }
     return await models.goods.findAndCountAll(query);
   },

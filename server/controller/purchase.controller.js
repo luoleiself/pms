@@ -8,7 +8,7 @@ router.get("/", async (ctx, next) => {
   await next();
   let { logUtils, resData, dbQuery } = ctx;
   try {
-    let result = await purchaseService.findByPages(ctx, models);
+    let result = await purchaseService.findAllByPages(ctx, models);
     resData.data = {
       total: result.count,
       p: dbQuery.p,
@@ -24,7 +24,15 @@ router.get("/", async (ctx, next) => {
 // 获取指定采购信息
 router.get("/:id", async (ctx, next) => {
   await next();
-  let { logUtils, resData } = ctx;
+  let {
+    logUtils,
+    resData,
+    params: { id }
+  } = ctx;
+  if (id.search(/^(\d)*$/) == -1) {
+    ctx.status = 400;
+    return;
+  }
   try {
     let result = await purchaseService.findById(ctx, models);
     if (!result) {
@@ -55,7 +63,15 @@ router.post("/", async (ctx, next) => {
 // 更新指定采购信息
 router.put("/:id", async (ctx, next) => {
   await next();
-  let { logUtils, resData } = ctx;
+  let {
+    logUtils,
+    resData,
+    params: { id }
+  } = ctx;
+  if (id.search(/^(\d)*$/) == -1) {
+    ctx.status = 400;
+    return;
+  }
   try {
     let result = await purchaseService.update(ctx, models);
     if (result.code == 0) {
@@ -73,7 +89,15 @@ router.put("/:id", async (ctx, next) => {
 // 删除指定采购记录
 router.delete("/:id", async (ctx, next) => {
   await next();
-  let { logUtils, resData } = ctx;
+  let {
+    logUtils,
+    resData,
+    params: { id }
+  } = ctx;
+  if (id.search(/^(\d)*$/) == -1) {
+    ctx.status = 400;
+    return;
+  }
   try {
     let result = await purchaseService.delete(ctx, models);
     if (!result) {

@@ -5,6 +5,12 @@
         <el-option label="启用" value="1"></el-option>
         <el-option label="禁用" value="0"></el-option>
       </el-select>
+      <el-select v-model="queryParams.category_id" placeholder="分类名称">
+        <el-option v-for="item in categoryList" :key="item.value" :label="item.label" :value="item.value"></el-option>
+      </el-select>
+      <el-select v-model="queryParams.brand_id" placeholder="品牌名称">
+        <el-option v-for="item in brandList" :key="item.value" :label="item.label" :value="item.value"></el-option>
+      </el-select>
       <el-input placeholder="请输入商品名称关键字" v-model="queryParams.keys" @keyup.enter.native="query" clearable></el-input>
       <el-button type="primary" @click="query">查询</el-button>
       <el-button @click="reset">重置</el-button>
@@ -109,7 +115,9 @@ export default {
     return {
       queryParams: {
         status: "",
-        keys: ""
+        keys: "",
+        category_id: "",
+        brand_id: ""
       },
       brandList: [],
       categoryList: [],
@@ -150,13 +158,15 @@ export default {
   },
   created() {
     this.updateTable();
+    this.initData();
   },
   methods: {
     query() {
       this.updateTable();
     },
     reset() {
-      this.queryParams.status = this.queryParams.keys = "";
+      this.queryParams.status = this.queryParams.keys = this.queryParams.category_id = this.queryParams.brand_id =
+        "";
       this.updateTable();
     },
     add() {
@@ -297,7 +307,10 @@ export default {
           .then(res => {
             this.brandOpt.loading = false;
             this.brandOpt.list = res.data.map(item => {
-              return { label: item.name, value: item.id };
+              return {
+                label: `${item.name} - ${item.manufactor.name}`,
+                value: item.id
+              };
             });
           })
           .catch(err => {
@@ -313,13 +326,37 @@ export default {
             p: this.pageOptions.currentPage,
             p_size: this.pageOptions.pageSize,
             status: this.queryParams.status,
-            keys: this.queryParams.keys
+            keys: this.queryParams.keys,
+            category_id: this.queryParams.category_id,
+            brand_id: this.queryParams.brand_id
           }
         })
         .then(res => {
           this.tableOptions.loading = false;
           this.tableOptions.tableData = res.data.rows;
           this.pageOptions.total = res.data.total;
+        })
+        .catch(err => {
+          this.$message.error(err.msg);
+        });
+    },
+    initData() {
+      this.$xhr
+        .get("/brands")
+        .then(res => {
+          this.brandList = res.data.map(item => {
+            return { label: item.name, value: item.id };
+          });
+        })
+        .catch(err => {
+          this.$message.error(err.msg);
+        });
+      this.$xhr
+        .get("/categories")
+        .then(res => {
+          this.categoryList = res.data.map(item => {
+            return { label: item.name, value: item.id };
+          });
         })
         .catch(err => {
           this.$message.error(err.msg);

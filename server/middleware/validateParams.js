@@ -18,6 +18,12 @@ exports = module.exports = async (ctx, next) => {
   let status = "";
   let keys = query.keys;
   let orderBy = query.orderBy || "create_time,desc"; // 默认排序字段
+  let start_time = query.start_time;
+  let end_time = query.end_time;
+  let goods_id = query.goods_id;
+  let brand_id = query.brand_id;
+  let category_id = query.category_id;
+  let manufactor_id = query.manufactor_id;
 
   if (query.p_size) {
     limit = Number(query.p_size);
@@ -35,13 +41,19 @@ exports = module.exports = async (ctx, next) => {
   }
 
   ctx.dbQuery = {
-    status,
-    keys,
-    orderBy,
+    p: query.p,
+    p_size: query.p_size,
     limit,
     offset,
-    p: query.p,
-    p_size: query.p_size
+    orderBy,
+    status,
+    keys,
+    goods_id,
+    category_id,
+    brand_id,
+    manufactor_id,
+    start_time,
+    end_time
   };
   await next();
 };

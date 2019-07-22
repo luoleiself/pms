@@ -20,10 +20,13 @@ exports = module.exports = {
       offset: dbQuery.offset,
       limit: dbQuery.limit,
       attributes: this.attributes,
-      include: [models.manufactors]
+      include: [{ model: models.manufactors }]
     };
     if (dbQuery.keys) {
       query.where.name = { [Op.substring]: dbQuery.keys };
+    }
+    if (dbQuery.manufactor_id) {
+      query.where.manufactor_id = dbQuery.manufactor_id;
     }
     let result = await models.brands.findAndCountAll(query);
     result = JSON.parse(JSON.stringify(result));

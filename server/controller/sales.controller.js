@@ -8,7 +8,7 @@ router.get("/", async (ctx, next) => {
   await next();
   let { logUtils, resData, dbQuery } = ctx;
   try {
-    let result = await salesService.findByPages(ctx, models);
+    let result = await salesService.findAllByPages(ctx, models);
     resData.data = {
       total: result.count,
       p: dbQuery.p,
@@ -24,7 +24,15 @@ router.get("/", async (ctx, next) => {
 // 获取指定销售信息
 router.get("/:id", async (ctx, next) => {
   await next();
-  let { logUtils, resData } = ctx;
+  let {
+    logUtils,
+    resData,
+    params: { id }
+  } = ctx;
+  if (id.search(/^(\d)*$/) == -1) {
+    ctx.status = 400;
+    return;
+  }
   try {
     let result = await salesService.findById(ctx, models);
     if (!result) {
@@ -60,7 +68,15 @@ router.post("/", async (ctx, next) => {
 // 更新指定销售信息
 router.put("/:id", async (ctx, next) => {
   await next();
-  let { logUtils, resData } = ctx;
+  let {
+    logUtils,
+    resData,
+    params: { id }
+  } = ctx;
+  if (id.search(/^(\d)*$/) == -1) {
+    ctx.status = 400;
+    return;
+  }
   try {
     let result = await salesService.update(ctx, models);
     if (result.code === 0) {
@@ -78,7 +94,15 @@ router.put("/:id", async (ctx, next) => {
 // 删除指定销售记录
 router.delete("/:id", async (ctx, next) => {
   await next();
-  let { logUtils, resData } = ctx;
+  let {
+    logUtils,
+    resData,
+    params: { id }
+  } = ctx;
+  if (id.search(/^(\d)*$/) == -1) {
+    ctx.status = 400;
+    return;
+  }
   try {
     let result = await salesService.delete(ctx, models);
     if (!result) {

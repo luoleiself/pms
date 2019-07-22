@@ -26,6 +26,11 @@ const router = new Router({
       redirect: "/home/goods",
       children: [
         {
+          path: "/home/index",
+          name: "index",
+          component: () => import("@/views/Index.vue")
+        },
+        {
           path: "/home/users",
           name: "users",
           component: () => import("@/views/Users.vue")

@@ -6,7 +6,8 @@
   flex-flow: row nowrap;
   justify-content: flex-start;
   align-items: center;
-  .el-select {
+  .el-select,
+  .el-date-editor {
     margin-right: 10px;
   }
   .el-input {

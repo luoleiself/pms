@@ -1,20 +1,28 @@
 exports = module.exports = {
-  attributes: ["id", "price", "amount", "create_time", "update_time", "goods_id"],
-  async findByPages(ctx, models) {
-    let { dbQuery } = ctx;
-    return await models.sales.findAndCountAll({
+  attributes: ["id", "price", "amount", "create_time", "update_time", "operator", "goods_id"],
+  async findAllByPages(ctx, models) {
+    let { dbQuery, Op } = ctx;
+    let query = {
+      where: {},
       offset: dbQuery.offset,
       limit: dbQuery.limit,
       attributes: this.attributes,
       include: {
         model: models.goods,
+        where: {},
         include: [
           { model: models.categories },
-          { model: models.brands },
-          { model: models.manufactors }
+          { model: models.brands, include: [{ model: models.manufactors }] }
         ]
       }
-    });
+    };
+    if (dbQuery.start_time) {
+      query.where.create_time = { [Op.gte]: +dbQuery.start_time, [Op.lte]: +dbQuery.end_time };
+    }
+    if (dbQuery.goods_id) {
+      query.include.where.id = dbQuery.goods_id;
+    }
+    return await models.sales.findAndCountAll(query);
   },
   async findById(ctx, models) {
     let id = Number(ctx.params.id);
@@ -25,20 +33,21 @@ exports = module.exports = {
         model: models.goods,
         include: [
           { model: models.categories },
-          { model: models.brands },
-          { model: models.manufactors }
+          { model: models.brands, include: [{ model: models.manufactors }] }
         ]
       }
     });
   },
   async add(ctx, models) {
     let {
-      request: { body }
+      request: { body },
+      user
     } = ctx;
     let sales = models.sales.build({
       price: body.price,
       amount: body.amount,
       goods_id: body.goods_id,
+      operator: user.payload.name,
       create_time: Math.floor(Date.now() / 1000)
     });
     let goods = await models.goods.findOne({ where: { id: body.goods_id } });
@@ -55,7 +64,8 @@ exports = module.exports = {
   },
   async update(ctx, models) {
     let {
-      request: { body }
+      request: { body },
+      user
     } = ctx;
     let sales = await this.findById(ctx, models);
     if (!sales) {
@@ -73,6 +83,7 @@ exports = module.exports = {
     sales.amount = body.amount;
     sales.price = body.price;
     sales.goods_id = body.goods_id;
+    sales.operator = user.payload.name;
     sales.update_time = Math.floor(Date.now() / 1000);
 
     await sales.save();
