@@ -26,6 +26,9 @@ exports = module.exports = {
     if (result.password != body.password) {
       return { code: 400 };
     }
+    if (!result.status) {
+      return { code: 401 };
+    }
     return result;
   }
 };

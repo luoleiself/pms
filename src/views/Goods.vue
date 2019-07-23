@@ -76,13 +76,13 @@
       <div>
         <el-form ref="form" :model="form" :rules="rules" label-width="120px">
           <el-form-item label="商品名称" prop="name">
-            <el-input v-model.trim="form.name" placeholder="商品名称" :disabled="dialogOpt.formDisable"></el-input>
+            <el-input v-model.trim="form.name" placeholder="商品名称" clearable :disabled="dialogOpt.formDisable"></el-input>
           </el-form-item>
           <el-form-item label="商品检索关键字" prop="keys">
-            <el-input v-model.trim="form.keys" placeholder="商品检索关键字"></el-input>
+            <el-input v-model.trim="form.keys" placeholder="商品检索关键字" clearable></el-input>
           </el-form-item>
           <el-form-item label="商品描述" prop="desc">
-            <el-input v-model.trim="form.desc" placeholder="商品描述"></el-input>
+            <el-input v-model.trim="form.desc" placeholder="商品描述" clearable></el-input>
           </el-form-item>
           <el-form-item label="分类" prop="category_id">
             <el-select v-model="form.category_id" clearable filterable remote placeholder="请输入关键字" :remote-method="categoryRemoteQuery" :loading="categoryOpt.loading" :style="{width: '340px'}">

@@ -58,25 +58,25 @@
       <div>
         <el-form ref="form" :model="form" :rules="rules" label-width="120px">
           <el-form-item label="供应商名称" prop="name">
-            <el-input v-model.trim="form.name" placeholder="供应商名称" :disabled="dialogOpt.formDisable"></el-input>
+            <el-input v-model.trim="form.name" placeholder="供应商名称" clearable :disabled="dialogOpt.formDisable"></el-input>
           </el-form-item>
           <el-form-item label="供应商描述" prop="desc">
-            <el-input v-model.trim="form.desc" placeholder="供应商描述"></el-input>
+            <el-input v-model.trim="form.desc" placeholder="供应商描述" clearable></el-input>
           </el-form-item>
           <el-form-item label="地址" prop="address">
-            <el-input v-model.trim="form.address" placeholder="地址"></el-input>
+            <el-input v-model.trim="form.address" placeholder="地址" clearable></el-input>
           </el-form-item>
           <el-form-item label="联系人" prop="contact">
-            <el-input v-model.trim="form.contact" placeholder="联系人"></el-input>
+            <el-input v-model.trim="form.contact" placeholder="联系人" clearable></el-input>
           </el-form-item>
           <el-form-item label="联系电话" prop="telephone">
-            <el-input v-model.trim="form.telephone" placeholder="联系电话"></el-input>
+            <el-input v-model.trim="form.telephone" placeholder="联系电话" clearable></el-input>
           </el-form-item>
           <el-form-item label="传真" prop="fax">
-            <el-input v-model.trim="form.fax" placeholder="传真"></el-input>
+            <el-input v-model.trim="form.fax" placeholder="传真" clearable></el-input>
           </el-form-item>
           <el-form-item label="邮箱" prop="email">
-            <el-input v-model.trim="form.email" placeholder="邮箱"></el-input>
+            <el-input v-model.trim="form.email" placeholder="邮箱" clearable></el-input>
           </el-form-item>
         </el-form>
       </div>

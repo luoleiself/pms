@@ -3,20 +3,36 @@ exports = module.exports = {
     "id",
     "name",
     "username",
+    "password",
     "sex",
     "department",
     "address",
     "telephone",
     "status",
     "create_time",
-    "update_time"
+    "update_time",
+    "operator"
   ],
-  async findByPages(ctx, models) {
-    let { dbQuery } = ctx;
-    return await models.users.findAndCountAll({
-      attributes: this.attributes,
+  async findAllByPages(ctx, models) {
+    let { dbQuery, Op } = ctx;
+    let query = {
+      where: { status: { [Op.in]: dbQuery.status } },
+      order: [dbQuery.orderBy.split(",")],
       offset: dbQuery.offset,
-      limit: dbQuery.limit
+      limit: dbQuery.limit,
+      attributes: this.attributes,
+      include: [{ model: models.roles, through: { model: models.user_role } }]
+    };
+    if (dbQuery.keys) {
+      query.where.name = { [Op.substring]: dbQuery.keys };
+    }
+    return await models.users.findAndCountAll(query);
+  },
+  async findAllByParams(ctx, models) {
+    let { dbQuery, Op } = ctx;
+    return await models.users.findAll({
+      where: { status: { [Op.in]: dbQuery.status }, name: { [Op.substring]: dbQuery.keys } },
+      attributes: this.attributes
     });
   },
   async findById(ctx, models) {
@@ -28,40 +44,64 @@ exports = module.exports = {
   },
   async add(ctx, models) {
     let {
-      request: { body }
+      request: { body },
+      Op,
+      user
     } = ctx;
-    return await models.users.findOrCreate({
-      where: { username: body.username },
-      defaults: {
-        name: body.name,
-        username: body.username,
-        password: body.password,
-        sex: body.sex,
-        department: body.department,
-        telephone: body.telephone,
-        address: body.address,
-        create_time: Math.floor(Date.now() / 1000)
-      }
-    });
+
+    let users = await models.users.findOne({ where: { username: body.username } });
+    if (users) {
+      return { code: 403, msg: "该登陆用户名已存在!" };
+    }
+    let roles = await models.roles.findAll({ where: { id: { [Op.in]: body.role_id } } });
+    console.log(JSON.stringify(roles));
+    return models.sequelize
+      .transaction(t => {
+        let users = await models.users.create(
+          {
+            username: body.username,
+            name: body.name,
+            password: body.password,
+            sex: Number(body.sex),
+            department: body.department,
+            telephone: body.telephone,
+            address: body.address,
+            operator: user.payload.name,
+            create_time: Math.floor(Date.now() / 1000)
+          },
+          { transaction: t }
+        );
+        users.setRoles(roles, { transaction: t });
+      })
+      .then(result => {
+        console.log(result);
+      })
+      .catch(err => {
+        throw new Error(err);
+      });
   },
   async update(ctx, models) {
     let {
-      request: { body }
+      request: { body },
+      user
     } = ctx;
-    let user = await this.findById(ctx, models);
-    if (!user) {
-      return null;
+    let users = await this.findById(ctx, models);
+    if (!users) {
+      return { code: 0, msg: "该用户不存在!" };
     }
-    user.name = body.name;
-    // user.password = body.password;
-    user.sex = body.sex;
-    user.department = body.department;
-    user.telephone = body.telephone;
-    user.address = body.address;
-    user.update_time = Math.floor(Date.now() / 1000);
+    users.name = body.name;
+    users.username = body.username;
+    users.password = body.password;
+    users.sex = body.sex;
+    users.department = body.department;
+    users.telephone = body.telephone;
+    users.address = body.address;
+    users.status = body.status;
+    users.operator = user.payload.name;
+    users.update_time = Math.floor(Date.now() / 1000);
 
-    await user.save();
-    return user;
+    await users.save();
+    return users;
   },
   async delete(ctx, models) {
     let user = await this.findById(ctx, models);

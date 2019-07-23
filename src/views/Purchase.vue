@@ -70,10 +70,10 @@
             </el-select>
           </el-form-item>
           <el-form-item label="单价" prop="price">
-            <el-input v-model="form.price" placeholder="销售单价"></el-input>
+            <el-input v-model="form.price" placeholder="销售单价" clearable></el-input>
           </el-form-item>
           <el-form-item label="数量" prop="amount">
-            <el-input v-model="form.amount" placeholder="销售数量"></el-input>
+            <el-input v-model="form.amount" placeholder="销售数量" clearable></el-input>
           </el-form-item>
         </el-form>
       </div>

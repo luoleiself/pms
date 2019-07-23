@@ -9,13 +9,23 @@ router.get("/", async (ctx, next) => {
   let { logUtils, resData, dbQuery } = ctx;
   await next();
   try {
-    let result = await usersService.findByPages(ctx, models);
-    resData.data = {
-      total: result.count,
-      p: dbQuery.p,
-      p_size: dbQuery.p_size,
-      rows: result.rows
-    };
+    let result = null;
+    if (dbQuery.p && dbQuery.p_size) {
+      result = await usersService.findAllByPages(ctx, models); // 分页查询全部
+    } else {
+      dbQuery.keys = dbQuery.keys ? dbQuery.keys : "";
+      result = await usersService.findAllByParams(ctx, models); // 分页查询全部
+    }
+    if (Array.isArray(result)) {
+      resData.data = result;
+    } else {
+      resData.data = {
+        total: result.count,
+        p: dbQuery.p,
+        p_size: dbQuery.p_size,
+        rows: result.rows
+      };
+    }
     ctx.body = resData;
   } catch (error) {
     logUtils.logError(ctx, error);
@@ -25,7 +35,15 @@ router.get("/", async (ctx, next) => {
 // 获取指定用户信息
 router.get("/:id", async (ctx, next) => {
   await next();
-  let { logUtils, resData } = ctx;
+  let {
+    logUtils,
+    resData,
+    params: { id }
+  } = ctx;
+  if (id.search(/^(\d)*$/) == -1) {
+    ctx.status = 400;
+    return;
+  }
   try {
     let result = await usersService.findById(ctx, models);
     if (!result) {
@@ -45,12 +63,13 @@ router.post("/", async (ctx, next) => {
   await next();
   let { logUtils, resData } = ctx;
   try {
-    let [result, created] = await usersService.add(ctx, models);
-    if (created) {
-      resData.data = result;
+    let result = await usersService.add(ctx, models);
+    console.log(JSON.stringify(result));
+    if (result.code == 403) {
+      resData.code = 10403;
+      resData.msg = result.msg;
     } else {
-      resData.code = 10404;
-      resData.msg = "该登陆用户名已存在!";
+      resData.data = result;
     }
     ctx.body = resData;
   } catch (error) {
@@ -60,11 +79,19 @@ router.post("/", async (ctx, next) => {
 // 更新指定用户信息
 router.put("/:id", async (ctx, next) => {
   await next();
-  let { logUtils, resData } = ctx;
+  let {
+    logUtils,
+    resData,
+    params: { id }
+  } = ctx;
+  if (id.search(/^(\d)*$/) == -1) {
+    ctx.status = 400;
+    return;
+  }
   try {
     let result = await usersService.update(ctx, models);
-    if (!result) {
-      resData.msg = "该用户不存在!";
+    if (result.code == 0) {
+      resData.msg = result.msg;
       resData.code = 10404;
     } else {
       resData.data = result;
@@ -78,7 +105,15 @@ router.put("/:id", async (ctx, next) => {
 // 删除指定用户
 router.delete("/:id", async (ctx, next) => {
   await next();
-  let { logUtils, resData } = ctx;
+  let {
+    logUtils,
+    resData,
+    params: { id }
+  } = ctx;
+  if (id.search(/^(\d)*$/) == -1) {
+    ctx.status = 400;
+    return;
+  }
   try {
     let result = await usersService.delete(ctx, models);
     if (!result) {

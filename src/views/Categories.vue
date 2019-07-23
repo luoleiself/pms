@@ -54,10 +54,10 @@
       <div>
         <el-form ref="form" :model="form" :rules="rules" label-width="120px">
           <el-form-item label="分类名称" prop="name">
-            <el-input v-model.trim="form.name" placeholder="分类名称" :disabled="dialogOpt.formDisable"></el-input>
+            <el-input v-model.trim="form.name" placeholder="分类名称" clearable :disabled="dialogOpt.formDisable"></el-input>
           </el-form-item>
           <el-form-item label="分类描述" prop="desc">
-            <el-input v-model.trim="form.desc" placeholder="分类描述"></el-input>
+            <el-input v-model.trim="form.desc" placeholder="分类描述" clearable></el-input>
           </el-form-item>
           <el-form-item label="父级分类" prop="pid">
             <el-select v-model="form.pid" clearable filterable remote placeholder="请输入关键字" :remote-method="categoryRemoteQuery" :loading="categoryOpt.loading" :style="{width: '340px'}">
