@@ -23,7 +23,7 @@ const router = new Router({
         requireAuth: true
       },
       component: () => import("@/views/Home.vue"),
-      redirect: "/home/goods",
+      redirect: "/home/index",
       children: [
         {
           path: "/home/index",

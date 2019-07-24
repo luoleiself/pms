@@ -64,7 +64,6 @@ router.post("/", async (ctx, next) => {
   let { logUtils, resData } = ctx;
   try {
     let result = await usersService.add(ctx, models);
-    console.log(JSON.stringify(result));
     if (result.code == 403) {
       resData.code = 10403;
       resData.msg = result.msg;
@@ -90,7 +89,7 @@ router.put("/:id", async (ctx, next) => {
   }
   try {
     let result = await usersService.update(ctx, models);
-    if (result.code == 0) {
+    if (result.code == 404) {
       resData.msg = result.msg;
       resData.code = 10404;
     } else {

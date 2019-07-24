@@ -1,47 +1,11 @@
 <template>
-  <el-row class="left_nav tac">
+  <el-row class="left_nav">
     <el-col :span="24">
-      <el-menu default-active="1" class="el-menu-vertical-demo" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
-        <el-menu-item index="1">
+      <el-menu default-active="0" class="el-menu-vertical-demo" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
+        <el-menu-item v-for="(item,index) in menu" :key="index" :index="`${index}`">
           <i class="el-icon-menu"></i>
-          <router-link tag="span" :to="{name: 'goods'}">
-            商品管理
-          </router-link>
-        </el-menu-item>
-        <el-menu-item index="2">
-          <i class="el-icon-menu"></i>
-          <router-link tag="span" :to="{name: 'categories'}">
-            分类管理
-          </router-link>
-        </el-menu-item>
-        <el-menu-item index="3">
-          <i class="el-icon-menu"></i>
-          <router-link tag="span" :to="{name: 'brands'}">
-            品牌管理
-          </router-link>
-        </el-menu-item>
-        <el-menu-item index="4">
-          <i class="el-icon-menu"></i>
-          <router-link tag="span" :to="{name: 'manufactors'}">
-            供应商管理
-          </router-link>
-        </el-menu-item>
-        <el-menu-item index="5">
-          <i class="el-icon-menu"></i>
-          <router-link tag="span" :to="{name: 'sale'}">
-            销售管理
-          </router-link>
-        </el-menu-item>
-        <el-menu-item index="6">
-          <i class="el-icon-menu"></i>
-          <router-link tag="span" :to="{name: 'purchase'}">
-            采购管理
-          </router-link>
-        </el-menu-item>
-        <el-menu-item index="7">
-          <i class="el-icon-menu"></i>
-          <router-link tag="span" :to="{name: 'users'}">
-            用户管理
+          <router-link tag="span" :to="{name: item.alias}">
+            {{item.name}}
           </router-link>
         </el-menu-item>
       </el-menu>
@@ -49,10 +13,17 @@
   </el-row>
 </template>
 <script>
+import { mapState } from "vuex";
+
 export default {
   name: "LeftNav",
   data() {
     return {};
+  },
+  computed: {
+    ...mapState({
+      menu: state => state.user.menu
+    })
   }
 };
 </script>

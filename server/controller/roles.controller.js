@@ -14,7 +14,7 @@ router.get("/", async (ctx, next) => {
       result = await rolesService.findAllByPages(ctx, models); // 分页查询全部
     } else {
       dbQuery.keys = dbQuery.keys ? dbQuery.keys : "";
-      result = await rolesService.findAllByParams(ctx, models); // 分页查询全部
+      result = await rolesService.findAllByParams(ctx, models); // 按条件查询全部
     }
     if (Array.isArray(result)) {
       resData.data = result;

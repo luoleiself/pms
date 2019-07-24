@@ -59,20 +59,9 @@ export default {
           password
         })
         .then(res => {
-          window.sessionStorage.setItem(
-            "user",
-            JSON.stringify({
-              id: res.data.id,
-              username: res.data.username,
-              name: res.data.name
-            })
-          );
+          window.sessionStorage.setItem("user", JSON.stringify(res.data));
           window.sessionStorage.setItem("token", res.token);
-          this.USER_LOGIN({
-            id: res.data.id,
-            username: res.data.username,
-            name: res.data.name
-          });
+          this.USER_LOGIN(res.data);
           this.$router.push({ path: "/home" });
         })
         .catch(err => {

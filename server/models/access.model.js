@@ -18,9 +18,13 @@ exports = module.exports = function(sequelize, DataTypes) {
         type: DataTypes.STRING(20),
         comment: "菜单名称"
       },
-      url: {
+      path: {
         type: DataTypes.STRING(20),
-        comment: "菜单连接"
+        comment: "菜单路径"
+      },
+      alias: {
+        type: DataTypes.STRING(20),
+        comment: "路径缩写"
       },
       status: {
         type: DataTypes.BOOLEAN,

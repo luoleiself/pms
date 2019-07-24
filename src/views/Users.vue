@@ -33,6 +33,11 @@
             <span v-else>禁用</span>
           </template>
         </el-table-column>
+        <el-table-column prop="" label="角色" align="center">
+          <template slot-scope="scope">
+            <span>{{scope.row.roles.map(item=>item.name).join(',')}}</span>
+          </template>
+        </el-table-column>
         <el-table-column prop="" label="创建时间" align="center" width="160">
           <template slot-scope="scope">
             <span>{{scope.row.create_time | dateFormat}}</span>
@@ -46,7 +51,6 @@
         <el-table-column prop="operator" label="操作人" align="center" width="100"></el-table-column>
         <el-table-column prop="" label="操作" align="center" width="120">
           <template slot-scope="scope">
-            <el-button type="text" size="mini" @click="resetPwd(scope.row)">重置密码</el-button>
             <el-button type="text" size="mini" @click="edit(scope.row)">编辑</el-button>
             <el-button type="text" size="mini" v-if="scope.row.status == 1" @click="disable(scope.row)">禁用</el-button>
             <el-button type="text" size="mini" v-else @click="enable(scope.row)">启用</el-button>
@@ -204,7 +208,7 @@ export default {
           department: res.data.department,
           telephone: res.data.telephone,
           address: res.data.address,
-          role_id: res.data.role_id
+          role_id: res.data.roles.map(item => item.id)
         };
         this.dialogOpt.visible = true;
         this.dialogOpt.formDisable = true;
@@ -231,17 +235,6 @@ export default {
         .put(`/users/${row.id}`, { status: 1 })
         .then(res => {
           this.$message.success(res.msg);
-          this.updateTable();
-        })
-        .catch(err => {
-          this.$message.error(err.msg);
-        });
-    },
-    resetPwd(row) {
-      this.$xhr
-        .put(`/users/${row.id}`, { password: md5("123456") })
-        .then(res => {
-          this.$message.success(`${res.msg} 新密码：123456`);
           this.updateTable();
         })
         .catch(err => {

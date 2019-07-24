@@ -32,14 +32,16 @@ exports = module.exports = {
     let { dbQuery, Op } = ctx;
     return await models.users.findAll({
       where: { status: { [Op.in]: dbQuery.status }, name: { [Op.substring]: dbQuery.keys } },
-      attributes: this.attributes
+      attributes: this.attributes,
+      include: [{ model: models.roles, through: { model: models.user_role } }]
     });
   },
   async findById(ctx, models) {
     let id = Number(ctx.params.id);
     return await models.users.findOne({
       where: { id: id },
-      attributes: this.attributes
+      attributes: this.attributes,
+      include: [{ model: models.roles, through: { model: models.user_role } }]
     });
   },
   async add(ctx, models) {
@@ -54,54 +56,77 @@ exports = module.exports = {
       return { code: 403, msg: "该登陆用户名已存在!" };
     }
     let roles = await models.roles.findAll({ where: { id: { [Op.in]: body.role_id } } });
-    console.log(JSON.stringify(roles));
     return models.sequelize
       .transaction(t => {
-        let users = await models.users.create(
-          {
-            username: body.username,
-            name: body.name,
-            password: body.password,
-            sex: Number(body.sex),
-            department: body.department,
-            telephone: body.telephone,
-            address: body.address,
-            operator: user.payload.name,
-            create_time: Math.floor(Date.now() / 1000)
-          },
-          { transaction: t }
-        );
-        users.setRoles(roles, { transaction: t });
+        return models.users
+          .create(
+            {
+              username: body.username,
+              name: body.name,
+              password: body.password,
+              sex: Number(body.sex),
+              department: body.department,
+              telephone: body.telephone,
+              address: body.address,
+              operator: user.payload.name,
+              create_time: Math.floor(Date.now() / 1000)
+            },
+            { transaction: t }
+          )
+          .then(async users => {
+            await users.setRoles(roles, { transaction: t });
+            return users;
+          });
       })
-      .then(result => {
-        console.log(result);
+      .then(users => {
+        return users;
       })
       .catch(err => {
+        console.log(err);
         throw new Error(err);
       });
   },
   async update(ctx, models) {
     let {
       request: { body },
+      Op,
       user
     } = ctx;
     let users = await this.findById(ctx, models);
     if (!users) {
-      return { code: 0, msg: "该用户不存在!" };
+      return { code: 404, msg: "该用户不存在!" };
     }
-    users.name = body.name;
-    users.username = body.username;
-    users.password = body.password;
-    users.sex = body.sex;
-    users.department = body.department;
-    users.telephone = body.telephone;
-    users.address = body.address;
-    users.status = body.status;
-    users.operator = user.payload.name;
-    users.update_time = Math.floor(Date.now() / 1000);
 
-    await users.save();
-    return users;
+    let roles = null;
+    if (body.role_id) {
+      roles = await models.roles.findAll({ where: { id: { [Op.in]: body.role_id } } });
+    }
+    return models.sequelize
+      .transaction(async t => {
+        users.name = body.name;
+        users.username = body.username;
+        users.password = body.password;
+        users.sex = body.sex;
+        users.department = body.department;
+        users.telephone = body.telephone;
+        users.address = body.address;
+        users.status = body.status;
+        users.operator = user.payload.name;
+        users.update_time = Math.floor(Date.now() / 1000);
+
+        await users.save();
+        if (body.role_id) {
+          await users.setRoles(roles, { transaction: t });
+        }
+        return users;
+      })
+      .then(async res => {
+        return await this.findById(ctx, models);
+      })
+      .catch(err => {
+        console.log(err);
+        throw new Error(err);
+      });
   },
   async delete(ctx, models) {
     let user = await this.findById(ctx, models);
