@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2019-07-19 21:02:05
+Date: 2019-07-24 20:43:44
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,20 +23,28 @@ CREATE TABLE `access` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '菜单id',
   `pid` int(10) unsigned DEFAULT '0' COMMENT '菜单父id',
   `name` varchar(20) DEFAULT NULL COMMENT '菜单名称',
-  `url` varchar(20) DEFAULT NULL COMMENT '菜单连接',
+  `path` varchar(20) DEFAULT NULL COMMENT '菜单路径',
+  `alias` varchar(20) DEFAULT NULL COMMENT '路径缩写',
   `status` tinyint(1) DEFAULT '1' COMMENT '启用状态: 1启用，0禁用',
   `create_time` int(10) unsigned DEFAULT NULL COMMENT '创建时间',
   `update_time` int(10) unsigned DEFAULT NULL COMMENT '更新时间',
   `operator` varchar(20) DEFAULT NULL COMMENT '操作人员',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of access
 -- ----------------------------
-INSERT INTO `access` VALUES ('1', '0', '首页', '/home', '1', '1562637693', null, null);
-INSERT INTO `access` VALUES ('2', '0', '采购', '/home/purchase', '1', null, null, null);
-INSERT INTO `access` VALUES ('3', '0', '销售', '/home/sales', '1', null, null, null);
+INSERT INTO `access` VALUES ('1', '0', '登录页', '/login', 'login', '1', null, null, null);
+INSERT INTO `access` VALUES ('2', '0', '导航页', '/home', 'home', '1', null, null, null);
+INSERT INTO `access` VALUES ('3', '2', '首页', '/home/index', 'index', '1', null, null, null);
+INSERT INTO `access` VALUES ('4', '2', '商品管理', '/home/goods', 'goods', '1', null, null, null);
+INSERT INTO `access` VALUES ('5', '2', '分类管理', '/home/categories', 'categories', '1', null, null, null);
+INSERT INTO `access` VALUES ('6', '2', '品牌管理', '/home/brands', 'brands', '1', null, null, null);
+INSERT INTO `access` VALUES ('7', '2', '供应商管理', '/home/manufactors', 'manufactors', '1', null, null, null);
+INSERT INTO `access` VALUES ('8', '2', '采购管理', '/home/purchase', 'purchase', '1', null, null, null);
+INSERT INTO `access` VALUES ('9', '2', '销售管理', '/home/sale', 'sale', '1', null, null, null);
+INSERT INTO `access` VALUES ('10', '2', '用户管理', '/home/users', 'users', '1', null, null, null);
 
 -- ----------------------------
 -- Table structure for brands
@@ -55,13 +63,14 @@ CREATE TABLE `brands` (
   PRIMARY KEY (`id`),
   KEY `manufactor_id` (`manufactor_id`),
   CONSTRAINT `brands_ibfk_1` FOREIGN KEY (`manufactor_id`) REFERENCES `manufactors` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of brands
 -- ----------------------------
 INSERT INTO `brands` VALUES ('11', '0', '康师傅', '著名品牌', '1', '1563540342', null, '张三', '14');
 INSERT INTO `brands` VALUES ('12', '0', '统一', '著名品牌', '1', '1563540504', null, '张三', '15');
+INSERT INTO `brands` VALUES ('13', '0', '加多宝', '凉茶一哥', '1', '1563796223', null, '张三', '16');
 
 -- ----------------------------
 -- Table structure for categories
@@ -77,7 +86,7 @@ CREATE TABLE `categories` (
   `status` tinyint(1) DEFAULT '1' COMMENT '启用状态: 1启用，0禁用',
   `operator` varchar(20) DEFAULT NULL COMMENT '操作人员',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of categories
@@ -89,6 +98,7 @@ INSERT INTO `categories` VALUES ('19', '16', '牛奶酸奶', '二级分类', '15
 INSERT INTO `categories` VALUES ('20', '16', '调味品', '二级分类', '1563540996', null, '1', '张三');
 INSERT INTO `categories` VALUES ('21', '0', '电子产品', '一级分类', '1563541021', null, '1', '张三');
 INSERT INTO `categories` VALUES ('22', '21', '手机', '二级分类', '1563541060', null, '1', '张三');
+INSERT INTO `categories` VALUES ('23', '16', '功能饮料', '功能饮料', '1563796259', null, '1', '张三');
 
 -- ----------------------------
 -- Table structure for goods
@@ -116,8 +126,8 @@ CREATE TABLE `goods` (
 -- ----------------------------
 -- Records of goods
 -- ----------------------------
-INSERT INTO `goods` VALUES ('13', '矿泉水', '矿泉水，矿物质水', '水', '0', '1563540355', null, '1', '张三', '11', null);
-INSERT INTO `goods` VALUES ('14', '方便面', '泡面', '油炸型方便面，大份量', '0', '1563541147', null, '1', '张三', '11', '17');
+INSERT INTO `goods` VALUES ('13', '矿泉水', '矿泉水，矿物质水', '水', '100', '1563540355', '1563774705', '1', '张三', '11', '18');
+INSERT INTO `goods` VALUES ('14', '方便面', '泡面', '油炸型方便面，大份量', '5', '1563541147', null, '1', '张三', '11', '17');
 
 -- ----------------------------
 -- Table structure for manufactors
@@ -137,13 +147,14 @@ CREATE TABLE `manufactors` (
   `status` tinyint(1) DEFAULT '1' COMMENT '启用状态: 1启用，0禁用',
   `operator` varchar(20) DEFAULT NULL COMMENT '操作人员',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of manufactors
 -- ----------------------------
 INSERT INTO `manufactors` VALUES ('14', '康师傅控股有限公司', '康师傅', '北京市北京路1号', '贝贝', '13112345678', '010-12345678', '13112345678@163.com', '1563540246', null, '1', '张三');
 INSERT INTO `manufactors` VALUES ('15', '统一企业公司', '著名公司', '上海市上海路1号', '嗨嗨', '13112345678', '010-1234567478', '12345678@163.com', '1563540474', null, '1', '张三');
+INSERT INTO `manufactors` VALUES ('16', '加多宝集团有限公司', '凉茶一哥', '广东省广州市白云区白云路1号', '宝宝', '13112345678', '010-12345678', '12345678@163.com', '1563796171', null, '1', '张三');
 
 -- ----------------------------
 -- Table structure for purchase
@@ -160,11 +171,13 @@ CREATE TABLE `purchase` (
   PRIMARY KEY (`id`),
   KEY `goods_id` (`goods_id`),
   CONSTRAINT `purchase_ibfk_1` FOREIGN KEY (`goods_id`) REFERENCES `goods` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of purchase
 -- ----------------------------
+INSERT INTO `purchase` VALUES ('1', '1.20', '10', '1563788273', '1563788367', '张三', '14');
+INSERT INTO `purchase` VALUES ('2', '5.00', '100', '1563886174', null, '张三', '13');
 
 -- ----------------------------
 -- Table structure for roles
@@ -184,9 +197,9 @@ CREATE TABLE `roles` (
 -- ----------------------------
 -- Records of roles
 -- ----------------------------
-INSERT INTO `roles` VALUES ('1', 'admin', '超级管理员', '1', '1562637693', null, null);
-INSERT INTO `roles` VALUES ('2', 'sale', '销售', '1', '1562637693', null, null);
-INSERT INTO `roles` VALUES ('3', 'purchase', '采购', '1', '1563177129', null, null);
+INSERT INTO `roles` VALUES ('1', '管理员', 'admin', '1', null, null, '');
+INSERT INTO `roles` VALUES ('2', '销售', 'sale', '1', null, null, null);
+INSERT INTO `roles` VALUES ('3', '采购', 'purchase', '1', null, null, null);
 
 -- ----------------------------
 -- Table structure for role_access
@@ -201,16 +214,25 @@ CREATE TABLE `role_access` (
   KEY `role_id` (`role_id`),
   CONSTRAINT `role_access_ibfk_1` FOREIGN KEY (`access_id`) REFERENCES `access` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `role_access_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of role_access
 -- ----------------------------
-INSERT INTO `role_access` VALUES ('1', '1', '1');
-INSERT INTO `role_access` VALUES ('2', '2', '1');
-INSERT INTO `role_access` VALUES ('5', '2', '3');
-INSERT INTO `role_access` VALUES ('4', '3', '1');
-INSERT INTO `role_access` VALUES ('3', '3', '2');
+INSERT INTO `role_access` VALUES ('2', '3', '1');
+INSERT INTO `role_access` VALUES ('11', '3', '2');
+INSERT INTO `role_access` VALUES ('15', '3', '3');
+INSERT INTO `role_access` VALUES ('3', '4', '1');
+INSERT INTO `role_access` VALUES ('12', '4', '2');
+INSERT INTO `role_access` VALUES ('16', '4', '3');
+INSERT INTO `role_access` VALUES ('4', '5', '1');
+INSERT INTO `role_access` VALUES ('5', '6', '1');
+INSERT INTO `role_access` VALUES ('6', '7', '1');
+INSERT INTO `role_access` VALUES ('7', '8', '1');
+INSERT INTO `role_access` VALUES ('17', '8', '3');
+INSERT INTO `role_access` VALUES ('8', '9', '1');
+INSERT INTO `role_access` VALUES ('13', '9', '2');
+INSERT INTO `role_access` VALUES ('9', '10', '1');
 
 -- ----------------------------
 -- Table structure for sales
@@ -227,11 +249,15 @@ CREATE TABLE `sales` (
   PRIMARY KEY (`id`),
   KEY `goods_id` (`goods_id`),
   CONSTRAINT `sales_ibfk_1` FOREIGN KEY (`goods_id`) REFERENCES `goods` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sales
 -- ----------------------------
+INSERT INTO `sales` VALUES ('1', '1.50', '11', '1563813100', '1563786846', '张三', '13');
+INSERT INTO `sales` VALUES ('2', '2.00', '1', '1563796032', null, '张三', '13');
+INSERT INTO `sales` VALUES ('3', '5.00', '5', '1563796955', null, '张三', '14');
+INSERT INTO `sales` VALUES ('4', '5.00', '88', '1563886214', null, '张三', '13');
 
 -- ----------------------------
 -- Table structure for users
@@ -251,14 +277,14 @@ CREATE TABLE `users` (
   `update_time` int(10) unsigned DEFAULT NULL COMMENT '更新时间',
   `operator` varchar(20) DEFAULT NULL COMMENT '操作人员',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('1', '张三', 'zhangsan', 'e10adc3949ba59abbe56e057f20f883e', '1', '采购部', '13112345678', '北京市朝阳区朝阳路1号', '1', '1562637693', null, null);
-INSERT INTO `users` VALUES ('12', '李四', 'lisi', 'e10adc3949ba59abbe56e057f20f883e', '1', '销售', null, null, '1', null, null, null);
-INSERT INTO `users` VALUES ('13', '总管', 'zongguan', 'e10adc3949ba59abbe56e057f20f883e', '1', '系统部', null, null, '1', null, null, null);
+INSERT INTO `users` VALUES ('1', '张三', 'zhangsan', 'e10adc3949ba59abbe56e057f20f883e', '0', '系统部', '010-12345678', '北京市北京路1号', '1', '1563956172', '1563956215', '张三');
+INSERT INTO `users` VALUES ('10', '李四', 'lisi', 'e10adc3949ba59abbe56e057f20f883e', '1', '采购部', '13112345678', '上海市上海路1号', '1', '1563953178', '1563972092', '李四');
+INSERT INTO `users` VALUES ('11', '王五', 'wangwu', 'e10adc3949ba59abbe56e057f20f883e', '1', '销售部', '13187654321', '广州市广州路1号', '1', '1563956103', '1563956167', '张三');
 
 -- ----------------------------
 -- Table structure for user_role
@@ -273,11 +299,13 @@ CREATE TABLE `user_role` (
   KEY `user_id` (`user_id`),
   CONSTRAINT `user_role_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `user_role_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_role
 -- ----------------------------
-INSERT INTO `user_role` VALUES ('3', '1', '13');
-INSERT INTO `user_role` VALUES ('2', '2', '12');
-INSERT INTO `user_role` VALUES ('1', '3', '1');
+INSERT INTO `user_role` VALUES ('1', '1', '1');
+INSERT INTO `user_role` VALUES ('13', '2', '1');
+INSERT INTO `user_role` VALUES ('15', '2', '11');
+INSERT INTO `user_role` VALUES ('14', '3', '1');
+INSERT INTO `user_role` VALUES ('12', '3', '10');
