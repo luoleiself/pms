@@ -13,7 +13,7 @@ fs.readdirSync(__dirname)
     router.use(`/${path.basename(fileName, ".controller.js")}`, require(`./${fileName}`).routes());
   });
 
-router.all("/", async (ctx, next) => {
+router.all("/*", async (ctx, next) => {
   await next();
   ctx.body = { code: 10404, msg: "Not matched to any routing" };
 });

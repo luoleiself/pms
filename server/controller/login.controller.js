@@ -1,6 +1,6 @@
 const Router = require("koa-router");
 const models = require("../models");
-const { loginService } = require("../service");
+const { usersService } = require("../service");
 
 const router = new Router();
 // 用户登陆
@@ -8,7 +8,7 @@ router.post("/", async (ctx, next) => {
   await next();
   let { logUtils, resData, jwt } = ctx;
   try {
-    let result = await loginService.login(ctx, models);
+    let result = await usersService.login(ctx, models);
     switch (result.code) {
       case 400:
         resData.code = 10400;

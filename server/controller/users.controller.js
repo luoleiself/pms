@@ -5,6 +5,23 @@ const { usersService } = require("../service");
 const router = new Router();
 
 // 查询所有用户列表分页
+/**
+ * @api {get} /users getUsers
+ * @apiName getUsers
+ * @apiGroup users
+ * 
+ * @apiSuccess {Object} users list
+ * @apiSuccessExample Success-Response:
+ * ```javascript
+ *  {
+ *    rows:[],
+ *    total: 0,
+ *    p: 1,
+ *    p_size: 10
+ *  }
+ * ```
+ * 
+ */
 router.get("/", async (ctx, next) => {
   let { logUtils, resData, dbQuery } = ctx;
   await next();
