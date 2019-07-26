@@ -3,7 +3,44 @@ const models = require("../models");
 const { manufactorsService } = require("../service");
 
 const router = new Router();
-// 查询所有供应商列表分页
+/**
+ * @api {get} /manufactors getManufactorsList
+ * @apiName getManufactorsList
+ * @apiGroup manufactors
+ *
+ * @apiUse commonRequestParams
+ * @apiUse commonRequestExample
+ * @apiUse commonResponseParams
+ *
+ * @apiSuccessExample Success-Response-1:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data:{
+ *      p: 1,
+ *      p_size: 10,
+ *      total: 30,
+ *      rows:[
+ *        { id: 1, name: '供应商名称', desc: '供应商描述', ... },
+ *        ...
+ *      ]
+ *    }
+ *  }
+ * @apiSuccessExample Success-Response-2:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data:[
+ *      { id: 1, name: '分类名称', desc: '分类描述', ... },
+ *      ...
+ *    ]
+ *  }
+ *
+ * @apiSampleRequest http://localhost:9999/api/manufactors
+ * @apiVersion 0.1.0
+ */
 router.get("/", async (ctx, next) => {
   await next();
   let { logUtils, resData, dbQuery } = ctx;
@@ -31,7 +68,36 @@ router.get("/", async (ctx, next) => {
     ctx.status = 500;
   }
 });
-// 获取指定供应商
+/**
+ * @api {get} /manufactors/:id getManufactorsById
+ * @apiName getManufactorsById
+ * @apiGroup manufactors
+ *
+ * @apiParam {Number} id manufactor id
+ * @apiSuccessExample Success-Response-1:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data: { id: 1, name: '供应商名称', desc: '供应商描述', ... },
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10404,
+ *    msg: '未查询到该供应商信息!',
+ *    data: []
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10400,
+ *    msg: '请求参数错误!',
+ *    data: []
+ *  }
+ * @apiSampleRequest http://localhost:9999/api/manufactors/:id
+ * @apiVersion 0.1.0
+ */
 router.get("/:id", async (ctx, next) => {
   await next();
   let {
@@ -47,7 +113,7 @@ router.get("/:id", async (ctx, next) => {
     let result = await manufactorsService.findById(ctx, models);
     if (!result) {
       resData.code = 10404;
-      resData.msg = "未查询到该供应商信息";
+      resData.msg = "未查询到该供应商信息!";
     } else {
       resData.data = result;
     }
@@ -57,7 +123,52 @@ router.get("/:id", async (ctx, next) => {
     ctx.status = 500;
   }
 });
-// 添加供应商
+/**
+ * @api {post} /manufactors addManufactors
+ * @apiName addManufactors
+ * @apiGroup manufactors
+ *
+ * @apiParam {string} name 供应商名称
+ * @apiParam {string} [desc] 供应商描述
+ * @apiParam {string} [address] 地址
+ * @apiParam {string} [contact] 联系人
+ * @apiParam {string} [telephone] 联系电话
+ * @apiParam {string} [fax] 传真
+ * @apiParam {string} [email] 邮箱
+ * @apiParamExample {json} Request-Example:
+ * {
+ *    name: '供应商名称',
+ *    desc: '供应商描述',
+ *    address: '地址',
+ *    contact: '联系人',
+ *    telephone: '联系电话',
+ *    fax: '传真',
+ *    email: '邮箱'
+ * }
+ * @apiSuccessExample Success-Response-1:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data: { id: 1, name: '供应商名称', desc: '供应商描述', ... },
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10404,
+ *    msg: '该供应商名称已存在!',
+ *    data: []
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10400,
+ *    msg: '请求参数错误!',
+ *    data: []
+ *  }
+ * @apiSampleRequest http://localhost:9999/api/manufactors
+ * @apiVersion 0.1.0
+ */
 router.post("/", async (ctx, next) => {
   await next();
   let { logUtils, resData } = ctx;
@@ -75,7 +186,53 @@ router.post("/", async (ctx, next) => {
     ctx.status = 500;
   }
 });
-// 更新指定供应商信息
+/**
+ * @api {put} /manufactors/:id updateManufactors
+ * @apiName updateManufactors
+ * @apiGroup manufactors
+ *
+ * @apiParam {Number} id manufactor id
+ * @apiParam {string} name 供应商名称
+ * @apiParam {string} [desc] 供应商描述
+ * @apiParam {string} [address] 地址
+ * @apiParam {string} [contact] 联系人
+ * @apiParam {string} [telephone] 联系电话
+ * @apiParam {string} [fax] 传真
+ * @apiParam {string} [email] 邮箱
+ * @apiParamExample {json} Request-Example:
+ * {
+ *    name: '供应商名称',
+ *    desc: '供应商描述',
+ *    address: '地址',
+ *    contact: '联系人',
+ *    telephone: '联系电话',
+ *    fax: '传真',
+ *    email: '邮箱'
+ * }
+ * @apiSuccessExample Success-Response-1:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data: { id: 1, name: '供应商名称', desc: '供应商描述', ... },
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10404,
+ *    msg: '该供应商不存在!',
+ *    data: []
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10400,
+ *    msg: '请求参数错误!',
+ *    data: []
+ *  }
+ * @apiSampleRequest http://localhost:9999/api/manufactors/:id
+ * @apiVersion 0.1.0
+ */
 router.put("/:id", async (ctx, next) => {
   await next();
   let {
@@ -89,8 +246,8 @@ router.put("/:id", async (ctx, next) => {
   }
   try {
     let result = await manufactorsService.update(ctx, models);
-    if (result.code == 0) {
-      resData.msg = result.msg;
+    if (!result) {
+      resData.msg = "该供应商不存在!";
       resData.code = 10404;
     } else {
       resData.data = result;
@@ -101,7 +258,36 @@ router.put("/:id", async (ctx, next) => {
     ctx.status = 500;
   }
 });
-// 删除指定供应商
+/**
+ * @api {delete} /manufactors/:id deleteManufactors
+ * @apiName deleteManufactors
+ * @apiGroup manufactors
+ *
+ * @apiParam {Number} id manufactor id
+ * @apiSuccessExample Success-Response-1:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data: { id: 1, name: '供应商名称', desc: '供应商描述', ... },
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10404,
+ *    msg: '该供应商不存在!',
+ *    data: []
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10400,
+ *    msg: '请求参数错误!',
+ *    data: []
+ *  }
+ * @apiSampleRequest http://localhost:9999/api/manufactors/:id
+ * @apiVersion 0.1.0
+ */
 router.delete("/:id", async (ctx, next) => {
   await next();
   let {

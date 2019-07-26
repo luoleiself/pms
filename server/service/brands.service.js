@@ -43,12 +43,21 @@ exports = module.exports = {
   // 按条件查询全部不分页
   async findAllByParams(ctx, models) {
     let { dbQuery, Op } = ctx;
-    return await models.brands.findAll({
-      where: { status: { [Op.in]: dbQuery.status }, name: { [Op.substring]: dbQuery.keys } },
+    let query = {
+      where: {
+        status: { [Op.in]: dbQuery.status }
+      },
       order: [dbQuery.orderBy.split(",")],
       attributes: this.attributes,
       include: [models.manufactors]
-    });
+    };
+    if (dbQuery.keys) {
+      query.where.name = { [Op.substring]: dbQuery.keys };
+    }
+    if (dbQuery.manufactor_id) {
+      query.where.manufactor_id = dbQuery.manufactor_id;
+    }
+    return await models.brands.findAll(query);
   },
   async findById(ctx, models) {
     let id = Number(ctx.params.id);
@@ -69,7 +78,7 @@ exports = module.exports = {
         pid: body.pid,
         desc: body.desc,
         status: body.status,
-        operator: user.payload.name,
+        operator: user ? user.payload.name : "",
         manufactor_id: body.manufactor_id,
         create_time: Math.floor(Date.now() / 1000)
       }
@@ -89,7 +98,7 @@ exports = module.exports = {
     brands.pid = body.pid;
     brands.desc = body.desc;
     brands.status = body.status;
-    brands.operator = user.payload.name;
+    brands.operator = user ? user.payload.name : "";
     brands.update_time = Math.floor(Date.now() / 1000);
 
     await brands.save();

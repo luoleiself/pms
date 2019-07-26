@@ -3,7 +3,44 @@ const models = require("../models");
 const { categoriesService } = require("../service");
 
 const router = new Router();
-// 查询所有分类列表分页
+/**
+ * @api {get} /categories getCategoriesList
+ * @apiName getCategoriesList
+ * @apiGroup categories
+ *
+ * @apiUse commonRequestParams
+ * @apiUse commonRequestExample
+ * @apiUse commonResponseParams
+ *
+ * @apiSuccessExample Success-Response-1:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data:{
+ *      p: 1,
+ *      p_size: 10,
+ *      total: 30,
+ *      rows:[
+ *        { id: 1, name: '分类名称', desc: '分类描述', ... },
+ *        ...
+ *      ]
+ *    }
+ *  }
+ * @apiSuccessExample Success-Response-2:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data:[
+ *      { id: 1, name: '分类名称', desc: '分类描述', ... },
+ *      ...
+ *    ]
+ *  }
+ *
+ * @apiSampleRequest http://localhost:9999/api/categories
+ * @apiVersion 0.1.0
+ */
 router.get("/", async (ctx, next) => {
   await next();
   let { logUtils, resData, dbQuery } = ctx;
@@ -32,7 +69,36 @@ router.get("/", async (ctx, next) => {
     ctx.status = 500;
   }
 });
-// 获取指定分类
+/**
+ * @api {get} /categories/:id getCategoriesById
+ * @apiName getCategoriesById
+ * @apiGroup categories
+ *
+ * @apiParam {Number} id categories id
+ * @apiSuccessExample Success-Response-1:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data: {id: 1, name: '分类名称', desc: '分类描述', ...},
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10404,
+ *    msg: '未查询到该分类信息!',
+ *    data: []
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10400,
+ *    msg: '请求参数错误!',
+ *    data: []
+ *  }
+ * @apiSampleRequest http://localhost:9999/api/categories/:id
+ * @apiVersion 0.1.0
+ */
 router.get("/:id", async (ctx, next) => {
   await next();
   let {
@@ -58,7 +124,44 @@ router.get("/:id", async (ctx, next) => {
     ctx.status = 500;
   }
 });
-// 添加分类
+/**
+ * @api {post} /categories addCategories
+ * @apiName addCategories
+ * @apiGroup categories
+ *
+ * @apiParam {String} name 分类名称
+ * @apiParam {String} [desc] 分类描述
+ * @apiParam {Number} [pid] 父级分类id
+ * @apiParamExample {json} Request-Example:
+ * {
+ *    name: '分类名称',
+ *    desc: '分类描述',
+ *    pid: ''
+ * }
+ * @apiSuccessExample Success-Response-1:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data: { id: 1, name: '分类名称', desc: '分类描述', ... },
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10404,
+ *    msg: '该分类名称已存在!',
+ *    data: []
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10400,
+ *    msg: '请求参数错误!',
+ *    data: []
+ *  }
+ * @apiSampleRequest http://localhost:9999/api/categories
+ * @apiVersion 0.1.0
+ */
 router.post("/", async (ctx, next) => {
   await next();
   let { logUtils, resData } = ctx;
@@ -76,7 +179,46 @@ router.post("/", async (ctx, next) => {
     ctx.status = 500;
   }
 });
-// 更新指定分类信息
+/**
+ * @api {put} /categories/:id updateCategories
+ * @apiName updateCategories
+ * @apiGroup categories
+ *
+ * @apiParam {Number} id categories id
+ * @apiParam {String} name 分类名称
+ * @apiParam {String} [desc] 分类描述
+ * @apiParam {Number} [pid] 父级分类id
+ * @apiParamExample {json} Request-Example:
+ * {
+ *    id: 1,
+ *    name: '分类名称',
+ *    desc: '分类描述',
+ *    pid: '',
+ * }
+ * @apiSuccessExample Success-Response-1:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data: { id: 1, name: '分类名称', desc: '分类描述', ... },
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10404,
+ *    msg: '该分类不存在!',
+ *    data: []
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10400,
+ *    msg: '请求参数错误!',
+ *    data: []
+ *  }
+ * @apiSampleRequest http://localhost:9999/api/categories/:id
+ * @apiVersion 0.1.0
+ */
 router.put("/:id", async (ctx, next) => {
   await next();
   let {
@@ -90,8 +232,8 @@ router.put("/:id", async (ctx, next) => {
   }
   try {
     let result = await categoriesService.update(ctx, models);
-    if (result.code == 0) {
-      resData.msg = result.msg;
+    if (!result) {
+      resData.msg = "该分类不存在!";
       resData.code = 10404;
     } else {
       resData.data = result;
@@ -102,7 +244,36 @@ router.put("/:id", async (ctx, next) => {
     ctx.status = 500;
   }
 });
-// 删除指定分类
+/**
+ * @api {delete} /categories/:id deleteCategories
+ * @apiName deleteCategories
+ * @apiGroup categories
+ *
+ * @apiParam {Number} id categories id
+ * @apiSuccessExample Success-Response-1:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data: { id: 1, name: '分类名称', desc: '分类描述', ... },
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10404,
+ *    msg: '该分类不存在!',
+ *    data: []
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10400,
+ *    msg: '请求参数错误!',
+ *    data: []
+ *  }
+ * @apiSampleRequest http://localhost:9999/api/categories/:id
+ * @apiVersion 0.1.0
+ */
 router.delete("/:id", async (ctx, next) => {
   await next();
   let {
@@ -128,7 +299,36 @@ router.delete("/:id", async (ctx, next) => {
     ctx.status = 500;
   }
 });
-// 获取指定分类的树形结构
+/**
+ * @api {get} /categories/tree/:id getCategoriesTreeById
+ * @apiName getCategoriesTreeById
+ * @apiGroup categories
+ *
+ * @apiParam {Number} id categories id
+ * @apiSuccessExample Success-Response-1:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data: { id: 1, name: '分类名称', desc: '分类描述', ... },
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10404,
+ *    msg: '未查询到该分类信息!',
+ *    data: []
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10400,
+ *    msg: '请求参数错误!',
+ *    data: []
+ *  }
+ * @apiSampleRequest http://localhost:9999/api/categories/tree/:id
+ * @apiVersion 0.1.0
+ */
 router.get("/tree/:id", async (ctx, next) => {
   await next();
   let {
@@ -144,7 +344,7 @@ router.get("/tree/:id", async (ctx, next) => {
     let result = await categoriesService.getTree(ctx, models);
     if (!result) {
       resData.code = 10404;
-      resData.msg = "未查询到该分类信息";
+      resData.msg = "未查询到该分类信息!";
     } else {
       resData.data = result;
     }

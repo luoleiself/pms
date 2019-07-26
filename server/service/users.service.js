@@ -68,7 +68,7 @@ exports = module.exports = {
               department: body.department,
               telephone: body.telephone,
               address: body.address,
-              operator: user.payload.name,
+              operator: user ? user.payload.name : "",
               create_time: Math.floor(Date.now() / 1000)
             },
             { transaction: t }
@@ -111,7 +111,7 @@ exports = module.exports = {
         users.telephone = body.telephone;
         users.address = body.address;
         users.status = body.status;
-        users.operator = user.payload.name;
+        users.operator = user ? user.payload.name : "";
         users.update_time = Math.floor(Date.now() / 1000);
 
         await users.save();

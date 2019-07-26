@@ -3,7 +3,45 @@ const models = require("../models");
 const { brandsService } = require("../service");
 
 const router = new Router();
-// 查询所有品牌列表分页
+/**
+ * @api {get} /brands getBrandsList
+ * @apiName getBrandsList
+ * @apiGroup brands
+ *
+ * @apiParam {Number} [manufactor_id] 供应商id
+ * @apiUse commonRequestParams
+ * @apiUse commonRequestExample
+ * @apiUse commonResponseParams
+ *
+ * @apiSuccessExample Success-Response-1:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data:{
+ *      p: 1,
+ *      p_size: 10,
+ *      total: 30,
+ *      rows:[
+ *        { id: 1, name: '品牌名称', desc: '品牌描述', ...},
+ *        ...
+ *      ]
+ *    }
+ *  }
+ * @apiSuccessExample Success-Response-2:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data:[
+ *      { id: 1, name: '品牌名称', desc: '品牌描述', ...},
+ *      ...
+ *    ]
+ *  }
+ *
+ * @apiSampleRequest http://localhost:9999/api/brands
+ * @apiVersion 0.1.0
+ */
 router.get("/", async (ctx, next) => {
   await next();
   let { logUtils, resData, dbQuery } = ctx;
@@ -32,8 +70,36 @@ router.get("/", async (ctx, next) => {
     ctx.status = 500;
   }
 });
-
-// 获取指定品牌
+/**
+ * @api {get} /brands/:id getBrandById
+ * @apiName getBrandById
+ * @apiGroup brands
+ *
+ * @apiParam {Number} id brand id
+ * @apiSuccessExample Success-Response-1:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data: { id: 1, name: '品牌名称', desc: '品牌描述', ... },
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10404,
+ *    msg: '未查询到该品牌信息!',
+ *    data: []
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10400,
+ *    msg: '请求参数错误!',
+ *    data: []
+ *  }
+ * @apiSampleRequest http://localhost:9999/api/brands/:id
+ * @apiVersion 0.1.0
+ */
 router.get("/:id", async (ctx, next) => {
   await next();
   let {
@@ -59,7 +125,47 @@ router.get("/:id", async (ctx, next) => {
     ctx.status = 500;
   }
 });
-// 添加品牌
+/**
+ * @api {post} /brands addBrand
+ * @apiName addBrand
+ * @apiGroup brands
+ *
+ * @apiParam {String} name 品牌名称
+ * @apiParam {String} [desc] 品牌名称
+ * @apiParam {Number} [pid] 所属品牌
+ * @apiParam {Number} manufactor_id 供应商id
+ *
+ * @apiParamExample {json} Request-Example:
+ *  {
+ *    name: '品牌名称',
+ *    desc: '品牌描述'，
+ *    pid: '',
+ *    manufactor_id: 1,
+ *  }
+ * @apiSuccessExample Success-Response-1:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data: { id: 1, name: '品牌名称', desc: '品牌描述', ... },
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10404,
+ *    msg: '该品牌名称已存在!',
+ *    data: []
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10400,
+ *    msg: '请求参数错误!',
+ *    data: []
+ *  }
+ * @apiSampleRequest http://localhost:9999/api/brands
+ * @apiVersion 0.1.0
+ */
 router.post("/", async (ctx, next) => {
   await next();
   let { logUtils, resData } = ctx;
@@ -77,7 +183,49 @@ router.post("/", async (ctx, next) => {
     ctx.status = 500;
   }
 });
-// 更新指定品牌信息
+/**
+ * @api {put} /brands/:id updateBrand
+ * @apiName updateBrand
+ * @apiGroup brands
+ *
+ * @apiParam {Number} id 品牌id
+ * @apiParam {String} name 品牌名称
+ * @apiParam {String} [desc] 品牌名称
+ * @apiParam {Number} [pid] 所属品牌
+ * @apiParam {Number} manufactor_id 供应商id
+ *
+ * @apiParamExample {json} Request-Example:
+ *  {
+ *    id: 1
+ *    name: '品牌名称',
+ *    desc: '品牌描述'，
+ *    pid: '',
+ *    manufactor_id: 1,
+ *  }
+ * @apiSuccessExample Success-Response-1:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data: { id: 1, name: '品牌名称', desc: '品牌描述', ... },
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10404,
+ *    msg: '未查询到该品牌信息!',
+ *    data: []
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10400,
+ *    msg: '请求参数错误!',
+ *    data: []
+ *  }
+ * @apiSampleRequest http://localhost:9999/api/brands/:id
+ * @apiVersion 0.1.0
+ */
 router.put("/:id", async (ctx, next) => {
   await next();
   let {
@@ -103,7 +251,36 @@ router.put("/:id", async (ctx, next) => {
     ctx.status = 500;
   }
 });
-// 删除指定品牌
+/**
+ * @api {delete} /brands/:id deleteBrand
+ * @apiName deleteBrand
+ * @apiGroup brands
+ *
+ * @apiParam {Number} id 品牌id
+ * @apiSuccessExample Success-Response-1:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data: { id: 1, name: '品牌名称', desc: '品牌描述', ... },
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10404,
+ *    msg: '未查询到该品牌信息!',
+ *    data: []
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10400,
+ *    msg: '请求参数错误!',
+ *    data: []
+ *  }
+ * @apiSampleRequest http://localhost:9999/api/brands/:id
+ * @apiVersion 0.1.0
+ */
 router.delete("/:id", async (ctx, next) => {
   await next();
   let {
@@ -129,7 +306,39 @@ router.delete("/:id", async (ctx, next) => {
     ctx.status = 500;
   }
 });
-// 获取指定品牌的树形结构
+/**
+ * @api {get} /brands/tree/:id getBrandTreeById
+ * @apiName getBrandTreeById
+ * @apiGroup brands
+ *
+ * @apiParam {Number} id 品牌id
+ * @apiSuccessExample Success-Response-1:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data: [
+ *      { id: 1, name: '品牌名称', desc: '品牌描述', ... ,children:[]}
+ *      ...
+ *    ],
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10404,
+ *    msg: '未查询到该品牌信息!',
+ *    data: []
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10400,
+ *    msg: '请求参数错误!',
+ *    data: []
+ *  }
+ * @apiSampleRequest http://localhost:9999/api/brands/tree/:id
+ * @apiVersion 0.1.0
+ */
 router.get("/tree/:id", async (ctx, next) => {
   await next();
   let {

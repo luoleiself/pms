@@ -4,11 +4,12 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "vue-cli-service lint",
+    "build": "vue-cli-service build",
     "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
     "dev:server": "cd ./server && nodemon --ignore logs/ --watch ./ index.js",
     "dev:client": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "dev:api": "apidoc -i server/controller/ -o server/doc/ && anywhere -h localhost -p 10000 -s -d ./server/doc"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,8 @@
     "@vue/cli-plugin-eslint": "^3.9.0",
     "@vue/cli-service": "^3.9.0",
     "@vue/eslint-config-airbnb": "^4.0.0",
+    "anywhere": "^1.5.0",
+    "apidoc": "^0.17.7",
     "axios": "^0.19.0",
     "babel-eslint": "^10.0.1",
     "concurrently": "^4.1.1",
@@ -50,12 +53,5 @@
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",
     "vuex": "^3.0.1"
-  },
-  "apidoc": {
-    "name": "pms",
-    "version": "0.1.0",
-    "description": "pms interface document",
-    "title": "pms",
-    "url": "http://localhost:9999/api"
   }
 }

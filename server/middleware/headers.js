@@ -9,7 +9,8 @@ exports = module.exports = async (ctx, next) => {
   let endTime = Date.now();
   ctx.set({
     "Access-Control-Allow-Credentials": true,
-    "Access-Control-Allow-Origin": `${url.format(hostName.client)}`,
+    // "Access-Control-Allow-Origin": `${url.format(hostName.client)}`,
+    "Access-Control-Allow-Origin": `${ctx.request.headers.origin}`,
     "Access-Control-Allow-Headers":
       "Content-Type,X-Requested-With,Cache-Control,Authorization,token",
     "Access-Control-Allow-Methods": "OPTIONS,GET,POST,DELETE,PUT",

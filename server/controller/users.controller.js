@@ -3,24 +3,61 @@ const models = require("../models");
 const { usersService } = require("../service");
 
 const router = new Router();
-
-// 查询所有用户列表分页
 /**
- * @api {get} /users getUsers
- * @apiName getUsers
- * @apiGroup users
- * 
- * @apiSuccess {Object} users list
- * @apiSuccessExample Success-Response:
- * ```javascript
+ * @apiDefine 400And404
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
  *  {
- *    rows:[],
- *    total: 0,
- *    p: 1,
- *    p_size: 10
+ *    code: 10404,
+ *    msg: '该用户不存在!',
+ *    data: []
  *  }
- * ```
- * 
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10400,
+ *    msg: '请求参数错误!',
+ *    data: []
+ *  }
+ */
+
+/**
+ * @api {get} /users getUsersList
+ * @apiName getUsersList
+ * @apiGroup users
+ *
+ * @apiUse commonRequestParams
+ * @apiUse commonRequestExample
+ * @apiUse commonResponseParams
+ *
+ * @apiSuccessExample Success-Response-1:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data:{
+ *      p: 1,
+ *      p_size: 10,
+ *      total: 30,
+ *      rows:[
+ *        {id: 1, name: '张三', username: 'zhangsan', ...},
+ *        ...
+ *      ]
+ *    }
+ *  }
+ * @apiSuccessExample Success-Response-2:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data:[
+ *      {id: 1, name: '张三', username: 'zhangsan', ...},
+ *      ...
+ *    ]
+ *  }
+ *
+ * @apiSampleRequest http://localhost:9999/api/users
+ * @apiVersion 0.1.0
  */
 router.get("/", async (ctx, next) => {
   let { logUtils, resData, dbQuery } = ctx;
@@ -38,8 +75,8 @@ router.get("/", async (ctx, next) => {
     } else {
       resData.data = {
         total: result.count,
-        p: dbQuery.p,
-        p_size: dbQuery.p_size,
+        p: +dbQuery.p,
+        p_size: +dbQuery.p_size,
         rows: result.rows
       };
     }
@@ -49,7 +86,31 @@ router.get("/", async (ctx, next) => {
     ctx.status = 500;
   }
 });
-// 获取指定用户信息
+/**
+ * @api {get} /users/:id getUserById
+ * @apiName getUserById
+ * @apiGroup users
+ *
+ * @apiParam {Number} id user id
+ * @apiSuccess {Number} [code=10200] 状态码
+ * @apiSuccess {String} [msg='操作成功'] 提示信息
+ * @apiSuccess {Object} [data] 结果
+ * @apiSuccessExample Success-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data: {
+ *      id: 1,
+ *      name: '张三',
+ *      username: 'zhangsan',
+ *      ...
+ *    }
+ *  }
+ * @apiUse 400And404
+ * @apiSampleRequest http://localhost:9999/api/users/:id
+ * @apiVersion 0.1.0
+ */
 router.get("/:id", async (ctx, next) => {
   await next();
   let {
@@ -75,7 +136,56 @@ router.get("/:id", async (ctx, next) => {
     ctx.status = 500;
   }
 });
-// 添加新用户
+/**
+ * @api {post} /users addUser
+ * @apiName addUser
+ * @apiGroup users
+ *
+ * @apiParam {String} name 姓名
+ * @apiParam {String} username 登陆用户名
+ * @apiParam {String} password 登陆密码
+ * @apiParam {Number} [sex] 性别 1->男，0->女
+ * @apiParam {String} [address] 地址
+ * @apiParam {String} [telephone] 电话
+ * @apiParam {String} [department] 部门
+ * @apiParam {Array} [role_id] 角色id
+ *
+ * @apiParamExample {json} Request-Example:
+ *  {
+ *    name: '张三'
+ *    username: 'zhangsan',
+ *    password: '123456',
+ *    sex: 1,
+ *    address: '北京市朝阳区朝阳路1号',
+ *    telephone: '13112345678',
+ *    department: '系统部',
+ *    role_id: [1, 2]
+ *  }
+ * @apiSuccess {Number} [code=10200] 状态码
+ * @apiSuccess {String} [msg='操作成功'] 提示信息
+ * @apiSuccess {Object} [result] 结果
+ * @apiSuccessExample Success-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data:{
+ *      id: 1,
+ *      name: '张三',
+ *      username: 'zhangsan',
+ *      ...
+ *    }
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10403,
+ *    msg: '该登陆用户名已存在!',
+ *    data: []
+ *  }
+ * @apiSampleRequest http://localhost:9999/api/users/:id
+ * @apiVersion 0.1.0
+ */
 router.post("/", async (ctx, next) => {
   await next();
   let { logUtils, resData } = ctx;
@@ -92,7 +202,52 @@ router.post("/", async (ctx, next) => {
     logUtils.logError(ctx, error);
   }
 });
-// 更新指定用户信息
+/**
+ * @api {put} /users/:id updateUser
+ * @apiName updateUser
+ * @apiGroup users
+ *
+ * @apiParam {Number} id user id
+ * @apiParam {String} name 姓名
+ * @apiParam {String} username 登陆用户名
+ * @apiParam {String} password 登陆密码
+ * @apiParam {Number} [sex] 性别 1->男，0->女
+ * @apiParam {String} [address] 地址
+ * @apiParam {String} [telephone] 电话
+ * @apiParam {String} [department] 部门
+ * @apiParam {Array} [role_id] 角色id
+ *
+ * @apiParamExample {json} Request-Example:
+ *  {
+ *    id: 1
+ *    name: '张三'
+ *    username: 'zhangsan',
+ *    password: '123456',
+ *    sex: 1,
+ *    address: '北京市朝阳区朝阳路1号',
+ *    telephone: '13112345678',
+ *    department: '系统部',
+ *    role_id: [1, 2]
+ *  }
+ * @apiSuccess {Number} [code=10200] 状态码
+ * @apiSuccess {String} [msg='操作成功'] 提示信息
+ * @apiSuccess {Object} [result] 结果
+ * @apiSuccessExample Success-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data:{
+ *      id: 1,
+ *      name: '张三',
+ *      username: 'zhangsan',
+ *      ...
+ *    }
+ *  }
+ * @apiUse 400And404
+ * @apiSampleRequest http://localhost:9999/api/users/:id
+ * @apiVersion 0.1.0
+ */
 router.put("/:id", async (ctx, next) => {
   await next();
   let {
@@ -118,7 +273,32 @@ router.put("/:id", async (ctx, next) => {
     ctx.status = 500;
   }
 });
-// 删除指定用户
+/**
+ * @api {delete} /users/:id deleteUser
+ * @apiName deleteUser
+ * @apiGroup users
+ *
+ * @apiParam {Number} id user id
+ *
+ * @apiSuccess {Number} [code=10200] 状态码
+ * @apiSuccess {String} [msg='操作成功'] 提示信息
+ * @apiSuccess {Object} [result] 结果
+ * @apiSuccessExample Success-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data:{
+ *      id: 1,
+ *      name: '张三',
+ *      username: 'zhangsan',
+ *      ...
+ *    }
+ *  }
+ * @apiUse 400And404
+ * @apiSampleRequest http://localhost:9999/api/users/:id
+ * @apiVersion 0.1.0
+ */
 router.delete("/:id", async (ctx, next) => {
   await next();
   let {

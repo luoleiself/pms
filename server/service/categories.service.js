@@ -29,11 +29,15 @@ exports = module.exports = {
   // 按条件查询全部分类不分页
   async findAllByParams(ctx, models) {
     let { dbQuery, Op } = ctx;
-    return await models.categories.findAll({
-      where: { status: { [Op.in]: dbQuery.status }, name: { [Op.substring]: dbQuery.keys } },
+    let query = {
+      where: { status: { [Op.in]: dbQuery.status } },
       order: [dbQuery.orderBy.split(",")],
       attributes: this.attributes
-    });
+    };
+    if (dbQuery.keys) {
+      query.where.name = { [Op.substring]: dbQuery.keys };
+    }
+    return await models.categories.findAll(query);
   },
   async findById(ctx, models) {
     let id = Number(ctx.params.id);
@@ -65,7 +69,7 @@ exports = module.exports = {
     } = ctx;
     let categories = await this.findById(ctx, models);
     if (!categories) {
-      return { code: 0, msg: "该分类不存在!" };
+      return null;
     }
 
     categories.name = body.name;
