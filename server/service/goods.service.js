@@ -40,11 +40,15 @@ exports = module.exports = {
   // 按条件查询全部不分页
   async findAllByParams(ctx, models) {
     let { dbQuery, Op } = ctx;
-    return await models.goods.findAll({
-      where: { status: { [Op.in]: dbQuery.status }, keys: { [Op.substring]: dbQuery.keys } },
+    let query = {
+      where: { status: { [Op.in]: dbQuery.status } },
       attributes: this.attributes,
       include: [{ model: models.brands, include: { model: models.manufactors } }, models.categories]
-    });
+    };
+    if (dbQuery.keys) {
+      query.where.keys = { [Op.substring]: dbQuery.keys };
+    }
+    return await models.goods.findAll(query);
   },
   async findById(ctx, models) {
     let id = Number(ctx.params.id);
@@ -79,7 +83,7 @@ exports = module.exports = {
     } = ctx;
     let goods = await this.findById(ctx, models);
     if (!goods) {
-      return { code: 0, msg: "该商品不存在!" };
+      return null;
     }
 
     goods.name = body.name;

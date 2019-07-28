@@ -16,9 +16,13 @@ exports = module.exports = {
   },
   async findAllByParams(ctx, models) {
     let { dbQuery, Op } = ctx;
-    return await models.roles.findAll({
-      where: { status: { [Op.in]: dbQuery.status }, name: { [Op.substring]: dbQuery.keys } },
+    let query = {
+      where: { status: { [Op.in]: dbQuery.status } },
       attributes: this.attributes
-    });
+    };
+    if (dbQuery.keys) {
+      query.where.name = { [Op.substring]: dbQuery.keys };
+    }
+    return await models.roles.findAll(query);
   }
 };

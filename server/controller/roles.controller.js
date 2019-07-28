@@ -3,8 +3,44 @@ const models = require("../models");
 const { rolesService } = require("../service");
 
 const router = new Router();
-
-// 查询所有角色列表
+/**
+ * @api {get} /roles getRolesList
+ * @apiName getRolesList
+ * @apiGroup roles
+ *
+ * @apiUse commonRequestParams
+ * @apiUse commonRequestExample
+ * @apiUse commonResponseParams
+ *
+ * @apiSuccessExample Success-Response-1:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data:{
+ *      p: 1,
+ *      p_size: 10,
+ *      total: 30,
+ *      rows:[
+ *        { id: 1, name: '角色名称', desc: '角色描述', ... },
+ *        ...
+ *      ]
+ *    }
+ *  }
+ * @apiSuccessExample Success-Response-2:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data:[
+ *      { id: 1, name: '角色名称', desc: '角色描述', ... },
+ *      ...
+ *    ]
+ *  }
+ *
+ * @apiSampleRequest http://localhost:9999/api/roles
+ * @apiVersion 0.1.0
+ */
 router.get("/", async (ctx, next) => {
   let { logUtils, resData, dbQuery } = ctx;
   await next();

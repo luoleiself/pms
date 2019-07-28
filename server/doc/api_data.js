@@ -866,6 +866,498 @@ define({ "api": [
   },
   {
     "type": "post",
+    "url": "/goods",
+    "title": "addGoods",
+    "name": "addGoods",
+    "group": "goods",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>商品名称</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "keys",
+            "description": "<p>商品关键字</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "desc",
+            "description": "<p>商品描述</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "category_id",
+            "description": "<p>分类id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "brand_id",
+            "description": "<p>品牌id</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  name: '商品名称',\n  desc: '商品描述'，\n  keys: '商品关键字',\n  category_id: 1,\n  brand_id: 1,\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response-1:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data: { id: 1, name: '商品名称', keys: '商品关键字', ... },\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10404,\n  msg: '该商品名称已存在!',\n  data: []\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10400,\n  msg: '请求参数错误!',\n  data: []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:9999/api/goods"
+      }
+    ],
+    "version": "0.1.0",
+    "filename": "server/controller/goods.controller.js",
+    "groupTitle": "goods"
+  },
+  {
+    "type": "delete",
+    "url": "/goods/:id",
+    "title": "deleteGoods",
+    "name": "deleteGoods",
+    "group": "goods",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>商品id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response-1:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data: { id: 1, name: '商品名称', desc: '商品描述', ... },\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10404,\n  msg: '该商品不存在!',\n  data: []\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10400,\n  msg: '请求参数错误!',\n  data: []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:9999/api/goods/:id"
+      }
+    ],
+    "version": "0.1.0",
+    "filename": "server/controller/goods.controller.js",
+    "groupTitle": "goods"
+  },
+  {
+    "type": "get",
+    "url": "/goods/:id",
+    "title": "getBoodsById",
+    "name": "getBoodsById",
+    "group": "goods",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>goods id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response-1:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data: { id: 1, name: '商品名称', keys: '商品关键字', ... },\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10404,\n  msg: '未查询到该商品信息!',\n  data: []\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10400,\n  msg: '请求参数错误!',\n  data: []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:9999/api/goods/:id"
+      }
+    ],
+    "version": "0.1.0",
+    "filename": "server/controller/goods.controller.js",
+    "groupTitle": "goods"
+  },
+  {
+    "type": "get",
+    "url": "/brands",
+    "title": "getGoodsList",
+    "name": "getGoodsList",
+    "group": "goods",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "category_id",
+            "description": "<p>分类id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "brand_id",
+            "description": "<p>品牌id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "p",
+            "description": "<p>页码</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "p_size",
+            "description": "<p>每页条数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "status",
+            "description": "<p>状态 1-&gt;启用,0-&gt;禁用</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "keys",
+            "description": "<p>查询关键字</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example-1:",
+          "content": "{\n  p: 1,\n  p_size: 10,\n  status: 1,\n  keys: 'example'\n}",
+          "type": "json"
+        },
+        {
+          "title": "Request-Example-2:",
+          "content": "{\n  status: 1,\n  keys: 'example'\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response-1:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data:{\n    p: 1,\n    p_size: 10,\n    total: 30,\n    rows:[\n      { id: 1, name: '商品名称', keys: '商品关键字', ... },\n      ...\n    ]\n  }\n}",
+          "type": "json"
+        },
+        {
+          "title": "Success-Response-2:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data:[\n    { id: 1, name: '商品名称', keys: '商品关键字', ... },\n    ...\n  ]\n}",
+          "type": "json"
+        }
+      ],
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": true,
+            "field": "code",
+            "defaultValue": "10200",
+            "description": "<p>状态码</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": true,
+            "field": "msg",
+            "defaultValue": "操作成功",
+            "description": "<p>提示信息</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": true,
+            "field": "p",
+            "description": "<p>当前页码</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": true,
+            "field": "p_size",
+            "description": "<p>当前每页条数</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": true,
+            "field": "total",
+            "description": "<p>查询结果总条数</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "optional": true,
+            "field": "rows",
+            "description": "<p>结果集</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:9999/api/goods"
+      }
+    ],
+    "version": "0.1.0",
+    "filename": "server/controller/goods.controller.js",
+    "groupTitle": "goods"
+  },
+  {
+    "type": "put",
+    "url": "/goods/:id",
+    "title": "updateGoods",
+    "name": "updateGoods",
+    "group": "goods",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>商品id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>商品名称</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "desc",
+            "description": "<p>商品描述</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "keys",
+            "description": "<p>商品关键字</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "category_id",
+            "description": "<p>分类id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "brand_id",
+            "description": "<p>品牌id</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  id: 1\n  name: '商品名称',\n  desc: '商品描述'，\n  keys: '商品关键字',\n  category_id: 1,\n  brand_id: 1,\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response-1:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data: { id: 1, name: '商品名称', desc: '商品描述', ... },\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10404,\n  msg: '该商品不存在!',\n  data: []\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10400,\n  msg: '请求参数错误!',\n  data: []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:9999/api/goods/:id"
+      }
+    ],
+    "version": "0.1.0",
+    "filename": "server/controller/goods.controller.js",
+    "groupTitle": "goods"
+  },
+  {
+    "type": "post",
+    "url": "/login",
+    "title": "login",
+    "name": "login",
+    "group": "login",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "username",
+            "description": "<p>用户名</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>密码</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example",
+          "content": "{\n   username: 'zhangsan',\n   password: 'ejyff8dagdsa8987f7das798gda789'\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response-1:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data: { id: 1, name: '用户姓名', username: '登录用户名', password:'', ... },\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10400,\n  msg: '密码错误!',\n  data: []\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10401,\n  msg: '用户状态未启用!',\n  data: []\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10404,\n  msg: '该用户名不存在!',\n  data: []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:9999/api/login"
+      }
+    ],
+    "version": "0.1.0",
+    "filename": "server/controller/login.controller.js",
+    "groupTitle": "login"
+  },
+  {
+    "type": "delete",
+    "url": "/login",
+    "title": "logout",
+    "name": "logout",
+    "group": "login",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response-1:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data: { id: 1, name: '用户姓名', username: '登录用户名', password:'', ... },\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:9999/api/login"
+      }
+    ],
+    "version": "0.1.0",
+    "filename": "server/controller/login.controller.js",
+    "groupTitle": "login"
+  },
+  {
+    "type": "post",
     "url": "/manufactors",
     "title": "addManufactors",
     "name": "addManufactors",
@@ -1279,6 +1771,129 @@ define({ "api": [
     "version": "0.1.0",
     "filename": "server/controller/manufactors.controller.js",
     "groupTitle": "manufactors"
+  },
+  {
+    "type": "get",
+    "url": "/roles",
+    "title": "getRolesList",
+    "name": "getRolesList",
+    "group": "roles",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response-1:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data:{\n    p: 1,\n    p_size: 10,\n    total: 30,\n    rows:[\n      { id: 1, name: '角色名称', desc: '角色描述', ... },\n      ...\n    ]\n  }\n}",
+          "type": "json"
+        },
+        {
+          "title": "Success-Response-2:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data:[\n    { id: 1, name: '角色名称', desc: '角色描述', ... },\n    ...\n  ]\n}",
+          "type": "json"
+        }
+      ],
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": true,
+            "field": "code",
+            "defaultValue": "10200",
+            "description": "<p>状态码</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": true,
+            "field": "msg",
+            "defaultValue": "操作成功",
+            "description": "<p>提示信息</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": true,
+            "field": "p",
+            "description": "<p>当前页码</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": true,
+            "field": "p_size",
+            "description": "<p>当前每页条数</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": true,
+            "field": "total",
+            "description": "<p>查询结果总条数</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "optional": true,
+            "field": "rows",
+            "description": "<p>结果集</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:9999/api/roles"
+      }
+    ],
+    "version": "0.1.0",
+    "filename": "server/controller/roles.controller.js",
+    "groupTitle": "roles",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "p",
+            "description": "<p>页码</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "p_size",
+            "description": "<p>每页条数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "status",
+            "description": "<p>状态 1-&gt;启用,0-&gt;禁用</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "keys",
+            "description": "<p>查询关键字</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example-1:",
+          "content": "{\n  p: 1,\n  p_size: 10,\n  status: 1,\n  keys: 'example'\n}",
+          "type": "json"
+        },
+        {
+          "title": "Request-Example-2:",
+          "content": "{\n  status: 1,\n  keys: 'example'\n}",
+          "type": "json"
+        }
+      ]
+    }
   },
   {
     "type": "post",

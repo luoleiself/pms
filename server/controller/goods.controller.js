@@ -3,7 +3,46 @@ const models = require("../models");
 const { goodsService } = require("../service");
 
 const router = new Router();
-// 查询所有商品列表分页
+/**
+ * @api {get} /brands getGoodsList
+ * @apiName getGoodsList
+ * @apiGroup goods
+ *
+ * @apiParam {Number} [category_id] 分类id
+ * @apiParam {Number} [brand_id] 品牌id
+ * @apiUse commonRequestParams
+ * @apiUse commonRequestExample
+ * @apiUse commonResponseParams
+ *
+ * @apiSuccessExample Success-Response-1:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data:{
+ *      p: 1,
+ *      p_size: 10,
+ *      total: 30,
+ *      rows:[
+ *        { id: 1, name: '商品名称', keys: '商品关键字', ... },
+ *        ...
+ *      ]
+ *    }
+ *  }
+ * @apiSuccessExample Success-Response-2:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data:[
+ *      { id: 1, name: '商品名称', keys: '商品关键字', ... },
+ *      ...
+ *    ]
+ *  }
+ *
+ * @apiSampleRequest http://localhost:9999/api/goods
+ * @apiVersion 0.1.0
+ */
 router.get("/", async (ctx, next) => {
   await next();
   let { logUtils, resData, dbQuery } = ctx;
@@ -31,7 +70,36 @@ router.get("/", async (ctx, next) => {
     ctx.status = 500;
   }
 });
-// 获取指定商品
+/**
+ * @api {get} /goods/:id getBoodsById
+ * @apiName getBoodsById
+ * @apiGroup goods
+ *
+ * @apiParam {Number} id goods id
+ * @apiSuccessExample Success-Response-1:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data: { id: 1, name: '商品名称', keys: '商品关键字', ... },
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10404,
+ *    msg: '未查询到该商品信息!',
+ *    data: []
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10400,
+ *    msg: '请求参数错误!',
+ *    data: []
+ *  }
+ * @apiSampleRequest http://localhost:9999/api/goods/:id
+ * @apiVersion 0.1.0
+ */
 router.get("/:id", async (ctx, next) => {
   await next();
   let {
@@ -57,7 +125,49 @@ router.get("/:id", async (ctx, next) => {
     ctx.status = 500;
   }
 });
-// 添加商品
+/**
+ * @api {post} /goods addGoods
+ * @apiName addGoods
+ * @apiGroup goods
+ *
+ * @apiParam {String} name 商品名称
+ * @apiParam {String} [keys] 商品关键字
+ * @apiParam {String} [desc] 商品描述
+ * @apiParam {Number} category_id 分类id
+ * @apiParam {Number} brand_id 品牌id
+ *
+ * @apiParamExample {json} Request-Example:
+ *  {
+ *    name: '商品名称',
+ *    desc: '商品描述'，
+ *    keys: '商品关键字',
+ *    category_id: 1,
+ *    brand_id: 1,
+ *  }
+ * @apiSuccessExample Success-Response-1:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data: { id: 1, name: '商品名称', keys: '商品关键字', ... },
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10404,
+ *    msg: '该商品名称已存在!',
+ *    data: []
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10400,
+ *    msg: '请求参数错误!',
+ *    data: []
+ *  }
+ * @apiSampleRequest http://localhost:9999/api/goods
+ * @apiVersion 0.1.0
+ */
 router.post("/", async (ctx, next) => {
   await next();
   let { logUtils, resData } = ctx;
@@ -75,7 +185,51 @@ router.post("/", async (ctx, next) => {
     ctx.status = 500;
   }
 });
-// 更新指定商品信息
+/**
+ * @api {put} /goods/:id updateGoods
+ * @apiName updateGoods
+ * @apiGroup goods
+ *
+ * @apiParam {Number} id 商品id
+ * @apiParam {String} name 商品名称
+ * @apiParam {String} [desc] 商品描述
+ * @apiParam {String} [keys] 商品关键字
+ * @apiParam {Number} category_id 分类id
+ * @apiParam {Number} brand_id 品牌id
+ *
+ * @apiParamExample {json} Request-Example:
+ *  {
+ *    id: 1
+ *    name: '商品名称',
+ *    desc: '商品描述'，
+ *    keys: '商品关键字',
+ *    category_id: 1,
+ *    brand_id: 1,
+ *  }
+ * @apiSuccessExample Success-Response-1:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data: { id: 1, name: '商品名称', desc: '商品描述', ... },
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10404,
+ *    msg: '该商品不存在!',
+ *    data: []
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10400,
+ *    msg: '请求参数错误!',
+ *    data: []
+ *  }
+ * @apiSampleRequest http://localhost:9999/api/goods/:id
+ * @apiVersion 0.1.0
+ */
 router.put("/:id", async (ctx, next) => {
   await next();
   let {
@@ -89,8 +243,8 @@ router.put("/:id", async (ctx, next) => {
   }
   try {
     let result = await goodsService.update(ctx, models);
-    if (result.code == 0) {
-      resData.msg = result.msg;
+    if (!result) {
+      resData.msg = "该商品不存在!";
       resData.code = 10404;
     } else {
       resData.data = result;
@@ -101,7 +255,36 @@ router.put("/:id", async (ctx, next) => {
     ctx.status = 500;
   }
 });
-// 删除指定商品
+/**
+ * @api {delete} /goods/:id deleteGoods
+ * @apiName deleteGoods
+ * @apiGroup goods
+ *
+ * @apiParam {Number} id 商品id
+ * @apiSuccessExample Success-Response-1:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data: { id: 1, name: '商品名称', desc: '商品描述', ... },
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10404,
+ *    msg: '该商品不存在!',
+ *    data: []
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10400,
+ *    msg: '请求参数错误!',
+ *    data: []
+ *  }
+ * @apiSampleRequest http://localhost:9999/api/goods/:id
+ * @apiVersion 0.1.0
+ */
 router.delete("/:id", async (ctx, next) => {
   await next();
   let {

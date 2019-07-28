@@ -3,7 +3,49 @@ const models = require("../models");
 const { usersService } = require("../service");
 
 const router = new Router();
-// 用户登陆
+/**
+ * @api {post} /login login
+ * @apiName login
+ * @apiGroup login
+ *
+ * @apiParam {String} username 用户名
+ * @apiParam {String} password 密码
+ * @apiParamExample {json} Request-Example
+ * {
+ *    username: 'zhangsan',
+ *    password: 'ejyff8dagdsa8987f7das798gda789'
+ * } 
+ * @apiSuccessExample Success-Response-1:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data: { id: 1, name: '用户姓名', username: '登录用户名', password:'', ... },
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10400,
+ *    msg: '密码错误!',
+ *    data: []
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10401,
+ *    msg: '用户状态未启用!',
+ *    data: []
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10404,
+ *    msg: '该用户名不存在!',
+ *    data: []
+ *  }
+ * @apiSampleRequest http://localhost:9999/api/login
+ * @apiVersion 0.1.0
+ */
 router.post("/", async (ctx, next) => {
   await next();
   let { logUtils, resData, jwt } = ctx;
@@ -38,7 +80,21 @@ router.post("/", async (ctx, next) => {
     ctx.status = 500;
   }
 });
-// 用户退出登陆
+/**
+ * @api {delete} /login logout
+ * @apiName logout
+ * @apiGroup login
+ *
+ * @apiSuccessExample Success-Response-1:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data: { id: 1, name: '用户姓名', username: '登录用户名', password:'', ... },
+ *  }
+ * @apiSampleRequest http://localhost:9999/api/login
+ * @apiVersion 0.1.0
+ */
 router.delete("/", async (ctx, next) => {
   await next();
   let { logUtils, resData } = ctx;
