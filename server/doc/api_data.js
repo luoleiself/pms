@@ -1773,6 +1773,358 @@ define({ "api": [
     "groupTitle": "manufactors"
   },
   {
+    "type": "post",
+    "url": "/purchase",
+    "title": "addPurchase",
+    "name": "addPurchase",
+    "group": "purchase",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "goods_id",
+            "description": "<p>goods id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "price",
+            "description": "<p>单价</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "amount",
+            "description": "<p>数量</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example",
+          "content": "{\n   goods_id: 1,\n   price: '',\n   amount: ''\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response-1:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data: { id: 1, price: '单价', amount: '数量', ... },\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:9999/api/purchase"
+      }
+    ],
+    "version": "0.1.0",
+    "filename": "server/controller/purchase.controller.js",
+    "groupTitle": "purchase"
+  },
+  {
+    "type": "delete",
+    "url": "/purchase/:id",
+    "title": "deletePurchase",
+    "name": "deletePurchase",
+    "group": "purchase",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>purchase id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response-1:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data: { id: 1, price: '单价', amount: '数量', ... },\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10404,\n  msg: '该采购信息不存在!',\n  data: []\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10400,\n  msg: '请求参数错误!',\n  data: []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:9999/api/purchase/:id"
+      }
+    ],
+    "version": "0.1.0",
+    "filename": "server/controller/purchase.controller.js",
+    "groupTitle": "purchase"
+  },
+  {
+    "type": "get",
+    "url": "/purchase/:id",
+    "title": "getPurchaseById",
+    "name": "getPurchaseById",
+    "group": "purchase",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>purchase id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response-1:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data: { id: 1, price: '单价', amount: '数量', ... },\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10404,\n  msg: '未查询到该采购信息!',\n  data: []\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10400,\n  msg: '请求参数错误!',\n  data: []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:9999/api/purchase/:id"
+      }
+    ],
+    "version": "0.1.0",
+    "filename": "server/controller/purchase.controller.js",
+    "groupTitle": "purchase"
+  },
+  {
+    "type": "get",
+    "url": "/purchase",
+    "title": "getPurchaseList",
+    "name": "getPurchaseList",
+    "group": "purchase",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "p",
+            "description": "<p>页码</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "p_size",
+            "description": "<p>每页条数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "start_time",
+            "description": "<p>开始时间,日期时间戳秒数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "end_time",
+            "description": "<p>结束时间,日期时间戳秒数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "goods_id",
+            "description": "<p>商品id</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example",
+          "content": "{\n   P: 1,\n   p_size: 10,\n   start_time: 1564395476,\n   end_time: 1564395476,\n   goods_id: 1,\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response-1:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data:{\n    p: 1,\n    p_size: 10,\n    total: 30,\n    rows:[\n      { id: 1, price: '单价', amount: '数量', ... },\n      ...\n    ]\n  }\n}",
+          "type": "json"
+        },
+        {
+          "title": "Success-Response-2:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data:[\n    { id: 1, price: '单价', amount: '数量', ... },\n    ...\n  ]\n}",
+          "type": "json"
+        }
+      ],
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": true,
+            "field": "code",
+            "defaultValue": "10200",
+            "description": "<p>状态码</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": true,
+            "field": "msg",
+            "defaultValue": "操作成功",
+            "description": "<p>提示信息</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": true,
+            "field": "p",
+            "description": "<p>当前页码</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": true,
+            "field": "p_size",
+            "description": "<p>当前每页条数</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": true,
+            "field": "total",
+            "description": "<p>查询结果总条数</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "optional": true,
+            "field": "rows",
+            "description": "<p>结果集</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:9999/api/purchase"
+      }
+    ],
+    "version": "0.1.0",
+    "filename": "server/controller/purchase.controller.js",
+    "groupTitle": "purchase"
+  },
+  {
+    "type": "put",
+    "url": "/purchase/:id",
+    "title": "updatePurchase",
+    "name": "updatePurchase",
+    "group": "purchase",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>purchase id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "goods_id",
+            "description": "<p>goods id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "price",
+            "description": "<p>单价</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "amount",
+            "description": "<p>数量</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example",
+          "content": "{\n   goods_id: 1,\n   price: '',\n   amount: ''\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response-1:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data: { id: 1, price: '单价', amount: '数量', ... },\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10404,\n  msg: '该采购信息不存在!',\n  data: []\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10400,\n  msg: '请求参数错误!',\n  data: []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:9999/api/purchase/:id"
+      }
+    ],
+    "version": "0.1.0",
+    "filename": "server/controller/purchase.controller.js",
+    "groupTitle": "purchase"
+  },
+  {
     "type": "get",
     "url": "/roles",
     "title": "getRolesList",
@@ -1894,6 +2246,372 @@ define({ "api": [
         }
       ]
     }
+  },
+  {
+    "type": "post",
+    "url": "/sales",
+    "title": "addSales",
+    "name": "addSales",
+    "group": "sales",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "goods_id",
+            "description": "<p>goods id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "price",
+            "description": "<p>单价</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "amount",
+            "description": "<p>数量</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example",
+          "content": "{\n   goods_id: 1,\n   price: '',\n   amount: ''\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data: { id: 1, price: '单价', amount: '数量', ... },\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10400,\n  msg: '销售数量不能大于库存数量',\n  data: [],\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:9999/api/sales"
+      }
+    ],
+    "version": "0.1.0",
+    "filename": "server/controller/sales.controller.js",
+    "groupTitle": "sales"
+  },
+  {
+    "type": "delete",
+    "url": "/sales/:id",
+    "title": "deleteSales",
+    "name": "deleteSales",
+    "group": "sales",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>sales id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response-1:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data: { id: 1, price: '单价', amount: '数量', ... },\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10404,\n  msg: '该销售信息不存在!',\n  data: []\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10400,\n  msg: '请求参数错误!',\n  data: []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:9999/api/sales/:id"
+      }
+    ],
+    "version": "0.1.0",
+    "filename": "server/controller/sales.controller.js",
+    "groupTitle": "sales"
+  },
+  {
+    "type": "get",
+    "url": "/sales/:id",
+    "title": "getSalesById",
+    "name": "getSalesById",
+    "group": "sales",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>sales id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response-1:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data: { id: 1, price: '单价', amount: '数量', ... },\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10404,\n  msg: '未查询到该销售信息!',\n  data: []\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10400,\n  msg: '请求参数错误!',\n  data: []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:9999/api/sales/:id"
+      }
+    ],
+    "version": "0.1.0",
+    "filename": "server/controller/sales.controller.js",
+    "groupTitle": "sales"
+  },
+  {
+    "type": "get",
+    "url": "/sales",
+    "title": "getSalesList",
+    "name": "getSalesList",
+    "group": "sales",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "p",
+            "description": "<p>页码</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "p_size",
+            "description": "<p>每页条数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "start_time",
+            "description": "<p>开始时间,日期时间戳秒数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "end_time",
+            "description": "<p>结束时间,日期时间戳秒数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "goods_id",
+            "description": "<p>商品id</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example",
+          "content": "{\n   P: 1,\n   p_size: 10,\n   start_time: 1564395476,\n   end_time: 1564395476,\n   goods_id: 1,\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response-1:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data:{\n    p: 1,\n    p_size: 10,\n    total: 30,\n    rows:[\n      { id: 1, price: '单价', amount: '数量', ... },\n      ...\n    ]\n  }\n}",
+          "type": "json"
+        },
+        {
+          "title": "Success-Response-2:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data:[\n    { id: 1, price: '单价', amount: '数量', ... },\n    ...\n  ]\n}",
+          "type": "json"
+        }
+      ],
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": true,
+            "field": "code",
+            "defaultValue": "10200",
+            "description": "<p>状态码</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": true,
+            "field": "msg",
+            "defaultValue": "操作成功",
+            "description": "<p>提示信息</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": true,
+            "field": "p",
+            "description": "<p>当前页码</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": true,
+            "field": "p_size",
+            "description": "<p>当前每页条数</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": true,
+            "field": "total",
+            "description": "<p>查询结果总条数</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "optional": true,
+            "field": "rows",
+            "description": "<p>结果集</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:9999/api/sales"
+      }
+    ],
+    "version": "0.1.0",
+    "filename": "server/controller/sales.controller.js",
+    "groupTitle": "sales"
+  },
+  {
+    "type": "put",
+    "url": "/sales/:id",
+    "title": "updateSales",
+    "name": "updateSales",
+    "group": "sales",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>sales id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "goods_id",
+            "description": "<p>goods id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "price",
+            "description": "<p>单价</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "amount",
+            "description": "<p>数量</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example",
+          "content": "{\n   goods_id: 1,\n   price: '',\n   amount: ''\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response-1:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data: { id: 1, price: '单价', amount: '数量', ... },\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10404,\n  msg: '该销售信息不存在!',\n  data: []\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10400,\n  msg: '销售数量不能大于库存数量!',\n  data: []\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10400,\n  msg: '请求参数错误!',\n  data: []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:9999/api/sales/:id"
+      }
+    ],
+    "version": "0.1.0",
+    "filename": "server/controller/sales.controller.js",
+    "groupTitle": "sales"
   },
   {
     "type": "post",

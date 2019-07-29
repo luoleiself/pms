@@ -10,7 +10,7 @@ export const dataMixin = {
       pageOptions: {
         total: 0,
         currentPage: 1,
-        pageSize: 10,
+        pageSize: 20,
         pageSizes: [10, 20, 30, 50, 100, 200, 300],
         layout: "total, sizes, prev, pager, next, jumper"
       }

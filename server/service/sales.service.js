@@ -52,7 +52,7 @@ exports = module.exports = {
     });
     let goods = await models.goods.findOne({ where: { id: body.goods_id } });
     if (body.amount > goods.amount) {
-      return { code: 0, msg: "销售数量不能大于库存数量!" };
+      return null;
     }
     goods.amount -= Number(body.amount);
 
@@ -104,16 +104,13 @@ exports = module.exports = {
   },
   // 按时间范围统计产品销售数量
   async sumSalesAmountByTime(ctx, models) {
-    let { Op, dbQuery } = ctx;
-    let start_time = Math.floor(Date.now() / 1000);
-    let end_time = start_time + 2592000;
+    let { Op } = ctx;
+    let end_time = Math.floor(Date.now() / 1000);
+    let start_time = end_time - 2592000;
     let result = await models.sequelize.query(
-      "SELECT id,price,goods_id,SUM(amount) AS total,create_time,update_time FROM sales WHERE create_time >= :start_time AND create_time <= :end_time GROUP BY goods_id",
+      "SELECT id,price,goods_id,SUM(amount) AS total,create_time,update_time FROM sales WHERE create_time >= :start_time AND create_time <= :end_time GROUP BY goods_id LIMIT 10",
       {
-        replacements: {
-          start_time: dbQuery.start_time || start_time,
-          end_time: dbQuery.end_time || end_time
-        },
+        replacements: { start_time, end_time },
         type: models.sequelize.QueryTypes.SELECT,
         raw: true
       }

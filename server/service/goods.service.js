@@ -27,7 +27,7 @@ exports = module.exports = {
       ]
     };
     if (dbQuery.keys) {
-      query.where.keys = { [Op.substring]: dbQuery.keys };
+      query.where.name = { [Op.substring]: dbQuery.keys };
     }
     if (dbQuery.category_id) {
       query.where.category_id = dbQuery.category_id;
@@ -46,7 +46,7 @@ exports = module.exports = {
       include: [{ model: models.brands, include: { model: models.manufactors } }, models.categories]
     };
     if (dbQuery.keys) {
-      query.where.keys = { [Op.substring]: dbQuery.keys };
+      query.where.name = { [Op.substring]: dbQuery.keys };
     }
     return await models.goods.findAll(query);
   },

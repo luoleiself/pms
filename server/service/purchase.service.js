@@ -65,7 +65,7 @@ exports = module.exports = {
     } = ctx;
     let purchase = await this.findById(ctx, models);
     if (!purchase) {
-      return { code: 0, msg: "该采购信息不存在!" };
+      return null;
     }
     let goods = await models.goods.findOne({ where: { id: purchase.goods_id } });
 

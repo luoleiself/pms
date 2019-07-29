@@ -3,7 +3,57 @@ const models = require("../models");
 const { purchaseService } = require("../service");
 
 const router = new Router();
-// 查询所有采购列表分页
+/**
+ * @api {get} /purchase getPurchaseList
+ * @apiName getPurchaseList
+ * @apiGroup purchase
+ *
+ * @apiParam {Number} [p] 页码
+ * @apiParam {Number} [p_size] 每页条数
+ * @apiParam {Number} [start_time] 开始时间,日期时间戳秒数
+ * @apiParam {Number} [end_time] 结束时间,日期时间戳秒数
+ * @apiParam {Number} [goods_id] 商品id
+ *
+ * @apiParamExample {json} Request-Example
+ * {
+ *    P: 1,
+ *    p_size: 10,
+ *    start_time: 1564395476,
+ *    end_time: 1564395476,
+ *    goods_id: 1,
+ * }
+ *
+ * @apiUse commonResponseParams
+ *
+ * @apiSuccessExample Success-Response-1:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data:{
+ *      p: 1,
+ *      p_size: 10,
+ *      total: 30,
+ *      rows:[
+ *        { id: 1, price: '单价', amount: '数量', ... },
+ *        ...
+ *      ]
+ *    }
+ *  }
+ * @apiSuccessExample Success-Response-2:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data:[
+ *      { id: 1, price: '单价', amount: '数量', ... },
+ *      ...
+ *    ]
+ *  }
+ *
+ * @apiSampleRequest http://localhost:9999/api/purchase
+ * @apiVersion 0.1.0
+ */
 router.get("/", async (ctx, next) => {
   await next();
   let { logUtils, resData, dbQuery } = ctx;
@@ -21,7 +71,36 @@ router.get("/", async (ctx, next) => {
     ctx.status = 500;
   }
 });
-// 获取指定采购信息
+/**
+ * @api {get} /purchase/:id getPurchaseById
+ * @apiName getPurchaseById
+ * @apiGroup purchase
+ *
+ * @apiParam {Number} id purchase id
+ * @apiSuccessExample Success-Response-1:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data: { id: 1, price: '单价', amount: '数量', ... },
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10404,
+ *    msg: '未查询到该采购信息!',
+ *    data: []
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10400,
+ *    msg: '请求参数错误!',
+ *    data: []
+ *  }
+ * @apiSampleRequest http://localhost:9999/api/purchase/:id
+ * @apiVersion 0.1.0
+ */
 router.get("/:id", async (ctx, next) => {
   await next();
   let {
@@ -37,7 +116,7 @@ router.get("/:id", async (ctx, next) => {
     let result = await purchaseService.findById(ctx, models);
     if (!result) {
       resData.code = 10404;
-      resData.msg = "未查询到该采购信息";
+      resData.msg = "未查询到该采购信息!";
     } else {
       resData.data = result;
     }
@@ -47,7 +126,31 @@ router.get("/:id", async (ctx, next) => {
     ctx.status = 500;
   }
 });
-// 添加采购信息
+/**
+ * @api {post} /purchase addPurchase
+ * @apiName addPurchase
+ * @apiGroup purchase
+ *
+ * @apiParam {Number} goods_id  goods id
+ * @apiParam {Number} [price] 单价
+ * @apiParam {Number} [amount] 数量
+ * @apiParamExample {json} Request-Example
+ * {
+ *    goods_id: 1,
+ *    price: '',
+ *    amount: ''
+ * }
+ *
+ * @apiSuccessExample Success-Response-1:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data: { id: 1, price: '单价', amount: '数量', ... },
+ *  }
+ * @apiSampleRequest http://localhost:9999/api/purchase
+ * @apiVersion 0.1.0
+ */
 router.post("/", async (ctx, next) => {
   await next();
   let { logUtils, resData } = ctx;
@@ -60,7 +163,46 @@ router.post("/", async (ctx, next) => {
     ctx.status = 500;
   }
 });
-// 更新指定采购信息
+/**
+ * @api {put} /purchase/:id updatePurchase
+ * @apiName updatePurchase
+ * @apiGroup purchase
+ *
+ * @apiParam {Number} id purchase id
+ * @apiParam {Number} goods_id goods id
+ * @apiParam {Number} [price] 单价
+ * @apiParam {Number} [amount] 数量
+ * @apiParamExample {json} Request-Example
+ * {
+ *    goods_id: 1,
+ *    price: '',
+ *    amount: ''
+ * }
+ *
+ * @apiSuccessExample Success-Response-1:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data: { id: 1, price: '单价', amount: '数量', ... },
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10404,
+ *    msg: '该采购信息不存在!',
+ *    data: []
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10400,
+ *    msg: '请求参数错误!',
+ *    data: []
+ *  }
+ * @apiSampleRequest http://localhost:9999/api/purchase/:id
+ * @apiVersion 0.1.0
+ */
 router.put("/:id", async (ctx, next) => {
   await next();
   let {
@@ -74,9 +216,9 @@ router.put("/:id", async (ctx, next) => {
   }
   try {
     let result = await purchaseService.update(ctx, models);
-    if (result.code == 0) {
-      resData.msg = result.msg;
+    if (!result) {
       resData.code = 10404;
+      resData.msg = "该采购信息不存在!";
     } else {
       resData.data = result;
     }
@@ -86,7 +228,37 @@ router.put("/:id", async (ctx, next) => {
     ctx.status = 500;
   }
 });
-// 删除指定采购记录
+/**
+ * @api {delete} /purchase/:id deletePurchase
+ * @apiName deletePurchase
+ * @apiGroup purchase
+ *
+ * @apiParam {Number} id purchase id
+ *
+ * @apiSuccessExample Success-Response-1:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data: { id: 1, price: '单价', amount: '数量', ... },
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10404,
+ *    msg: '该采购信息不存在!',
+ *    data: []
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10400,
+ *    msg: '请求参数错误!',
+ *    data: []
+ *  }
+ * @apiSampleRequest http://localhost:9999/api/purchase/:id
+ * @apiVersion 0.1.0
+ */
 router.delete("/:id", async (ctx, next) => {
   await next();
   let {
