@@ -101,27 +101,5 @@ exports = module.exports = {
     await sales.destroy();
     await goods.save();
     return sales;
-  },
-  // 按时间范围统计产品销售数量
-  async sumSalesAmountByTime(ctx, models) {
-    let { Op } = ctx;
-    let end_time = Math.floor(Date.now() / 1000);
-    let start_time = end_time - 2592000;
-    let result = await models.sequelize.query(
-      "SELECT id,price,goods_id,SUM(amount) AS total,create_time,update_time FROM sales WHERE create_time >= :start_time AND create_time <= :end_time GROUP BY goods_id LIMIT 10",
-      {
-        replacements: { start_time, end_time },
-        type: models.sequelize.QueryTypes.SELECT,
-        raw: true
-      }
-    );
-    let ids = result.map(item => item.goods_id);
-    let goods = await models.goods.findAll({ where: { id: { [Op.in]: ids } } }, { ras: true });
-    goods = JSON.parse(JSON.stringify(goods));
-    result = result.map(item => {
-      let good = goods.find(val => val.id == item.goods_id);
-      return { ...item, goods: good };
-    });
-    return result;
   }
 };
