@@ -46,7 +46,7 @@ exports = module.exports = {
   // 统计各分类下的商品个数
   async statGoodsByCategory(ctx, models) {
     let result = await models.sequelize.query(
-      "SELECT g.category_id,count(c.id) as amount,c.name as category_name,c.desc,c.status,c.create_time,c.update_time,GROUP_CONCAT(g.name) as goods_name FROM goods g LEFT JOIN categories c ON g.category_id = c.id GROUP BY c.id",
+      "SELECT g.category_id,count(c.id) AS amount,c.name AS category_name,c.desc,c.status,c.create_time,c.update_time,GROUP_CONCAT(g.name) AS goods_name FROM goods g LEFT JOIN categories c ON g.category_id = c.id GROUP BY c.id",
       {
         type: models.sequelize.QueryTypes.SELECT,
         raw: true
