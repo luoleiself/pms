@@ -40,6 +40,11 @@ html {
   overflow-y: scroll;
 }
 
+html,body{
+  height: 100%;
+  width: 100%;
+}
+
 :root {
   overflow-y: auto;
   overflow-x: hidden;

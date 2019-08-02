@@ -4,9 +4,9 @@
       <el-col :span="20">
         <ul>
           <li>
-            <img :src="img" alt="">
+            <img :src="img" alt="" :style="{height: '24px', 'vertical-align': 'middle'}">
           </li>
-          <li>
+          <li class="title">
             商品信息管理系统
           </li>
         </ul>
@@ -98,6 +98,9 @@ export default {
   }
   img {
     max-height: 100%;
+  }
+  .title {
+    padding: 0;
   }
 }
 </style>
