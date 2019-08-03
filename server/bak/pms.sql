@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2019-07-30 21:08:05
+Date: 2019-08-03 17:36:04
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -140,25 +140,25 @@ CREATE TABLE `goods` (
 -- ----------------------------
 -- Records of goods
 -- ----------------------------
-INSERT INTO `goods` VALUES ('13', '矿泉水', '矿泉水，矿物质水', '水', '80', '1563540355', '1563774705', '1', '张三', '11', '18');
-INSERT INTO `goods` VALUES ('14', '方便面', '泡面', '油炸型方便面，大份量', '470', '1563541147', null, '1', '张三', '11', '17');
+INSERT INTO `goods` VALUES ('13', '矿泉水', '矿泉水，矿物质水', '水', '30', '1563540355', '1563774705', '1', '张三', '11', '18');
+INSERT INTO `goods` VALUES ('14', '方便面', '泡面', '油炸型方便面，大份量', '320', '1563541147', null, '1', '张三', '11', '17');
 INSERT INTO `goods` VALUES ('15', '火腿肠', '火腿肠，香肠', '生熟都能吃', '895', '1564404198', null, '1', '张三', '14', '24');
 INSERT INTO `goods` VALUES ('16', '油辣子', '辣椒酱，老干妈，鸡肉味，油辣酱', '老干妈牌油辣子', '180', '1564404258', null, '1', '张三', '15', '28');
-INSERT INTO `goods` VALUES ('17', '荣耀20', '超级4摄，荣耀顶级产品', '荣耀旗舰级', '85', '1564404570', null, '1', '张三', '18', '22');
+INSERT INTO `goods` VALUES ('17', '荣耀20', '超级4摄，荣耀顶级产品', '荣耀旗舰级', '71', '1564404570', null, '1', '张三', '18', '22');
 INSERT INTO `goods` VALUES ('18', '小米9', '小米9，米9', '小米', '200', '1564405766', null, '1', '张三', '19', '22');
 INSERT INTO `goods` VALUES ('19', '华为P30', 'p30,P30', '', '43', '1564405860', null, '1', '张三', '17', '22');
-INSERT INTO `goods` VALUES ('20', '干脆面', '干吃面，油炸型', '可直接食用', '100', '1564475955', null, '1', '张三', '11', '17');
-INSERT INTO `goods` VALUES ('21', '鸡精', '调味料', '调味料，鸡精', '300', '1564476022', null, '1', '张三', '15', '20');
-INSERT INTO `goods` VALUES ('22', '苏打水', '苏打水', '苏打水', '500', '1564476088', null, '1', '张三', '11', '18');
+INSERT INTO `goods` VALUES ('20', '干脆面', '干吃面，油炸型', '可直接食用', '300', '1564475955', null, '1', '张三', '11', '17');
+INSERT INTO `goods` VALUES ('21', '鸡精', '调味料', '调味料，鸡精', '250', '1564476022', null, '1', '张三', '15', '20');
+INSERT INTO `goods` VALUES ('22', '苏打水', '苏打水', '苏打水', '400', '1564476088', null, '1', '张三', '11', '18');
 INSERT INTO `goods` VALUES ('23', 'MagicBook', '笔记本,MagicBook,Book,', '荣耀笔记本，', '35', '1564476158', '1564476501', '1', '张三', '18', '25');
-INSERT INTO `goods` VALUES ('24', '红牛', '红牛', '红牛', '140', '1564476255', null, '1', '张三', '12', '23');
-INSERT INTO `goods` VALUES ('25', '冰红茶', '冰红茶', '冰红茶', '0', '1564476282', null, '1', '张三', '12', '26');
-INSERT INTO `goods` VALUES ('26', 'AD钙奶', '娃哈哈，AD钙奶，', '全国畅销', '500', '1564476466', null, '1', '张三', '21', '19');
+INSERT INTO `goods` VALUES ('24', '红牛', '红牛', '红牛', '110', '1564476255', null, '1', '张三', '12', '23');
+INSERT INTO `goods` VALUES ('25', '冰红茶', '冰红茶', '冰红茶', '90', '1564476282', null, '1', '张三', '12', '26');
+INSERT INTO `goods` VALUES ('26', 'AD钙奶', '娃哈哈，AD钙奶，', '全国畅销', '470', '1564476466', null, '1', '张三', '21', '19');
 INSERT INTO `goods` VALUES ('27', '健力宝', '健力宝', '健力宝', '400', '1564476681', null, '1', '张三', '21', '26');
 INSERT INTO `goods` VALUES ('28', '小米笔记本', '小米笔记本，miBook,mi', '小米笔记本', '200', '1564476751', null, '1', '张三', '19', '25');
-INSERT INTO `goods` VALUES ('29', '海天酱油', '酱油，海天', '海天酱油', '60', '1564476864', null, '1', '张三', '22', '20');
+INSERT INTO `goods` VALUES ('29', '海天酱油', '酱油，海天', '海天酱油', '30', '1564476864', null, '1', '张三', '22', '20');
 INSERT INTO `goods` VALUES ('30', '爽歪歪', '爽歪歪', '爽歪歪', '125', '1564476903', null, '1', '张三', '21', '19');
-INSERT INTO `goods` VALUES ('31', 'QQ星', 'QQ星', 'QQ星', '178', '1564476928', null, '1', '张三', '21', '19');
+INSERT INTO `goods` VALUES ('31', 'QQ星', 'QQ星', 'QQ星', '55', '1564476928', null, '1', '张三', '21', '19');
 
 -- ----------------------------
 -- Table structure for manufactors
@@ -209,7 +209,7 @@ CREATE TABLE `purchase` (
   PRIMARY KEY (`id`),
   KEY `goods_id` (`goods_id`),
   CONSTRAINT `purchase_ibfk_1` FOREIGN KEY (`goods_id`) REFERENCES `goods` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of purchase
@@ -233,6 +233,8 @@ INSERT INTO `purchase` VALUES ('16', '2.00', '125', '1564481097', null, '张三'
 INSERT INTO `purchase` VALUES ('17', '2.00', '300', '1564481109', null, '张三', '21');
 INSERT INTO `purchase` VALUES ('18', '2.50', '178', '1564481133', null, '张三', '31');
 INSERT INTO `purchase` VALUES ('19', '5.00', '150', '1564481144', null, '张三', '24');
+INSERT INTO `purchase` VALUES ('20', '2.00', '100', '1564823413', null, '张三', '25');
+INSERT INTO `purchase` VALUES ('21', '1.00', '200', '1564823423', null, '张三', '20');
 
 -- ----------------------------
 -- Table structure for roles
@@ -304,7 +306,7 @@ CREATE TABLE `sales` (
   PRIMARY KEY (`id`),
   KEY `goods_id` (`goods_id`),
   CONSTRAINT `sales_ibfk_1` FOREIGN KEY (`goods_id`) REFERENCES `goods` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sales
@@ -327,6 +329,18 @@ INSERT INTO `sales` VALUES ('15', '4000.00', '5', '1564406035', null, '张三', 
 INSERT INTO `sales` VALUES ('16', '5.00', '50', '1564406058', null, '张三', '15');
 INSERT INTO `sales` VALUES ('17', '5.00', '30', '1564406076', null, '张三', '14');
 INSERT INTO `sales` VALUES ('18', '3.00', '10', '1564481220', null, '张三', '24');
+INSERT INTO `sales` VALUES ('19', '2.00', '10', '1564823435', null, '张三', '25');
+INSERT INTO `sales` VALUES ('20', '5.00', '100', '1564823444', null, '张三', '14');
+INSERT INTO `sales` VALUES ('21', '4000.00', '14', '1564823497', null, '张三', '17');
+INSERT INTO `sales` VALUES ('22', '12.00', '30', '1564823511', null, '张三', '29');
+INSERT INTO `sales` VALUES ('23', '2.50', '100', '1564824144', null, '张三', '31');
+INSERT INTO `sales` VALUES ('24', '2.00', '50', '1564824156', null, '张三', '13');
+INSERT INTO `sales` VALUES ('25', '5.00', '100', '1564824187', null, '张三', '22');
+INSERT INTO `sales` VALUES ('26', '2.00', '50', '1564824216', null, '张三', '14');
+INSERT INTO `sales` VALUES ('27', '2.50', '30', '1564824243', null, '张三', '24');
+INSERT INTO `sales` VALUES ('28', '5.00', '30', '1564824254', null, '张三', '26');
+INSERT INTO `sales` VALUES ('29', '3.00', '23', '1564824272', null, '张三', '31');
+INSERT INTO `sales` VALUES ('30', '2.00', '50', '1564824284', null, '张三', '21');
 
 -- ----------------------------
 -- Table structure for users
