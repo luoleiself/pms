@@ -5,7 +5,7 @@
         <img src="../assets/images/logo.png" alt="">
         <span>商品信息管理系统</span>
       </p>
-      <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+      <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="70px" class="demo-ruleForm">
         <el-form-item label="用户名" prop="username">
           <el-input type="text" v-model="ruleForm.username" autocomplete="off" clearable :style="{width: '280px'}"></el-input>
         </el-form-item>
@@ -13,8 +13,8 @@
           <el-input type="password" v-model="ruleForm.password" autocomplete="off" clearable></el-input>
         </el-form-item>
         <el-form-item>
+          <el-button class="login_btn" type="primary" @click="submitForm('ruleForm')">登陆</el-button>
         </el-form-item>
-          <el-button type="primary" @click="submitForm('ruleForm')">登陆</el-button>
       </el-form>
     </div>
   </div>
@@ -84,7 +84,7 @@ export default {
   width: 100%;
   height: 100%;
   background: url("../assets/images/bg.png") center center no-repeat;
-  background-size: 100%;
+  background-size: 100% 100%;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
@@ -101,22 +101,27 @@ export default {
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
-}
-.login_dialog_title {
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  margin-bottom: 20px;
-  img {
-    display: inline-block;
-    vertical-align: middle;
-    max-width: 50px;
-    max-height: 50px;
-    margin-right: 20px;
+  .login_dialog_title {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    margin-bottom: 20px;
+    img {
+      display: inline-block;
+      vertical-align: middle;
+      max-width: 50px;
+      max-height: 50px;
+      margin-right: 20px;
+    }
+    span {
+      font-size: 18px;
+      color: #409eff;
+    }
   }
-  span {
-    font-size: 18px;
-    color: #009944;
+  .login_btn {
+    width: 280px;
+    font-size: 16px;
+    letter-spacing: 4px;
   }
 }
 </style>

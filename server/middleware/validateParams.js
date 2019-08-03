@@ -28,6 +28,8 @@ exports = module.exports = async (ctx, next) => {
   if (query.p_size) {
     limit = Number(query.p_size);
     offset = Number(query.p) ? (Number(query.p) - 1) * limit : 0 * limit;
+    query.p = query.p ? +query.p : 1;
+    query.p_size = +query.p_size;
   }
 
   if (query.status) {
