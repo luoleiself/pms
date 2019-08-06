@@ -1,3 +1,10 @@
+/*
+ * 数据库
+ * 表结构
+ * 初期设计文件
+ * 不作为数据库导入使用
+ * 
+ */
 # 删除数据库
 DROP DATABASE IF EXISTS `pms`; 
 CREATE DATABASE IF NOT EXISTS `pms` CHARACTER SET utf8;

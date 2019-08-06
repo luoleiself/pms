@@ -865,6 +865,94 @@ define({ "api": [
     "groupTitle": "categories"
   },
   {
+    "type": "get",
+    "url": "/salesPurchase",
+    "title": "salesPurchase",
+    "name": "salesPurchase",
+    "group": "charts",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:9999/api/charts/salesPurchase"
+      }
+    ],
+    "version": "0.1.0",
+    "filename": "server/controller/charts.controller.js",
+    "groupTitle": "charts"
+  },
+  {
+    "type": "get",
+    "url": "/category/goods",
+    "title": "statGoodsByCategory",
+    "name": "statGoodsByCategory",
+    "group": "charts",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:9999/api/charts/category/goods"
+      }
+    ],
+    "version": "0.1.0",
+    "filename": "server/controller/charts.controller.js",
+    "groupTitle": "charts"
+  },
+  {
+    "type": "get",
+    "url": "/purchase/record",
+    "title": "sumPurchaseAmountByTime",
+    "name": "sumPurchaseAmountByTime",
+    "group": "charts",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "p_size",
+            "defaultValue": "5",
+            "description": "<p>筛选条数</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:9999/api/charts/purchase/record"
+      }
+    ],
+    "version": "0.1.0",
+    "filename": "server/controller/charts.controller.js",
+    "groupTitle": "charts"
+  },
+  {
+    "type": "get",
+    "url": "/sales/record",
+    "title": "sumSalesAmountByTime",
+    "name": "sumSalesAmountByTime",
+    "group": "charts",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "p_size",
+            "defaultValue": "5",
+            "description": "<p>筛选条数</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:9999/api/charts/sales/record"
+      }
+    ],
+    "version": "0.1.0",
+    "filename": "server/controller/charts.controller.js",
+    "groupTitle": "charts"
+  },
+  {
     "type": "post",
     "url": "/goods",
     "title": "addGoods",
