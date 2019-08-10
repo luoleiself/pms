@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2019-08-09 18:19:03
+Date: 2019-08-10 15:26:45
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -250,7 +250,7 @@ CREATE TABLE `roles` (
   `update_time` int(10) unsigned DEFAULT NULL COMMENT '更新时间',
   `operator` varchar(20) DEFAULT NULL COMMENT '操作人员',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of roles
@@ -258,6 +258,7 @@ CREATE TABLE `roles` (
 INSERT INTO `roles` VALUES ('1', '管理员', 'admin', '1', null, null, '');
 INSERT INTO `roles` VALUES ('2', '销售', 'sale', '1', null, null, null);
 INSERT INTO `roles` VALUES ('3', '采购', 'purchase', '1', null, null, null);
+INSERT INTO `roles` VALUES ('4', '游客', 'visitor', '1', null, null, null);
 
 -- ----------------------------
 -- Table structure for role_access
@@ -272,7 +273,7 @@ CREATE TABLE `role_access` (
   KEY `role_id` (`role_id`),
   CONSTRAINT `role_access_ibfk_1` FOREIGN KEY (`access_id`) REFERENCES `access` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `role_access_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of role_access
@@ -280,6 +281,7 @@ CREATE TABLE `role_access` (
 INSERT INTO `role_access` VALUES ('2', '3', '1');
 INSERT INTO `role_access` VALUES ('11', '3', '2');
 INSERT INTO `role_access` VALUES ('15', '3', '3');
+INSERT INTO `role_access` VALUES ('18', '3', '4');
 INSERT INTO `role_access` VALUES ('3', '4', '1');
 INSERT INTO `role_access` VALUES ('12', '4', '2');
 INSERT INTO `role_access` VALUES ('16', '4', '3');
@@ -377,7 +379,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` VALUES ('1', '张三', 'zhangsan', 'e10adc3949ba59abbe56e057f20f883e', '2', '系统部', '010-12345678', '北京市北京路1号', '1', '1563956172', '1564137707', '');
 INSERT INTO `users` VALUES ('10', '李四', 'lisi', 'e10adc3949ba59abbe56e057f20f883e', '1', '采购部', '13112345678', '上海市上海路1号', '1', '1563953178', '1563972092', '李四');
 INSERT INTO `users` VALUES ('11', '王五', 'wangwu', 'e10adc3949ba59abbe56e057f20f883e', '1', '销售部', '13187654321', '广州市广州路1号', '1', '1563956103', '1563956167', '张三');
-INSERT INTO `users` VALUES ('12', '赵六', 'zhaoliu', 'e10adc3949ba59abbe56e057f20f883e', '1', '游客', '13112345678', '歪果仁', '1', '1564037211', null, '张三');
+INSERT INTO `users` VALUES ('12', '赵六', 'zhaoliu', 'e10adc3949ba59abbe56e057f20f883e', '1', '访客', '13112345678', '歪果仁', '1', '1564037211', null, '张三');
 
 -- ----------------------------
 -- Table structure for user_role
@@ -392,7 +394,7 @@ CREATE TABLE `user_role` (
   KEY `user_id` (`user_id`),
   CONSTRAINT `user_role_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `user_role_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_role
@@ -400,3 +402,4 @@ CREATE TABLE `user_role` (
 INSERT INTO `user_role` VALUES ('1', '1', '1');
 INSERT INTO `user_role` VALUES ('15', '2', '11');
 INSERT INTO `user_role` VALUES ('12', '3', '10');
+INSERT INTO `user_role` VALUES ('16', '4', '12');
