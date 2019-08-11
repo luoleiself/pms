@@ -15,6 +15,10 @@ Date: 2019-08-10 15:26:45
 
 SET FOREIGN_KEY_CHECKS=0;
 
+DROP DATABASE IF EXISTS `pms`;
+CREATE DATABASE `pms`;
+USE `pms`;
+
 -- ----------------------------
 -- Table structure for access
 -- ----------------------------
