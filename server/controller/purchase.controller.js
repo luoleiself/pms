@@ -35,7 +35,7 @@ const router = new Router();
  *      p_size: 10,
  *      total: 30,
  *      rows:[
- *        { id: 1, price: '单价', amount: '数量', ... },
+ *        { id: 1, amount: '数量', ... },
  *        ...
  *      ]
  *    }
@@ -46,12 +46,11 @@ const router = new Router();
  *    code: 10200,
  *    msg: '操作成功',
  *    data:[
- *      { id: 1, price: '单价', amount: '数量', ... },
+ *      { id: 1, amount: '数量', ... },
  *      ...
  *    ]
  *  }
  *
- * @apiSampleRequest http://localhost:9999/api/purchase
  * @apiVersion 0.1.0
  */
 router.get("/", async (ctx, next) => {
@@ -82,7 +81,7 @@ router.get("/", async (ctx, next) => {
  *  {
  *    code: 10200,
  *    msg: '操作成功',
- *    data: { id: 1, price: '单价', amount: '数量', ... },
+ *    data: { id: 1, amount: '数量', ... },
  *  }
  * @apiSuccessExample Error-Response:
  *  HTTP/1.1 200 OK
@@ -98,7 +97,6 @@ router.get("/", async (ctx, next) => {
  *    msg: '请求参数错误!',
  *    data: []
  *  }
- * @apiSampleRequest http://localhost:9999/api/purchase/:id
  * @apiVersion 0.1.0
  */
 router.get("/:id", async (ctx, next) => {
@@ -132,12 +130,10 @@ router.get("/:id", async (ctx, next) => {
  * @apiGroup purchase
  *
  * @apiParam {Number} goods_id  goods id
- * @apiParam {Number} [price] 单价
  * @apiParam {Number} [amount] 数量
  * @apiParamExample {json} Request-Example
  * {
  *    goods_id: 1,
- *    price: '',
  *    amount: ''
  * }
  *
@@ -146,9 +142,8 @@ router.get("/:id", async (ctx, next) => {
  *  {
  *    code: 10200,
  *    msg: '操作成功',
- *    data: { id: 1, price: '单价', amount: '数量', ... },
+ *    data: { id: 1, amount: '数量', ... },
  *  }
- * @apiSampleRequest http://localhost:9999/api/purchase
  * @apiVersion 0.1.0
  */
 router.post("/", async (ctx, next) => {
@@ -170,12 +165,10 @@ router.post("/", async (ctx, next) => {
  *
  * @apiParam {Number} id purchase id
  * @apiParam {Number} goods_id goods id
- * @apiParam {Number} [price] 单价
  * @apiParam {Number} [amount] 数量
  * @apiParamExample {json} Request-Example
  * {
  *    goods_id: 1,
- *    price: '',
  *    amount: ''
  * }
  *
@@ -184,7 +177,7 @@ router.post("/", async (ctx, next) => {
  *  {
  *    code: 10200,
  *    msg: '操作成功',
- *    data: { id: 1, price: '单价', amount: '数量', ... },
+ *    data: { id: 1, amount: '数量', ... },
  *  }
  * @apiSuccessExample Error-Response:
  *  HTTP/1.1 200 OK
@@ -200,7 +193,6 @@ router.post("/", async (ctx, next) => {
  *    msg: '请求参数错误!',
  *    data: []
  *  }
- * @apiSampleRequest http://localhost:9999/api/purchase/:id
  * @apiVersion 0.1.0
  */
 router.put("/:id", async (ctx, next) => {
@@ -240,7 +232,7 @@ router.put("/:id", async (ctx, next) => {
  *  {
  *    code: 10200,
  *    msg: '操作成功',
- *    data: { id: 1, price: '单价', amount: '数量', ... },
+ *    data: { id: 1, amount: '数量', ... },
  *  }
  * @apiSuccessExample Error-Response:
  *  HTTP/1.1 200 OK
@@ -256,7 +248,6 @@ router.put("/:id", async (ctx, next) => {
  *    msg: '请求参数错误!',
  *    data: []
  *  }
- * @apiSampleRequest http://localhost:9999/api/purchase/:id
  * @apiVersion 0.1.0
  */
 router.delete("/:id", async (ctx, next) => {

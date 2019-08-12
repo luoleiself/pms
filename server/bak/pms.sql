@@ -204,7 +204,6 @@ INSERT INTO `manufactors` VALUES ('23', '海天集团有限公司', '海天', '�
 DROP TABLE IF EXISTS `purchase`;
 CREATE TABLE `purchase` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '采购记录id',
-  `price` decimal(10,2) unsigned DEFAULT '0.00' COMMENT '采购单价',
   `amount` smallint(5) unsigned DEFAULT '0' COMMENT '采购数量',
   `create_time` int(10) unsigned DEFAULT NULL COMMENT '创建时间',
   `update_time` int(10) unsigned DEFAULT NULL COMMENT '更新时间',
@@ -304,7 +303,6 @@ INSERT INTO `role_access` VALUES ('9', '10', '1');
 DROP TABLE IF EXISTS `sales`;
 CREATE TABLE `sales` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '销售记录id',
-  `price` decimal(10,2) unsigned DEFAULT '0.00' COMMENT '销售单价',
   `amount` smallint(5) unsigned DEFAULT '0' COMMENT '销售数量',
   `create_time` int(10) unsigned DEFAULT NULL COMMENT '创建时间',
   `update_time` int(10) unsigned DEFAULT NULL COMMENT '更新时间',

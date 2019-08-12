@@ -15,7 +15,6 @@
       <el-table :data="tableOptions.tableData" :height="tableOptions.tableHeight" stripe border style="width: 100%" v-loading="tableOptions.loading" @selection-change="tblSelectionChange">
         <el-table-column type="selection" width="55" align="center"></el-table-column>
         <el-table-column prop="id" label="ID" align="center" width="70"></el-table-column>
-        <el-table-column prop="price" label="采购单价" align="center"></el-table-column>
         <el-table-column prop="amount" label="采购数量" align="center"></el-table-column>
         <el-table-column prop="" label="商品名称" align="center">
           <template slot-scope="scope">
@@ -69,9 +68,6 @@
               </el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="单价" prop="price">
-            <el-input v-model="form.price" placeholder="销售单价" clearable></el-input>
-          </el-form-item>
           <el-form-item label="数量" prop="amount">
             <el-input v-model="form.amount" placeholder="销售数量" clearable></el-input>
           </el-form-item>
@@ -91,14 +87,6 @@ export default {
   name: "Purchase",
   mixins: [dataMixin, methodsMixin],
   data() {
-    let checkPrice = (rule, val, callback) => {
-      let regExp = /^(([0-9]*?)|([0-9]{1,}\.[0-9]*?))$/i;
-      if (val.search(regExp) == -1) {
-        return callback(new Error("价格格式只能为整数或小数!"));
-      } else {
-        callback();
-      }
-    };
     let checkAmount = (rule, val, callback) => {
       let regExp = /^([0-9]*?)$/i;
       if (val.search(regExp) == -1) {
@@ -121,14 +109,12 @@ export default {
       },
       form: {
         goods_id: "",
-        price: "",
         amount: ""
       },
       rules: {
         goods_id: [
           { required: true, message: "商品名称不能为空!", trigger: "blur" }
         ],
-        price: [{ validator: checkPrice, trigger: "blur" }],
         amount: [{ validator: checkAmount, trigger: "blur" }]
       },
       goodsOpt: {
@@ -165,7 +151,6 @@ export default {
         this.dialogOpt.row = row;
         this.dialogOpt.formDisable = true;
         this.form.goods_id = res.data.goods_id;
-        this.form.price = res.data.price;
         this.form.amount = res.data.amount;
         this.goodsOpt.list.push({
           label: `${res.data.good.name} - ${res.data.good.brand.name} - ${res.data.good.brand.manufactor.name}`,
@@ -178,7 +163,7 @@ export default {
     // 重置表单项
     resetFields(formName) {
       this.$refs[formName].clearValidate();
-      this.form.goods_id = this.form.price = this.form.amount = "";
+      this.form.goods_id = this.form.amount = "";
       this.goodsOpt.list = [];
     },
     beforeClose(done) {

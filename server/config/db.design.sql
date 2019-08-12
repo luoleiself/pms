@@ -78,7 +78,6 @@ CREATE TABLE IF NOT EXISTS `brands`(
 DROP TABLE IF EXISTS `sales`;
 CREATE TABLE IF NOT EXISTS `sales`(
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '销售记录id', 
-	`price` decimal(10,2) unsigned DEFAULT '0.0' COMMENT '销售单价', 
 	`amount` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '销售数量', 
 	`create_time` int(10) unsigned COMMENT '创建时间', 
 	`update_time` int(10) unsigned COMMENT '更新时间', 
@@ -91,7 +90,6 @@ CREATE TABLE IF NOT EXISTS `sales`(
 DROP TABLE IF EXISTS `purchase`;
 CREATE TABLE IF NOT EXISTS `purchase`(
 	`id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '采购信息id',
-	`price` decimal(10,2) unsigned default '0.0' COMMENT '采购单价',
 	`amount` smallint(5) unsigned default '0' COMMENT '采购数量',
 	`create_time` int(10) unsigned COMMENT '创建时间',
 	`update_time` int(10) unsigned COMMENT '更新时间',

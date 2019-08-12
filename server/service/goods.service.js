@@ -42,6 +42,7 @@ exports = module.exports = {
     let { dbQuery, Op } = ctx;
     let query = {
       where: { status: { [Op.in]: dbQuery.status } },
+      order: [dbQuery.orderBy.split(",")],
       attributes: this.attributes,
       include: [{ model: models.brands, include: { model: models.manufactors } }, models.categories]
     };

@@ -32,6 +32,7 @@ exports = module.exports = {
     let { dbQuery, Op } = ctx;
     return await models.users.findAll({
       where: { status: { [Op.in]: dbQuery.status }, name: { [Op.substring]: dbQuery.keys } },
+      order: [dbQuery.orderBy.split(",")],
       attributes: this.attributes,
       include: [{ model: models.roles, through: { model: models.user_role } }]
     });

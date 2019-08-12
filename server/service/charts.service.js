@@ -9,7 +9,7 @@ exports = module.exports = {
     let start_time = end_time - 2592000;
     end_time += 86399;
     let result = await models.sequelize.query(
-      "SELECT id,price,goods_id,SUM(amount) AS total,create_time,update_time FROM sales WHERE create_time >= :start_time AND create_time <= :end_time GROUP BY goods_id LIMIT :limit",
+      "SELECT id,goods_id,SUM(amount) AS total,create_time,update_time FROM sales WHERE create_time >= :start_time AND create_time <= :end_time GROUP BY goods_id LIMIT :limit",
       {
         replacements: { start_time, end_time, limit: dbQuery.p_size },
         type: models.sequelize.QueryTypes.SELECT,
@@ -35,7 +35,7 @@ exports = module.exports = {
     let start_time = end_time - 2592000;
     end_time += 86399;
     let result = await models.sequelize.query(
-      "SELECT id,price,goods_id,SUM(amount) AS total,create_time,update_time FROM purchase WHERE create_time >= :start_time AND create_time <= :end_time GROUP BY goods_id LIMIT :limit",
+      "SELECT id,goods_id,SUM(amount) AS total,create_time,update_time FROM purchase WHERE create_time >= :start_time AND create_time <= :end_time GROUP BY goods_id LIMIT :limit",
       {
         replacements: { start_time, end_time, limit: dbQuery.p_size },
         type: models.sequelize.QueryTypes.SELECT,

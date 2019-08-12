@@ -43,7 +43,6 @@ const router = new Router();
  *    msg: '该用户名不存在!',
  *    data: []
  *  }
- * @apiSampleRequest http://localhost:9999/api/login
  * @apiVersion 0.1.0
  */
 router.post("/", async (ctx, next) => {
@@ -92,7 +91,6 @@ router.post("/", async (ctx, next) => {
  *    msg: '操作成功',
  *    data: { id: 1, name: '用户姓名', username: '登录用户名', password:'', ... },
  *  }
- * @apiSampleRequest http://localhost:9999/api/login
  * @apiVersion 0.1.0
  */
 router.delete("/", async (ctx, next) => {

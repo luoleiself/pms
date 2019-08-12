@@ -56,7 +56,6 @@ const router = new Router();
  *    ]
  *  }
  *
- * @apiSampleRequest http://localhost:9999/api/users
  * @apiVersion 0.1.0
  */
 router.get("/", async (ctx, next) => {
@@ -108,7 +107,6 @@ router.get("/", async (ctx, next) => {
  *    }
  *  }
  * @apiUse 400And404
- * @apiSampleRequest http://localhost:9999/api/users/:id
  * @apiVersion 0.1.0
  */
 router.get("/:id", async (ctx, next) => {
@@ -183,7 +181,6 @@ router.get("/:id", async (ctx, next) => {
  *    msg: '该登陆用户名已存在!',
  *    data: []
  *  }
- * @apiSampleRequest http://localhost:9999/api/users/:id
  * @apiVersion 0.1.0
  */
 router.post("/", async (ctx, next) => {
@@ -245,7 +242,6 @@ router.post("/", async (ctx, next) => {
  *    }
  *  }
  * @apiUse 400And404
- * @apiSampleRequest http://localhost:9999/api/users/:id
  * @apiVersion 0.1.0
  */
 router.put("/:id", async (ctx, next) => {
@@ -296,7 +292,6 @@ router.put("/:id", async (ctx, next) => {
  *    }
  *  }
  * @apiUse 400And404
- * @apiSampleRequest http://localhost:9999/api/users/:id
  * @apiVersion 0.1.0
  */
 router.delete("/:id", async (ctx, next) => {
