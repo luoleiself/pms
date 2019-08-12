@@ -9,11 +9,11 @@ exports = module.exports = function(sequelize, DataTypes) {
         allowNull: false,
         comment: "销售记录id"
       },
-      price: {
+      /* price: {
         type: DataTypes.DECIMAL(10, 2).UNSIGNED,
         defaultValue: "0.0",
         comment: "销售单价"
-      },
+      }, */
       amount: {
         type: DataTypes.SMALLINT(5).UNSIGNED,
         defaultValue: "0",

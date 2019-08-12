@@ -38,7 +38,6 @@ const router = new Router();
  *    ]
  *  }
  *
- * @apiSampleRequest http://localhost:9999/api/roles
  * @apiVersion 0.1.0
  */
 router.get("/", async (ctx, next) => {

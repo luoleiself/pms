@@ -95,11 +95,6 @@ define({ "api": [
         }
       ]
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/brands"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/brands.controller.js",
     "groupTitle": "brands"
@@ -142,11 +137,6 @@ define({ "api": [
         }
       ]
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/brands/:id"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/brands.controller.js",
     "groupTitle": "brands"
@@ -189,11 +179,6 @@ define({ "api": [
         }
       ]
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/brands/:id"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/brands.controller.js",
     "groupTitle": "brands"
@@ -236,11 +221,6 @@ define({ "api": [
         }
       ]
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/brands/tree/:id"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/brands.controller.js",
     "groupTitle": "brands"
@@ -366,11 +346,6 @@ define({ "api": [
         ]
       }
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/brands"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/brands.controller.js",
     "groupTitle": "brands"
@@ -448,11 +423,6 @@ define({ "api": [
         }
       ]
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/brands/:id"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/brands.controller.js",
     "groupTitle": "brands"
@@ -516,11 +486,6 @@ define({ "api": [
         }
       ]
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/categories"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/categories.controller.js",
     "groupTitle": "categories"
@@ -563,11 +528,6 @@ define({ "api": [
         }
       ]
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/categories/:id"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/categories.controller.js",
     "groupTitle": "categories"
@@ -610,11 +570,6 @@ define({ "api": [
         }
       ]
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/categories/:id"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/categories.controller.js",
     "groupTitle": "categories"
@@ -687,11 +642,6 @@ define({ "api": [
         ]
       }
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/categories"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/categories.controller.js",
     "groupTitle": "categories",
@@ -780,11 +730,6 @@ define({ "api": [
         }
       ]
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/categories/tree/:id"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/categories.controller.js",
     "groupTitle": "categories"
@@ -855,11 +800,6 @@ define({ "api": [
         }
       ]
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/categories/:id"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/categories.controller.js",
     "groupTitle": "categories"
@@ -870,11 +810,6 @@ define({ "api": [
     "title": "salesPurchase",
     "name": "salesPurchase",
     "group": "charts",
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/charts/salesPurchase"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/charts.controller.js",
     "groupTitle": "charts"
@@ -885,11 +820,6 @@ define({ "api": [
     "title": "statGoodsByCategory",
     "name": "statGoodsByCategory",
     "group": "charts",
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/charts/category/goods"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/charts.controller.js",
     "groupTitle": "charts"
@@ -914,11 +844,6 @@ define({ "api": [
         ]
       }
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/charts/purchase/record"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/charts.controller.js",
     "groupTitle": "charts"
@@ -943,11 +868,6 @@ define({ "api": [
         ]
       }
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/charts/sales/record"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/charts.controller.js",
     "groupTitle": "charts"
@@ -1025,11 +945,6 @@ define({ "api": [
         }
       ]
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/goods"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/goods.controller.js",
     "groupTitle": "goods"
@@ -1072,11 +987,6 @@ define({ "api": [
         }
       ]
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/goods/:id"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/goods.controller.js",
     "groupTitle": "goods"
@@ -1119,11 +1029,6 @@ define({ "api": [
         }
       ]
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/goods/:id"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/goods.controller.js",
     "groupTitle": "goods"
@@ -1256,11 +1161,6 @@ define({ "api": [
         ]
       }
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/goods"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/goods.controller.js",
     "groupTitle": "goods"
@@ -1345,11 +1245,6 @@ define({ "api": [
         }
       ]
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/goods/:id"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/goods.controller.js",
     "groupTitle": "goods"
@@ -1411,11 +1306,6 @@ define({ "api": [
         }
       ]
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/login"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/login.controller.js",
     "groupTitle": "login"
@@ -1435,11 +1325,6 @@ define({ "api": [
         }
       ]
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/login"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/login.controller.js",
     "groupTitle": "login"
@@ -1531,11 +1416,6 @@ define({ "api": [
         }
       ]
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/manufactors"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/manufactors.controller.js",
     "groupTitle": "manufactors"
@@ -1578,11 +1458,6 @@ define({ "api": [
         }
       ]
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/manufactors/:id"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/manufactors.controller.js",
     "groupTitle": "manufactors"
@@ -1625,11 +1500,6 @@ define({ "api": [
         }
       ]
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/manufactors/:id"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/manufactors.controller.js",
     "groupTitle": "manufactors"
@@ -1702,11 +1572,6 @@ define({ "api": [
         ]
       }
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/manufactors"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/manufactors.controller.js",
     "groupTitle": "manufactors",
@@ -1851,11 +1716,6 @@ define({ "api": [
         }
       ]
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/manufactors/:id"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/manufactors.controller.js",
     "groupTitle": "manufactors"
@@ -1880,13 +1740,6 @@ define({ "api": [
             "group": "Parameter",
             "type": "Number",
             "optional": true,
-            "field": "price",
-            "description": "<p>单价</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": true,
             "field": "amount",
             "description": "<p>数量</p>"
           }
@@ -1895,7 +1748,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Request-Example",
-          "content": "{\n   goods_id: 1,\n   price: '',\n   amount: ''\n}",
+          "content": "{\n   goods_id: 1,\n   amount: ''\n}",
           "type": "json"
         }
       ]
@@ -1904,16 +1757,11 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response-1:",
-          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data: { id: 1, price: '单价', amount: '数量', ... },\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data: { id: 1, amount: '数量', ... },\n}",
           "type": "json"
         }
       ]
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/purchase"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/purchase.controller.js",
     "groupTitle": "purchase"
@@ -1941,7 +1789,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response-1:",
-          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data: { id: 1, price: '单价', amount: '数量', ... },\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data: { id: 1, amount: '数量', ... },\n}",
           "type": "json"
         },
         {
@@ -1956,11 +1804,6 @@ define({ "api": [
         }
       ]
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/purchase/:id"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/purchase.controller.js",
     "groupTitle": "purchase"
@@ -1988,7 +1831,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response-1:",
-          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data: { id: 1, price: '单价', amount: '数量', ... },\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data: { id: 1, amount: '数量', ... },\n}",
           "type": "json"
         },
         {
@@ -2003,11 +1846,6 @@ define({ "api": [
         }
       ]
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/purchase/:id"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/purchase.controller.js",
     "groupTitle": "purchase"
@@ -2070,12 +1908,12 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response-1:",
-          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data:{\n    p: 1,\n    p_size: 10,\n    total: 30,\n    rows:[\n      { id: 1, price: '单价', amount: '数量', ... },\n      ...\n    ]\n  }\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data:{\n    p: 1,\n    p_size: 10,\n    total: 30,\n    rows:[\n      { id: 1, amount: '数量', ... },\n      ...\n    ]\n  }\n}",
           "type": "json"
         },
         {
           "title": "Success-Response-2:",
-          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data:[\n    { id: 1, price: '单价', amount: '数量', ... },\n    ...\n  ]\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data:[\n    { id: 1, amount: '数量', ... },\n    ...\n  ]\n}",
           "type": "json"
         }
       ],
@@ -2128,11 +1966,6 @@ define({ "api": [
         ]
       }
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/purchase"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/purchase.controller.js",
     "groupTitle": "purchase"
@@ -2164,13 +1997,6 @@ define({ "api": [
             "group": "Parameter",
             "type": "Number",
             "optional": true,
-            "field": "price",
-            "description": "<p>单价</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": true,
             "field": "amount",
             "description": "<p>数量</p>"
           }
@@ -2179,7 +2005,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Request-Example",
-          "content": "{\n   goods_id: 1,\n   price: '',\n   amount: ''\n}",
+          "content": "{\n   goods_id: 1,\n   amount: ''\n}",
           "type": "json"
         }
       ]
@@ -2188,7 +2014,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response-1:",
-          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data: { id: 1, price: '单价', amount: '数量', ... },\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data: { id: 1, amount: '数量', ... },\n}",
           "type": "json"
         },
         {
@@ -2203,11 +2029,6 @@ define({ "api": [
         }
       ]
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/purchase/:id"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/purchase.controller.js",
     "groupTitle": "purchase"
@@ -2280,11 +2101,6 @@ define({ "api": [
         ]
       }
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/roles"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/roles.controller.js",
     "groupTitle": "roles",
@@ -2355,13 +2171,6 @@ define({ "api": [
             "group": "Parameter",
             "type": "Number",
             "optional": true,
-            "field": "price",
-            "description": "<p>单价</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": true,
             "field": "amount",
             "description": "<p>数量</p>"
           }
@@ -2370,7 +2179,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Request-Example",
-          "content": "{\n   goods_id: 1,\n   price: '',\n   amount: ''\n}",
+          "content": "{\n   goods_id: 1,\n   amount: ''\n}",
           "type": "json"
         }
       ]
@@ -2379,7 +2188,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data: { id: 1, price: '单价', amount: '数量', ... },\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data: { id: 1, amount: '数量', ... },\n}",
           "type": "json"
         }
       ]
@@ -2393,11 +2202,6 @@ define({ "api": [
         }
       ]
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/sales"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/sales.controller.js",
     "groupTitle": "sales"
@@ -2425,7 +2229,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response-1:",
-          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data: { id: 1, price: '单价', amount: '数量', ... },\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data: { id: 1, amount: '数量', ... },\n}",
           "type": "json"
         },
         {
@@ -2440,11 +2244,6 @@ define({ "api": [
         }
       ]
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/sales/:id"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/sales.controller.js",
     "groupTitle": "sales"
@@ -2472,7 +2271,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response-1:",
-          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data: { id: 1, price: '单价', amount: '数量', ... },\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data: { id: 1, amount: '数量', ... },\n}",
           "type": "json"
         },
         {
@@ -2487,11 +2286,6 @@ define({ "api": [
         }
       ]
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/sales/:id"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/sales.controller.js",
     "groupTitle": "sales"
@@ -2554,12 +2348,12 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response-1:",
-          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data:{\n    p: 1,\n    p_size: 10,\n    total: 30,\n    rows:[\n      { id: 1, price: '单价', amount: '数量', ... },\n      ...\n    ]\n  }\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data:{\n    p: 1,\n    p_size: 10,\n    total: 30,\n    rows:[\n      { id: 1, amount: '数量', ... },\n      ...\n    ]\n  }\n}",
           "type": "json"
         },
         {
           "title": "Success-Response-2:",
-          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data:[\n    { id: 1, price: '单价', amount: '数量', ... },\n    ...\n  ]\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data:[\n    { id: 1, amount: '数量', ... },\n    ...\n  ]\n}",
           "type": "json"
         }
       ],
@@ -2612,11 +2406,6 @@ define({ "api": [
         ]
       }
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/sales"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/sales.controller.js",
     "groupTitle": "sales"
@@ -2648,13 +2437,6 @@ define({ "api": [
             "group": "Parameter",
             "type": "Number",
             "optional": true,
-            "field": "price",
-            "description": "<p>单价</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": true,
             "field": "amount",
             "description": "<p>数量</p>"
           }
@@ -2663,7 +2445,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Request-Example",
-          "content": "{\n   goods_id: 1,\n   price: '',\n   amount: ''\n}",
+          "content": "{\n   goods_id: 1,\n   amount: ''\n}",
           "type": "json"
         }
       ]
@@ -2672,7 +2454,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response-1:",
-          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data: { id: 1, price: '单价', amount: '数量', ... },\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data: { id: 1, amount: '数量', ... },\n}",
           "type": "json"
         },
         {
@@ -2692,11 +2474,6 @@ define({ "api": [
         }
       ]
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/sales/:id"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/sales.controller.js",
     "groupTitle": "sales"
@@ -2817,11 +2594,6 @@ define({ "api": [
         }
       ]
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/users/:id"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/users.controller.js",
     "groupTitle": "users"
@@ -2891,11 +2663,6 @@ define({ "api": [
         }
       ]
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/users/:id"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/users.controller.js",
     "groupTitle": "users"
@@ -2965,11 +2732,6 @@ define({ "api": [
         }
       ]
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/users/:id"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/users.controller.js",
     "groupTitle": "users"
@@ -3042,11 +2804,6 @@ define({ "api": [
         ]
       }
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/users"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/users.controller.js",
     "groupTitle": "users",
@@ -3225,11 +2982,6 @@ define({ "api": [
         }
       ]
     },
-    "sampleRequest": [
-      {
-        "url": "http://localhost:9999/api/users/:id"
-      }
-    ],
     "version": "0.1.0",
     "filename": "server/controller/users.controller.js",
     "groupTitle": "users"

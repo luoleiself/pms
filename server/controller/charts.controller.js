@@ -8,7 +8,6 @@ const router = new Router();
  * @apiName statGoodsByCategory
  * @apiGroup charts
  *
- * @apiSampleRequest http://localhost:9999/api/charts/category/goods
  * @apiVersion 0.1.0
  */
 router.get("/category/goods", async (ctx, next) => {
@@ -30,7 +29,6 @@ router.get("/category/goods", async (ctx, next) => {
  *
  * @apiParam {Number} [p_size=5] 筛选条数
  *
- * @apiSampleRequest http://localhost:9999/api/charts/sales/record
  * @apiVersion 0.1.0
  */
 router.get("/sales/record", async (ctx, next) => {
@@ -59,7 +57,6 @@ router.get("/sales/record", async (ctx, next) => {
  *
  * @apiParam {Number} [p_size=5] 筛选条数
  *
- * @apiSampleRequest http://localhost:9999/api/charts/purchase/record
  * @apiVersion 0.1.0
  */
 router.get("/purchase/record", async (ctx, next) => {
@@ -86,7 +83,6 @@ router.get("/purchase/record", async (ctx, next) => {
  * @apiName salesPurchase
  * @apiGroup charts
  *
- * @apiSampleRequest http://localhost:9999/api/charts/salesPurchase
  * @apiVersion 0.1.0
  */
 router.get("/salesPurchase", async (ctx, next) => {

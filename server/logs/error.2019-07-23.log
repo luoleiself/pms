@@ -1,0 +1,32 @@
+[2019-07-23T16:16:38.154] [ERROR] error - Request: PUT http://localhost:9999 /api/users/1 {} undefined Error:SyntaxError Identifier 'user' has already been declared
+[2019-07-23T16:18:53.149] [ERROR] error - Request: PUT http://localhost:9999 /api/users/1 {} undefined Error:SyntaxError Identifier 'user' has already been declared
+[2019-07-23T16:19:46.025] [ERROR] error - Request: PUT http://localhost:9999 /api/users/1 {} undefined Error:SyntaxError Identifier 'user' has already been declared
+[2019-07-23T16:19:49.756] [ERROR] error - Request: PUT http://localhost:9999 /api/users/1 {} undefined Error:SyntaxError Identifier 'user' has already been declared
+[2019-07-23T16:20:12.295] [ERROR] error - Request: PUT http://localhost:9999 /api/users/1 {} undefined Error:SyntaxError Identifier 'user' has already been declared
+[2019-07-23T16:21:39.851] [ERROR] error - Request: PUT http://localhost:9999 /api/users/1 {} undefined Error:SyntaxError Identifier 'user' has already been declared
+[2019-07-23T16:22:08.005] [ERROR] error - Request: PUT http://localhost:9999 /api/users/12 {} undefined Error:SyntaxError Identifier 'user' has already been declared
+[2019-07-23T16:23:58.760] [ERROR] error - Request: PUT http://localhost:9999 /api/users/12 {} undefined Error:SyntaxError Identifier 'user' has already been declared
+[2019-07-23T16:25:07.829] [ERROR] error - Request: PUT http://localhost:9999 /api/users/1 {} undefined Error:SyntaxError Identifier 'user' has already been declared
+[2019-07-23T16:25:28.562] [ERROR] error - Request: PUT http://localhost:9999 /api/users/1 {} undefined Error:SyntaxError Identifier 'user' has already been declared
+[2019-07-23T16:26:34.351] [ERROR] error - Request: PUT http://localhost:9999 /api/users/12 {} undefined Error:SyntaxError Identifier 'user' has already been declared
+[2019-07-23T16:26:44.280] [ERROR] error - Request: PUT http://localhost:9999 /api/users/1 {} undefined Error:SyntaxError Identifier 'user' has already been declared
+[2019-07-23T16:27:30.279] [ERROR] error - Request: PUT http://localhost:9999 /api/users/1 {} undefined Error:TypeError user.save is not a function
+[2019-07-23T17:31:23.900] [ERROR] error - Request: GET http://localhost:9999 /api/users {"p":"1","p_size":"10","status":"","keys":""} undefined Error:SequelizeEagerLoadingError user_role is not associated to users!
+[2019-07-23T19:46:18.238] [ERROR] error - Request: POST http://localhost:9999 /api/users {} undefined Error:TypeError Cannot read property 'length' of undefined
+[2019-07-23T19:47:28.514] [ERROR] error - Request: POST http://localhost:9999 /api/users {} undefined Error:TypeError Cannot read property 'length' of undefined
+[2019-07-23T19:49:06.522] [ERROR] error - Request: POST http://localhost:9999 /api/users {} undefined Error:TypeError Cannot read property 'length' of undefined
+[2019-07-23T20:03:07.220] [ERROR] error - Request: POST http://localhost:9999 /api/users {} undefined Error:TypeError Cannot read property 'length' of undefined
+[2019-07-23T20:04:04.632] [ERROR] error - Request: POST http://localhost:9999 /api/users {} undefined Error:TypeError JSON.string is not a function
+[2019-07-23T20:34:18.971] [ERROR] error - Request: POST http://localhost:9999 /api/users {} undefined Error:ReferenceError roles is not defined
+[2019-07-23T20:34:57.391] [ERROR] error - Request: POST http://localhost:9999 /api/users {} undefined Error:ReferenceError roles is not defined
+[2019-07-23T20:35:02.222] [ERROR] error - Request: POST http://localhost:9999 /api/users {} undefined Error:ReferenceError roles is not defined
+[2019-07-23T20:54:02.527] [ERROR] error - Request: POST http://localhost:9999 /api/users {} undefined Error:TypeError models.Sequelize.transaction is not a function
+[2019-07-23T20:54:26.446] [ERROR] error - Request: POST http://localhost:9999 /api/users {} undefined Error:TypeError models.Sequelize.transaction is not a function
+[2019-07-23T20:55:27.147] [ERROR] error - Request: POST http://localhost:9999 /api/users {} undefined Error:TypeError models.Sequelize.transaction is not a function
+[2019-07-23T20:56:43.302] [ERROR] error - Request: POST http://localhost:9999 /api/users {} undefined Error:TypeError models.Sequelize.transaction is not a function
+[2019-07-23T20:57:14.083] [ERROR] error - Request: POST http://localhost:9999 /api/users {} undefined Error:TypeError models.Sequelize.transaction is not a function
+[2019-07-23T21:00:12.252] [ERROR] error - Request: POST http://localhost:9999 /api/users {} undefined Error:TypeError models.Sequelize.transaction is not a function
+[2019-07-23T21:01:00.076] [ERROR] error - Request: POST http://localhost:9999 /api/users {} undefined Error:TypeError Cannot read property 'code' of undefined
+[2019-07-23T21:02:34.770] [ERROR] error - Request: POST http://localhost:9999 /api/users {} undefined Error:TypeError Cannot read property 'code' of undefined
+[2019-07-23T21:03:03.427] [ERROR] error - Request: POST http://localhost:9999 /api/users {} undefined Error:TypeError Cannot read property 'code' of undefined
+[2019-07-23T21:05:47.712] [ERROR] error - Request: POST http://localhost:9999 /api/users {} undefined Error:TypeError Cannot read property 'code' of undefined

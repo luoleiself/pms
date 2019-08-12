@@ -38,7 +38,6 @@ const router = new Router();
  *    ]
  *  }
  *
- * @apiSampleRequest http://localhost:9999/api/manufactors
  * @apiVersion 0.1.0
  */
 router.get("/", async (ctx, next) => {
@@ -95,7 +94,6 @@ router.get("/", async (ctx, next) => {
  *    msg: '请求参数错误!',
  *    data: []
  *  }
- * @apiSampleRequest http://localhost:9999/api/manufactors/:id
  * @apiVersion 0.1.0
  */
 router.get("/:id", async (ctx, next) => {
@@ -166,7 +164,6 @@ router.get("/:id", async (ctx, next) => {
  *    msg: '请求参数错误!',
  *    data: []
  *  }
- * @apiSampleRequest http://localhost:9999/api/manufactors
  * @apiVersion 0.1.0
  */
 router.post("/", async (ctx, next) => {
@@ -230,7 +227,6 @@ router.post("/", async (ctx, next) => {
  *    msg: '请求参数错误!',
  *    data: []
  *  }
- * @apiSampleRequest http://localhost:9999/api/manufactors/:id
  * @apiVersion 0.1.0
  */
 router.put("/:id", async (ctx, next) => {
@@ -285,7 +281,6 @@ router.put("/:id", async (ctx, next) => {
  *    msg: '请求参数错误!',
  *    data: []
  *  }
- * @apiSampleRequest http://localhost:9999/api/manufactors/:id
  * @apiVersion 0.1.0
  */
 router.delete("/:id", async (ctx, next) => {

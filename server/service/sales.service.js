@@ -1,5 +1,5 @@
 exports = module.exports = {
-  attributes: ["id", "price", "amount", "create_time", "update_time", "operator", "goods_id"],
+  attributes: ["id", "amount", "create_time", "update_time", "operator", "goods_id"],
   async findAllByPages(ctx, models) {
     let { dbQuery, Op } = ctx;
     let query = {
@@ -44,7 +44,6 @@ exports = module.exports = {
       user
     } = ctx;
     let sales = models.sales.build({
-      price: body.price,
       amount: body.amount,
       goods_id: body.goods_id,
       operator: user.payload.name,
@@ -81,7 +80,6 @@ exports = module.exports = {
     goods.amount -= Number(body.amount);
 
     sales.amount = body.amount;
-    sales.price = body.price;
     sales.goods_id = body.goods_id;
     sales.operator = user.payload.name;
     sales.update_time = Math.floor(Date.now() / 1000);

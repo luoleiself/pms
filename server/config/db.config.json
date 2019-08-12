@@ -4,7 +4,7 @@
     "port": 3306,
     "database": "pms",
     "username": "root",
-    "password": "root",
+    "password": "1006611",
     "dialect": "mysql"
   },
   "pool": {
