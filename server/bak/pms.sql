@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2019-08-10 15:26:45
+Date: 2019-08-14 21:11:13
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -67,7 +67,7 @@ CREATE TABLE `brands` (
   PRIMARY KEY (`id`),
   KEY `manufactor_id` (`manufactor_id`),
   CONSTRAINT `brands_ibfk_1` FOREIGN KEY (`manufactor_id`) REFERENCES `manufactors` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of brands
@@ -84,6 +84,7 @@ INSERT INTO `brands` VALUES ('19', '0', '小米', '为发烧而生', '1', '15644
 INSERT INTO `brands` VALUES ('20', '19', '悦米', '小米旗下', '1', '1564404511', null, '张三', '21');
 INSERT INTO `brands` VALUES ('21', '0', '娃哈哈', '娃哈哈', '1', '1564476412', null, '张三', '22');
 INSERT INTO `brands` VALUES ('22', '0', '海天', '海天', '1', '1564476857', null, '张三', '23');
+INSERT INTO `brands` VALUES ('24', '0', '测试', null, '1', '1565590941', null, '', '15');
 
 -- ----------------------------
 -- Table structure for categories
@@ -145,24 +146,24 @@ CREATE TABLE `goods` (
 -- Records of goods
 -- ----------------------------
 INSERT INTO `goods` VALUES ('13', '矿泉水', '矿泉水，矿物质水', '水', '150', '1563540355', '1563774705', '1', '张三', '11', '18');
-INSERT INTO `goods` VALUES ('14', '方便面', '泡面', '油炸型方便面，大份量', '320', '1563541147', null, '1', '张三', '11', '17');
-INSERT INTO `goods` VALUES ('15', '火腿肠', '火腿肠，香肠', '生熟都能吃', '895', '1564404198', null, '1', '张三', '14', '24');
+INSERT INTO `goods` VALUES ('14', '方便面', '泡面', '油炸型方便面，大份量', '470', '1563541147', null, '1', '张三', '11', '17');
+INSERT INTO `goods` VALUES ('15', '火腿肠', '火腿肠，香肠', '生熟都能吃', '795', '1564404198', null, '1', '张三', '14', '24');
 INSERT INTO `goods` VALUES ('16', '油辣子', '辣椒酱，老干妈，鸡肉味，油辣酱', '老干妈牌油辣子', '180', '1564404258', null, '1', '张三', '15', '28');
-INSERT INTO `goods` VALUES ('17', '荣耀20', '超级4摄，荣耀顶级产品', '荣耀旗舰级', '66', '1564404570', null, '1', '张三', '18', '22');
+INSERT INTO `goods` VALUES ('17', '荣耀20', '超级4摄，荣耀顶级产品', '荣耀旗舰级', '61', '1564404570', null, '1', '张三', '18', '22');
 INSERT INTO `goods` VALUES ('18', '小米9', '小米9，米9', '小米', '200', '1564405766', null, '1', '张三', '19', '22');
 INSERT INTO `goods` VALUES ('19', '华为P30', 'p30,P30', '', '43', '1564405860', null, '1', '张三', '17', '22');
 INSERT INTO `goods` VALUES ('20', '干脆面', '干吃面，油炸型', '可直接食用', '300', '1564475955', null, '1', '张三', '11', '17');
 INSERT INTO `goods` VALUES ('21', '鸡精', '调味料', '调味料，鸡精', '250', '1564476022', null, '1', '张三', '15', '20');
 INSERT INTO `goods` VALUES ('22', '苏打水', '苏打水', '苏打水', '290', '1564476088', null, '1', '张三', '11', '18');
 INSERT INTO `goods` VALUES ('23', 'MagicBook', '笔记本,MagicBook,Book,', '荣耀笔记本，', '35', '1564476158', '1564476501', '1', '张三', '18', '25');
-INSERT INTO `goods` VALUES ('24', '红牛', '红牛', '红牛', '110', '1564476255', null, '1', '张三', '12', '23');
-INSERT INTO `goods` VALUES ('25', '冰红茶', '冰红茶', '冰红茶', '90', '1564476282', null, '1', '张三', '12', '26');
-INSERT INTO `goods` VALUES ('26', 'AD钙奶', '娃哈哈，AD钙奶，', '全国畅销', '310', '1564476466', null, '1', '张三', '21', '19');
+INSERT INTO `goods` VALUES ('24', '红牛', '红牛', '红牛', '161', '1564476255', null, '1', '张三', '12', '23');
+INSERT INTO `goods` VALUES ('25', '冰红茶', '冰红茶', '冰红茶', '72', '1564476282', null, '1', '张三', '12', '26');
+INSERT INTO `goods` VALUES ('26', 'AD钙奶', '娃哈哈，AD钙奶，', '全国畅销', '490', '1564476466', null, '1', '张三', '21', '19');
 INSERT INTO `goods` VALUES ('27', '健力宝', '健力宝', '健力宝', '400', '1564476681', null, '1', '张三', '21', '26');
-INSERT INTO `goods` VALUES ('28', '小米笔记本', '小米笔记本，miBook,mi', '小米笔记本', '200', '1564476751', null, '1', '张三', '19', '25');
-INSERT INTO `goods` VALUES ('29', '海天酱油', '酱油，海天', '海天酱油', '25', '1564476864', null, '1', '张三', '22', '20');
+INSERT INTO `goods` VALUES ('28', '小米笔记本', '小米笔记本，miBook,mi', '小米笔记本', '190', '1564476751', null, '1', '张三', '19', '25');
+INSERT INTO `goods` VALUES ('29', '海天酱油', '酱油，海天', '海天酱油', '205', '1564476864', null, '1', '张三', '22', '20');
 INSERT INTO `goods` VALUES ('30', '爽歪歪', '爽歪歪', '爽歪歪', '125', '1564476903', null, '1', '张三', '21', '19');
-INSERT INTO `goods` VALUES ('31', 'QQ星', 'QQ星', 'QQ星', '25', '1564476928', null, '1', '张三', '21', '19');
+INSERT INTO `goods` VALUES ('31', 'QQ星', 'QQ星', 'QQ星', '5', '1564476928', null, '1', '张三', '21', '19');
 
 -- ----------------------------
 -- Table structure for manufactors
@@ -212,33 +213,38 @@ CREATE TABLE `purchase` (
   PRIMARY KEY (`id`),
   KEY `goods_id` (`goods_id`),
   CONSTRAINT `purchase_ibfk_1` FOREIGN KEY (`goods_id`) REFERENCES `goods` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of purchase
 -- ----------------------------
-INSERT INTO `purchase` VALUES ('1', '1.20', '10', '1563788273', '1563788367', '张三', '14');
-INSERT INTO `purchase` VALUES ('2', '5.00', '100', '1563886174', null, '张三', '13');
-INSERT INTO `purchase` VALUES ('3', '2999.00', '100', '1564405650', null, '张三', '17');
-INSERT INTO `purchase` VALUES ('4', '5.00', '200', '1564405664', null, '张三', '16');
-INSERT INTO `purchase` VALUES ('5', '2.00', '1000', '1564405712', null, '张三', '15');
-INSERT INTO `purchase` VALUES ('6', '5.00', '500', '1564405733', null, '张三', '14');
-INSERT INTO `purchase` VALUES ('7', '1999.00', '200', '1564405778', null, '张三', '18');
-INSERT INTO `purchase` VALUES ('8', '4000.00', '50', '1564405881', null, '张三', '19');
-INSERT INTO `purchase` VALUES ('9', '5000.00', '200', '1564480964', null, '张三', '28');
-INSERT INTO `purchase` VALUES ('10', '2.00', '500', '1564480982', null, '张三', '26');
-INSERT INTO `purchase` VALUES ('11', '4000.00', '35', '1564480993', null, '张三', '23');
-INSERT INTO `purchase` VALUES ('12', '1.00', '100', '1564481002', null, '张三', '20');
-INSERT INTO `purchase` VALUES ('13', '5.00', '60', '1564481021', null, '张三', '29');
-INSERT INTO `purchase` VALUES ('14', '4.00', '400', '1564481046', null, '张三', '27');
-INSERT INTO `purchase` VALUES ('15', '3.50', '500', '1564481060', null, '张三', '22');
-INSERT INTO `purchase` VALUES ('16', '2.00', '125', '1564481097', null, '张三', '30');
-INSERT INTO `purchase` VALUES ('17', '2.00', '300', '1564481109', null, '张三', '21');
-INSERT INTO `purchase` VALUES ('18', '2.50', '178', '1564481133', null, '张三', '31');
-INSERT INTO `purchase` VALUES ('19', '5.00', '150', '1564481144', null, '张三', '24');
-INSERT INTO `purchase` VALUES ('20', '2.00', '100', '1564823413', null, '张三', '25');
-INSERT INTO `purchase` VALUES ('21', '1.00', '200', '1564823423', null, '张三', '20');
-INSERT INTO `purchase` VALUES ('22', '1.00', '150', '1565070538', null, '张三', '13');
+INSERT INTO `purchase` VALUES ('1', '10', '1563788273', '1563788367', '张三', '14');
+INSERT INTO `purchase` VALUES ('2', '100', '1563886174', null, '张三', '13');
+INSERT INTO `purchase` VALUES ('3', '100', '1564405650', null, '张三', '17');
+INSERT INTO `purchase` VALUES ('4', '200', '1564405664', null, '张三', '16');
+INSERT INTO `purchase` VALUES ('5', '1000', '1564405712', null, '张三', '15');
+INSERT INTO `purchase` VALUES ('6', '500', '1564405733', null, '张三', '14');
+INSERT INTO `purchase` VALUES ('7', '200', '1564405778', null, '张三', '18');
+INSERT INTO `purchase` VALUES ('8', '50', '1564405881', null, '张三', '19');
+INSERT INTO `purchase` VALUES ('9', '200', '1564480964', null, '张三', '28');
+INSERT INTO `purchase` VALUES ('10', '500', '1564480982', null, '张三', '26');
+INSERT INTO `purchase` VALUES ('11', '35', '1564480993', null, '张三', '23');
+INSERT INTO `purchase` VALUES ('12', '100', '1564481002', null, '张三', '20');
+INSERT INTO `purchase` VALUES ('13', '60', '1564481021', null, '张三', '29');
+INSERT INTO `purchase` VALUES ('14', '400', '1564481046', null, '张三', '27');
+INSERT INTO `purchase` VALUES ('15', '500', '1564481060', null, '张三', '22');
+INSERT INTO `purchase` VALUES ('16', '125', '1564481097', null, '张三', '30');
+INSERT INTO `purchase` VALUES ('17', '300', '1564481109', null, '张三', '21');
+INSERT INTO `purchase` VALUES ('18', '178', '1564481133', null, '张三', '31');
+INSERT INTO `purchase` VALUES ('19', '150', '1564481144', null, '张三', '24');
+INSERT INTO `purchase` VALUES ('20', '100', '1564823413', null, '张三', '25');
+INSERT INTO `purchase` VALUES ('21', '200', '1564823423', null, '张三', '20');
+INSERT INTO `purchase` VALUES ('22', '150', '1565070538', null, '张三', '13');
+INSERT INTO `purchase` VALUES ('23', '500', '1565589930', null, '李四', '26');
+INSERT INTO `purchase` VALUES ('24', '300', '1565589952', null, '李四', '14');
+INSERT INTO `purchase` VALUES ('25', '251', '1565591912', null, '李四', '24');
+INSERT INTO `purchase` VALUES ('26', '82', '1565593604', null, '张三', '25');
+INSERT INTO `purchase` VALUES ('27', '200', '1565697307', '1565697417', '张三', '29');
 
 -- ----------------------------
 -- Table structure for roles
@@ -311,49 +317,66 @@ CREATE TABLE `sales` (
   PRIMARY KEY (`id`),
   KEY `goods_id` (`goods_id`),
   CONSTRAINT `sales_ibfk_1` FOREIGN KEY (`goods_id`) REFERENCES `goods` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sales
 -- ----------------------------
-INSERT INTO `sales` VALUES ('1', '1.50', '11', '1563813100', '1563786846', '张三', '13');
-INSERT INTO `sales` VALUES ('2', '2.00', '1', '1563796032', null, '张三', '13');
-INSERT INTO `sales` VALUES ('3', '5.00', '5', '1563796955', null, '张三', '14');
-INSERT INTO `sales` VALUES ('4', '5.00', '88', '1563886214', null, '张三', '13');
-INSERT INTO `sales` VALUES ('5', '5.00', '2', '1564403399', null, '张三', '14');
-INSERT INTO `sales` VALUES ('6', '2.00', '3', '1564403413', null, '张三', '14');
-INSERT INTO `sales` VALUES ('7', '2.00', '20', '1564405789', null, '张三', '15');
-INSERT INTO `sales` VALUES ('8', '2.00', '5', '1564405797', null, '张三', '15');
-INSERT INTO `sales` VALUES ('9', '2899.00', '5', '1564405817', null, '张三', '17');
-INSERT INTO `sales` VALUES ('10', '4000.00', '2', '1564405913', null, '张三', '19');
-INSERT INTO `sales` VALUES ('11', '2.00', '20', '1564405965', null, '张三', '16');
-INSERT INTO `sales` VALUES ('12', '5.00', '30', '1564405997', null, '张三', '15');
-INSERT INTO `sales` VALUES ('13', '2.00', '20', '1564406006', null, '张三', '13');
-INSERT INTO `sales` VALUES ('14', '2899.00', '10', '1564406017', null, '张三', '17');
-INSERT INTO `sales` VALUES ('15', '4000.00', '5', '1564406035', null, '张三', '19');
-INSERT INTO `sales` VALUES ('16', '5.00', '50', '1564406058', null, '张三', '15');
-INSERT INTO `sales` VALUES ('17', '5.00', '30', '1564406076', null, '张三', '14');
-INSERT INTO `sales` VALUES ('18', '3.00', '10', '1564481220', null, '张三', '24');
-INSERT INTO `sales` VALUES ('19', '2.00', '10', '1564823435', null, '张三', '25');
-INSERT INTO `sales` VALUES ('20', '5.00', '100', '1564823444', null, '张三', '14');
-INSERT INTO `sales` VALUES ('21', '4000.00', '14', '1564823497', null, '张三', '17');
-INSERT INTO `sales` VALUES ('22', '12.00', '30', '1564823511', null, '张三', '29');
-INSERT INTO `sales` VALUES ('23', '2.50', '100', '1564824144', null, '张三', '31');
-INSERT INTO `sales` VALUES ('24', '2.00', '50', '1564824156', null, '张三', '13');
-INSERT INTO `sales` VALUES ('25', '5.00', '100', '1564824187', null, '张三', '22');
-INSERT INTO `sales` VALUES ('26', '2.00', '50', '1564824216', null, '张三', '14');
-INSERT INTO `sales` VALUES ('27', '2.50', '30', '1564824243', null, '张三', '24');
-INSERT INTO `sales` VALUES ('28', '5.00', '30', '1564824254', null, '张三', '26');
-INSERT INTO `sales` VALUES ('29', '3.00', '23', '1564824272', null, '张三', '31');
-INSERT INTO `sales` VALUES ('30', '2.00', '50', '1564824284', null, '张三', '21');
-INSERT INTO `sales` VALUES ('31', '1000.00', '5', '1565070375', null, '张三', '17');
-INSERT INTO `sales` VALUES ('32', '3.00', '10', '1565070390', null, '张三', '22');
-INSERT INTO `sales` VALUES ('33', '5.00', '5', '1565070407', null, '张三', '29');
-INSERT INTO `sales` VALUES ('34', '1.00', '30', '1565070440', null, '张三', '13');
-INSERT INTO `sales` VALUES ('35', '2.00', '30', '1565070454', null, '张三', '31');
-INSERT INTO `sales` VALUES ('36', '3.00', '110', '1565070487', null, '张三', '26');
-INSERT INTO `sales` VALUES ('37', '2.50', '50', '1565070560', null, '张三', '26');
-INSERT INTO `sales` VALUES ('38', '3.00', '100', '1565070584', null, '张三', '22');
+INSERT INTO `sales` VALUES ('1', '11', '1563813100', '1563786846', '张三', '13');
+INSERT INTO `sales` VALUES ('2', '1', '1563796032', null, '张三', '13');
+INSERT INTO `sales` VALUES ('3', '5', '1563796955', null, '张三', '14');
+INSERT INTO `sales` VALUES ('4', '88', '1563886214', null, '张三', '13');
+INSERT INTO `sales` VALUES ('5', '2', '1564403399', null, '张三', '14');
+INSERT INTO `sales` VALUES ('6', '3', '1564403413', null, '张三', '14');
+INSERT INTO `sales` VALUES ('7', '20', '1564405789', null, '张三', '15');
+INSERT INTO `sales` VALUES ('8', '5', '1564405797', null, '张三', '15');
+INSERT INTO `sales` VALUES ('9', '5', '1564405817', null, '张三', '17');
+INSERT INTO `sales` VALUES ('10', '2', '1564405913', null, '张三', '19');
+INSERT INTO `sales` VALUES ('11', '20', '1564405965', null, '张三', '16');
+INSERT INTO `sales` VALUES ('12', '30', '1564405997', null, '张三', '15');
+INSERT INTO `sales` VALUES ('13', '20', '1564406006', null, '张三', '13');
+INSERT INTO `sales` VALUES ('14', '10', '1564406017', null, '张三', '17');
+INSERT INTO `sales` VALUES ('15', '5', '1564406035', null, '张三', '19');
+INSERT INTO `sales` VALUES ('16', '50', '1564406058', null, '张三', '15');
+INSERT INTO `sales` VALUES ('17', '30', '1564406076', null, '张三', '14');
+INSERT INTO `sales` VALUES ('18', '10', '1564481220', null, '张三', '24');
+INSERT INTO `sales` VALUES ('19', '10', '1564823435', null, '张三', '25');
+INSERT INTO `sales` VALUES ('20', '100', '1564823444', null, '张三', '14');
+INSERT INTO `sales` VALUES ('21', '14', '1564823497', null, '张三', '17');
+INSERT INTO `sales` VALUES ('22', '30', '1564823511', null, '张三', '29');
+INSERT INTO `sales` VALUES ('23', '100', '1564824144', null, '张三', '31');
+INSERT INTO `sales` VALUES ('24', '50', '1564824156', null, '张三', '13');
+INSERT INTO `sales` VALUES ('25', '100', '1564824187', null, '张三', '22');
+INSERT INTO `sales` VALUES ('26', '50', '1564824216', null, '张三', '14');
+INSERT INTO `sales` VALUES ('27', '30', '1564824243', null, '张三', '24');
+INSERT INTO `sales` VALUES ('28', '30', '1564824254', null, '张三', '26');
+INSERT INTO `sales` VALUES ('29', '23', '1564824272', null, '张三', '31');
+INSERT INTO `sales` VALUES ('30', '50', '1564824284', null, '张三', '21');
+INSERT INTO `sales` VALUES ('31', '5', '1565070375', null, '张三', '17');
+INSERT INTO `sales` VALUES ('32', '10', '1565070390', null, '张三', '22');
+INSERT INTO `sales` VALUES ('33', '5', '1565070407', null, '张三', '29');
+INSERT INTO `sales` VALUES ('34', '30', '1565070440', null, '张三', '13');
+INSERT INTO `sales` VALUES ('35', '30', '1565070454', null, '张三', '31');
+INSERT INTO `sales` VALUES ('36', '110', '1565070487', null, '张三', '26');
+INSERT INTO `sales` VALUES ('37', '50', '1565070560', null, '张三', '26');
+INSERT INTO `sales` VALUES ('38', '100', '1565070584', null, '张三', '22');
+INSERT INTO `sales` VALUES ('39', '100', '1565594626', null, '张三', '24');
+INSERT INTO `sales` VALUES ('40', '20', '1565596093', null, '张三', '26');
+INSERT INTO `sales` VALUES ('41', '25', '1565697252', null, '张三', '24');
+INSERT INTO `sales` VALUES ('42', '100', '1565697259', null, '张三', '14');
+INSERT INTO `sales` VALUES ('43', '10', '1565697268', null, '张三', '28');
+INSERT INTO `sales` VALUES ('44', '5', '1565697277', null, '张三', '17');
+INSERT INTO `sales` VALUES ('45', '100', '1565697283', null, '张三', '26');
+INSERT INTO `sales` VALUES ('46', '20', '1565697298', null, '张三', '29');
+INSERT INTO `sales` VALUES ('47', '100', '1565697342', null, '张三', '25');
+INSERT INTO `sales` VALUES ('48', '50', '1565697357', null, '张三', '15');
+INSERT INTO `sales` VALUES ('49', '20', '1565697369', null, '张三', '31');
+INSERT INTO `sales` VALUES ('50', '50', '1565697385', null, '张三', '15');
+INSERT INTO `sales` VALUES ('51', '50', '1565697394', null, '张三', '14');
+INSERT INTO `sales` VALUES ('52', '50', '1565697401', null, '张三', '24');
+INSERT INTO `sales` VALUES ('53', '100', '1565786884', null, '张三', '26');
+INSERT INTO `sales` VALUES ('54', '100', '1565786906', null, '张三', '26');
+INSERT INTO `sales` VALUES ('55', '25', '1565787233', null, '张三', '24');
 
 -- ----------------------------
 -- Table structure for users
