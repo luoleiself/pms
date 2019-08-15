@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2019-08-14 21:11:13
+Date: 2019-08-15 21:06:15
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -156,12 +156,12 @@ INSERT INTO `goods` VALUES ('20', '干脆面', '干吃面，油炸型', '可直�
 INSERT INTO `goods` VALUES ('21', '鸡精', '调味料', '调味料，鸡精', '250', '1564476022', null, '1', '张三', '15', '20');
 INSERT INTO `goods` VALUES ('22', '苏打水', '苏打水', '苏打水', '290', '1564476088', null, '1', '张三', '11', '18');
 INSERT INTO `goods` VALUES ('23', 'MagicBook', '笔记本,MagicBook,Book,', '荣耀笔记本，', '35', '1564476158', '1564476501', '1', '张三', '18', '25');
-INSERT INTO `goods` VALUES ('24', '红牛', '红牛', '红牛', '161', '1564476255', null, '1', '张三', '12', '23');
+INSERT INTO `goods` VALUES ('24', '红牛', '红牛', '红牛', '111', '1564476255', null, '1', '张三', '12', '23');
 INSERT INTO `goods` VALUES ('25', '冰红茶', '冰红茶', '冰红茶', '72', '1564476282', null, '1', '张三', '12', '26');
-INSERT INTO `goods` VALUES ('26', 'AD钙奶', '娃哈哈，AD钙奶，', '全国畅销', '490', '1564476466', null, '1', '张三', '21', '19');
+INSERT INTO `goods` VALUES ('26', 'AD钙奶', '娃哈哈，AD钙奶，', '全国畅销', '390', '1564476466', null, '1', '张三', '21', '19');
 INSERT INTO `goods` VALUES ('27', '健力宝', '健力宝', '健力宝', '400', '1564476681', null, '1', '张三', '21', '26');
 INSERT INTO `goods` VALUES ('28', '小米笔记本', '小米笔记本，miBook,mi', '小米笔记本', '190', '1564476751', null, '1', '张三', '19', '25');
-INSERT INTO `goods` VALUES ('29', '海天酱油', '酱油，海天', '海天酱油', '205', '1564476864', null, '1', '张三', '22', '20');
+INSERT INTO `goods` VALUES ('29', '海天酱油', '酱油，海天', '海天酱油', '153', '1564476864', null, '1', '张三', '22', '20');
 INSERT INTO `goods` VALUES ('30', '爽歪歪', '爽歪歪', '爽歪歪', '125', '1564476903', null, '1', '张三', '21', '19');
 INSERT INTO `goods` VALUES ('31', 'QQ星', 'QQ星', 'QQ星', '5', '1564476928', null, '1', '张三', '21', '19');
 
@@ -317,7 +317,7 @@ CREATE TABLE `sales` (
   PRIMARY KEY (`id`),
   KEY `goods_id` (`goods_id`),
   CONSTRAINT `sales_ibfk_1` FOREIGN KEY (`goods_id`) REFERENCES `goods` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sales
@@ -377,6 +377,9 @@ INSERT INTO `sales` VALUES ('52', '50', '1565697401', null, '张三', '24');
 INSERT INTO `sales` VALUES ('53', '100', '1565786884', null, '张三', '26');
 INSERT INTO `sales` VALUES ('54', '100', '1565786906', null, '张三', '26');
 INSERT INTO `sales` VALUES ('55', '25', '1565787233', null, '张三', '24');
+INSERT INTO `sales` VALUES ('56', '50', '1565874163', null, '张三', '24');
+INSERT INTO `sales` VALUES ('57', '100', '1565874221', null, '张三', '26');
+INSERT INTO `sales` VALUES ('58', '52', '1565874341', null, '张三', '29');
 
 -- ----------------------------
 -- Table structure for users

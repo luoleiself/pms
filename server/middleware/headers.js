@@ -14,7 +14,9 @@ exports = module.exports = async (ctx, next) => {
     "Access-Control-Allow-Headers":
       "Content-Type,X-Requested-With,Cache-Control,Authorization,token",
     "Access-Control-Allow-Methods": "OPTIONS,GET,POST,DELETE,PUT",
-    "Cache-Control": "max-age=86400,must-revalidate",
+    // "Cache-Control": "max-age=86400,must-revalidate",
+    "Cache-Control": "no-cache",
+    pragma: "no-cache",
     "X-Response-Time": `${endTime - startTime}ms`
   });
 };
