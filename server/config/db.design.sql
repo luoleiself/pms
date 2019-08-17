@@ -74,11 +74,11 @@ CREATE TABLE IF NOT EXISTS `brands`(
 	primary key(`id`)
 );
 
-/*##################### 销售信息表  #####################*/
+/*##################### 出库信息表  #####################*/
 DROP TABLE IF EXISTS `sales`;
 CREATE TABLE IF NOT EXISTS `sales`(
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '销售记录id', 
-	`amount` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '销售数量', 
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '出库记录id', 
+	`amount` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '出库数量', 
 	`create_time` int(10) unsigned COMMENT '创建时间', 
 	`update_time` int(10) unsigned COMMENT '更新时间', 
 	`operator` int(5) unsigned COMMENT '操作人员id', 
@@ -86,11 +86,11 @@ CREATE TABLE IF NOT EXISTS `sales`(
 	primary key(`id`)
 );
 
-/*##################### 采购信息表  #####################*/
+/*##################### 入库信息表  #####################*/
 DROP TABLE IF EXISTS `purchase`;
 CREATE TABLE IF NOT EXISTS `purchase`(
-	`id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '采购信息id',
-	`amount` smallint(5) unsigned default '0' COMMENT '采购数量',
+	`id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '入库信息id',
+	`amount` smallint(5) unsigned default '0' COMMENT '入库数量',
 	`create_time` int(10) unsigned COMMENT '创建时间',
 	`update_time` int(10) unsigned COMMENT '更新时间',
 	`operator` int(5) unsigned COMMENT '操作人员id',

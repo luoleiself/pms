@@ -7,17 +7,17 @@ exports = module.exports = function(sequelize, DataTypes) {
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
-        comment: "销售记录id"
+        comment: "出库记录id"
       },
       /* price: {
         type: DataTypes.DECIMAL(10, 2).UNSIGNED,
         defaultValue: "0.0",
-        comment: "销售单价"
+        comment: "出库单价"
       }, */
       amount: {
         type: DataTypes.SMALLINT(5).UNSIGNED,
         defaultValue: "0",
-        comment: "销售数量"
+        comment: "出库数量"
       },
       // goods_id: {
       //   type: DataTypes.INTEGER(5).UNSIGNED,

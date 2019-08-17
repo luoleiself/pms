@@ -9,13 +9,13 @@
       <el-button @click="reset">重置</el-button>
     </div>
     <div class="menu_box">
-      <el-button type="primary" @click="add">添加采购记录</el-button>
+      <el-button type="primary" @click="add">添加入库记录</el-button>
     </div>
     <template>
       <el-table :data="tableOptions.tableData" :height="tableOptions.tableHeight" stripe border style="width: 100%" v-loading="tableOptions.loading" @selection-change="tblSelectionChange">
         <el-table-column type="selection" width="55" align="center"></el-table-column>
         <el-table-column prop="id" label="ID" align="center" width="70"></el-table-column>
-        <el-table-column prop="amount" label="采购数量" align="center"></el-table-column>
+        <el-table-column prop="amount" label="入库数量" align="center"></el-table-column>
         <el-table-column prop="" label="商品名称" align="center">
           <template slot-scope="scope">
             <span>{{scope.row.good.name}}</span>
@@ -69,7 +69,7 @@
             </el-select>
           </el-form-item>
           <el-form-item label="数量" prop="amount">
-            <el-input v-model="form.amount" placeholder="销售数量" clearable></el-input>
+            <el-input v-model="form.amount" placeholder="入库数量" clearable></el-input>
           </el-form-item>
         </el-form>
       </div>
@@ -102,7 +102,7 @@ export default {
       },
       goodsList: [],
       dialogOpt: {
-        title: "添加采购记录",
+        title: "添加入库记录",
         visible: false,
         oper: 0, // 1->添加，2->编辑
         formDisable: false
@@ -137,7 +137,7 @@ export default {
       this.updateTable();
     },
     add() {
-      this.dialogOpt.title = "添加采购记录";
+      this.dialogOpt.title = "添加入库记录";
       this.dialogOpt.visible = true;
       this.dialogOpt.oper = 1;
       this.dialogOpt.formDisable = false;
@@ -145,7 +145,7 @@ export default {
     async edit(row) {
       try {
         let res = await this.$xhr.get(`/purchase/${row.id}`);
-        this.dialogOpt.title = "编辑采购记录";
+        this.dialogOpt.title = "编辑入库记录";
         this.dialogOpt.visible = true;
         this.dialogOpt.oper = 2;
         this.dialogOpt.row = row;

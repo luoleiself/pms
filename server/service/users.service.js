@@ -95,7 +95,7 @@ exports = module.exports = {
     } = ctx;
     let users = await this.findById(ctx, models);
     if (!users) {
-      return { code: 404, msg: "该用户不存在!" };
+      return null;
     }
 
     let roles = null;
@@ -172,5 +172,19 @@ exports = module.exports = {
     result = JSON.parse(JSON.stringify(result));
     result.menu = arr;
     return result;
+  },
+  // 重置密码
+  async resetPwd(ctx, models) {
+    let { user, md5 } = ctx;
+    let users = await this.findById(ctx, models);
+    if (!users) {
+      return null;
+    }
+    users.password = md5(`123456`);
+    users.operator = user ? user.payload.name : "";
+    users.update_time = Math.floor(Date.now() / 1000);
+
+    await users.save();
+    return users;
   }
 };

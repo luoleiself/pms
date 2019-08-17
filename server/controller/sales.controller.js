@@ -87,7 +87,7 @@ router.get("/", async (ctx, next) => {
  *  HTTP/1.1 200 OK
  *  {
  *    code: 10404,
- *    msg: '未查询到该销售信息!',
+ *    msg: '未查询到该出库信息!',
  *    data: []
  *  }
  * @apiSuccessExample Error-Response:
@@ -114,7 +114,7 @@ router.get("/:id", async (ctx, next) => {
     let result = await salesService.findById(ctx, models);
     if (!result) {
       resData.code = 10404;
-      resData.msg = "未查询到该销售信息";
+      resData.msg = "未查询到该出库信息";
     } else {
       resData.data = result;
     }
@@ -148,7 +148,7 @@ router.get("/:id", async (ctx, next) => {
  *  HTTP/1.1 200 OK
  *  {
  *    code: 10400,
- *    msg: '销售数量不能大于库存数量',
+ *    msg: '出库数量不能大于库存数量',
  *    data: [],
  *  }
  * @apiVersion 0.1.0
@@ -160,7 +160,7 @@ router.post("/", async (ctx, next) => {
     let result = await salesService.add(ctx, models);
     if (!result) {
       resData.code = 10400;
-      resData.msg = "销售数量不能大于库存数量!";
+      resData.msg = "出库数量不能大于库存数量!";
     } else {
       resData.data = result;
     }
@@ -195,14 +195,14 @@ router.post("/", async (ctx, next) => {
  *  HTTP/1.1 200 OK
  *  {
  *    code: 10404,
- *    msg: '该销售信息不存在!',
+ *    msg: '该出库信息不存在!',
  *    data: []
  *  }
  * @apiSuccessExample Error-Response:
  *  HTTP/1.1 200 OK
  *  {
  *    code: 10400,
- *    msg: '销售数量不能大于库存数量!',
+ *    msg: '出库数量不能大于库存数量!',
  *    data: []
  *  }
  * @apiSuccessExample Error-Response:
@@ -257,7 +257,7 @@ router.put("/:id", async (ctx, next) => {
  *  HTTP/1.1 200 OK
  *  {
  *    code: 10404,
- *    msg: '该销售信息不存在!',
+ *    msg: '该出库信息不存在!',
  *    data: []
  *  }
  * @apiSuccessExample Error-Response:
@@ -283,7 +283,7 @@ router.delete("/:id", async (ctx, next) => {
   try {
     let result = await salesService.delete(ctx, models);
     if (!result) {
-      resData.msg = "该销售信息不存在!";
+      resData.msg = "该出库信息不存在!";
       resData.code = 10404;
     } else {
       resData.data = result;

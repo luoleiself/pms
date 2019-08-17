@@ -17,6 +17,7 @@ app
   .use(async (ctx, next) => {
     ctx.jwt = jwt;
     ctx.Op = models.Sequelize.Op;
+    ctx.md5 = md5;
     await next();
   })
   .use(headers)

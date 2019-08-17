@@ -45,7 +45,7 @@ export default {
         },
         series: [
           {
-            name: "销售商品",
+            name: "出库商品",
             type: "pie",
             center: ["50%", "50%"],
             data: []
@@ -65,7 +65,7 @@ export default {
           }));
           this.chart1.setOption({
             title: {
-              text: `近一个月销售量前${p_size}名商品占比`
+              text: `近一个月出库量前${p_size}名商品占比`
             },
             legend: {
               data: legend
@@ -92,7 +92,7 @@ export default {
         },
         series: [
           {
-            name: "采购商品",
+            name: "入库商品",
             type: "pie",
             center: ["50%", "50%"],
             data: []
@@ -112,7 +112,7 @@ export default {
           }));
           this.chart2.setOption({
             title: {
-              text: `近一个月采购量前${p_size}名商品占比`
+              text: `近一个月入库量前${p_size}名商品占比`
             },
             legend: {
               data: legend
@@ -177,7 +177,7 @@ export default {
       this.chart4 = echarts.init(this.$refs["chart4"]);
       this.chart4.setOption({
         title: {
-          text: "按月份统计销售和采购总量",
+          text: "按月份统计出库和入库总量",
           x: "center"
         },
         tooltip: {

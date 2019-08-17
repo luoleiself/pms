@@ -1794,7 +1794,7 @@ define({ "api": [
         },
         {
           "title": "Error-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  code: 10404,\n  msg: '该采购信息不存在!',\n  data: []\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10404,\n  msg: '该入库信息不存在!',\n  data: []\n}",
           "type": "json"
         },
         {
@@ -1836,7 +1836,7 @@ define({ "api": [
         },
         {
           "title": "Error-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  code: 10404,\n  msg: '未查询到该采购信息!',\n  data: []\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10404,\n  msg: '未查询到该入库信息!',\n  data: []\n}",
           "type": "json"
         },
         {
@@ -2019,7 +2019,7 @@ define({ "api": [
         },
         {
           "title": "Error-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  code: 10404,\n  msg: '该采购信息不存在!',\n  data: []\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10404,\n  msg: '该入库信息不存在!',\n  data: []\n}",
           "type": "json"
         },
         {
@@ -2197,7 +2197,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  code: 10400,\n  msg: '销售数量不能大于库存数量',\n  data: [],\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10400,\n  msg: '出库数量不能大于库存数量',\n  data: [],\n}",
           "type": "json"
         }
       ]
@@ -2234,7 +2234,7 @@ define({ "api": [
         },
         {
           "title": "Error-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  code: 10404,\n  msg: '该销售信息不存在!',\n  data: []\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10404,\n  msg: '该出库信息不存在!',\n  data: []\n}",
           "type": "json"
         },
         {
@@ -2276,7 +2276,7 @@ define({ "api": [
         },
         {
           "title": "Error-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  code: 10404,\n  msg: '未查询到该销售信息!',\n  data: []\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10404,\n  msg: '未查询到该出库信息!',\n  data: []\n}",
           "type": "json"
         },
         {
@@ -2459,12 +2459,12 @@ define({ "api": [
         },
         {
           "title": "Error-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  code: 10404,\n  msg: '该销售信息不存在!',\n  data: []\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10404,\n  msg: '该出库信息不存在!',\n  data: []\n}",
           "type": "json"
         },
         {
           "title": "Error-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  code: 10400,\n  msg: '销售数量不能大于库存数量!',\n  data: []\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10400,\n  msg: '出库数量不能大于库存数量!',\n  data: []\n}",
           "type": "json"
         },
         {
@@ -2853,6 +2853,75 @@ define({ "api": [
         }
       ]
     }
+  },
+  {
+    "type": "put",
+    "url": "/users/resetpwd/:id",
+    "title": "resetPwd",
+    "name": "resetPwd",
+    "group": "users",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>user id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": true,
+            "field": "code",
+            "defaultValue": "10200",
+            "description": "<p>状态码</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": true,
+            "field": "msg",
+            "defaultValue": "操作成功",
+            "description": "<p>提示信息</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": true,
+            "field": "result",
+            "description": "<p>结果</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data:{\n    id: 1,\n    name: '张三',\n    username: 'zhangsan',\n    ...\n  }\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10404,\n  msg: '该用户不存在!',\n  data: []\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10400,\n  msg: '请求参数错误!',\n  data: []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.1.0",
+    "filename": "server/controller/users.controller.js",
+    "groupTitle": "users"
   },
   {
     "type": "put",

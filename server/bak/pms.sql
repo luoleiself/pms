@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2019-08-15 21:06:15
+Date: 2019-08-17 18:34:02
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -46,8 +46,8 @@ INSERT INTO `access` VALUES ('4', '2', '商品管理', '/home/goods', 'goods', '
 INSERT INTO `access` VALUES ('5', '2', '分类管理', '/home/categories', 'categories', '1', null, null, null);
 INSERT INTO `access` VALUES ('6', '2', '品牌管理', '/home/brands', 'brands', '1', null, null, null);
 INSERT INTO `access` VALUES ('7', '2', '供应商管理', '/home/manufactors', 'manufactors', '1', null, null, null);
-INSERT INTO `access` VALUES ('8', '2', '采购管理', '/home/purchase', 'purchase', '1', null, null, null);
-INSERT INTO `access` VALUES ('9', '2', '销售管理', '/home/sale', 'sale', '1', null, null, null);
+INSERT INTO `access` VALUES ('8', '2', '入库管理', '/home/purchase', 'purchase', '1', null, null, null);
+INSERT INTO `access` VALUES ('9', '2', '出库管理', '/home/sale', 'sale', '1', null, null, null);
 INSERT INTO `access` VALUES ('10', '2', '用户管理', '/home/users', 'users', '1', null, null, null);
 
 -- ----------------------------
@@ -158,7 +158,7 @@ INSERT INTO `goods` VALUES ('22', '苏打水', '苏打水', '苏打水', '290', 
 INSERT INTO `goods` VALUES ('23', 'MagicBook', '笔记本,MagicBook,Book,', '荣耀笔记本，', '35', '1564476158', '1564476501', '1', '张三', '18', '25');
 INSERT INTO `goods` VALUES ('24', '红牛', '红牛', '红牛', '111', '1564476255', null, '1', '张三', '12', '23');
 INSERT INTO `goods` VALUES ('25', '冰红茶', '冰红茶', '冰红茶', '72', '1564476282', null, '1', '张三', '12', '26');
-INSERT INTO `goods` VALUES ('26', 'AD钙奶', '娃哈哈，AD钙奶，', '全国畅销', '390', '1564476466', null, '1', '张三', '21', '19');
+INSERT INTO `goods` VALUES ('26', 'AD钙奶', '娃哈哈，AD钙奶，', '全国畅销', '340', '1564476466', null, '1', '张三', '21', '19');
 INSERT INTO `goods` VALUES ('27', '健力宝', '健力宝', '健力宝', '400', '1564476681', null, '1', '张三', '21', '26');
 INSERT INTO `goods` VALUES ('28', '小米笔记本', '小米笔记本，miBook,mi', '小米笔记本', '190', '1564476751', null, '1', '张三', '19', '25');
 INSERT INTO `goods` VALUES ('29', '海天酱油', '酱油，海天', '海天酱油', '153', '1564476864', null, '1', '张三', '22', '20');
@@ -204,8 +204,8 @@ INSERT INTO `manufactors` VALUES ('23', '海天集团有限公司', '海天', '�
 -- ----------------------------
 DROP TABLE IF EXISTS `purchase`;
 CREATE TABLE `purchase` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '采购记录id',
-  `amount` smallint(5) unsigned DEFAULT '0' COMMENT '采购数量',
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '入库记录id',
+  `amount` smallint(5) unsigned DEFAULT '0' COMMENT '入库数量',
   `create_time` int(10) unsigned DEFAULT NULL COMMENT '创建时间',
   `update_time` int(10) unsigned DEFAULT NULL COMMENT '更新时间',
   `operator` varchar(20) DEFAULT NULL COMMENT '操作人员',
@@ -265,8 +265,8 @@ CREATE TABLE `roles` (
 -- Records of roles
 -- ----------------------------
 INSERT INTO `roles` VALUES ('1', '管理员', 'admin', '1', null, null, '');
-INSERT INTO `roles` VALUES ('2', '销售', 'sale', '1', null, null, null);
-INSERT INTO `roles` VALUES ('3', '采购', 'purchase', '1', null, null, null);
+INSERT INTO `roles` VALUES ('2', '出库', 'sale', '1', null, null, null);
+INSERT INTO `roles` VALUES ('3', '入库', 'purchase', '1', null, null, null);
 INSERT INTO `roles` VALUES ('4', '游客', 'visitor', '1', null, null, null);
 
 -- ----------------------------
@@ -308,8 +308,8 @@ INSERT INTO `role_access` VALUES ('9', '10', '1');
 -- ----------------------------
 DROP TABLE IF EXISTS `sales`;
 CREATE TABLE `sales` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '销售记录id',
-  `amount` smallint(5) unsigned DEFAULT '0' COMMENT '销售数量',
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '出库记录id',
+  `amount` smallint(5) unsigned DEFAULT '0' COMMENT '出库数量',
   `create_time` int(10) unsigned DEFAULT NULL COMMENT '创建时间',
   `update_time` int(10) unsigned DEFAULT NULL COMMENT '更新时间',
   `operator` varchar(20) DEFAULT NULL COMMENT '操作人员',
@@ -317,7 +317,7 @@ CREATE TABLE `sales` (
   PRIMARY KEY (`id`),
   KEY `goods_id` (`goods_id`),
   CONSTRAINT `sales_ibfk_1` FOREIGN KEY (`goods_id`) REFERENCES `goods` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sales
@@ -380,6 +380,7 @@ INSERT INTO `sales` VALUES ('55', '25', '1565787233', null, '张三', '24');
 INSERT INTO `sales` VALUES ('56', '50', '1565874163', null, '张三', '24');
 INSERT INTO `sales` VALUES ('57', '100', '1565874221', null, '张三', '26');
 INSERT INTO `sales` VALUES ('58', '52', '1565874341', null, '张三', '29');
+INSERT INTO `sales` VALUES ('59', '50', '1566025283', null, '张三', '26');
 
 -- ----------------------------
 -- Table structure for users
@@ -404,10 +405,10 @@ CREATE TABLE `users` (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('1', '张三', 'zhangsan', 'e10adc3949ba59abbe56e057f20f883e', '2', '系统部', '010-12345678', '北京市北京路1号', '1', '1563956172', '1564137707', '');
-INSERT INTO `users` VALUES ('10', '李四', 'lisi', 'e10adc3949ba59abbe56e057f20f883e', '1', '采购部', '13112345678', '上海市上海路1号', '1', '1563953178', '1563972092', '李四');
-INSERT INTO `users` VALUES ('11', '王五', 'wangwu', 'e10adc3949ba59abbe56e057f20f883e', '1', '销售部', '13187654321', '广州市广州路1号', '1', '1563956103', '1563956167', '张三');
-INSERT INTO `users` VALUES ('12', '赵六', 'zhaoliu', 'e10adc3949ba59abbe56e057f20f883e', '1', '访客', '13112345678', '歪果仁', '1', '1564037211', null, '张三');
+INSERT INTO `users` VALUES ('1', '张三', 'zhangsan', 'e10adc3949ba59abbe56e057f20f883e', '2', '系统部', '010-12345678', '北京市北京路1号', '1', '1563956172', '1566036068', '张三');
+INSERT INTO `users` VALUES ('10', '李四', 'lisi', 'e10adc3949ba59abbe56e057f20f883e', '1', '前台', '13112345678', '上海市上海路1号', '1', '1563953178', '1566036015', '张三');
+INSERT INTO `users` VALUES ('11', '王五', 'wangwu', 'e10adc3949ba59abbe56e057f20f883e', '1', '前台', '3333', '3333', '1', '1563956103', '1566036016', '张三');
+INSERT INTO `users` VALUES ('12', '赵六', 'zhaoliu', 'e10adc3949ba59abbe56e057f20f883e', '1', '访客', '13112345678', '歪果仁', '1', '1564037211', '1566036034', '张三');
 
 -- ----------------------------
 -- Table structure for user_role

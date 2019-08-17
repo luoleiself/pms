@@ -1,5 +1,5 @@
 exports = module.exports = {
-  // 按时间范围统计产品销售数量
+  // 按时间范围统计产品出库数量
   async sumSalesAmountByTime(ctx, models) {
     let { dbQuery, Op } = ctx;
     if (!dbQuery.p_size) {
@@ -25,7 +25,7 @@ exports = module.exports = {
     });
     return result;
   },
-  // 按时间范围统计产品销售数量
+  // 按时间范围统计产品出库数量
   async sumPurchaseAmountByTime(ctx, models) {
     let { dbQuery, Op } = ctx;
     if (!dbQuery.p_size) {
@@ -62,7 +62,7 @@ exports = module.exports = {
     );
     return result;
   },
-  /* 按月统计销售量和采购量 */
+  /* 按月统计出库量和入库量 */
   async statSalesPurchaseByMonth(ctx, models) {
     let end_time = Math.floor(new Date(new Date().toLocaleDateString()).getTime() / 1000);
     let start_time = end_time - 2592000;
@@ -84,8 +84,8 @@ exports = module.exports = {
       }
     );
     let timeArr = [];
-    let sObj = { name: "销售", type: "line", data: [] };
-    let pObj = { name: "采购", type: "line", data: [] };
+    let sObj = { name: "出库", type: "line", data: [] };
+    let pObj = { name: "入库", type: "line", data: [] };
     let flag = true;
     while (flag) {
       if (start_time > end_time) {

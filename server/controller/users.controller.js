@@ -257,8 +257,8 @@ router.put("/:id", async (ctx, next) => {
   }
   try {
     let result = await usersService.update(ctx, models);
-    if (result.code == 404) {
-      resData.msg = result.msg;
+    if (!result) {
+      resData.msg = "该用户不存在!";
       resData.code = 10404;
     } else {
       resData.data = result;
@@ -319,7 +319,56 @@ router.delete("/:id", async (ctx, next) => {
     ctx.status = 500;
   }
 });
-
+/**
+ * @api {put} /users/resetpwd/:id resetPwd
+ * @apiName resetPwd
+ * @apiGroup users
+ *
+ * @apiParam {Number} id user id
+ *
+ * @apiSuccess {Number} [code=10200] 状态码
+ * @apiSuccess {String} [msg='操作成功'] 提示信息
+ * @apiSuccess {Object} [result] 结果
+ * @apiSuccessExample Success-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data:{
+ *      id: 1,
+ *      name: '张三',
+ *      username: 'zhangsan',
+ *      ...
+ *    }
+ *  }
+ * @apiUse 400And404
+ * @apiVersion 0.1.0
+ */
+router.put("/resetpwd/:id", async (ctx, next) => {
+  await next();
+  let {
+    logUtils,
+    resData,
+    params: { id }
+  } = ctx;
+  if (id.search(/^(\d)*$/) == -1) {
+    ctx.status = 400;
+    return;
+  }
+  try {
+    let result = await usersService.resetPwd(ctx, models);
+    if (!result) {
+      resData.msg = "该用户不存在!";
+      resData.code = 10404;
+    } else {
+      resData.data = result;
+    }
+    ctx.body = resData;
+  } catch (error) {
+    logUtils.logError(ctx, error);
+    ctx.status = 500;
+  }
+});
 // router.all('/([^\d].*)', async (ctx, next) => {
 //   await next();
 //   let { resData } = ctx;

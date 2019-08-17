@@ -49,6 +49,11 @@
           </template>
         </el-table-column>
         <el-table-column prop="operator" label="操作人" align="center" width="100"></el-table-column>
+        <el-table-column prop="" label="重置登陆密码" align="center" width="120">
+          <template slot-scope="scope">
+            <el-button type="text" size="mini" @click="resetPwd(scope.row)">重置密码</el-button>
+          </template>
+        </el-table-column>
         <el-table-column prop="" label="操作" align="center" width="120">
           <template slot-scope="scope">
             <el-button type="text" size="mini" @click="edit(scope.row)">编辑</el-button>
@@ -233,6 +238,17 @@ export default {
     enable(row) {
       this.$xhr
         .put(`/users/${row.id}`, { status: 1 })
+        .then(res => {
+          this.$message.success(res.msg);
+          this.updateTable();
+        })
+        .catch(err => {
+          this.$message.error(err.msg);
+        });
+    },
+    resetPwd(row) {
+      this.$xhr
+        .put(`/users/resetpwd/${row.id}`)
         .then(res => {
           this.$message.success(res.msg);
           this.updateTable();

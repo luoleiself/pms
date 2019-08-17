@@ -87,7 +87,7 @@ router.get("/", async (ctx, next) => {
  *  HTTP/1.1 200 OK
  *  {
  *    code: 10404,
- *    msg: '未查询到该采购信息!',
+ *    msg: '未查询到该入库信息!',
  *    data: []
  *  }
  * @apiSuccessExample Error-Response:
@@ -114,7 +114,7 @@ router.get("/:id", async (ctx, next) => {
     let result = await purchaseService.findById(ctx, models);
     if (!result) {
       resData.code = 10404;
-      resData.msg = "未查询到该采购信息!";
+      resData.msg = "未查询到该入库信息!";
     } else {
       resData.data = result;
     }
@@ -183,7 +183,7 @@ router.post("/", async (ctx, next) => {
  *  HTTP/1.1 200 OK
  *  {
  *    code: 10404,
- *    msg: '该采购信息不存在!',
+ *    msg: '该入库信息不存在!',
  *    data: []
  *  }
  * @apiSuccessExample Error-Response:
@@ -210,7 +210,7 @@ router.put("/:id", async (ctx, next) => {
     let result = await purchaseService.update(ctx, models);
     if (!result) {
       resData.code = 10404;
-      resData.msg = "该采购信息不存在!";
+      resData.msg = "该入库信息不存在!";
     } else {
       resData.data = result;
     }
@@ -238,7 +238,7 @@ router.put("/:id", async (ctx, next) => {
  *  HTTP/1.1 200 OK
  *  {
  *    code: 10404,
- *    msg: '该采购信息不存在!',
+ *    msg: '该入库信息不存在!',
  *    data: []
  *  }
  * @apiSuccessExample Error-Response:
@@ -264,7 +264,7 @@ router.delete("/:id", async (ctx, next) => {
   try {
     let result = await purchaseService.delete(ctx, models);
     if (!result) {
-      resData.msg = "该采购信息不存在!";
+      resData.msg = "该入库信息不存在!";
       resData.code = 10404;
     } else {
       resData.data = result;

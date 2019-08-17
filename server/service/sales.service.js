@@ -69,12 +69,12 @@ exports = module.exports = {
     } = ctx;
     let sales = await this.findById(ctx, models);
     if (!sales) {
-      return { code: 0, msg: "该销售信息不存在!" };
+      return { code: 0, msg: "该出库信息不存在!" };
     }
     let goods = await models.goods.findOne({ where: { id: sales.goods_id } });
 
     if (body.amount > goods.amount + sales.amount) {
-      return { code: 0, msg: "销售数量不能大于库存数量!" };
+      return { code: 0, msg: "出库数量不能大于库存数量!" };
     }
 
     goods.amount += sales.amount;
