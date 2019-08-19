@@ -190,7 +190,7 @@ router.post("/", async (ctx, next) => {
     let result = await usersService.add(ctx, models);
     if (result.code == 403) {
       resData.code = 10403;
-      resData.msg = result.msg;
+      resData.msg = "该登陆用户名已存在!";
     } else {
       resData.data = result;
     }

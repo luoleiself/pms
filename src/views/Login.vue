@@ -70,7 +70,7 @@ export default {
           window.sessionStorage.setItem("user", JSON.stringify(res.data));
           window.sessionStorage.setItem("token", res.token);
           this.USER_LOGIN(res.data);
-          this.$router.push({ path: "/home" });
+          this.$router.push({ name: "home" });
         })
         .catch(err => {
           this.$message.error(err.msg);

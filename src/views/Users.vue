@@ -220,6 +220,10 @@ export default {
         this.dialogOpt.oper = 2;
         this.dialogOpt.title = "编辑用户";
         this.dialogOpt.row = row;
+        this.rolesOpt.list = res.data.roles.map(item => ({
+            label: `${item.name} - ${item.desc}`,
+            value: item.id
+          }));
       } catch (error) {
         this.$message.error(error.msg);
       }

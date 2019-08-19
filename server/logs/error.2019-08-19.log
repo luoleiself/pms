@@ -1,0 +1,39 @@
+[2019-08-19T17:30:36.511] [ERROR] error - Request: PUT http://localhost:9999 /api/roles/5 {} undefined Error:ReferenceError Op is not defined
+[2019-08-19T17:32:07.432] [ERROR] error - Request: PUT http://localhost:9999 /api/roles/5 {} undefined Error:ReferenceError Op is not defined
+[2019-08-19T17:32:29.854] [ERROR] error - Request: PUT http://localhost:9999 /api/roles/5 {} undefined Error:ReferenceError Op is not defined
+[2019-08-19T17:32:46.212] [ERROR] error - Request: PUT http://localhost:9999 /api/roles/5 {} undefined Error:ReferenceError Op is not defined
+[2019-08-19T17:34:09.967] [ERROR] error - Request: PUT http://localhost:9999 /api/roles/5 {} undefined Error:ReferenceError Op is not defined
+[2019-08-19T17:35:12.478] [ERROR] error - Request: PUT http://localhost:9999 /api/roles/5 {} undefined Error:ReferenceError Op is not defined
+[2019-08-19T17:36:00.976] [ERROR] error - Request: PUT http://localhost:9999 /api/roles/5 {} undefined Error:ReferenceError Op is not defined
+[2019-08-19T17:36:03.033] [ERROR] error - Request: PUT http://localhost:9999 /api/roles/5 {} undefined Error:ReferenceError Op is not defined
+[2019-08-19T17:36:03.447] [ERROR] error - Request: PUT http://localhost:9999 /api/roles/5 {} undefined Error:ReferenceError Op is not defined
+[2019-08-19T17:36:03.630] [ERROR] error - Request: PUT http://localhost:9999 /api/roles/5 {} undefined Error:ReferenceError Op is not defined
+[2019-08-19T17:36:37.472] [ERROR] error - Request: PUT http://localhost:9999 /api/roles/5 {} undefined Error:ReferenceError Op is not defined
+[2019-08-19T17:37:03.567] [ERROR] error - Request: PUT http://localhost:9999 /api/roles/5 {} undefined Error:ReferenceError Op is not defined
+[2019-08-19T17:37:17.424] [ERROR] error - Request: PUT http://localhost:9999 /api/roles/5 {} undefined Error:ReferenceError Op is not defined
+[2019-08-19T17:37:21.734] [ERROR] error - Request: PUT http://localhost:9999 /api/roles/5 {} undefined Error:ReferenceError Op is not defined
+[2019-08-19T17:39:35.191] [ERROR] error - Request: PUT http://localhost:9999 /api/roles/5 {} undefined Error:ReferenceError Op is not defined
+[2019-08-19T17:42:07.523] [ERROR] error - Request: PUT http://localhost:9999 /api/roles/5 {} undefined Error:ReferenceError Op is not defined
+[2019-08-19T17:43:45.053] [ERROR] error - Request: PUT http://localhost:9999 /api/roles/5 {} undefined Error:ReferenceError Op is not defined
+[2019-08-19T17:43:48.767] [ERROR] error - Request: PUT http://localhost:9999 /api/roles/5 {} undefined Error:ReferenceError Op is not defined
+[2019-08-19T17:44:35.718] [ERROR] error - Request: PUT http://localhost:9999 /api/roles/5 {} undefined Error:ReferenceError Op is not defined
+[2019-08-19T17:44:45.524] [ERROR] error - Request: PUT http://localhost:9999 /api/roles/5 {} undefined Error:ReferenceError Op is not defined
+[2019-08-19T17:44:49.576] [ERROR] error - Request: PUT http://localhost:9999 /api/roles/5 {} undefined Error:ReferenceError Op is not defined
+[2019-08-19T17:44:55.129] [ERROR] error - Request: PUT http://localhost:9999 /api/roles/5 {} undefined Error:ReferenceError Op is not defined
+[2019-08-19T17:45:12.449] [ERROR] error - Request: PUT http://localhost:9999 /api/roles/5 {} undefined Error:ReferenceError Op is not defined
+[2019-08-19T17:48:32.678] [ERROR] error - Request: PUT http://localhost:9999 /api/roles/5 {} undefined Error:ReferenceError Op is not defined
+[2019-08-19T17:49:28.574] [ERROR] error - Request: PUT http://localhost:9999 /api/roles/5 {} undefined Error:Error TypeError: roles.setAccess is not a function
+[2019-08-19T20:13:57.405] [ERROR] error - Request: GET http://localhost:9999 /api/access {"p":1,"p_size":20,"status":"","keys":""} undefined Error:SequelizeDatabaseError Unknown column 'path' in 'field list'
+[2019-08-19T20:14:00.734] [ERROR] error - Request: GET http://localhost:9999 /api/access {"p":1,"p_size":20,"status":"","keys":""} undefined Error:SequelizeDatabaseError Unknown column 'path' in 'field list'
+[2019-08-19T20:14:14.399] [ERROR] error - Request: GET http://localhost:9999 /api/access {"p":1,"p_size":20,"status":"","keys":""} undefined Error:TypeError Cannot read property 'name' of null
+[2019-08-19T20:14:30.441] [ERROR] error - Request: GET http://localhost:9999 /api/access {"p":1,"p_size":20,"status":"","keys":""} undefined Error:TypeError Cannot read property 'name' of null
+[2019-08-19T20:15:05.762] [ERROR] error - Request: GET http://localhost:9999 /api/access {"p":1,"p_size":20,"status":"","keys":""} undefined Error:TypeError Cannot read property 'name' of null
+[2019-08-19T20:15:26.966] [ERROR] error - Request: GET http://localhost:9999 /api/access {"p":1,"p_size":20,"status":"","keys":""} undefined Error:TypeError Cannot read property 'name' of null
+[2019-08-19T20:15:53.815] [ERROR] error - Request: GET http://localhost:9999 /api/access {"p":1,"p_size":20,"status":"","keys":""} undefined Error:TypeError Cannot read property 'name' of null
+[2019-08-19T20:54:24.720] [ERROR] error - Request: PUT http://localhost:9999 /api/access/13 {} undefined Error:TypeError access.save is not a function
+[2019-08-19T20:54:26.414] [ERROR] error - Request: PUT http://localhost:9999 /api/access/13 {} undefined Error:TypeError access.save is not a function
+[2019-08-19T20:56:42.790] [ERROR] error - Request: PUT http://localhost:9999 /api/access/13 {} undefined Error:TypeError access.save is not a function
+[2019-08-19T20:57:28.280] [ERROR] error - Request: PUT http://localhost:9999 /api/access/13 {} undefined Error:TypeError access.save is not a function
+[2019-08-19T20:57:52.386] [ERROR] error - Request: PUT http://localhost:9999 /api/access/13 {} undefined Error:TypeError access.save is not a function
+[2019-08-19T21:00:42.304] [ERROR] error - Request: PUT http://localhost:9999 /api/access/13 {} undefined Error:TypeError access.save is not a function
+[2019-08-19T21:02:09.083] [ERROR] error - Request: PUT http://localhost:9999 /api/access/13 {} undefined Error:TypeError models.access.findById is not a function

@@ -54,7 +54,7 @@ exports = module.exports = {
 
     let users = await models.users.findOne({ where: { username: body.username } });
     if (users) {
-      return { code: 403, msg: "该登陆用户名已存在!" };
+      return { code: 403 };
     }
     let roles = await models.roles.findAll({ where: { id: { [Op.in]: body.role_id } } });
     return models.sequelize
@@ -125,7 +125,6 @@ exports = module.exports = {
         return await this.findById(ctx, models);
       })
       .catch(err => {
-        console.log(err);
         throw new Error(err);
       });
   },
@@ -150,15 +149,17 @@ exports = module.exports = {
       include: { model: models.roles, include: { model: models.access } }
     });
     if (!result) {
-      return { code: 404 };
+      return { code: 404, msg: "该用户名不存在!" };
     }
     if (result.password != body.password) {
-      return { code: 400 };
+      return { code: 400, msg: "密码错误!" };
     }
     if (!result.status) {
-      return { code: 401 };
+      return { code: 403, msg: "用户状态未启用" };
     }
-
+    if (result.roles.length == 0) {
+      return { code: 405, msg: "该用户没有访问权限" };
+    }
     let res = result.roles.reduce(
       (cur, val) => cur.concat(val.accesses.reduce((cur, val) => cur.concat(val), [])),
       []

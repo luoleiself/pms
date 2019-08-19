@@ -1,5 +1,416 @@
 define({ "api": [
   {
+    "type": "post",
+    "url": "/access",
+    "title": "addAccess",
+    "name": "addAccess",
+    "group": "access",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>权限名称</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "path",
+            "description": "<p>权限路由</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "alias",
+            "description": "<p>权限简称</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  name: '权限名称'\n  path: '/home/access',\n  alias: 'access',\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": true,
+            "field": "code",
+            "defaultValue": "10200",
+            "description": "<p>状态码</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": true,
+            "field": "msg",
+            "defaultValue": "操作成功",
+            "description": "<p>提示信息</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": true,
+            "field": "result",
+            "description": "<p>结果</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data:{\n    id: 1,\n    name: '权限名称',\n    ...\n  }\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10403,\n  msg: '该权限路由已存在!',\n  data: []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.1.0",
+    "filename": "server/controller/access.controller.js",
+    "groupTitle": "access"
+  },
+  {
+    "type": "get",
+    "url": "/access/:id",
+    "title": "geAccessById",
+    "name": "geAccessById",
+    "group": "access",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>access id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": true,
+            "field": "code",
+            "defaultValue": "10200",
+            "description": "<p>状态码</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": true,
+            "field": "msg",
+            "defaultValue": "操作成功",
+            "description": "<p>提示信息</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": true,
+            "field": "data",
+            "description": "<p>结果</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data: {\n    id: 1,\n    name: '权限名称',\n    ...\n  }\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response-1:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10404,\n  msg: '该权限不存在!',\n  data: []\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response-2:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10400,\n  msg: '请求参数错误!',\n  data: []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.1.0",
+    "filename": "server/controller/access.controller.js",
+    "groupTitle": "access"
+  },
+  {
+    "type": "get",
+    "url": "/access",
+    "title": "getAccessList",
+    "name": "getAccessList",
+    "group": "access",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response-1:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data:{\n    p: 1,\n    p_size: 10,\n    total: 30,\n    rows:[\n      { id: 1, name: '权限名称', path: '权限路由', ... },\n      ...\n    ]\n  }\n}",
+          "type": "json"
+        },
+        {
+          "title": "Success-Response-2:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data:[\n    { id: 1, name: '权限名称', path: '权限路由', ... },\n    ...\n  ]\n}",
+          "type": "json"
+        }
+      ],
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": true,
+            "field": "code",
+            "defaultValue": "10200",
+            "description": "<p>状态码</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": true,
+            "field": "msg",
+            "defaultValue": "操作成功",
+            "description": "<p>提示信息</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": true,
+            "field": "p",
+            "description": "<p>当前页码</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": true,
+            "field": "p_size",
+            "description": "<p>当前每页条数</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": true,
+            "field": "total",
+            "description": "<p>查询结果总条数</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "optional": true,
+            "field": "rows",
+            "description": "<p>结果集</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.1.0",
+    "filename": "server/controller/access.controller.js",
+    "groupTitle": "access",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "p",
+            "description": "<p>页码</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "p_size",
+            "description": "<p>每页条数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "status",
+            "description": "<p>状态 1-&gt;启用,0-&gt;禁用</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "keys",
+            "description": "<p>查询关键字</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example-1:",
+          "content": "{\n  p: 1,\n  p_size: 10,\n  status: 1,\n  keys: 'example'\n}",
+          "type": "json"
+        },
+        {
+          "title": "Request-Example-2:",
+          "content": "{\n  status: 1,\n  keys: 'example'\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "/access/tree/:id",
+    "title": "getAccessTreeById",
+    "name": "getAccessTreeById",
+    "group": "access",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>access id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response-1:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data: { id: 1, name: '登陆页', path:'/home/login', alias:'login',... },\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10404,\n  msg: '未查询到该权限信息!',\n  data: []\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10400,\n  msg: '请求参数错误!',\n  data: []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.1.0",
+    "filename": "server/controller/access.controller.js",
+    "groupTitle": "access"
+  },
+  {
+    "type": "put",
+    "url": "/access/:id",
+    "title": "updateAccess",
+    "name": "updateAccess",
+    "group": "access",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>access id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>权限名称</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "path",
+            "description": "<p>权限路由</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "alias",
+            "description": "<p>权限简称</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example-1:",
+          "content": "{\n  id: 1\n  name: '权限名称'\n  path: '/home/access',\n  alias: 'access',\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": true,
+            "field": "code",
+            "defaultValue": "10200",
+            "description": "<p>状态码</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": true,
+            "field": "msg",
+            "defaultValue": "操作成功",
+            "description": "<p>提示信息</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": true,
+            "field": "result",
+            "description": "<p>结果</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data:{\n    id: 1,\n    name: '权限名称',\n    ...\n  }\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response-1:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10404,\n  msg: '该权限信息不存在!',\n  data: []\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response-2:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10400,\n  msg: '请求参数错误!',\n  data: []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.1.0",
+    "filename": "server/controller/access.controller.js",
+    "groupTitle": "access"
+  },
+  {
     "type": "all",
     "url": "/userss",
     "title": "allPathNotMatched",
@@ -2034,6 +2445,161 @@ define({ "api": [
     "groupTitle": "purchase"
   },
   {
+    "type": "post",
+    "url": "/roles",
+    "title": "addRoles",
+    "name": "addRoles",
+    "group": "roles",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>角色名称</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "desc",
+            "description": "<p>角色描述</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "status",
+            "defaultValue": "1",
+            "description": "<p>状态</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  name: '管理员'\n  desc: 'admin',\n  status: '1'\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": true,
+            "field": "code",
+            "defaultValue": "10200",
+            "description": "<p>状态码</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": true,
+            "field": "msg",
+            "defaultValue": "操作成功",
+            "description": "<p>提示信息</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": true,
+            "field": "result",
+            "description": "<p>结果</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data:{\n    id: 1,\n    name: '管理员',\n    ...\n  }\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10403,\n  msg: '该角色名称已存在!',\n  data: []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.1.0",
+    "filename": "server/controller/roles.controller.js",
+    "groupTitle": "roles"
+  },
+  {
+    "type": "get",
+    "url": "/roles/:id",
+    "title": "geRolesById",
+    "name": "geRolesById",
+    "group": "roles",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>user id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": true,
+            "field": "code",
+            "defaultValue": "10200",
+            "description": "<p>状态码</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": true,
+            "field": "msg",
+            "defaultValue": "操作成功",
+            "description": "<p>提示信息</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": true,
+            "field": "data",
+            "description": "<p>结果</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data: {\n    id: 1,\n    name: '管理员',\n    ...\n  }\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response-1:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10404,\n  msg: '该角色名称不存在!',\n  data: []\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response-2:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10400,\n  msg: '请求参数错误!',\n  data: []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.1.0",
+    "filename": "server/controller/roles.controller.js",
+    "groupTitle": "roles"
+  },
+  {
     "type": "get",
     "url": "/roles",
     "title": "getRolesList",
@@ -2150,6 +2716,108 @@ define({ "api": [
         }
       ]
     }
+  },
+  {
+    "type": "put",
+    "url": "/roles/:id",
+    "title": "updateRoles",
+    "name": "updateRoles",
+    "group": "roles",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>role id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>角色名称</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "desc",
+            "description": "<p>角色描述</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Array",
+            "optional": false,
+            "field": "access_id",
+            "description": "<p>权限id</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example-1:",
+          "content": "{\n  id: 1\n  name: '管理员'，\n  desc: 'admin'\n}",
+          "type": "json"
+        },
+        {
+          "title": "Request-Example-2:",
+          "content": "{\n  access_id: [1,2,3]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": true,
+            "field": "code",
+            "defaultValue": "10200",
+            "description": "<p>状态码</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": true,
+            "field": "msg",
+            "defaultValue": "操作成功",
+            "description": "<p>提示信息</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": true,
+            "field": "result",
+            "description": "<p>结果</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10200,\n  msg: '操作成功',\n  data:{\n    id: 1,\n    name: '管理员',\n    ...\n  }\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response-1:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10404,\n  msg: '该角色名称不存在!',\n  data: []\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response-2:",
+          "content": "HTTP/1.1 200 OK\n{\n  code: 10400,\n  msg: '请求参数错误!',\n  data: []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.1.0",
+    "filename": "server/controller/roles.controller.js",
+    "groupTitle": "roles"
   },
   {
     "type": "post",

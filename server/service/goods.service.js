@@ -94,7 +94,6 @@ exports = module.exports = {
     goods.brand_id = body.brand_id;
     goods.category_id = body.category_id;
     goods.operator = user.payload.name;
-    goods.status = body.status;
     goods.update_time = Math.floor(Date.now() / 1000);
 
     await goods.save();

@@ -14,7 +14,7 @@ const router = new Router();
  * {
  *    username: 'zhangsan',
  *    password: 'ejyff8dagdsa8987f7das798gda789'
- * } 
+ * }
  * @apiSuccessExample Success-Response-1:
  *  HTTP/1.1 200 OK
  *  {
@@ -53,15 +53,19 @@ router.post("/", async (ctx, next) => {
     switch (result.code) {
       case 400:
         resData.code = 10400;
-        resData.msg = "密码错误!";
+        resData.msg = result.msg;
         break;
-      case 401:
-        resData.code = 10401;
-        resData.msg = "用户状态未启用";
+      case 403:
+        resData.code = 10403;
+        resData.msg = result.msg;
         break;
       case 404:
         resData.code = 10404;
-        resData.msg = "该用户名不存在!";
+        resData.msg = result.msg;
+        break;
+      case 405:
+        resData.code = 10405;
+        resData.msg = result.msg;
         break;
       default:
         resData.data = result;

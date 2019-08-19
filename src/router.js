@@ -36,6 +36,16 @@ const router = new Router({
           component: () => import("@/views/Users.vue")
         },
         {
+          path: "/home/roles",
+          name: "roles",
+          component: () => import("@/views/Roles.vue")
+        },
+        {
+          path: "/home/access",
+          name: "access",
+          component: () => import("@/views/Access.vue")
+        },
+        {
           path: "/home/goods",
           name: "goods",
           component: () => import("@/views/Goods.vue")

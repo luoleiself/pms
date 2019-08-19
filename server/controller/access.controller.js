@@ -1,12 +1,12 @@
 const Router = require("koa-router");
 const models = require("../models");
-const { rolesService } = require("../service");
+const { accessService } = require("../service");
 
 const router = new Router();
 /**
- * @api {get} /roles getRolesList
- * @apiName getRolesList
- * @apiGroup roles
+ * @api {get} /access getAccessList
+ * @apiName getAccessList
+ * @apiGroup access
  *
  * @apiUse commonRequestParams
  * @apiUse commonRequestExample
@@ -22,7 +22,7 @@ const router = new Router();
  *      p_size: 10,
  *      total: 30,
  *      rows:[
- *        { id: 1, name: '角色名称', desc: '角色描述', ... },
+ *        { id: 1, name: '权限名称', path: '权限路由', ... },
  *        ...
  *      ]
  *    }
@@ -33,7 +33,7 @@ const router = new Router();
  *    code: 10200,
  *    msg: '操作成功',
  *    data:[
- *      { id: 1, name: '角色名称', desc: '角色描述', ... },
+ *      { id: 1, name: '权限名称', path: '权限路由', ... },
  *      ...
  *    ]
  *  }
@@ -46,10 +46,10 @@ router.get("/", async (ctx, next) => {
   try {
     let result = null;
     if (dbQuery.p && dbQuery.p_size) {
-      result = await rolesService.findAllByPages(ctx, models); // 分页查询全部
+      result = await accessService.findAllByPages(ctx, models); // 分页查询全部
     } else {
       dbQuery.keys = dbQuery.keys ? dbQuery.keys : "";
-      result = await rolesService.findAllByParams(ctx, models); // 按条件查询全部
+      result = await accessService.findAllByParams(ctx, models); // 按条件查询全部
     }
     if (Array.isArray(result)) {
       resData.data = result;
@@ -68,11 +68,11 @@ router.get("/", async (ctx, next) => {
   }
 });
 /**
- * @api {get} /roles/:id geRolesById
- * @apiName geRolesById
- * @apiGroup roles
+ * @api {get} /access/:id geAccessById
+ * @apiName geAccessById
+ * @apiGroup access
  *
- * @apiParam {Number} id user id
+ * @apiParam {Number} id access id
  * @apiSuccess {Number} [code=10200] 状态码
  * @apiSuccess {String} [msg='操作成功'] 提示信息
  * @apiSuccess {Object} [data] 结果
@@ -83,7 +83,7 @@ router.get("/", async (ctx, next) => {
  *    msg: '操作成功',
  *    data: {
  *      id: 1,
- *      name: '管理员',
+ *      name: '权限名称',
  *      ...
  *    }
  *  }
@@ -91,7 +91,7 @@ router.get("/", async (ctx, next) => {
  *  HTTP/1.1 200 OK
  *  {
  *    code: 10404,
- *    msg: '该角色名称不存在!',
+ *    msg: '该权限不存在!',
  *    data: []
  *  }
  * @apiSuccessExample Error-Response-2:
@@ -115,10 +115,10 @@ router.get("/:id", async (ctx, next) => {
     return;
   }
   try {
-    let result = await rolesService.findById(ctx, models);
+    let result = await accessService.findById(ctx, models);
     if (!result) {
       resData.code = 10404;
-      resData.msg = "未查询到该角色信息";
+      resData.msg = "未查询到该权限信息";
     } else {
       resData.data = result;
     }
@@ -129,19 +129,19 @@ router.get("/:id", async (ctx, next) => {
   }
 });
 /**
- * @api {post} /roles addRoles
- * @apiName addRoles
- * @apiGroup roles
+ * @api {post} /access addAccess
+ * @apiName addAccess
+ * @apiGroup access
  *
- * @apiParam {String} name 角色名称
- * @apiParam {String} desc 角色描述
- * @apiParam {String} [status=1] 状态
+ * @apiParam {String} name 权限名称
+ * @apiParam {String} path 权限路由
+ * @apiParam {String} alias 权限简称
  *
  * @apiParamExample {json} Request-Example:
  *  {
- *    name: '管理员'
- *    desc: 'admin',
- *    status: '1'
+ *    name: '权限名称'
+ *    path: '/home/access',
+ *    alias: 'access',
  *  }
  * @apiSuccess {Number} [code=10200] 状态码
  * @apiSuccess {String} [msg='操作成功'] 提示信息
@@ -153,7 +153,7 @@ router.get("/:id", async (ctx, next) => {
  *    msg: '操作成功',
  *    data:{
  *      id: 1,
- *      name: '管理员',
+ *      name: '权限名称',
  *      ...
  *    }
  *  }
@@ -161,7 +161,7 @@ router.get("/:id", async (ctx, next) => {
  *  HTTP/1.1 200 OK
  *  {
  *    code: 10403,
- *    msg: '该角色名称已存在!',
+ *    msg: '该权限路由已存在!',
  *    data: []
  *  }
  * @apiVersion 0.1.0
@@ -170,12 +170,12 @@ router.post("/", async (ctx, next) => {
   await next();
   let { logUtils, resData } = ctx;
   try {
-    let [result, created] = await rolesService.add(ctx, models);
+    let [result, created] = await accessService.add(ctx, models);
     if (created) {
       resData.data = result;
     } else {
       resData.code = 10403;
-      resData.msg = "该角色名称已存在!";
+      resData.msg = "该权限路由已存在!";
     }
     ctx.body = resData;
   } catch (error) {
@@ -183,24 +183,21 @@ router.post("/", async (ctx, next) => {
   }
 });
 /**
- * @api {put} /roles/:id updateRoles
- * @apiName updateRoles
- * @apiGroup roles
+ * @api {put} /access/:id updateAccess
+ * @apiName updateAccess
+ * @apiGroup access
  *
- * @apiParam {Number} id   role id
- * @apiParam {String} name 角色名称
- * @apiParam {String} desc 角色描述
- * @apiParam {Array}  access_id 权限id
+ * @apiParam {Number} id   access id
+ * @apiParam {String} name 权限名称
+ * @apiParam {String} path 权限路由
+ * @apiParam {String} alias 权限简称
  *
  * @apiParamExample {json} Request-Example-1:
  *  {
  *    id: 1
- *    name: '管理员'，
- *    desc: 'admin'
- *  }
- * @apiParamExample {json} Request-Example-2:
- *  {
- *    access_id: [1,2,3]
+ *    name: '权限名称'
+ *    path: '/home/access',
+ *    alias: 'access',
  *  }
  * @apiSuccess {Number} [code=10200] 状态码
  * @apiSuccess {String} [msg='操作成功'] 提示信息
@@ -212,7 +209,7 @@ router.post("/", async (ctx, next) => {
  *    msg: '操作成功',
  *    data:{
  *      id: 1,
- *      name: '管理员',
+ *      name: '权限名称',
  *      ...
  *    }
  *  }
@@ -220,7 +217,7 @@ router.post("/", async (ctx, next) => {
  *  HTTP/1.1 200 OK
  *  {
  *    code: 10404,
- *    msg: '该角色名称不存在!',
+ *    msg: '该权限信息不存在!',
  *    data: []
  *  }
  * @apiSuccessExample Error-Response-2:
@@ -244,9 +241,9 @@ router.put("/:id", async (ctx, next) => {
     return;
   }
   try {
-    let result = await rolesService.update(ctx, models);
+    let result = await accessService.update(ctx, models);
     if (!result) {
-      resData.msg = "该角色不存在!";
+      resData.msg = "该权限信息不存在!";
       resData.code = 10404;
     } else {
       resData.data = result;
@@ -257,13 +254,59 @@ router.put("/:id", async (ctx, next) => {
     ctx.status = 500;
   }
 });
-
-// router.all('/([^\d].*)', async (ctx, next) => {
-//   await next();
-//   let { resData } = ctx;
-//   resData.code = 10404;
-//   resData.msg = "未匹配到正确资源操作路由!";
-//   ctx.body = resData;
-// });
+/**
+ * @api {get} /access/tree/:id getAccessTreeById
+ * @apiName getAccessTreeById
+ * @apiGroup access
+ *
+ * @apiParam {Number} id access id
+ * @apiSuccessExample Success-Response-1:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10200,
+ *    msg: '操作成功',
+ *    data: { id: 1, name: '登陆页', path:'/home/login', alias:'login',... },
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10404,
+ *    msg: '未查询到该权限信息!',
+ *    data: []
+ *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10400,
+ *    msg: '请求参数错误!',
+ *    data: []
+ *  }
+ * @apiVersion 0.1.0
+ */
+router.get("/tree/:id", async (ctx, next) => {
+  await next();
+  let {
+    logUtils,
+    resData,
+    params: { id }
+  } = ctx;
+  if (id.search(/^(\d)*$/) == -1) {
+    ctx.status = 400;
+    return;
+  }
+  try {
+    let result = await accessService.getTree(ctx, models);
+    if (!result) {
+      resData.code = 10404;
+      resData.msg = "未查询到该权限信息!";
+    } else {
+      resData.data = result;
+    }
+    ctx.body = resData;
+  } catch (error) {
+    logUtils.logError(ctx, error);
+    ctx.status = 500;
+  }
+});
 
 exports = module.exports = router;
