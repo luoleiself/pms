@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2019-08-17 18:34:02
+Date: 2019-08-20 20:40:28
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -29,26 +29,28 @@ CREATE TABLE `access` (
   `name` varchar(20) DEFAULT NULL COMMENT '菜单名称',
   `path` varchar(20) DEFAULT NULL COMMENT '菜单路径',
   `alias` varchar(20) DEFAULT NULL COMMENT '路径缩写',
+  `icon` varchar(20) DEFAULT NULL COMMENT '图标',
   `status` tinyint(1) DEFAULT '1' COMMENT '启用状态: 1启用，0禁用',
   `create_time` int(10) unsigned DEFAULT NULL COMMENT '创建时间',
   `update_time` int(10) unsigned DEFAULT NULL COMMENT '更新时间',
   `operator` varchar(20) DEFAULT NULL COMMENT '操作人员',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of access
 -- ----------------------------
-INSERT INTO `access` VALUES ('1', '0', '登录页', '/login', 'login', '1', null, null, null);
-INSERT INTO `access` VALUES ('2', '0', '导航页', '/home', 'home', '1', null, null, null);
-INSERT INTO `access` VALUES ('3', '2', '首页', '/home/index', 'index', '1', null, null, null);
-INSERT INTO `access` VALUES ('4', '2', '商品管理', '/home/goods', 'goods', '1', null, null, null);
-INSERT INTO `access` VALUES ('5', '2', '分类管理', '/home/categories', 'categories', '1', null, null, null);
-INSERT INTO `access` VALUES ('6', '2', '品牌管理', '/home/brands', 'brands', '1', null, null, null);
-INSERT INTO `access` VALUES ('7', '2', '供应商管理', '/home/manufactors', 'manufactors', '1', null, null, null);
-INSERT INTO `access` VALUES ('8', '2', '入库管理', '/home/purchase', 'purchase', '1', null, null, null);
-INSERT INTO `access` VALUES ('9', '2', '出库管理', '/home/sale', 'sale', '1', null, null, null);
-INSERT INTO `access` VALUES ('10', '2', '用户管理', '/home/users', 'users', '1', null, null, null);
+INSERT INTO `access` VALUES ('3', '0', '数据统计', '/home/index', 'index', '1', '1566220459', '1566220539', '张三', 'el-icon-menu');
+INSERT INTO `access` VALUES ('4', '0', '商品管理', '/home/goods', 'goods', '1', '1566220459', '1566272300', '张三', 'el-icon-menu');
+INSERT INTO `access` VALUES ('5', '0', '分类管理', '/home/categories', 'categories', '1', '1566220459', '1566220462', '张三', 'el-icon-menu');
+INSERT INTO `access` VALUES ('6', '0', '品牌管理', '/home/brands', 'brands', '1', '1566220459', '1566220407', '张三', 'el-icon-menu');
+INSERT INTO `access` VALUES ('7', '0', '供应商管理', '/home/manufactors', 'manufactors', '1', '1566220459', '1566220406', '张三', 'el-icon-menu');
+INSERT INTO `access` VALUES ('8', '0', '入库管理', '/home/purchase', 'purchase', '1', '1566220459', '1566220461', '张三', 'el-icon-menu');
+INSERT INTO `access` VALUES ('9', '0', '出库管理', '/home/sale', 'sale', '1', '1566220459', '1566220463', '张三', 'el-icon-menu');
+INSERT INTO `access` VALUES ('10', '13', '用户管理', '/home//config/users', 'users', '1', '1566220459', '1566220464', '张三', 'el-icon-menu');
+INSERT INTO `access` VALUES ('11', '13', '角色管理', '/home/config/roles', 'roles', '1', '1566220459', '1566220410', '张三', 'el-icon-menu');
+INSERT INTO `access` VALUES ('12', '13', '权限管理', '/home/config/access', 'access', '1', '1566220459', '1566220406', '张三', 'el-icon-menu');
+INSERT INTO `access` VALUES ('13', '0', '配置管理', '/home/config', 'config', '1', null, '1566276718', '张三', 'el-icon-menu');
 
 -- ----------------------------
 -- Table structure for brands
@@ -114,7 +116,7 @@ INSERT INTO `categories` VALUES ('21', '0', '电子产品', '一级分类', '156
 INSERT INTO `categories` VALUES ('22', '21', '手机', '二级分类', '1563541060', null, '1', '张三');
 INSERT INTO `categories` VALUES ('23', '16', '功能饮料', '功能饮料', '1563796259', null, '1', '张三');
 INSERT INTO `categories` VALUES ('24', '16', '肉制品', '肉制品', '1564403513', null, '1', '张三');
-INSERT INTO `categories` VALUES ('25', '21', '电脑', '笔记本，台式机', '1564403535', null, '1', '张三');
+INSERT INTO `categories` VALUES ('25', '21', '电脑', '笔记本，台式机', '1564403535', '1566215292', '1', '张三');
 INSERT INTO `categories` VALUES ('26', '16', '碳酸饮料', '碳酸饮料', '1564403577', null, '1', '张三');
 INSERT INTO `categories` VALUES ('27', '16', '食用油', '食用油', '1564403727', null, '1', '张三');
 INSERT INTO `categories` VALUES ('28', '20', '辣椒酱', '辣椒酱', '1564404005', null, '1', '张三');
@@ -264,10 +266,10 @@ CREATE TABLE `roles` (
 -- ----------------------------
 -- Records of roles
 -- ----------------------------
-INSERT INTO `roles` VALUES ('1', '管理员', 'admin', '1', null, null, '');
-INSERT INTO `roles` VALUES ('2', '出库', 'sale', '1', null, null, null);
-INSERT INTO `roles` VALUES ('3', '入库', 'purchase', '1', null, null, null);
-INSERT INTO `roles` VALUES ('4', '游客', 'visitor', '1', null, null, null);
+INSERT INTO `roles` VALUES ('1', '管理员', 'admin', '1', null, '1566277661', '张三');
+INSERT INTO `roles` VALUES ('2', '出库', 'sale', '1', null, '1566277680', '张三');
+INSERT INTO `roles` VALUES ('3', '入库', 'purchase', '1', null, '1566277684', '张三');
+INSERT INTO `roles` VALUES ('4', '游客', 'visitor', '1', null, '1566304742', '张三');
 
 -- ----------------------------
 -- Table structure for role_access
@@ -282,7 +284,7 @@ CREATE TABLE `role_access` (
   KEY `role_id` (`role_id`),
   CONSTRAINT `role_access_ibfk_1` FOREIGN KEY (`access_id`) REFERENCES `access` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `role_access_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of role_access
@@ -302,6 +304,9 @@ INSERT INTO `role_access` VALUES ('17', '8', '3');
 INSERT INTO `role_access` VALUES ('8', '9', '1');
 INSERT INTO `role_access` VALUES ('13', '9', '2');
 INSERT INTO `role_access` VALUES ('9', '10', '1');
+INSERT INTO `role_access` VALUES ('32', '11', '1');
+INSERT INTO `role_access` VALUES ('25', '12', '1');
+INSERT INTO `role_access` VALUES ('31', '13', '1');
 
 -- ----------------------------
 -- Table structure for sales
@@ -405,9 +410,9 @@ CREATE TABLE `users` (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('1', '张三', 'zhangsan', 'e10adc3949ba59abbe56e057f20f883e', '2', '系统部', '010-12345678', '北京市北京路1号', '1', '1563956172', '1566036068', '张三');
+INSERT INTO `users` VALUES ('1', '张三', 'zhangsan', 'e10adc3949ba59abbe56e057f20f883e', '2', '系统部', '010-12345678', '北京市北京路1号', '1', '1563956172', '1566196150', '张三');
 INSERT INTO `users` VALUES ('10', '李四', 'lisi', 'e10adc3949ba59abbe56e057f20f883e', '1', '前台', '13112345678', '上海市上海路1号', '1', '1563953178', '1566036015', '张三');
-INSERT INTO `users` VALUES ('11', '王五', 'wangwu', 'e10adc3949ba59abbe56e057f20f883e', '1', '前台', '3333', '3333', '1', '1563956103', '1566036016', '张三');
+INSERT INTO `users` VALUES ('11', '王五', 'wangwu', 'e10adc3949ba59abbe56e057f20f883e', '1', '前台', '3333', '3333', '1', '1563956103', '1566279622', '张三');
 INSERT INTO `users` VALUES ('12', '赵六', 'zhaoliu', 'e10adc3949ba59abbe56e057f20f883e', '1', '访客', '13112345678', '歪果仁', '1', '1564037211', '1566036034', '张三');
 
 -- ----------------------------
@@ -423,12 +428,12 @@ CREATE TABLE `user_role` (
   KEY `user_id` (`user_id`),
   CONSTRAINT `user_role_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `user_role_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_role
 -- ----------------------------
-INSERT INTO `user_role` VALUES ('1', '1', '1');
-INSERT INTO `user_role` VALUES ('15', '2', '11');
+INSERT INTO `user_role` VALUES ('18', '1', '1');
+INSERT INTO `user_role` VALUES ('20', '2', '11');
 INSERT INTO `user_role` VALUES ('12', '3', '10');
 INSERT INTO `user_role` VALUES ('16', '4', '12');
