@@ -24,7 +24,11 @@ exports = module.exports = function(sequelize, DataTypes) {
       },
       alias: {
         type: DataTypes.STRING(20),
-        comment: "路径缩写"
+        comment: "权限缩写"
+      },
+      icon: {
+        type: DataTypes.STRING(20),
+        comment: "权限图标"
       },
       status: {
         type: DataTypes.BOOLEAN,

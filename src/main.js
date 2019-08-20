@@ -7,9 +7,11 @@ import router from "./router";
 import store from "./store";
 import Xhr from "./assets/js/api";
 
+import rMenu from './components/r-menu' // 菜单插件
 import { dateFormat } from "./assets/js/filters";
 
 Vue.use(ElementUI);
+Vue.use(rMenu);
 
 Vue.config.productionTip = false;
 Vue.prototype.$xhr = Xhr;

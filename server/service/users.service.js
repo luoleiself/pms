@@ -1,3 +1,4 @@
+const tree = require("../utils/tree");
 exports = module.exports = {
   attributes: [
     "id",
@@ -160,6 +161,7 @@ exports = module.exports = {
     if (result.roles.length == 0) {
       return { code: 405, msg: "该用户没有访问权限" };
     }
+
     let res = result.roles.reduce(
       (cur, val) => cur.concat(val.accesses.reduce((cur, val) => cur.concat(val), [])),
       []
@@ -170,8 +172,9 @@ exports = module.exports = {
       arr.findIndex(val => val.id == item.id) == -1 && arr.push(item);
     });
 
+    let treeMenu = tree(0, JSON.parse(JSON.stringify(arr)));
     result = JSON.parse(JSON.stringify(result));
-    result.menu = arr;
+    result.menu = treeMenu;
     return result;
   },
   // 重置密码

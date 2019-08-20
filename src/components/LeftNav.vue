@@ -1,14 +1,15 @@
 <template>
   <el-row class="left_nav">
     <el-col :span="24">
-      <el-menu default-active="0" class="el-menu-vertical-demo" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
+      <!-- <el-menu default-active="0" class="el-menu-vertical-demo" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
         <el-menu-item v-for="(item,index) in menu" :key="index" :index="`${index}`">
           <i class="el-icon-menu"></i>
           <router-link tag="span" :to="{name: item.alias}">
             {{item.name}}
           </router-link>
         </el-menu-item>
-      </el-menu>
+      </el-menu> -->
+      <r-menu :menuList="menu" default-active="index" unique-opened />
     </el-col>
   </el-row>
 </template>

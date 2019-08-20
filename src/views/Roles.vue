@@ -188,7 +188,11 @@ export default {
       this.dialogOpt2.visible = true;
       let { data: role } = await this.$xhr.get(`/roles/${row.id}`);
       let { data: access } = await this.$xhr.get(`/access/tree/0`);
-      let checkedIds = role.accesses.map(item => item.id);
+      let checkedIds = role.accesses.map((item, index, arr) => {
+        if (arr.findIndex(val => val.pid == item.id) == -1) {
+          return item.id;
+        }
+      });
       this.tree = access;
       this.defaultCheckedKeys = checkedIds;
     },
@@ -199,7 +203,13 @@ export default {
       this.dialogOpt2.visible = false;
     },
     submitFormConfirm2(formName) {
-      let checkedIds = this.$refs.tree.getCheckedKeys(true);
+      // let checkedIds = this.$refs.tree.getCheckedKeys(true);
+      let checkedIds = [
+        ...new Set([
+          ...this.$refs.tree.getCheckedKeys(),
+          ...this.$refs.tree.getHalfCheckedKeys()
+        ])
+      ];
       this.$xhr
         .put(`/roles/${this.dialogOpt2.row.id}`, {
           access_id: checkedIds

@@ -6,6 +6,7 @@ exports = module.exports = {
     "name",
     "path",
     "alias",
+    "icon",
     "status",
     "create_time",
     "update_time",
@@ -66,6 +67,7 @@ exports = module.exports = {
         name: body.name,
         desc: body.desc,
         status: body.status,
+        icon: body.icon,
         operator: user.payload.name,
         pid: body.pid,
         create_time: Math.floor(Date.now() / 1000)
@@ -86,6 +88,7 @@ exports = module.exports = {
     access.name = body.name;
     access.path = body.path;
     access.alias = body.alias;
+    access.icon = body.icon;
     access.status = body.status;
     access.operator = user ? user.payload.name : "";
     access.update_time = Math.floor(Date.now() / 1000);

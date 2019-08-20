@@ -19,6 +19,11 @@
         <el-table-column prop="name" label="权限名称" align="center"></el-table-column>
         <el-table-column prop="path" label="权限路由" align="center"></el-table-column>
         <el-table-column prop="alias" label="权限简称" align="center"></el-table-column>
+        <el-table-column prop="icon" label="权限图标" align="center">
+          <template slot-scope="scope">
+            <span :class="scope.row.icon"></span>
+          </template>
+        </el-table-column>
         <el-table-column prop="" label="父级权限" align="center">
           <template slot-scope="scope">
             <span v-if="scope.row.parent">{{scope.row.parent.name}}</span>
@@ -55,20 +60,35 @@
       </div>
     </template>
     <!-- 添加和编辑弹框 -->
-    <el-dialog :title="dialogOpt.title" :visible.sync="dialogOpt.visible" :close-on-click-modal='false' :close-on-press-escape='false' :before-close="beforeClose" top="18vh" width="400px">
+    <el-dialog :title="dialogOpt.title" :visible.sync="dialogOpt.visible" :close-on-click-modal='false' :close-on-press-escape='false' :before-close="beforeClose" top="18vh" width="580px">
       <div>
-        <el-form ref="form" :model="form" :rules="rules" label-width="120px">
-          <el-form-item label="权限名称" prop="name">
-            <el-input v-model.trim="form.name" placeholder="权限名称" clearable></el-input>
-          </el-form-item>
+        <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+          <el-row :gutter="24">
+            <el-col :span="12">
+              <el-form-item label="权限名称" prop="name">
+                <el-input v-model.trim="form.name" placeholder="权限名称" clearable></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="权限简称" prop="alias">
+                <el-input v-model.trim="form.alias" placeholder="权限简称" clearable></el-input>
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row :gutter="24">
+            <el-col :span="12">
+              <el-form-item label="权限图标" prop="icon">
+                <el-input v-model.trim="form.icon" placeholder="权限图标" clearable></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+            </el-col>
+          </el-row>
           <el-form-item label="权限路由" prop="path">
-            <el-input v-model.trim="form.path" placeholder="权限路由" clearable :disabled="dialogOpt.formDisable"></el-input>
-          </el-form-item>
-          <el-form-item label="权限简称" prop="alias">
-            <el-input v-model.trim="form.alias" placeholder="权限简称" clearable :disabled="dialogOpt.formDisable"></el-input>
+            <el-input v-model.trim="form.path" placeholder="权限路由" clearable :style="{width:'458px'}"></el-input>
           </el-form-item>
           <el-form-item label="父级权限" prop="pid">
-            <el-select v-model="form.pid" clearable filterable remote placeholder="请输入关键字" :remote-method="accessRemoteQuery" :loading="accessOpt.loading" :style="{width: '240px'}">
+            <el-select v-model="form.pid" clearable filterable remote placeholder="请输入关键字" :remote-method="accessRemoteQuery" :loading="accessOpt.loading" :style="{width: '458px'}">
               <el-option v-for="item in accessOpt.list" :key="item.value" :label="item.label" :value="item.value"></el-option>
             </el-select>
           </el-form-item>
@@ -97,7 +117,6 @@ export default {
       dialogOpt: {
         title: "添加权限",
         visible: false,
-        formDisable: false,
         oper: 0 // 1-> 添加 2-> 编辑
       },
       accessOpt: {
@@ -108,6 +127,7 @@ export default {
         name: "",
         path: "",
         alias: "",
+        icon: "el-icon-menu",
         pid: ""
       },
       rules: {
@@ -138,7 +158,6 @@ export default {
       this.dialogOpt.title = "添加权限";
       this.dialogOpt.visible = true;
       this.dialogOpt.oper = 1;
-      this.dialogOpt.formDisable = false;
     },
     async edit(row) {
       try {
@@ -147,6 +166,7 @@ export default {
           name: res.data.name,
           path: res.data.path,
           alias: res.data.alias,
+          icon: res.data.icon,
           pid: res.data.pid || ""
         };
         if (res.data.parent) {
@@ -159,7 +179,6 @@ export default {
         this.dialogOpt.oper = 2;
         this.dialogOpt.title = "编辑权限";
         this.dialogOpt.row = row;
-        this.dialogOpt.formDisable = true;
       } catch (error) {
         this.$message.error(error.msg);
       }
@@ -195,7 +214,7 @@ export default {
             this.accessOpt.loading = false;
             this.accessOpt.list = res.data.map(item => {
               return {
-                label: `${item.name} - ${item.path} - ${item.alias}`,
+                label: `${item.name} - ${item.alias} - ${item.path}`,
                 value: item.id
               };
             });
