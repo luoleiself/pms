@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2019-08-20 20:40:28
+Date: 2019-08-21 21:21:07
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -35,22 +35,22 @@ CREATE TABLE `access` (
   `update_time` int(10) unsigned DEFAULT NULL COMMENT '更新时间',
   `operator` varchar(20) DEFAULT NULL COMMENT '操作人员',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of access
 -- ----------------------------
-INSERT INTO `access` VALUES ('3', '0', '数据统计', '/home/index', 'index', '1', '1566220459', '1566220539', '张三', 'el-icon-menu');
-INSERT INTO `access` VALUES ('4', '0', '商品管理', '/home/goods', 'goods', '1', '1566220459', '1566272300', '张三', 'el-icon-menu');
-INSERT INTO `access` VALUES ('5', '0', '分类管理', '/home/categories', 'categories', '1', '1566220459', '1566220462', '张三', 'el-icon-menu');
-INSERT INTO `access` VALUES ('6', '0', '品牌管理', '/home/brands', 'brands', '1', '1566220459', '1566220407', '张三', 'el-icon-menu');
-INSERT INTO `access` VALUES ('7', '0', '供应商管理', '/home/manufactors', 'manufactors', '1', '1566220459', '1566220406', '张三', 'el-icon-menu');
-INSERT INTO `access` VALUES ('8', '0', '入库管理', '/home/purchase', 'purchase', '1', '1566220459', '1566220461', '张三', 'el-icon-menu');
-INSERT INTO `access` VALUES ('9', '0', '出库管理', '/home/sale', 'sale', '1', '1566220459', '1566220463', '张三', 'el-icon-menu');
-INSERT INTO `access` VALUES ('10', '13', '用户管理', '/home//config/users', 'users', '1', '1566220459', '1566220464', '张三', 'el-icon-menu');
-INSERT INTO `access` VALUES ('11', '13', '角色管理', '/home/config/roles', 'roles', '1', '1566220459', '1566220410', '张三', 'el-icon-menu');
-INSERT INTO `access` VALUES ('12', '13', '权限管理', '/home/config/access', 'access', '1', '1566220459', '1566220406', '张三', 'el-icon-menu');
-INSERT INTO `access` VALUES ('13', '0', '配置管理', '/home/config', 'config', '1', null, '1566276718', '张三', 'el-icon-menu');
+INSERT INTO `access` VALUES ('3', '0', '数据统计', '/home/index', 'index', 'el-icon-menu', '1', '1566220459', '1566220539', '张三');
+INSERT INTO `access` VALUES ('4', '0', '商品管理', '/home/goods', 'goods', 'el-icon-menu', '1', '1566220459', '1566272300', '张三');
+INSERT INTO `access` VALUES ('5', '0', '分类管理', '/home/categories', 'categories', 'el-icon-menu', '1', '1566220459', '1566220462', '张三');
+INSERT INTO `access` VALUES ('6', '0', '品牌管理', '/home/brands', 'brands', 'el-icon-menu', '1', '1566220459', '1566220407', '张三');
+INSERT INTO `access` VALUES ('7', '0', '供应商管理', '/home/manufactors', 'manufactors', 'el-icon-menu', '1', '1566220459', '1566220406', '张三');
+INSERT INTO `access` VALUES ('8', '0', '入库管理', '/home/purchase', 'purchase', 'el-icon-menu', '1', '1566220459', '1566220461', '张三');
+INSERT INTO `access` VALUES ('9', '0', '出库管理', '/home/sale', 'sale', 'el-icon-menu', '1', '1566220459', '1566220463', '张三');
+INSERT INTO `access` VALUES ('10', '13', '用户管理', '/home//config/users', 'users', 'el-icon-menu', '1', '1566220459', '1566220464', '张三');
+INSERT INTO `access` VALUES ('11', '13', '角色管理', '/home/config/roles', 'roles', 'el-icon-menu', '1', '1566220459', '1566220410', '张三');
+INSERT INTO `access` VALUES ('12', '13', '权限管理', '/home/config/access', 'access', 'el-icon-menu', '1', '1566220459', '1566220406', '张三');
+INSERT INTO `access` VALUES ('13', '0', '配置管理', '/home/config', 'config', 'el-icon-menu', '1', null, '1566276718', '张三');
 
 -- ----------------------------
 -- Table structure for brands
@@ -284,7 +284,7 @@ CREATE TABLE `role_access` (
   KEY `role_id` (`role_id`),
   CONSTRAINT `role_access_ibfk_1` FOREIGN KEY (`access_id`) REFERENCES `access` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `role_access_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of role_access
@@ -393,9 +393,9 @@ INSERT INTO `sales` VALUES ('59', '50', '1566025283', null, '张三', '26');
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户id',
-  `name` varchar(20) DEFAULT NULL COMMENT '用户姓名',
-  `username` varchar(20) DEFAULT NULL COMMENT '登陆用户名',
-  `password` varchar(200) DEFAULT NULL COMMENT '用户密码',
+  `name` varchar(20) NOT NULL COMMENT '用户姓名',
+  `username` varchar(20) NOT NULL COMMENT '登陆用户名',
+  `password` varchar(200) NOT NULL COMMENT '用户密码',
   `sex` tinyint(1) DEFAULT '1' COMMENT '性别: 1男, 0女',
   `department` varchar(15) DEFAULT NULL COMMENT '所属部门',
   `telephone` varchar(15) DEFAULT NULL COMMENT '联系电话',

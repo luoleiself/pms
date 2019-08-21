@@ -10,8 +10,7 @@ npm -v    # npm 版本
 ## 数据库配置
 
 > 数据库连接配置项: pms/server/config/db.config.json
-
-> 数据库文件: pms/server/bak/pms.sql
+> 数据库结构和数据文件: pms/server/bak/pms.sql
 
 ```javascript
 // 默认配置
