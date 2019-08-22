@@ -1,0 +1,2 @@
+[2019-08-22T10:40:30.334] [ERROR] error - Request: GET http://localhost:9999 /api/sales {"p":1,"p_size":20,"goods_id":"","start_time":"","end_time":""} undefined Error:SequelizeDatabaseError Unknown column 'sales.desc' in 'order clause'
+[2019-08-22T10:49:47.123] [ERROR] error - Request: GET http://localhost:9999 /api/sales {"p":1,"p_size":20,"goods_id":"","start_time":"","end_time":""} undefined Error:TypeError dbQuery.orderBy.include is not a function

@@ -10,9 +10,9 @@ let formatText = {
     return `${formatText.formatReq(ctx)} Error:${error.name} ${error.message}`;
   },
   formatReq(ctx) {
-    return `Request: ${ctx.method} ${ctx.origin} ${ctx.path} ${JSON.stringify(
-      ctx.query
-    )} ${JSON.stringify(ctx.req.body)}`;
+    return `Request: ${ctx.method} ${ctx.origin}${ctx.path}${ctx.search} ${
+      ctx.req.body ? JSON.stringify(ctx.req.body) : ""
+    }`;
   },
   formatRes(ctx) {
     return `Response: ${ctx.status} ${ctx.message} ${JSON.stringify(ctx.body)}`;
@@ -26,7 +26,7 @@ exports = module.exports = {
     }
   },
   logAccess(ctx) {
-    if (ctx) {
+    if (!ctx.method.toLowerCase().includes("options")) {
       let logTxt = `${formatText.formatReq(ctx)} ${formatText.formatRes(ctx)}`;
       accessLog.info(logTxt);
     }

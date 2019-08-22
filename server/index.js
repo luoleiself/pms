@@ -8,7 +8,7 @@ const resData = require("./middleware/resData"); // 响应数据模板
 const validateParams = require("./middleware/validateParams"); // 检查请求参数格式
 const headers = require("./middleware/headers"); // 设置响应头
 const validateToken = require("./middleware/validateToken"); // 验证token
-const hostName = require("./config/host.json");
+const host = require("./config/host.json");
 const jwt = require("./utils/jwt");
 
 const app = new Koa();
@@ -33,9 +33,8 @@ models.sequelize
   .sync()
   .then(async () => {
     console.log("|----- database sync success -----|");
-
-    app.listen(hostName.server.port, () => {
-      console.log(`pms service is running at ${url.format(hostName.server)}`);
+    app.listen(host.server.dev.port, host.server.dev.hostname, () => {
+      console.log(`pms service is running at ${url.format(host.server.dev)}`);
     });
   })
   .catch(err => {
@@ -44,3 +43,8 @@ models.sequelize
       process.exit();
     }
   });
+
+app.on("error", (err, ctx) => {
+  let { logUtils } = ctx;
+  logUtils.logError(ctx, err);
+});

@@ -17,7 +17,7 @@ exports = module.exports = async (ctx, next) => {
   let limit = null;
   let status = "";
   let keys = query.keys;
-  let orderBy = query.orderBy || "update_time,desc"; // 默认排序字段
+  let orderBy = query.orderBy || "create_time,desc"; // 默认排序字段
   let start_time = query.start_time;
   let end_time = query.end_time;
   let goods_id = query.goods_id;

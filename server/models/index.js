@@ -1,20 +1,20 @@
 const path = require("path");
 const fs = require("fs");
 const Sequelize = require("sequelize");
-const config = require(path.resolve(__dirname, "..", "config/db.config.json"));
+const dbConfig = require(path.resolve(__dirname, "..", "config/db.config.json"));
 
 let db = {};
 let sequelize = null;
 
 try {
-  sequelize = new Sequelize(config.dev.database, config.dev.username, config.dev.password, {
-    host: config.dev.host,
-    dialect: config.dev.dialect,
-    pool: config.dev.pool
+  sequelize = new Sequelize(dbConfig.dev.database, dbConfig.dev.username, dbConfig.dev.password, {
+    host: dbConfig.dev.host,
+    dialect: dbConfig.dev.dialect,
+    pool: dbConfig.dev.pool
   });
   sequelize.authenticate();
 } catch (error) {
-  console.error(`数据库连接出错，请检查models\\index.js`);
+  console.error(`数据库连接出错，请检查models/index.js`);
   process.exit();
 }
 

@@ -1,9 +1,11 @@
 {
   "server": {
-    "protocol": "http",
-    "hostname": "localhost",
-    "port": 9999,
-    "pathname": "/api"
+    "dev": {
+      "protocol": "http",
+      "hostname": "localhost",
+      "port": 9999,
+      "pathname": "/api"
+    }
   },
   "client": {
     "protocol": "http",

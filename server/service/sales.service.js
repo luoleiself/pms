@@ -4,7 +4,12 @@ exports = module.exports = {
     let { dbQuery, Op } = ctx;
     let query = {
       where: {},
-      order: [dbQuery.orderBy.split(",")],
+      order: [
+        dbQuery.orderBy.split(","),
+        dbQuery.orderBy.includes("create_time")
+          ? "update_time,desc".split(",")
+          : "create_time,desc".split(",")
+      ],
       offset: dbQuery.offset,
       limit: dbQuery.limit,
       attributes: this.attributes,

@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "vue-cli-service lint",
-    "build": "vue-cli-service build",
-    "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
-    "dev:server": "cd ./server && nodemon --ignore logs/ --watch ./ index.js",
-    "dev:client": "vue-cli-service serve",
-    "dev:api": "apidoc -i server/controller/ -o server/doc/ && anywhere -h localhost -p 10000 -s -d ./server/doc"
+    "dev": "concurrently \"npm run client\" \"npm run server\"",
+    "server": "cd ./server && nodemon --ignore logs/ --watch ./ index.js",
+    "client": "vue-cli-service serve",
+    "client:lint": "vue-cli-service lint",
+    "client:build": "vue-cli-service build",
+    "api": "apidoc -i server/controller/ -o server/doc/ && anywhere -h localhost -p 10000 -s -d ./server/doc",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",

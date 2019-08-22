@@ -29,6 +29,8 @@ password: 1006611;
 
 - client：http://localhost:9998
 
+- apidoc: http://localhost:10000
+
   ```javascript
   // 示例用户
   username: "zhangsan";
@@ -39,18 +41,17 @@ password: 1006611;
 
 ```bash
   npm install   # 安装项目运行依赖
-  npm run dev   # 启动
+  npm run dev   # 启动客户端服务和接口服务
 ```
 
 ## 其他命令
 
 ```bash
-  npm run lint          # 客户端代码语法检查
-  npm run build         # 构建客户端生产环境
-  npm run dev           # 同时启动客户端服务器和接口服务器
-  npm run dev:server    # 只启动接口服务器
-  npm run dev:client    # 只启动客户端服务器
-  npm run dev:api       # 启动接口文档服务器
+  npm run server        # 启动接口服务
+  npm run client        # 启动客户端服务
+  npm run client:lint   # 客户端代码语法检查
+  npm run client:build  # 构建客户端生产环境
+  npm run api           # 启动api文档服务
 ```
 
 ## 项目目录

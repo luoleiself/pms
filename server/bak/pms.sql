@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2019-08-21 21:21:07
+Date: 2019-08-22 17:46:30
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -26,16 +26,16 @@ DROP TABLE IF EXISTS `access`;
 CREATE TABLE `access` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '菜单id',
   `pid` int(10) unsigned DEFAULT '0' COMMENT '菜单父id',
-  `name` varchar(20) DEFAULT NULL COMMENT '菜单名称',
-  `path` varchar(20) DEFAULT NULL COMMENT '菜单路径',
-  `alias` varchar(20) DEFAULT NULL COMMENT '路径缩写',
-  `icon` varchar(20) DEFAULT NULL COMMENT '图标',
+  `name` varchar(20) NOT NULL COMMENT '菜单名称',
+  `path` varchar(50) NOT NULL COMMENT '菜单路径',
+  `alias` varchar(20) NOT NULL COMMENT '路径缩写',
+  `icon` varchar(20) DEFAULT NULL COMMENT '权限图标',
   `status` tinyint(1) DEFAULT '1' COMMENT '启用状态: 1启用，0禁用',
   `create_time` int(10) unsigned DEFAULT NULL COMMENT '创建时间',
   `update_time` int(10) unsigned DEFAULT NULL COMMENT '更新时间',
   `operator` varchar(20) DEFAULT NULL COMMENT '操作人员',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of access
@@ -59,13 +59,13 @@ DROP TABLE IF EXISTS `brands`;
 CREATE TABLE `brands` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '品牌id',
   `pid` int(10) unsigned DEFAULT '0' COMMENT '父级品牌id',
-  `name` varchar(20) DEFAULT NULL COMMENT '品牌名称',
+  `name` varchar(20) NOT NULL COMMENT '品牌名称',
   `desc` varchar(100) DEFAULT NULL COMMENT '品牌描述',
   `status` tinyint(1) DEFAULT '1' COMMENT '启用状态: 1启用，0禁用',
   `create_time` int(10) unsigned DEFAULT NULL COMMENT '创建时间',
   `update_time` int(10) unsigned DEFAULT NULL COMMENT '更新时间',
   `operator` varchar(20) DEFAULT NULL COMMENT '操作人员',
-  `manufactor_id` int(10) unsigned DEFAULT NULL,
+  `manufactor_id` int(10) unsigned DEFAULT NULL COMMENT '供应商id',
   PRIMARY KEY (`id`),
   KEY `manufactor_id` (`manufactor_id`),
   CONSTRAINT `brands_ibfk_1` FOREIGN KEY (`manufactor_id`) REFERENCES `manufactors` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
@@ -95,7 +95,7 @@ DROP TABLE IF EXISTS `categories`;
 CREATE TABLE `categories` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '分类id',
   `pid` int(10) unsigned DEFAULT '0' COMMENT '父级分类id',
-  `name` varchar(20) DEFAULT NULL COMMENT '分类名称',
+  `name` varchar(20) NOT NULL COMMENT '分类名称',
   `desc` varchar(100) DEFAULT NULL COMMENT '分类描述',
   `create_time` int(10) unsigned DEFAULT NULL COMMENT '创建时间',
   `update_time` int(10) unsigned DEFAULT NULL COMMENT '更新时间',
@@ -127,22 +127,22 @@ INSERT INTO `categories` VALUES ('28', '20', '辣椒酱', '辣椒酱', '15644040
 DROP TABLE IF EXISTS `goods`;
 CREATE TABLE `goods` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '商品id',
-  `name` varchar(20) DEFAULT NULL COMMENT '商品名称',
+  `name` varchar(20) NOT NULL COMMENT '商品名称',
   `keys` varchar(100) DEFAULT NULL COMMENT '检索关键字',
   `desc` varchar(100) DEFAULT NULL COMMENT '商品描述',
-  `amount` smallint(5) unsigned DEFAULT '0' COMMENT '库存数据量',
+  `amount` smallint(5) unsigned DEFAULT '0' COMMENT '库存数量',
   `create_time` int(10) unsigned DEFAULT NULL COMMENT '创建时间',
   `update_time` int(10) unsigned DEFAULT NULL COMMENT '更新时间',
   `status` tinyint(1) DEFAULT '1' COMMENT '启用状态: 1启用，0禁用',
   `operator` varchar(20) DEFAULT NULL COMMENT '操作人员',
-  `brand_id` int(10) unsigned DEFAULT NULL,
-  `category_id` int(10) unsigned DEFAULT NULL,
+  `brand_id` int(10) unsigned DEFAULT NULL COMMENT '品牌id',
+  `category_id` int(10) unsigned DEFAULT NULL COMMENT '分类id',
   PRIMARY KEY (`id`),
   KEY `brand_id` (`brand_id`),
   KEY `category_id` (`category_id`),
   CONSTRAINT `goods_ibfk_1` FOREIGN KEY (`brand_id`) REFERENCES `brands` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `goods_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of goods
@@ -160,12 +160,13 @@ INSERT INTO `goods` VALUES ('22', '苏打水', '苏打水', '苏打水', '290', 
 INSERT INTO `goods` VALUES ('23', 'MagicBook', '笔记本,MagicBook,Book,', '荣耀笔记本，', '35', '1564476158', '1564476501', '1', '张三', '18', '25');
 INSERT INTO `goods` VALUES ('24', '红牛', '红牛', '红牛', '111', '1564476255', null, '1', '张三', '12', '23');
 INSERT INTO `goods` VALUES ('25', '冰红茶', '冰红茶', '冰红茶', '72', '1564476282', null, '1', '张三', '12', '26');
-INSERT INTO `goods` VALUES ('26', 'AD钙奶', '娃哈哈，AD钙奶，', '全国畅销', '340', '1564476466', null, '1', '张三', '21', '19');
+INSERT INTO `goods` VALUES ('26', 'AD钙奶', '娃哈哈，AD钙奶，', '全国畅销', '690', '1564476466', null, '1', '张三', '21', '19');
 INSERT INTO `goods` VALUES ('27', '健力宝', '健力宝', '健力宝', '400', '1564476681', null, '1', '张三', '21', '26');
 INSERT INTO `goods` VALUES ('28', '小米笔记本', '小米笔记本，miBook,mi', '小米笔记本', '190', '1564476751', null, '1', '张三', '19', '25');
 INSERT INTO `goods` VALUES ('29', '海天酱油', '酱油，海天', '海天酱油', '153', '1564476864', null, '1', '张三', '22', '20');
 INSERT INTO `goods` VALUES ('30', '爽歪歪', '爽歪歪', '爽歪歪', '125', '1564476903', null, '1', '张三', '21', '19');
 INSERT INTO `goods` VALUES ('31', 'QQ星', 'QQ星', 'QQ星', '5', '1564476928', null, '1', '张三', '21', '19');
+INSERT INTO `goods` VALUES ('32', '可乐', '非常可乐', '非常可乐', '0', '1566441766', null, '1', '张三', '21', '26');
 
 -- ----------------------------
 -- Table structure for manufactors
@@ -173,11 +174,11 @@ INSERT INTO `goods` VALUES ('31', 'QQ星', 'QQ星', 'QQ星', '5', '1564476928', 
 DROP TABLE IF EXISTS `manufactors`;
 CREATE TABLE `manufactors` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '供应商id',
-  `name` varchar(20) DEFAULT NULL COMMENT '供应商名称',
+  `name` varchar(20) NOT NULL COMMENT '供应商名称',
   `desc` varchar(100) DEFAULT NULL COMMENT '供应商描述',
   `address` varchar(100) DEFAULT NULL COMMENT '供应商地址',
   `contact` varchar(20) DEFAULT NULL COMMENT '联系人',
-  `telephone` varchar(15) DEFAULT NULL COMMENT '联系方式',
+  `telephone` varchar(15) DEFAULT NULL COMMENT '联系电话',
   `fax` varchar(15) DEFAULT NULL COMMENT '传真号码',
   `email` varchar(20) DEFAULT NULL COMMENT '邮箱地址',
   `create_time` int(10) unsigned DEFAULT NULL COMMENT '创建时间',
@@ -211,11 +212,11 @@ CREATE TABLE `purchase` (
   `create_time` int(10) unsigned DEFAULT NULL COMMENT '创建时间',
   `update_time` int(10) unsigned DEFAULT NULL COMMENT '更新时间',
   `operator` varchar(20) DEFAULT NULL COMMENT '操作人员',
-  `goods_id` int(10) unsigned DEFAULT NULL,
+  `goods_id` int(10) unsigned DEFAULT NULL COMMENT '商品id',
   PRIMARY KEY (`id`),
   KEY `goods_id` (`goods_id`),
   CONSTRAINT `purchase_ibfk_1` FOREIGN KEY (`goods_id`) REFERENCES `goods` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of purchase
@@ -247,6 +248,7 @@ INSERT INTO `purchase` VALUES ('24', '300', '1565589952', null, '李四', '14');
 INSERT INTO `purchase` VALUES ('25', '251', '1565591912', null, '李四', '24');
 INSERT INTO `purchase` VALUES ('26', '82', '1565593604', null, '张三', '25');
 INSERT INTO `purchase` VALUES ('27', '200', '1565697307', '1565697417', '张三', '29');
+INSERT INTO `purchase` VALUES ('28', '500', '1566441403', null, '张三', '26');
 
 -- ----------------------------
 -- Table structure for roles
@@ -254,7 +256,7 @@ INSERT INTO `purchase` VALUES ('27', '200', '1565697307', '1565697417', '张三'
 DROP TABLE IF EXISTS `roles`;
 CREATE TABLE `roles` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '角色id',
-  `name` varchar(20) DEFAULT NULL COMMENT '角色名称',
+  `name` varchar(20) NOT NULL COMMENT '角色名称',
   `desc` varchar(100) DEFAULT NULL COMMENT '角色描述',
   `status` tinyint(1) DEFAULT '1' COMMENT '启用状态: 1启用，0禁用',
   `create_time` int(10) unsigned DEFAULT NULL COMMENT '创建时间',
@@ -277,8 +279,8 @@ INSERT INTO `roles` VALUES ('4', '游客', 'visitor', '1', null, '1566304742', '
 DROP TABLE IF EXISTS `role_access`;
 CREATE TABLE `role_access` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '角色菜单id',
-  `access_id` int(10) unsigned DEFAULT NULL,
-  `role_id` int(10) unsigned DEFAULT NULL,
+  `access_id` int(10) unsigned NOT NULL,
+  `role_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `role_access_role_id_access_id_unique` (`access_id`,`role_id`),
   KEY `role_id` (`role_id`),
@@ -318,11 +320,11 @@ CREATE TABLE `sales` (
   `create_time` int(10) unsigned DEFAULT NULL COMMENT '创建时间',
   `update_time` int(10) unsigned DEFAULT NULL COMMENT '更新时间',
   `operator` varchar(20) DEFAULT NULL COMMENT '操作人员',
-  `goods_id` int(10) unsigned DEFAULT NULL,
+  `goods_id` int(10) unsigned DEFAULT NULL COMMENT '商品id',
   PRIMARY KEY (`id`),
   KEY `goods_id` (`goods_id`),
   CONSTRAINT `sales_ibfk_1` FOREIGN KEY (`goods_id`) REFERENCES `goods` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sales
@@ -386,6 +388,7 @@ INSERT INTO `sales` VALUES ('56', '50', '1565874163', null, '张三', '24');
 INSERT INTO `sales` VALUES ('57', '100', '1565874221', null, '张三', '26');
 INSERT INTO `sales` VALUES ('58', '52', '1565874341', null, '张三', '29');
 INSERT INTO `sales` VALUES ('59', '50', '1566025283', null, '张三', '26');
+INSERT INTO `sales` VALUES ('60', '150', '1566441551', null, '张三', '26');
 
 -- ----------------------------
 -- Table structure for users
@@ -421,8 +424,8 @@ INSERT INTO `users` VALUES ('12', '赵六', 'zhaoliu', 'e10adc3949ba59abbe56e057
 DROP TABLE IF EXISTS `user_role`;
 CREATE TABLE `user_role` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户角色id',
-  `role_id` int(10) unsigned DEFAULT NULL,
-  `user_id` int(10) unsigned DEFAULT NULL,
+  `role_id` int(10) unsigned NOT NULL,
+  `user_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_role_user_id_role_id_unique` (`role_id`,`user_id`),
   KEY `user_id` (`user_id`),
