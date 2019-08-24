@@ -209,7 +209,7 @@ export default {
       if (query !== "") {
         this.accessOpt.loading = true;
         this.$xhr
-          .get("/access", { params: { status: "1", keys: query } })
+          .get("/access", { params: { status: 1, keys: query } })
           .then(res => {
             this.accessOpt.loading = false;
             this.accessOpt.list = res.data.map(item => {

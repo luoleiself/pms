@@ -286,7 +286,7 @@ export default {
       if (query !== "") {
         this.categoryOpt.loading = true;
         this.$xhr
-          .get("/categories", { params: { status: "1", keys: query } })
+          .get("/categories", { params: { status: 1, keys: query } })
           .then(res => {
             this.categoryOpt.loading = false;
             this.categoryOpt.list = res.data.map(item => {
@@ -303,7 +303,7 @@ export default {
       if (query !== "") {
         this.brandOpt.loading = true;
         this.$xhr
-          .get("/brands", { params: { status: "1", keys: query } })
+          .get("/brands", { params: { status: 1, keys: query } })
           .then(res => {
             this.brandOpt.loading = false;
             this.brandOpt.list = res.data.map(item => {
@@ -342,7 +342,7 @@ export default {
     },
     initData() {
       this.$xhr
-        .get("/brands")
+        .get("/brands", { params: { status: 1 } })
         .then(res => {
           this.brandList = res.data.map(item => {
             return { label: item.name, value: item.id };
@@ -352,7 +352,7 @@ export default {
           this.$message.error(err.msg);
         });
       this.$xhr
-        .get("/categories")
+        .get("/categories", { params: { status: 1 } })
         .then(res => {
           this.categoryList = res.data.map(item => {
             return { label: item.name, value: item.id };

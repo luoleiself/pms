@@ -233,7 +233,7 @@ export default {
       if (query !== "") {
         this.categoryOpt.loading = true;
         this.$xhr
-          .get("/categories", { params: { status: "1", keys: query } })
+          .get("/categories", { params: { status: 1, keys: query } })
           .then(res => {
             this.categoryOpt.loading = false;
             this.categoryOpt.list = res.data.map(item => {

@@ -214,7 +214,7 @@ export default {
       if (query !== "") {
         this.goodsOpt.loading = true;
         this.$xhr
-          .get("/goods", { params: { status: "1", keys: query } })
+          .get("/goods", { params: { status: 1, keys: query } })
           .then(res => {
             this.goodsOpt.loading = false;
             this.goodsOpt.list = res.data.map(item => {
@@ -255,7 +255,7 @@ export default {
     },
     initData() {
       this.$xhr
-        .get("/goods")
+        .get("/goods", { params: { status: 1 } })
         .then(res => {
           this.goodsList = res.data.map(item => {
             return { label: item.name, value: item.id };

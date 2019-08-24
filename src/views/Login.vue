@@ -58,6 +58,7 @@ export default {
         return false;
       });
     },
+    // 登陆
     login: Debounce(function() {
       let { username, password } = this.ruleForm;
       password = md5(password);

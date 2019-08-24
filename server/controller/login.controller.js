@@ -43,6 +43,13 @@ const router = new Router();
  *    msg: '该用户名不存在!',
  *    data: []
  *  }
+ * @apiSuccessExample Error-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *    code: 10405,
+ *    msg: '该用户名没有访问权限!',
+ *    data: []
+ *  }
  * @apiVersion 0.1.0
  */
 router.post("/", async (ctx, next) => {

@@ -101,7 +101,7 @@ export default {
         keys: "",
         manufactor_id: ""
       },
-      manufactorList:[],
+      manufactorList: [],
       dialogOpt: {
         title: "添加品牌",
         visible: false,
@@ -316,7 +316,7 @@ export default {
     },
     initData() {
       this.$xhr
-        .get("/manufactors")
+        .get("/manufactors", { params: { status: 1 } })
         .then(res => {
           this.manufactorList = res.data.map(item => {
             return { label: item.name, value: item.id };
