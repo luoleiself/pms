@@ -56,6 +56,7 @@ password: 1006611;
 
 ## 项目目录
 
+```
 |-- pms
 |-- node_modules 依赖模块文件
 |-- README.md  项目指南
@@ -82,3 +83,4 @@ password: 1006611;
   |-- store.js
   |-- App.vue
   |-- main.js  页面入口文件
+```
