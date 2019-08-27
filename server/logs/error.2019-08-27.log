@@ -1,0 +1,17 @@
+[2019-08-27T17:29:21.621] [ERROR] error - Request: OPTIONS http://localhost:9999/api/login  Error:ReferenceError deny is not defined
+[2019-08-27T17:29:28.809] [ERROR] error - Request: OPTIONS http://localhost:9999/api/login  Error:ReferenceError deny is not defined
+[2019-08-27T17:29:36.861] [ERROR] error - Request: OPTIONS http://localhost:9999/api/login  Error:ReferenceError deny is not defined
+[2019-08-27T17:29:42.972] [ERROR] error - Request: GET http://localhost:9999/api/login  Error:ReferenceError deny is not defined
+[2019-08-27T17:29:43.139] [ERROR] error - Request: GET http://localhost:9999/favicon.ico  Error:ReferenceError deny is not defined
+[2019-08-27T17:33:19.683] [ERROR] error - Request: OPTIONS http://localhost:9999/api/login  Error:ReferenceError deny is not defined
+[2019-08-27T17:33:37.435] [ERROR] error - Request: OPTIONS http://localhost:9999/api/login  Error:ReferenceError deny is not defined
+[2019-08-27T18:02:06.761] [ERROR] error - Request: OPTIONS http://localhost:9999/api/login  Error:ReferenceError sameorigin is not defined
+[2019-08-27T18:03:21.332] [ERROR] error - Request: OPTIONS http://localhost:9999/api/login  Error:ReferenceError deny is not defined
+[2019-08-27T18:04:14.252] [ERROR] error - Request: OPTIONS http://localhost:9999/api/login  Error:ReferenceError deny is not defined
+[2019-08-27T18:05:36.829] [ERROR] error - Request: OPTIONS http://localhost:9999/api/login  Error:ReferenceError sameorigin is not defined
+[2019-08-27T18:08:30.657] [ERROR] error - Request: OPTIONS http://localhost:9999/api/login  Error:ReferenceError sameorigin is not defined
+[2019-08-27T18:09:05.665] [ERROR] error - Request: OPTIONS http://localhost:9999/api/login  Error:ReferenceError sameorigin is not defined
+[2019-08-27T18:09:16.583] [ERROR] error - Request: OPTIONS http://localhost:9999/api/login  Error:ReferenceError sameorigin is not defined
+[2019-08-27T18:10:54.853] [ERROR] error - Request: OPTIONS http://localhost:9999/api/login  Error:ReferenceError sameorigin is not defined
+[2019-08-27T18:11:33.545] [ERROR] error - Request: OPTIONS http://localhost:9999/api/login  Error:ReferenceError sameorigin is not defined
+[2019-08-27T18:11:44.331] [ERROR] error - Request: OPTIONS http://localhost:9999/api/login  Error:ReferenceError sameorigin is not defined

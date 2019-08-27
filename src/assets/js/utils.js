@@ -45,7 +45,7 @@ export const Throttle = (fn, t) => {
 };
 /**
  * @method 格式化时间戳
- * @param {Number|String} value
+ * @param {Number|String} value 时间戳单位为毫秒
  * @returns {Date|String}
  */
 export const dateFormat = value => {

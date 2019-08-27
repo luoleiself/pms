@@ -17,6 +17,9 @@ exports = module.exports = async (ctx, next) => {
     // "Cache-Control": "max-age=86400,must-revalidate",
     "Cache-Control": "no-cache",
     pragma: "no-cache",
-    "X-Response-Time": `${endTime - startTime}ms`
+    "X-Response-Time": `${endTime - startTime}ms`,
+    // "X-Frame-Options": deny,
+    // "X-Frame-Options": sameorigin,
+    // "X-Frame-Options": 'allow-from http://localhost:9998/',
   });
 };
