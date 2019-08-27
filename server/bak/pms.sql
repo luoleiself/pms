@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2019-08-22 17:46:30
+Date: 2019-08-27 20:55:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -35,7 +35,7 @@ CREATE TABLE `access` (
   `update_time` int(10) unsigned DEFAULT NULL COMMENT '更新时间',
   `operator` varchar(20) DEFAULT NULL COMMENT '操作人员',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of access
@@ -86,7 +86,7 @@ INSERT INTO `brands` VALUES ('19', '0', '小米', '为发烧而生', '1', '15644
 INSERT INTO `brands` VALUES ('20', '19', '悦米', '小米旗下', '1', '1564404511', null, '张三', '21');
 INSERT INTO `brands` VALUES ('21', '0', '娃哈哈', '娃哈哈', '1', '1564476412', null, '张三', '22');
 INSERT INTO `brands` VALUES ('22', '0', '海天', '海天', '1', '1564476857', null, '张三', '23');
-INSERT INTO `brands` VALUES ('24', '0', '测试', null, '1', '1565590941', null, '', '15');
+INSERT INTO `brands` VALUES ('24', '0', '测试', null, '0', '1565590941', '1566616455', '张三', '15');
 
 -- ----------------------------
 -- Table structure for categories
@@ -147,7 +147,7 @@ CREATE TABLE `goods` (
 -- ----------------------------
 -- Records of goods
 -- ----------------------------
-INSERT INTO `goods` VALUES ('13', '矿泉水', '矿泉水，矿物质水', '水', '150', '1563540355', '1563774705', '1', '张三', '11', '18');
+INSERT INTO `goods` VALUES ('13', '矿泉水', '矿泉水，矿物质水', '水', '405', '1563540355', '1563774705', '1', '张三', '11', '18');
 INSERT INTO `goods` VALUES ('14', '方便面', '泡面', '油炸型方便面，大份量', '470', '1563541147', null, '1', '张三', '11', '17');
 INSERT INTO `goods` VALUES ('15', '火腿肠', '火腿肠，香肠', '生熟都能吃', '795', '1564404198', null, '1', '张三', '14', '24');
 INSERT INTO `goods` VALUES ('16', '油辣子', '辣椒酱，老干妈，鸡肉味，油辣酱', '老干妈牌油辣子', '180', '1564404258', null, '1', '张三', '15', '28');
@@ -160,7 +160,7 @@ INSERT INTO `goods` VALUES ('22', '苏打水', '苏打水', '苏打水', '290', 
 INSERT INTO `goods` VALUES ('23', 'MagicBook', '笔记本,MagicBook,Book,', '荣耀笔记本，', '35', '1564476158', '1564476501', '1', '张三', '18', '25');
 INSERT INTO `goods` VALUES ('24', '红牛', '红牛', '红牛', '111', '1564476255', null, '1', '张三', '12', '23');
 INSERT INTO `goods` VALUES ('25', '冰红茶', '冰红茶', '冰红茶', '72', '1564476282', null, '1', '张三', '12', '26');
-INSERT INTO `goods` VALUES ('26', 'AD钙奶', '娃哈哈，AD钙奶，', '全国畅销', '690', '1564476466', null, '1', '张三', '21', '19');
+INSERT INTO `goods` VALUES ('26', 'AD钙奶', '娃哈哈，AD钙奶，', '全国畅销', '960', '1564476466', null, '1', '张三', '21', '19');
 INSERT INTO `goods` VALUES ('27', '健力宝', '健力宝', '健力宝', '400', '1564476681', null, '1', '张三', '21', '26');
 INSERT INTO `goods` VALUES ('28', '小米笔记本', '小米笔记本，miBook,mi', '小米笔记本', '190', '1564476751', null, '1', '张三', '19', '25');
 INSERT INTO `goods` VALUES ('29', '海天酱油', '酱油，海天', '海天酱油', '153', '1564476864', null, '1', '张三', '22', '20');
@@ -216,7 +216,7 @@ CREATE TABLE `purchase` (
   PRIMARY KEY (`id`),
   KEY `goods_id` (`goods_id`),
   CONSTRAINT `purchase_ibfk_1` FOREIGN KEY (`goods_id`) REFERENCES `goods` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of purchase
@@ -249,6 +249,9 @@ INSERT INTO `purchase` VALUES ('25', '251', '1565591912', null, '李四', '24');
 INSERT INTO `purchase` VALUES ('26', '82', '1565593604', null, '张三', '25');
 INSERT INTO `purchase` VALUES ('27', '200', '1565697307', '1565697417', '张三', '29');
 INSERT INTO `purchase` VALUES ('28', '500', '1566441403', null, '张三', '26');
+INSERT INTO `purchase` VALUES ('29', '335', '1566615002', null, '张三', '26');
+INSERT INTO `purchase` VALUES ('30', '425', '1566615016', null, '张三', '13');
+INSERT INTO `purchase` VALUES ('31', '35', '1566906637', null, '张三', '26');
 
 -- ----------------------------
 -- Table structure for roles
@@ -268,7 +271,7 @@ CREATE TABLE `roles` (
 -- ----------------------------
 -- Records of roles
 -- ----------------------------
-INSERT INTO `roles` VALUES ('1', '管理员', 'admin', '1', null, '1566277661', '张三');
+INSERT INTO `roles` VALUES ('1', '管理员', 'admin', '1', null, '1566635386', '张三');
 INSERT INTO `roles` VALUES ('2', '出库', 'sale', '1', null, '1566277680', '张三');
 INSERT INTO `roles` VALUES ('3', '入库', 'purchase', '1', null, '1566277684', '张三');
 INSERT INTO `roles` VALUES ('4', '游客', 'visitor', '1', null, '1566304742', '张三');
@@ -324,7 +327,7 @@ CREATE TABLE `sales` (
   PRIMARY KEY (`id`),
   KEY `goods_id` (`goods_id`),
   CONSTRAINT `sales_ibfk_1` FOREIGN KEY (`goods_id`) REFERENCES `goods` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sales
@@ -389,6 +392,10 @@ INSERT INTO `sales` VALUES ('57', '100', '1565874221', null, '张三', '26');
 INSERT INTO `sales` VALUES ('58', '52', '1565874341', null, '张三', '29');
 INSERT INTO `sales` VALUES ('59', '50', '1566025283', null, '张三', '26');
 INSERT INTO `sales` VALUES ('60', '150', '1566441551', null, '张三', '26');
+INSERT INTO `sales` VALUES ('61', '120', '1566615030', null, '张三', '13');
+INSERT INTO `sales` VALUES ('62', '50', '1566638709', null, '张三', '26');
+INSERT INTO `sales` VALUES ('63', '50', '1566906615', null, '张三', '26');
+INSERT INTO `sales` VALUES ('64', '50', '1566906624', null, '张三', '13');
 
 -- ----------------------------
 -- Table structure for users
