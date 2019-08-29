@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2019-08-28 20:43:12
+Date: 2019-08-29 21:04:25
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -147,7 +147,7 @@ CREATE TABLE `goods` (
 -- ----------------------------
 -- Records of goods
 -- ----------------------------
-INSERT INTO `goods` VALUES ('13', '矿泉水', '矿泉水，矿物质水', '水', '715', '1563540355', '1563774705', '1', '张三', '11', '18');
+INSERT INTO `goods` VALUES ('13', '矿泉水', '矿泉水，矿物质水', '水', '665', '1563540355', '1563774705', '1', '张三', '11', '18');
 INSERT INTO `goods` VALUES ('14', '方便面', '泡面', '油炸型方便面，大份量', '720', '1563541147', null, '1', '张三', '11', '17');
 INSERT INTO `goods` VALUES ('15', '火腿肠', '火腿肠，香肠', '生熟都能吃', '795', '1564404198', null, '1', '张三', '14', '24');
 INSERT INTO `goods` VALUES ('16', '油辣子', '辣椒酱，老干妈，鸡肉味，油辣酱', '老干妈牌油辣子', '180', '1564404258', null, '1', '张三', '15', '28');
@@ -160,7 +160,7 @@ INSERT INTO `goods` VALUES ('22', '苏打水', '苏打水', '苏打水', '290', 
 INSERT INTO `goods` VALUES ('23', 'MagicBook', '笔记本,MagicBook,Book,', '荣耀笔记本，', '35', '1564476158', '1564476501', '1', '张三', '18', '25');
 INSERT INTO `goods` VALUES ('24', '红牛', '红牛', '红牛', '111', '1564476255', null, '1', '张三', '12', '23');
 INSERT INTO `goods` VALUES ('25', '冰红茶', '冰红茶', '冰红茶', '72', '1564476282', null, '1', '张三', '12', '26');
-INSERT INTO `goods` VALUES ('26', 'AD钙奶', '娃哈哈，AD钙奶，', '全国畅销', '740', '1564476466', null, '1', '张三', '21', '19');
+INSERT INTO `goods` VALUES ('26', 'AD钙奶', '娃哈哈，AD钙奶，', '全国畅销', '690', '1564476466', null, '1', '张三', '21', '19');
 INSERT INTO `goods` VALUES ('27', '健力宝', '健力宝', '健力宝', '400', '1564476681', null, '1', '张三', '21', '26');
 INSERT INTO `goods` VALUES ('28', '小米笔记本', '小米笔记本，miBook,mi', '小米笔记本', '190', '1564476751', null, '1', '张三', '19', '25');
 INSERT INTO `goods` VALUES ('29', '海天酱油', '酱油，海天', '海天酱油', '153', '1564476864', null, '1', '张三', '22', '20');
@@ -329,7 +329,7 @@ CREATE TABLE `sales` (
   PRIMARY KEY (`id`),
   KEY `goods_id` (`goods_id`),
   CONSTRAINT `sales_ibfk_1` FOREIGN KEY (`goods_id`) REFERENCES `goods` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sales
@@ -400,6 +400,8 @@ INSERT INTO `sales` VALUES ('63', '50', '1566906615', null, '张三', '26');
 INSERT INTO `sales` VALUES ('64', '50', '1566906624', null, '张三', '13');
 INSERT INTO `sales` VALUES ('65', '220', '1566996119', null, '张三', '26');
 INSERT INTO `sales` VALUES ('66', '100', '1566996147', null, '张三', '14');
+INSERT INTO `sales` VALUES ('67', '50', '1567080986', null, '张三', '26');
+INSERT INTO `sales` VALUES ('68', '50', '1567080998', null, '张三', '13');
 
 -- ----------------------------
 -- Table structure for users
