@@ -9,11 +9,13 @@ npm -v    # npm 版本
 
 ## 数据库配置
 
-> 数据库连接配置项: pms/server/config/db.config.json
-> 数据库结构和数据文件: pms/server/bak/pms.sql
+* 数据库连接配置项: 
+  > pms/server/config/db.config.json
+* 数据库结构和数据文件: 
+  > pms/server/bak/pms.sql
 
 ```javascript
-// 默认配置
+// 数据库连接默认配置
 dialect: mysql;
 database: pms;
 port: 3306;
@@ -23,19 +25,14 @@ password: 1006611;
 
 ## 服务配置
 
-> 客户端和服务器端配置项: pms/server/config/host.json
+* 客户端和服务器端配置项: 
+  > pms/server/config/host.json
 
-- server：http://localhost:9999/api
-
-- client：http://localhost:9998
-
-- apidoc: http://localhost:10000
-
-  ```javascript
-  // 示例用户
-  username: "zhangsan";
-  password: 123456;
-  ```
+```javascript
+// 示例用户
+用户名: zhangsan
+密码: 123456
+```
 
 ## 项目启动
 
@@ -44,6 +41,14 @@ password: 1006611;
   npm run dev   # 启动客户端服务和接口服务
 ```
 
+## 地址
+
+- 服务器端地址：http://localhost:9999/api/users
+
+- 客户端访问地址：http://localhost:9998
+
+- 接口文档地址: http://localhost:10000
+
 ## 其他命令
 
 ```bash
@@ -51,7 +56,7 @@ password: 1006611;
   npm run client        # 启动客户端服务
   npm run client:lint   # 客户端代码语法检查
   npm run client:build  # 构建客户端生产环境
-  npm run api           # 启动api文档服务
+  npm run api           # 启动接口文档服务器
 ```
 
 ## 项目目录
