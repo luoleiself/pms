@@ -63,29 +63,29 @@ password: 1006611;
 
 ```
 |-- pms
-|-- node_modules 依赖模块文件
-|-- README.md  项目指南
-|-- package.json  项目依赖文件
-|-- vue.config.js vue配置文件
-|-- apidoc.json   接口文档配置文件
-|-- public  静态资源文件
-|-- server 服务器端目录
-  |-- bak   备份文件目录
-  |-- config  配置文件目录
-  |-- controller  路由文件目录
-  |-- doc  接口文档目录
-  |-- logs  日志文件目录
-  |-- middleware   中间件目录
-  |-- models  数据库模型目录
-  |-- service 业务逻辑目录
-  |-- test  测试文件目录
-  |-- utils 工具方法目录
-  |-- index.js 入口文件
-|-- src
-  |-- assets
-  |-- component
-  |-- router.js
-  |-- store.js
-  |-- App.vue
-  |-- main.js  页面入口文件
+  |-- node_modules 依赖模块文件
+  |-- README.md  项目指南
+  |-- package.json  项目依赖文件
+  |-- vue.config.js vue配置文件
+  |-- apidoc.json   接口文档配置文件
+  |-- public  静态资源文件
+  |-- server 服务器端目录
+    |-- bak   备份文件目录
+    |-- config  配置文件目录
+    |-- controller  路由文件目录
+    |-- doc  接口文档目录
+    |-- logs  日志文件目录
+    |-- middleware   中间件目录
+    |-- models  数据库模型目录
+    |-- service 业务逻辑目录
+    |-- test  测试文件目录
+    |-- utils 工具方法目录
+    |-- index.js 入口文件
+  |-- src
+    |-- assets
+    |-- component
+    |-- router.js
+    |-- store.js
+    |-- App.vue
+    |-- main.js  页面入口文件
 ```
