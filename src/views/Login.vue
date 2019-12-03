@@ -61,7 +61,9 @@ export default {
     // 登陆
     login: Debounce(function() {
       let { username, password } = this.ruleForm;
-      password = md5(password);
+      if(password.length != 32){
+        password = md5(password);
+      }
       this.$xhr
         .post("/login", {
           username,
