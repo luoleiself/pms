@@ -1,0 +1,21 @@
+@import "./reset.scss";
+
+.query_box {
+  padding: 0 0 0 15px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  .el-select,
+  .el-date-editor {
+    margin-right: 10px;
+  }
+  .el-input {
+    margin-right: 10px;
+    width: auto !important;
+  }
+}
+.menu_box {
+  padding: 0 15px;
+  margin: 15px 0;
+}

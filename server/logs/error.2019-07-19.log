@@ -1,0 +1,7 @@
+[2019-07-19T14:58:26.696] [ERROR] error - Request: GET http://localhost:9999 /api/brands/gg {} undefined Error:SequelizeDatabaseError Unknown column 'NaN' in 'where clause'
+[2019-07-19T14:58:31.155] [ERROR] error - Request: GET http://localhost:9999 /api/brands/gg {} undefined Error:SequelizeDatabaseError Unknown column 'NaN' in 'where clause'
+[2019-07-19T16:57:58.595] [ERROR] error - Request: GET http://localhost:9999 /api/categories {"p":"1","p_size":"10","status":"","keys":""} undefined Error:SequelizeEagerLoadingError categories is not associated to categories!
+[2019-07-19T16:58:12.197] [ERROR] error - Request: GET http://localhost:9999 /api/categories {"p":"1","p_size":"10","status":"","keys":""} undefined Error:SequelizeEagerLoadingError categories is not associated to categories!
+[2019-07-19T16:59:11.293] [ERROR] error - Request: GET http://localhost:9999 /api/categories {"p":"1","p_size":"10","status":"","keys":""} undefined Error:SequelizeEagerLoadingError categories is not associated to categories!
+[2019-07-19T18:01:41.666] [ERROR] error - Request: GET http://localhost:9999 /api/categories {"p":"1","p_size":"10","status":"","keys":""} undefined Error:TypeError result.get is not a function
+[2019-07-19T18:01:52.847] [ERROR] error - Request: GET http://localhost:9999 /api/categories {"p":"1","p_size":"10","status":"","keys":""} undefined Error:TypeError result.get is not a function

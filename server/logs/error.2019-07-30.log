@@ -1,0 +1,1 @@
+[2019-07-30T14:21:56.847] [ERROR] error - Request: GET http://localhost:9999 /api/charts/purchase {} undefined Error:TypeError purchaseService.sumSalesAmountByTime is not a function

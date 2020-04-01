@@ -1,0 +1,1 @@
+[2019-08-06T16:26:23.514] [ERROR] error - Request: POST http://localhost:9999 /api/brands {} undefined Error:SequelizeForeignKeyConstraintError Cannot add or update a child row: a foreign key constraint fails (`pms`.`brands`, CONSTRAINT `brands_ibfk_1` FOREIGN KEY (`manufactor_id`) REFERENCES `manufactors` (`id`) ON DELETE SET NULL ON UPDATE CASCADE)

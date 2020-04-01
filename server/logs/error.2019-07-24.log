@@ -1,0 +1,12 @@
+[2019-07-24T11:57:29.207] [ERROR] error - Request: POST http://localhost:9999 /api/users {} undefined Error:TypeError Cannot read property 'code' of undefined
+[2019-07-24T15:29:12.628] [ERROR] error - Request: PUT http://localhost:9999 /api/users/10 {} undefined Error:Error SequelizeDatabaseError: Lock wait timeout exceeded; try restarting transaction
+[2019-07-24T15:51:52.460] [ERROR] error - Request: PUT http://localhost:9999 /api/users/1 {} undefined Error:TypeError Cannot read property 'length' of undefined
+[2019-07-24T15:53:33.141] [ERROR] error - Request: PUT http://localhost:9999 /api/users/1 {} undefined Error:TypeError Cannot read property 'length' of undefined
+[2019-07-24T17:04:57.274] [ERROR] error - Request: POST http://localhost:9999 /api/login {} undefined Error:TypeError item.accesses.map(...).flat is not a function
+[2019-07-24T17:06:32.618] [ERROR] error - Request: POST http://localhost:9999 /api/login {} undefined Error:TypeError item.accesses.map(...).flat is not a function
+[2019-07-24T17:17:40.373] [ERROR] error - Request: POST http://localhost:9999 /api/login {} undefined Error:TypeError result.roles.map(...).flat is not a function
+[2019-07-24T17:19:17.714] [ERROR] error - Request: POST http://localhost:9999 /api/login {} undefined Error:TypeError res.flat is not a function
+[2019-07-24T18:18:21.026] [ERROR] error - Request: POST http://localhost:9999 /api/login {} undefined Error:TypeError Cannot read property 'id' of undefined
+[2019-07-24T18:18:21.042] [ERROR] error - Request: POST http://localhost:9999 /api/login {} undefined Error:TypeError Cannot read property 'id' of undefined
+[2019-07-24T18:18:23.265] [ERROR] error - Request: POST http://localhost:9999 /api/login {} undefined Error:TypeError Cannot read property 'id' of undefined
+[2019-07-24T18:18:25.280] [ERROR] error - Request: POST http://localhost:9999 /api/login {} undefined Error:TypeError Cannot read property 'id' of undefined

@@ -2,8 +2,13 @@
   "name": "pms",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
+    "dev": "concurrently \"npm run client\" \"npm run server\"",
+    "server": "cd ./server && nodemon --ignore logs/ --watch ./ index.js",
+    "client": "vue-cli-service serve",
+    "client:lint": "vue-cli-service lint",
+    "client:build": "vue-cli-service build",
+    "api": "apidoc -i server/controller/ -o server/doc/ && anywhere -h localhost -p 10000 -s -d ./server/doc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +20,38 @@
   "bugs": {
     "url": "https://github.com/luoleiself/pms/issues"
   },
-  "homepage": "https://github.com/luoleiself/pms#readme"
+  "homepage": "https://github.com/luoleiself/pms#readme",
+  "dependencies": {
+    "@vue/cli-plugin-babel": "^3.9.0",
+    "@vue/cli-plugin-eslint": "^3.9.0",
+    "@vue/cli-service": "^3.9.0",
+    "@vue/eslint-config-airbnb": "^4.0.0",
+    "anywhere": "^1.5.0",
+    "apidoc": "^0.17.7",
+    "axios": "^0.19.0",
+    "babel-eslint": "^10.0.1",
+    "concurrently": "^4.1.1",
+    "echarts": "^4.2.1",
+    "element-ui": "^2.10.1",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "koa": "^2.7.0",
+    "koa-body": "^4.1.0",
+    "koa-router": "^7.4.0",
+    "log4js": "^4.4.0",
+    "md5": "^2.2.1",
+    "mysql2": "^1.6.5",
+    "node-sass": "^4.9.0",
+    "sass-loader": "^7.1.0",
+    "sequelize": "^5.8.12",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1",
+    "core-js": "^2.6.5",
+    "vue": "^2.6.10",
+    "vue-router": "^3.0.3",
+    "vuex": "^3.0.1"
+  }
 }
