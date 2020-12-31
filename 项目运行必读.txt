@@ -1,0 +1,26 @@
+项目运行依赖于 Node.js环境，Node >= 8.12.0
+数据库环境：MySQL 5.7.24
+
+1. 首先安装 Node环境（电脑如安装则忽略）
+    node -v  // 使用命令行窗口运行命令，查看 node 版本
+    npm -v  // 使用命令行窗口运行命令，查看 npm 版本
+    mysql -V  // 使用命令行窗口运行命令，查看数据库版本
+
+1.5  npm install  // 使用命令行窗口运行命令，在项目目录下安装node项目运行依赖包
+
+2. 数据库结构及数据文件（导入数据库）
+    pms/server/bak/pms.sql 
+3. 数据库接口用户名配置等参数
+    pms/server/config/db.config.json 
+4. 配置客户端和服务器端配置项（可不配置，有默认配置项）
+    pms/server/config/host.json
+5. 运行项目 
+    npm run dev // 使用命令行窗口运行命令，在项目目录下使用命令启动项目
+6. 浏览器访问（chrome）（如果跳过第2步的话需要在数据库中手动配置用户名和密码）
+    客户端地址： http://localhost:9998
+    用户名： zhangsan
+    密码： 123456
+7. 本步骤可不做
+    服务器端地址： http://localhost:9999/api/users（用于查看接口返回数据，可在浏览器里面直接输入地址访问）
+    接口文档地址： http://localhost:10000 （用于查看接口文档及接口描述，需要在项目目录下使用 npm run api 命令）
+8. 其它可参考项目目录下 pms/ README.md 文档
